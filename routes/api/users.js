@@ -8,7 +8,8 @@ const passport = require('passport');
 // require('../../config/passport')(passport);
 
 
-
+const validateRegisterInput = require('../../validation/register.js');
+const validateLoginInput = require('../../validation/login.js');
 
 // router.get('/test', (req, res) => res.json({msg: 'Users route is working'}));
 
@@ -24,11 +25,18 @@ router.post('/register', (req, res) => {
     // Check to make sure nobody has already registered with a duplicate email
     // console.log(req);
     // console.log("req body", req.body);
+
+    const { errors, isValid } = validateRegisterInput(req.body);
+
+    if (!isValid) {
+      return res.status(400).json(errors);
+    }
+
     User.findOne({ email: req.body.email })
       .then(user => {
         if (user) {
           // Throw a 400 error if the email address already exists
-          return res.status(400).json({email: "A user has already registered with this address"})
+          return res.status(400).json({email: "Email already exists"})
         } else {
           // Otherwise create a new user
           const newUser = new User({
@@ -51,8 +59,16 @@ router.post('/register', (req, res) => {
   })
 
 router.post('/login', (req, res) => {
+
+  const { errors, isValid } = validateLoginInput(req.body);
+
+  if (!isValid) {
+    return res.status(400).json(errors);
+  }
+
   const email = req.body.email;
   const password = req.body.password;
+  
 
   User.findOne({email})
     .then(user => {

@@ -9,6 +9,8 @@ require('./config/passport')(passport);
 const users = require('./routes/api/users');
 const events = require('./routes/api/events');
 
+
+
 mongoose
   .connect(db)
   .then(() => console.log('Sucessfully connected to MongoDB'))
