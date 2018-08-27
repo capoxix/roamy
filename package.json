@@ -4,11 +4,11 @@
   "description": "test mlab",
   "main": "index.js",
   "scripts": {
-    "client-install": "npm install --prefix client",
+    "frontend-install": "npm install --prefix frontend",
     "start": "node app.js",
     "server": "nodemon app.js",
-    "client": "npm start --prefix client",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
+    "frontend": "npm start --prefix frontend",
+    "dev": "concurrently \"npm run server\" \"npm run frontend\""
   },
   "author": "Garbo Cheng",
   "license": "MIT",
@@ -31,6 +31,8 @@
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.3.1",
     "redux": "^4.0.0",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.3.0",
     "validator": "^10.7.0",
     "webpack": "^4.17.1",
     "webpack-cli": "^3.1.0"
