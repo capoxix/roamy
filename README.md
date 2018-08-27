@@ -1,6 +1,6 @@
 # Background and Overview
 
-“Peripatetic” is an interactive map application, based on the concept of MoneyMap, that allows users to see a defined area where they can go on a given time frame. The area will be impacted by current traffic conditions, construction, weather, and other factors . This allows people to drop pins on any location and have a visual representation of places are within reach according to the time they have available.
+“Peripatetic” is an interactive map application, based on the concept of MoneyMile, that allows users to see a defined area where they can go on a given time frame. The area will be impacted by current traffic conditions, construction, weather, and other factors . This allows people to drop pins on any location and have a visual representation of places are within reach according to the time they have available.
 
 # Functionality and MVP
 
