@@ -7,7 +7,8 @@ require('./config/passport')(passport);
 
 
 const users = require('./routes/api/users');
-const events = require('./routes/api/events');
+// const events = require('./routes/api/events');
+const locations = require('./routes/api/locations');
 
 
 
@@ -23,11 +24,14 @@ const app = express();
 //Middleware for body parser
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
+
 app.use(passport.initialize());
 
 
 app.use('/api/users', users);
-app.use('/api/events', events);
+// app.use('/api/events', events);
+app.use('/api/locations', locations);
+
 
 
 

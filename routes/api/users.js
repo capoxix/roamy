@@ -11,7 +11,6 @@ const passport = require('passport');
 const validateRegisterInput = require('../../validation/register.js');
 const validateLoginInput = require('../../validation/login.js');
 
-// router.get('/test', (req, res) => res.json({msg: 'Users route is working'}));
 
 router.get('/current', passport.authenticate('jwt', {session: false}), (req, res) => {
   res.json({
@@ -22,10 +21,7 @@ router.get('/current', passport.authenticate('jwt', {session: false}), (req, res
 })
 
 router.post('/register', (req, res) => {
-    // Check to make sure nobody has already registered with a duplicate email
-    // console.log(req);
-    // console.log("req body", req.body);
-
+ 
     const { errors, isValid } = validateRegisterInput(req.body);
 
     if (!isValid) {
