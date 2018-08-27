@@ -1,14 +1,14 @@
 // const fetch = require('node-fetch');
 const axios = require('axios');
 
-export const test = user => {
-    axios.get(`/api/events/test`)
+
+//{email: 'garbocheng93@gmail.com', password: '123456'}
+export const login = user => {
+    axios.post(`/api/users/login`, user)
     .then((response) => {
-        return response.text();
-    }).then((body) => {
-        let results = JSON.parse(body)
-        console.log(results)   // logs to server
-        // response.send(results) // sends to frontend
-      });
+        // console.log(response);
+        console.log(response.data);
+        // return response.data;
+    });
 };
 
