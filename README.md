@@ -26,11 +26,13 @@
     * We will then adjust our API calls accordingly based on the return time of each endpoint vs the time available to the User. We will then adjust each respective endpoint until each of our endpoints is less than or equal to the user request time.
     * Natural barriers such as deserts parks and water will have to be taken into consideration.
 * **UX**
-    * The Frontend will display a large google maps with a nav-bar at the top(right left?)
+    * The Frontend will display a large google maps with a nav-bar at the top
     * There will be a simple input form that can take in an integer for time and a location. Users can drop a pin to enter a location as well. 
-    * A Login button will be available which will display a dropdown auth page (or modal)?
+    * A Login button will be available which will display a dropdown auth page (or modal)
     * On enter of a search request, it will render a shape cloud displaying the range.
 
+    ![link](readme-images/Maps1.png)
+    ![link](readme-images/Maps2.png)
 * **Backend**
     * The backend will take in the start location and deconstruct it to a latitude longitude.
     * Multiple endpoints will radiate out from said location and a distance matrix will be generated to find the time taken to reach each point.
