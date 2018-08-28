@@ -97,7 +97,7 @@ app.get(`/south`, async (request, response) => {
     searches+=1;
     console.log("we are on search #: ", searches);
     console.log("-------------");
-    point.long = long-difference;
+    point.long = lat-difference;
     console.log("Our first long is: ", point.long);
     resp = await fetch(`https://maps.googleapis.com/maps/api/directions/json?origin=${lat}+${long}&destination=${point.lat},%20${long}&key=AIzaSyDBghaO6vALAG_-QG2SCBN8LEB_jFM6o1Q`);
     // console.log(await response.text());
