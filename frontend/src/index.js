@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './components/App';
+import Root from './components/root';
 import {login, register} from './actions/session_actions';
 import configureStore from './store/store';
 
@@ -14,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
     window.dispatch = store.dispatch;
     window.getState = store.getState;
 
-    ReactDOM.render(<App store={store}/>, root);
+    ReactDOM.render(<Root store={store}/>, root);
     
 
 })

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import Directions from './directions.js';
+import RegisterFormContainer  from './user/register_form_container';
 
 
 class App extends Component {
@@ -14,6 +15,8 @@ class App extends Component {
           <code> Me hoping my MERN stack works.</code>
         </p>
         <p className="Directions-intro"><Directions/></p>
+
+        <RegisterFormContainer/>
       </div>
     );
   }

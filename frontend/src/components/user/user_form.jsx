@@ -12,7 +12,7 @@ class UserForm extends React.Component {
   handleSubmit(e){
     e.preventDefault();
     const user = Object.assign({}, this.state);
-    this.props.processForm(user).then(() => this.props.history.push('/events'));
+    this.props.processForm(user);
   }
 
   update(field){
@@ -22,10 +22,6 @@ class UserForm extends React.Component {
   }
 
   render(){
-    const errorsList = this.props.errors.signup.map((error) =>
-      <li>{error}</li>
-    );
-
       <Link to = '/login'>If you've already done this before, click here to log in</Link>;
 
 
@@ -33,10 +29,8 @@ class UserForm extends React.Component {
       <div className= "form-container">
         <div className="form">
           <ul className="error">
-            {errorsList}
           </ul>
-          <h1>Join for sports time</h1>
-          <p>1000s of strangers across the world have come together for sports. Create an account and you'll be on your way to join the community.</p>
+          <h1>{this.props.formType}</h1>
           <form onSubmit={this.handleSubmit}>
 
               <input
@@ -69,7 +63,6 @@ class UserForm extends React.Component {
               />
 
           <input type='submit' value="Register"/>
-          <Link onClick={() => this.props.clearErrors()} to = '/login'>If you've already done this before, click here to log in</Link>
           </form>
 
         </div>
