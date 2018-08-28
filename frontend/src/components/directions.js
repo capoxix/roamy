@@ -19,7 +19,7 @@ class Directions extends Component {
 
 
   render(){
-    if (!this.result) return null;
+    // if (!this.result) return null;
     console.log(this.result);
     return (
       <div>

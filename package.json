@@ -10,7 +10,7 @@
     "frontend": "npm start --prefix frontend",
     "dev": "concurrently \"npm run server\" \"npm run frontend\""
   },
-  "author": "Garbo Cheng",
+  "author": "Tony Zhang",
   "license": "MIT",
   "dependencies": {
     "babel-core": "^6.26.3",
