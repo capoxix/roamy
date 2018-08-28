@@ -22,6 +22,10 @@ class Header extends React.Component {
         <div className="map-form-wrapper">
           <MapForm/> 
         </div>
+
+        <div className="login-wrapper">
+          <button>Login</button>
+        </div>
       </div>
     )
   }

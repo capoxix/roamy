@@ -13,11 +13,11 @@ class Form extends React.Component {
   
       <form onSubmit={() => console.log("submit!")}>
         <label>Location:
-          <input value="dd"></input>
+          <input value="location"></input>
         </label>
 
-        <label>Time:
-          <input value="dd"></input>
+        <label className="time-label">Time:
+          <input value="15"></input>
         </label>
       </form>
     </div>
