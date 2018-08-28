@@ -17,9 +17,9 @@ export const receiveErrors = errors => ({
 });
 
 export const register = formUser => dispatch => API.register(formUser)
-    .then((user) => dispatch(receiveCurrentUser(user)))
-    .fail((errors) => dispatch(receiveErrors(errors.responseJSON)));
+    .then((user) => dispatch(receiveCurrentUser(user.data)))
+    .catch((errors) => dispatch(receiveErrors(errors.responseJSON)));
 
-export const login = formUser => API.login(formUser)
-    .then((user) => dispatch(receiveCurrentUser(user)))
-    .fail((errors) => dispatch(receiveErrors(errors.reponseJSON)));
+export const login = formUser => dispatch => API.login(formUser)
+    .then((user) => dispatch(receiveCurrentUser(user.data)))
+    .catch((errors) => dispatch(receiveErrors(errors.reponseJSON)));
