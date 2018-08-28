@@ -34,43 +34,92 @@ class Point {
 let point;
 
 
-let lat= 37.7990;
-let long= -122.4014;
+let lat= 34.069502;
+let long= -118.444918;
 let minutes = 15;
-let searches = 0;
-let difference = minutes*0.005402;
-let scale = 0.005402;
+// let lat= 37.7990;
+// let long= -122.4014;
+// let minutes = 15;
+
+
 var resp;
 
-app.get(`/search`, async (request, response) => {
+app.get(`/east`, async (request, response) => {
   // make api call using fetch
   let googleMins = 0;
+  let searches = 0;
+  let difference = minutes*0.005402;
+  let scale = 0.005402;
 
   //
-  point = new Point({lat: lat,long: long+difference});
+  point = new Point({lat: lat,long: long});
 
   while(googleMins !== minutes && searches < 4) {
     searches+=1;
-    point.long = point.long+difference;
+    console.log("we are on search #: ", searches);
+    console.log("-------------");
+    point.long = long+difference;
     console.log("Our first long is: ", point.long);
+    console.log("-------------");
     resp = await fetch(`https://maps.googleapis.com/maps/api/directions/json?origin=${lat}+${long}&destination=${lat},%20${point.long}&key=AIzaSyDBghaO6vALAG_-QG2SCBN8LEB_jFM6o1Q`);
     // console.log(await response.text());
     const results = JSON.parse(await resp.text());
-    console.log("Our result variable contains: ", results.routes[0].legs[0].duration.text.split(" ")[0]);
+    console.log("Our GoogleMins is currently: ", results.routes[0].legs[0].duration.text.split(" ")[0]);
 
       googleMins = parseInt(results.routes[0].legs[0].duration.text.split(" ")[0]);
-      if (minutes !== googleMins){
+      if (minutes === googleMins){
         // endpoints.push(point);
         // await response.send(point);
       } else {
         console.log("our point.long is: ", point.long);
-        console.log("our long is: ", long);
+        console.log("-------------");
         difference = minutes*(point.long-long)/googleMins;
-        console.log("our diff is: ", differece);
+        console.log("our diff is: ", difference);
+        console.log("-------------");
       }
       // console.log("Our googlemins is currently:", googleMins);
     // });
   }
+  response.send(point);
+});
+
+app.get(`/west`, async (request, response) => {
+  // make api call using fetch
+  let googleMins = 0;
+  let searches = 0;
+  let difference = minutes*0.005402;
+  let scale = 0.005402;
+
+  //
+  point = new Point({lat: lat,long: long});
+
+  while(googleMins !== minutes && searches < 4) {
+    searches+=1;
+    console.log("we are on search #: ", searches);
+    console.log("-------------");
+    point.long = long-difference;
+    console.log("Our first long is: ", point.long);
+    resp = await fetch(`https://maps.googleapis.com/maps/api/directions/json?origin=${lat}+${long}&destination=${lat},%20${point.long}&key=AIzaSyDBghaO6vALAG_-QG2SCBN8LEB_jFM6o1Q`);
+    // console.log(await response.text());
+    const results = JSON.parse(await resp.text());
+    console.log("Our GoogleMins is: ", results.routes[0].legs[0].duration.text.split(" ")[0]);
+
+      googleMins = parseInt(results.routes[0].legs[0].duration.text.split(" ")[0]);
+      if (minutes === googleMins){
+        // endpoints.push(point);
+        // await response.send(point);
+      } else {
+
+        console.log("our point.long is: ", point.long);
+        console.log("-------------");
+        difference = minutes*(Math.abs(long-point.long))/googleMins;
+        console.log("our diff is: ", difference);
+      }
+      // console.log("Our googlemins is currently:", googleMins);
+    // });
+    console.log("-------------");
+  }
+
   response.send(point);
 });
 
