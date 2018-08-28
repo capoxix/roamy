@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import './App.css';
 import Directions from './directions.js';
 
+import MapForm from './header/map-form';
+
 
 class App extends Component {
   render() {
@@ -14,6 +16,7 @@ class App extends Component {
           <code> Me hoping my MERN stack works.</code>
         </p>
         <p className="Directions-intro"><Directions/></p>
+        <MapForm/>
       </div>
     );
   }

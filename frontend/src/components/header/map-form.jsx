@@ -11,13 +11,14 @@ class Form extends React.Component {
     return (
     <div className="SearchForm"> 
   
-      <form action="">
-      <label>Location:
-        <input value="dd"></input>
-      </label>
-      <label>Time:
-        <input value="dd"></input>
-      </label>
+      <form onSubmit={() => console.log("submit!")}>
+        <label>Location:
+          <input value="dd"></input>
+        </label>
+
+        <label>Time:
+          <input value="dd"></input>
+        </label>
       </form>
     </div>
     )
