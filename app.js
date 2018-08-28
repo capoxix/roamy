@@ -51,15 +51,15 @@ app.get(`/search`, async (request, response) => {
 
   while(googleMins !== minutes && searches < 4) {
     searches+=1;
-    point.long = long+difference;
+    point.long = point.long+difference;
     console.log("Our first long is: ", point.long);
-    resp = await fetch(`https://maps.googleapis.com/maps/api/directions/json?origin=${lat}+${long}&destination=${point.lat},%20${point.long}&key=AIzaSyDBghaO6vALAG_-QG2SCBN8LEB_jFM6o1Q`);
+    resp = await fetch(`https://maps.googleapis.com/maps/api/directions/json?origin=${lat}+${long}&destination=${lat},%20${point.long}&key=AIzaSyDBghaO6vALAG_-QG2SCBN8LEB_jFM6o1Q`);
     // console.log(await response.text());
     const results = JSON.parse(await resp.text());
     console.log("Our result variable contains: ", results.routes[0].legs[0].duration.text.split(" ")[0]);
 
       googleMins = parseInt(results.routes[0].legs[0].duration.text.split(" ")[0]);
-      if (minutes <= googleMins){
+      if (minutes !== googleMins){
         // endpoints.push(point);
         // await response.send(point);
       } else {
