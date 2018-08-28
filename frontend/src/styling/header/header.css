@@ -1,0 +1,19 @@
+.header-wrapper {
+  border: 1px solid blue;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.drop-down-wrapper {
+  border: 1px solid blue;
+}
+
+.map-form-wrapper {
+  border: 1px solid blue;
+}
+
+.map-form {
+  display: flex;
+  justify-content: space-between;
+}

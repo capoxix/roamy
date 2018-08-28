@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 
 import MapForm from './map-form';
+import '../../styling/header/header.css';
 
 const mapStateToProps = (state) => {
   return ({});

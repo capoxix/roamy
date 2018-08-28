@@ -9,7 +9,7 @@ class Form extends React.Component {
   }
   render() {
     return (
-    <div className="SearchForm"> 
+    <div className="map-form"> 
   
       <form onSubmit={() => console.log("submit!")}>
         <label>Location:

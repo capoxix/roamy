@@ -1,6 +1,7 @@
 import React from 'react';
 
 import MapForm from './map-form';
+import '../../styling/header/header.css';
 
 class Header extends React.Component {
 
@@ -14,7 +15,7 @@ class Header extends React.Component {
     return (
       <div className="header-wrapper">
 
-        <div className="">
+        <div className="drop-down-wrapper">
           Possible Dropdown here for regular shtuff
         </div>
 
