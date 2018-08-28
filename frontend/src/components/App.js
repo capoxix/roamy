@@ -13,7 +13,7 @@ class App extends Component {
         <p className="App-intro">
           <code> Me hoping my MERN stack works.</code>
         </p>
-        <p className="Directions-intro"><Directions/></p>
+        <div className="Directions-intro"><Directions/></div>
       </div>
     );
   }

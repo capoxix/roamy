@@ -12,8 +12,11 @@ class Directions extends Component {
   componentDidMount(){
     axios.get(`/directions`)
     .then(response => {
-      this.result = response;
-      // this.end_address = this.result.routes[0].legs[0].end_address;
+      this.result = response.data;
+      window.result=response.data;
+      // console.log(this.result.data);
+      // this.end_address = response.data.routes[0].legs[0].end_address;
+      // console.log(this.end_address);
     });
   }
 

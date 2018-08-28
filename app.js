@@ -20,17 +20,29 @@ mongoose
 
 const app = express();
 
+let minutes = 16;
+
 //create route to get single book by its isbn
 app.get('/directions/', (request, response) => {
   // make api call using fetch
   fetch(`https://maps.googleapis.com/maps/api/directions/json?origin=San+Francisco&destination=37.799809,%20-122.389125&key=AIzaSyDBghaO6vALAG_-QG2SCBN8LEB_jFM6o1Q`)
   .then((response) => {
       return response.text();
-  }).then((body) => {
+  })
+  .then((body) => {
       let results = JSON.parse(body)
       // console.log(results)   // logs to server
       // console.log(results.routes[0].legs[0].end_address)
-      response.send(results) // sends to frontend
+      console.log(results.routes[0].legs[0].duration.text.split(" ")[0]);
+      result_minutes = parseInt(results.routes[0].legs[0].duration.text.split(" ")[0]);
+      if (result_minutes === minutes){
+          response.send(results);
+        } else {
+          
+        };
+
+      // sends to frontend
+
     });
 });
 
