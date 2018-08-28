@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import Directions from './directions.js';
 import RegisterFormContainer  from './user/register_form_container';
+import LoginFormContainer from './session/login_form_container';
 
 
 class App extends Component {
@@ -17,6 +18,8 @@ class App extends Component {
         <p className="Directions-intro"><Directions/></p>
 
         <RegisterFormContainer/>
+
+        <LoginFormContainer/>
       </div>
     );
   }
