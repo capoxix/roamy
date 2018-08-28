@@ -18,14 +18,15 @@ class App extends Component {
           <code> Me hoping my MERN stack works.</code>
         </p>
         <p className="Directions-intro"><Directions/></p>
-<<<<<<< HEAD
 
         <RegisterFormContainer/>
 
         <LoginFormContainer/>
-=======
+        
         <Header/>
->>>>>>> feac3152c7b6766a7ff4c33a85b3dd94d646d030
+
+
+
       </div>
     );
   }

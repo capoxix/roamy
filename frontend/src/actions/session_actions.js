@@ -6,6 +6,22 @@ export const LOGOUT_CURRENT_USER = "LOGOUT_CURRENT_USER";
 export const RECEIVE_ERRORS = "RECEIVE_ERRORS";
 export const RECEIVE_SIGNUP_ERRORS = 'RECEIVE_SIGNUP_ERRORS';
 
+
+import axios from 'axios';
+
+const setAuthToken = token => {
+  if (token) {
+    // Apply to every request
+    axios.defaults.headers.common['Authorization'] = token;
+  } else {
+    // Delete auth header
+    delete axios.defaults.headers.common['Authorization'];
+  }
+};
+
+export default setAuthToken;
+
+
 export const receiveCurrentUser = currentUser => ({
     type: RECEIVE_CURRENT_USER,
     currentUser
