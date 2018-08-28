@@ -40,37 +40,38 @@ let minutes = 15;
 let searches = 0;
 let difference = minutes*0.005402;
 let scale = 0.005402;
+var resp;
 
 app.get(`/search`, async (request, response) => {
   // make api call using fetch
   let googleMins = 0;
 
   //
-  point = new Point({lat: lat,long: long+difference})
+  point = new Point({lat: lat,long: long+difference});
 
   while(googleMins !== minutes && searches < 4) {
     searches+=1;
     point.long = long+difference;
     console.log("Our first long is: ", point.long);
-    const response = await fetch(`https://maps.googleapis.com/maps/api/directions/json?origin=${lat}+${long}&destination=${point.lat},%20${point.long}&key=AIzaSyDBghaO6vALAG_-QG2SCBN8LEB_jFM6o1Q`);
-    console.log(await response.text());
+    resp = await fetch(`https://maps.googleapis.com/maps/api/directions/json?origin=${lat}+${long}&destination=${point.lat},%20${point.long}&key=AIzaSyDBghaO6vALAG_-QG2SCBN8LEB_jFM6o1Q`);
+    // console.log(await response.text());
+    const results = JSON.parse(await resp.text());
+    console.log("Our result variable contains: ", results.routes[0].legs[0].duration.text.split(" ")[0]);
 
-      // let results = JSON.parse(body)
-      // // console.log(results)   // logs to server
-      // // console.log(results.routes[0].legs[0].end_address)
-      // console.log(results.routes[0].legs[0].duration.text.split(" ")[0]);
-      // console.log("Our lat is currently:", point.lat);
-      // console.log("Our long is currently:", point.long);
-      // console.log("Our diff is currently:", difference);
-      //
-      // point.long = point.long - scale;
-      //
-      // console.log("Our new long is: ", point.long);
-      //
-      // googleMins = parseInt(results.routes[0].legs[0].duration.text.split(" ")[0]);
+      googleMins = parseInt(results.routes[0].legs[0].duration.text.split(" ")[0]);
+      if (minutes <= googleMins){
+        // endpoints.push(point);
+        // await response.send(point);
+      } else {
+        console.log("our point.long is: ", point.long);
+        console.log("our long is: ", long);
+        difference = minutes*(point.long-long)/googleMins;
+        console.log("our diff is: ", differece);
+      }
       // console.log("Our googlemins is currently:", googleMins);
     // });
   }
+  response.send(point);
 });
 
 
@@ -98,10 +99,16 @@ app.listen(port, () => console.log(`Server is running on port ${port}`));
 
 
 
+// window.results = results;
+// console.log(results);
+// console.log(results.routes[0].legs[0].end_address);
 
-      // if (minutes === googleMins){
-      //   // endpoints.push(point);
-      //   response.send(point);
-      // } else {
-      //   difference = minutes*(point.long-long)/googleMins;
-      // }
+  // console.log(results.routes[0].legs[0].duration.text.split(" ")[0]);
+  // console.log("Our lat is currently:", point.lat);
+  // console.log("Our long is currently:", point.long);
+  // console.log("Our diff is currently:", difference);
+  //
+  // point.long = point.long - scale;
+  //
+  // console.log("Our new long is: ", point.long);
+  //
