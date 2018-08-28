@@ -8,7 +8,8 @@
     "start": "node app.js",
     "server": "nodemon app.js",
     "frontend": "npm start --prefix frontend",
-    "dev": "concurrently \"npm run server\" \"npm run frontend\""
+    "dev": "concurrently \"npm run server\" \"npm run frontend\"",
+    "debug": "node --inspect app.js"
   },
   "author": "Tony Zhang",
   "license": "MIT",
