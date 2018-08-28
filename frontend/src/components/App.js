@@ -5,6 +5,7 @@ import RegisterFormContainer  from './user/register_form_container';
 import LoginFormContainer from './session/login_form_container';
 
 import Header from './header/header';
+import HeaderContainer from './header/header_container';
 
 
 class App extends Component {
@@ -23,7 +24,7 @@ class App extends Component {
 
         <LoginFormContainer/>
         
-        <Header/>
+        <HeaderContainer/>
 
 
 
