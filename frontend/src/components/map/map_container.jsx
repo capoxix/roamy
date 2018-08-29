@@ -1,6 +1,7 @@
 import {Map, InfoWindow, Marker, GoogleApiWrapper, Polygon} from 'google-maps-react';
 import React from 'react';
 import Point from '../../util/point';
+const gAPI = require('../../config/keys').gAPI;
 
 export class MapContainer extends React.Component {
     state = {
@@ -134,5 +135,5 @@ export class MapContainer extends React.Component {
 }
 
 export default GoogleApiWrapper({
-  apiKey: ('AIzaSyA3tKBZcqJXXbGnAGoph4_a1WEZ_QZK7-E')
+  apiKey: (gAPI)
 })(MapContainer)
