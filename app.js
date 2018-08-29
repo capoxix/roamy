@@ -22,63 +22,51 @@ mongoose
 
 const app = express();
 
-app.get(`/directions`, async (request, response) => {
-  // make api call using fetch
-  let googleMins = 0;
-  let searches = 0;
-  let difference = minutes*0.005402;
-  let scale = 0.005402;
-  point = new Point({lat: lat,long: long});
-
-  while(googleMins !== minutes && searches < 4) {
-    searches+=1;
-    point.lat = lat+difference;
-    resp = await fetch(`https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&mode=driving&origins=${lat},${long}&destinations=${point.lat}%2C${point.long}&key=AIzaSyDBghaO6vALAG_-QG2SCBN8LEB_jFM6o1Q`);
-    // console.log(await response.text());
-    const results = JSON.parse(await resp.text());
-    console.log("Our resultSeconds is currently: ", results.rows[0].elements[0].duration.value);
-
-  }
-  response.send(point);
-});
 
 app.get('/test', (req, res) => {
   console.log("hi")
   res.send("hit")
 })
 
-app.get(`/directions`, async (request, response) => {
+app.get(`/directions`, (req, res) => {
   // make api call using fetch
+  // origin will be created based on user input
+  console.log(Point)
   const origin = new Point({
-    lat: lat,
-    lng: lng,
-    minutes: minutes
+    lat: 37.7790,
+    lng: 122.4014,
+    minutes: 10
   })
-  let endPoints;
   let responseMins = 0;
   let searches = 0;
+  let searchStr;
+  let endPoints;
   
+  // NEED A CASE STATEMENT, OF CHECKING IF ORIGIN IS IN WATER OR NOT
  
   endPoints = origin.initEndPoints()
+  console.log(endPoints)
 
   while(searches < 4) {
     searches+=1;
 
-    resp = await fetch(`https://maps.googleapis.com/maps/api/directions/json?origin=${lat}+${long}&destination=${point.lat},%20${long}&key=AIzaSyDBghaO6vALAG_-QG2SCBN8LEB_jFM6o1Q`);
-    resp = await fetch('https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=34.069502,-118.444918&destinations=34.150532%2C-118.444918&key=AIzaSyDBghaO6vALAG_-QG2SCBN8LEB_jFM6o1Q')
-    const results = JSON.parse(await resp.text());
+    searchStr = origin.makeSearchStr(endPoints);
+    // resp = await fetch(`https://maps.googleapis.com/maps/api/directions/json?origin=${lat}+${long}&destination=${point.lat},%20${long}&key=AIzaSyDBghaO6vALAG_-QG2SCBN8LEB_jFM6o1Q`);
+    
+    // const results = JSON.parse(await resp.text());
 
-      responseMins = parseInt(results.routes[0].legs[0].duration.text.split(" ")[0]);
-      if (minutes === responseMins){
+      // responseMins = parseInt(results.routes[0].legs[0].duration.text.split(" ")[0]);
+      // if (minutes === responseMins){
         
-      } else {
+      // } else {
 
-        difference = minutes*(point.lat-lat)/responseMins;
+      //   difference = minutes*(point.lat-lat)/responseMins;
 
-      }
+      console.log(searchStr)
+      // }
   }
 
-  response.send(point);
+  res.send(endPoints);
 });
 
 

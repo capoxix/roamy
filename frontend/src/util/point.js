@@ -67,11 +67,11 @@ class Point {
   }
 }
 
-let o = new Point({lat: 37.7990, lng: -122.4014, minutes: 10})
-let d1 = new Point({lat: 37.775181, lng: -122.409909})
-let d2 = new Point({lat: 37.781402, lng:  -122.411327})
-let arr = o.initEndPoints();
+// let o = new Point({lat: 37.7990, lng: -122.4014, minutes: 10})
+// let d1 = new Point({lat: 37.775181, lng: -122.409909})
+// let d2 = new Point({lat: 37.781402, lng:  -122.411327})
+// let arr = o.initEndPoints();
 
-o.makeSearchStr([d1, d2]);
+// o.makeSearchStr([d1, d2]);
 
-module.export = Point;
+module.exports = Point;
