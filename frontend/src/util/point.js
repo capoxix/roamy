@@ -24,7 +24,7 @@ class Point {
     const dLat = 0.003604 * this.minutes;
     const dLng =  0.0045402 * this.minutes;
 
-    let numPoints = 1;
+    let numPoints = 4;
     let angle = 360 / numPoints;
     let currentAngle = 0;
   
@@ -42,10 +42,10 @@ class Point {
     return `${this.lat}%2C${this.lng}%7C`
   }
 
-  makeSearchStr() {
+  makeSearchStr(endPoints) {
     // resp = await fetch(`https://maps.googleapis.com/maps/api/directions/json?origin=${lat}+${long}&destination=${point.lat},%20${long}&key=AIzaSyDBghaO6vALAG_-QG2SCBN8LEB_jFM6o1Q`);
     const start = this.makeStartStr();
-    const destinations = `&destinations=34.150532%2C-118.444918`
+    const destinations = Point.makeDestinationsStr(endPoints);
     const key = '&key=AIzaSyDBghaO6vALAG_-QG2SCBN8LEB_jFM6o1Q'
     return start + destinations + key
   }
@@ -56,36 +56,26 @@ class Point {
     return header + origin;
   }
   
-  makeDestinationsStr(destinations) {
-    let destinationStr = `&destinations=34.150532%2C-118.444918%7C`
+  static makeDestinationsStr(endPoints) {
+    let destinations = `&destinations=`
 
-    for (let i = 0; i < destinations.length; i++) {
-      destinationStr = destinationStr +  destinations[i].getLatLng();
+    debugger
+
+    for (let i = 0; i < endPoints.length; i++) {
+      destinations = destinations +  endPoints[i].getLatLng();
     }
 
-    return destinationStr
+    return destinations
   }
 }
 
+let o = new Point({lat: 37.7990, lng: -122.4014, minutes: 10})
+let d1 = new Point({lat: 37.775181, lng: -122.409909})
+let d2 = new Point({lat: 37.781402, lng:  -122.411327})
+let arr = o.initEndPoints();
+
+o.makeSearchStr([d1, d2]);
+
+https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=37.799,-122.4014&destinations37.775181%2C-122.409909%7C37.781402%2C-122.411327%7C&key=AIzaSyDBghaO6vALAG_-QG2SCBN8LEB_jFM6o1Q
+https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=40.6655101,-73.89188969999998&destinations=40.6905615%2C-73.9976592%7C40.6905615%2C-73.9976592%7C40.6905615%2C-73.9976592%7C40.6905615%2C-73.9976592%7C40.6905615%2C-73.9976592%7C40.6905615%2C-73.9976592%7C40.659569%2C-73.933783%7C40.729029%2C-73.851524%7C40.6860072%2C-73.6334271%7C40.598566%2C-73.7527626%7C40.659569%2C-73.933783%7C40.729029%2C-73.851524%7C40.6860072%2C-73.6334271%7C40.598566%2C-73.7527626&key
 module.export = Point;
-
-// async function cloudGenerator(lat ,lng, minutes) {
-//   const origin = new Point({
-//     lat: lat,
-//     lng: lng,
-//     minutes: minutes
-//   })
-//   const endPoints = [];
-//   let cycles = 0;
-  
- 
-//   endPoints = origin.initEndPoints()
-
-  
-  
-//   // while (not perfect) {
-//   // do async matrix call one at a time FIRST!!!! OI
-//   endPoints.forEach((point) => point.adjustPoint(resMinutes))
-// }
-
-let o = new Point({lat: 37.7990, lng: -122.4014, minutes: 20})
