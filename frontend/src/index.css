@@ -1,5 +1,28 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+  font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
+}
+
+.App-header {
+  padding-left: 20px;
+}
+
+.App-intro {
+  padding-left: 20px;
+}
+
+.form{
+  padding-left: 20px;
+}
+
+i {
+  font-size: 20px;
+  padding-bottom: 3px;
+}
+
+.map-form {
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 3px;
 }
