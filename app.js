@@ -43,55 +43,100 @@ let minutes = 15;
 
 var resp;
 
-const findLat = () => {
-
-};
-
 app.get(`/directions`, async (request, response) => {
   // make api call using fetch
   let googleMins = 0;
   let searches = 0;
   let difference = minutes*0.005402;
   let scale = 0.005402;
-
-  //
   point = new Point({lat: lat,long: long});
 
   while(googleMins !== minutes && searches < 4) {
     searches+=1;
-    console.log("we are on search #: ", searches);
-    console.log("-------------");
-
-
-
-
     point.lat = lat+difference;
-
-
-
-    console.log("Our first long is: ", point.long);
-    console.log("-------------");
-    resp = await fetch(`https://maps.googleapis.com/maps/api/directions/json?origin=${lat}+${long}&destination=${point.lat},%20${long}&key=AIzaSyDBghaO6vALAG_-QG2SCBN8LEB_jFM6o1Q`);
+    // console.log("we are on search #: ", searches);
+    // console.log("-------------");
+    // console.log("Our first long is: ", point.long);
+    // console.log("-------------");
+    // resp = await fetch(`https://maps.googleapis.com/maps/api/directions/json?origin=${lat}+${long}&destination=${point.lat},%20${long}&key=AIzaSyDBghaO6vALAG_-QG2SCBN8LEB_jFM6o1Q`);
+    resp = await fetch(`https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=${lat},${long}&destinations=${point.lat}%2C${point.long}&key=AIzaSyDBghaO6vALAG_-QG2SCBN8LEB_jFM6o1Q`);
     // console.log(await response.text());
     const results = JSON.parse(await resp.text());
-    console.log("Our GoogleMins is currently: ", results.routes[0].legs[0].duration.text.split(" ")[0]);
-
-      googleMins = parseInt(results.routes[0].legs[0].duration.text.split(" ")[0]);
-      if (minutes === googleMins){
-        // endpoints.push(point);
-        // await response.send(point);
-      } else {
-        console.log("our point.long is: ", point.long);
-        console.log("-------------");
-        difference = minutes*(point.lat-lat)/googleMins;
-        console.log("our diff is: ", difference);
-        console.log("-------------");
-      }
+    console.log("Our resultSeconds is currently: ", results.rows[0].elements[0].duration.value);
+    console.log("Our lat is: ", lat);
+    console.log("Our lat is: ", long);
+    console.log("Our point lat is: ", point.lat);
+    console.log("Our point.long is: ", point.long);
+      // googleMins = parseInt(results.routes[0].legs[0].duration.text.split(" ")[0]);
+      // if (minutes === googleMins){
+      //   // endpoints.push(point);
+      //   // await response.send(point);
+      // } else {
+      //   console.log("our point.long is: ", point.long);
+      //   console.log("-------------");
+      //   difference = minutes*(point.lat-lat)/googleMins;
+      //   console.log("our diff is: ", difference);
+      //   console.log("-------------");
+      // }
       // console.log("Our googlemins is currently:", googleMins);
     // });
   }
   response.send(point);
 });
+
+
+
+
+//
+// const findLat = () => {
+//
+// };
+//
+// app.get(`/directions`, async (request, response) => {
+//   // make api call using fetch
+//   let googleMins = 0;
+//   let searches = 0;
+//   let difference = minutes*0.005402;
+//   let scale = 0.005402;
+//
+//   //
+//   point = new Point({lat: lat,long: long});
+//
+//   while(googleMins !== minutes && searches < 4) {
+//     searches+=1;
+//     console.log("we are on search #: ", searches);
+//     console.log("-------------");
+//
+//
+//
+//
+//     point.lat = lat+difference;
+//
+//
+//
+//     console.log("Our first long is: ", point.long);
+//     console.log("-------------");
+//     resp = await fetch(`https://maps.googleapis.com/maps/api/directions/json?origin=${lat}+${long}&destination=${point.lat},%20${long}&key=AIzaSyDBghaO6vALAG_-QG2SCBN8LEB_jFM6o1Q`);
+//     // console.log(await response.text());
+//     const results = JSON.parse(await resp.text());
+//     console.log("Our GoogleMins is currently: ", results.routes[0].legs[0].duration.text.split(" ")[0]);
+//
+//       googleMins = parseInt(results.routes[0].legs[0].duration.text.split(" ")[0]);
+//       if (minutes === googleMins){
+//         // endpoints.push(point);
+//         // await response.send(point);
+//       } else {
+//         console.log("our point.long is: ", point.long);
+//         console.log("-------------");
+//         difference = minutes*(point.lat-lat)/googleMins;
+//         console.log("our diff is: ", difference);
+//         console.log("-------------");
+//       }
+//       // console.log("Our googlemins is currently:", googleMins);
+//     // });
+//   }
+//   response.send(point);
+// });
 
 
 
@@ -108,25 +153,20 @@ app.get(`/directions`, async (request, response) => {
 //
 //   while(googleMins !== minutes && searches < 4) {
 //     searches+=1;
-//     console.log("we are on search #: ", searches);
-//     console.log("-------------");
+//
+//   //initial scale
+//     // point.lat = lat;
+//     // point.long = long + scale*minutes;
+//
+//
+//   //readjustment scale
+//     scaleLat = sin(Math.PI *degrees/180)*(minutes* Math.abs(this.lat - lat)/googleMins)
+//     point.lat = lat+scaleLat;
+//     scaleLong = cos(Math.PI*degrees/180)*(minutes* Math.abs(this.long - long)/googleMins)
+//     point.long = long+scaleLong;
 
 
-  //initial scale
-    point.lat = lat;
-    point.long = long + scale*minutes;
-
-
-  //readjustment scale
-    scaleLat = sin(Math.PI *degrees/180)*(minutes* Math.abs(this.lat - lat)/googleMins)
-    point.lat = lat+scaleLat;
-    scaleLong = cos(Math.PI*degrees/180)*(minutes* Math.abs(this.long - long)/googleMins)
-    point.long = long+scaleLong;
-
-
-//     console.log("Our first long is: ", point.long);
-//     console.log("-------------");
-//     resp = await fetch(`https://maps.googleapis.com/maps/api/directions/json?origin=${lat}+${long}&destination=${point.lat},%20${long}&key=AIzaSyDBghaO6vALAG_-QG2SCBN8LEB_jFM6o1Q`);
+//   resp = await fetch(`https://maps.googleapis.com/maps/api/directions/json?origin=${lat}+${long}&destination=${point.lat},%20${long}&key=AIzaSyDBghaO6vALAG_-QG2SCBN8LEB_jFM6o1Q`);
 //     // console.log(await response.text());
 //     const results = JSON.parse(await resp.text());
 //     console.log("Our GoogleMins is currently: ", results.routes[0].legs[0].duration.text.split(" ")[0]);
