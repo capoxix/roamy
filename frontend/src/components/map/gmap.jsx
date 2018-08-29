@@ -15,7 +15,9 @@ class GMap extends React.Component {
         center: {},
         clicked: {},
         clickedMarker: [],
-        favoriteMarkers: []
+        favoriteMarkers: [],
+        trackName: '',
+        currentLocationMarker:[]
       };
     
     onMarkerClick = (props, marker, e) =>
@@ -55,14 +57,6 @@ class GMap extends React.Component {
         getFavorites(this.props.userId).then(favorites =>  that.setMarkersIntoMap(favorites.data));
     }
 
-    // addFavoritesToMarkers(){
-    //     getFavorites(this.props.userId).then(favorites =>  this.setState({favoriteMarkers: favorites.data.map(favorite => 
-    //         <Marker onClick={this.onMarkerClick}
-    //             name={favorite.name}
-    //             position={{lat: `${favorite.lat}`, lng: `${favorite.lng}`}}
-    //             />
-    //     )}));
-    // }
 
     setMarkersIntoMap(favoriteDataArr){
         let favoritesMarkersArr = favoriteDataArr.map(favorite => 
@@ -71,6 +65,23 @@ class GMap extends React.Component {
                 position={{lat: `${favorite.lat}`, lng: `${favorite.lng}`}}
                 />);
         this.setState({favoriteMarkers: favoritesMarkersArr});
+    }
+
+    getCurrentLocation(){
+        let that = this;
+        if(navigator.geolocation){
+            navigator.geolocation.getCurrentPosition(function(position) {
+                let pos = {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude
+                }
+                that.setState({center: pos});
+                that.setState({currentLocationMarker: <Marker onClick={that.onMarkerClick}
+                    name={'YOUR LOCATION!'}
+                    position={that.state.center}
+                    icon= {{path: that.props.google.maps.SymbolPath.CIRCLE, scale:10}}/>});
+            });
+        }
     }
     
 
@@ -107,15 +118,15 @@ class GMap extends React.Component {
     // ];
 
 
-    let that = this;
-    if(navigator.geolocation){
-        navigator.geolocation.getCurrentPosition(function(position) {
-            let pos = {
-                lat: position.coords.latitude,
-                lng: position.coords.longitude
-            }
-            that.setState({center: pos});
-        });
+    // let that = this;
+    // if(navigator.geolocation){
+    //     navigator.geolocation.getCurrentPosition(function(position) {
+    //         let pos = {
+    //             lat: position.coords.latitude,
+    //             lng: position.coords.longitude
+    //         }
+    //         that.setState({center: pos});
+    //     });
 
         // console.log('userId', this.props.userId);
         // console.log('trackFunction', this.props.track);
@@ -123,8 +134,9 @@ class GMap extends React.Component {
         /* attempt to make a control in google maps*/
         return (
             <div>
-                <button type='button' onClick={()=>this.trackInput()}>TRACK FAVORITE LOCATION</button>
+                <button type='button' onClick={()=>this.trackInput()}>TRACK LOCATION</button>
                 <button type='button' onClick={()=> this.addFavoritesToMarkers()}>Get Favorite Spots</button>
+                <button type='button' onClick={()=> this.getCurrentLocation()}>Get Current Location</button>
                 <div>
                     <Map google={this.props.google}
                     onClick={this.onMapClicked}
@@ -133,6 +145,7 @@ class GMap extends React.Component {
                     // controls[{this.props.google.maps.ControlPosition.TOP_CENTER}]
                     >
                         {markers}
+                        {this.state.currentLocationMarker}
                         {this.state.favoriteMarkers}
                         {this.state.clickedMarker}
 
@@ -155,10 +168,10 @@ class GMap extends React.Component {
                 </div>
             </div>
         );
-            
-    } else {
-        return (<div>no location</div>);
-    }
+      
+    // } else {
+    //     return (<div>no location</div>);
+    // }
   }
 }
 
