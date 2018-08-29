@@ -4,8 +4,8 @@
   justify-content: space-between;
   width: 100%;
   height: 56px;
-  padding-left: 10px;
   padding-right: 10px;
+  margin-top: 5px;
 }
 
 .drop-down-wrapper {
@@ -32,5 +32,5 @@
 }
 
 .login-wrapper {
-  border: 1px solid blue;
+  border: 1px solid grey;
 }
