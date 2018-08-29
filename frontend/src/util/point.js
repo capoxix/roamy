@@ -38,7 +38,7 @@ class Point {
       //find the dLat dLng
       const dLat = 0.003604 * startPoint.minutes;
       const dLng =  0.0045402 * startPoint.minutes;
-      debugger
+      // debugger
       let numPoints = 8;
       let angle = 360 / numPoints;
       let currentAngle = 0;

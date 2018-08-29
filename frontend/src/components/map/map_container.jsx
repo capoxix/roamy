@@ -7,6 +7,9 @@ export class MapContainer extends React.Component {
         showingInfoWindow: false,
         activeMarker: {},
         selectedPlace: {},
+        center: {},
+        clicked: {},
+        clickedMarker: {}
       };
     
     onMarkerClick = (props, marker, e) =>
@@ -16,13 +19,22 @@ export class MapContainer extends React.Component {
             showingInfoWindow: true
         });
 
-    onMapClicked = (props) => {
+    onMapClicked = (props, map, e) => {
         if (this.state.showingInfoWindow) {
             this.setState({
                 showingInfoWindow: false,
                 activeMarker: null
             })
         }
+        // console.log(e.latLng);
+        // console.log('clicked lat:', e.latLng.lat(), e.latLng.lng())
+        this.setState({clicked: {lat: e.latLng.lat(), lng: e.latLng.lng()}})
+        this.setState({clickedMarker: <Marker onClick={this.onMarkerClick}
+            name={'Clicked point'}
+            position={{lat: e.latLng.lat(), lng: e.latLng.lng()}} 
+        icon={{path: this.props.google.maps.SymbolPath.BACKWARD_CLOSED_ARROW, scale: 10}}/>});
+        console.log(this.state.clicked);
+       
     };
 
   render() {
@@ -39,6 +51,15 @@ export class MapContainer extends React.Component {
     //     // {lat: 25.774, lng: -80.190}
     //   ];
 
+    let goldStar = {
+        path: 'M 125,5 155,90 245,90 175,145 200,230 125,180 50,230 75,145 5,90 95,90 z',
+        fillColor: 'yellow',
+        fillOpacity: 0.8,
+        scale: 1,
+        strokeColor: 'gold',
+        strokeWeight: 14
+      };
+
       const style = {
         width: '500px',
         height: '500px'
@@ -52,10 +73,15 @@ export class MapContainer extends React.Component {
             position = {{ lat: 39.648209, lng: -75.711185 }}
             name = { 'Changing Colors Garage' }
             />,
-            <Marker onClick={this.onMarkerClick}
-            name={'AA'}
-            position={{lat: 37.7990, lng: -122.4014}} />];
-
+        <Marker onClick={this.onMarkerClick}
+        name={'AA'}
+        position={{lat: 37.7990, lng: -122.4014}} />,
+    <Marker onClick={this.onMarkerClick}
+        name={'YOUR LOCATION!'}
+        position={this.state.center}
+        icon= {{path: this.props.google.maps.SymbolPath.CIRCLE, scale:10}}
+        />];
+        {this.state.clickedMarker}
 
             let pos = {};
             navigator.geolocation.getCurrentPosition(function(position) {
@@ -66,33 +92,45 @@ export class MapContainer extends React.Component {
             });
 
             console.log(pos);
+    let that = this;
+    if(navigator.geolocation){
+        navigator.geolocation.getCurrentPosition(function(position) {
+            let pos = {
+                lat: position.coords.latitude,
+                lng: position.coords.longitude
+            }
+            that.setState({center: pos});
+        });
+        return (
+            <div style={style}>
+                <Map google={this.props.google}
+                onClick={this.onMapClicked}
+                center={this.state.center}>
+                    
+                    {markers}
 
-    return (
-        <div style={style}>
-            <Map google={this.props.google}
-            onClick={this.onMapClicked}
-            center={pos}>
-                
-                {markers}
+                    <InfoWindow
+                        marker={this.state.activeMarker}
+                        visible={this.state.showingInfoWindow}>
+                        <div>
+                            <h1>{this.state.selectedPlace.name}</h1>
+                        </div>
+                    </InfoWindow>
 
-                <InfoWindow
-                    marker={this.state.activeMarker}
-                    visible={this.state.showingInfoWindow}>
-                    <div>
-                        <h1>{this.state.selectedPlace.name}</h1>
-                    </div>
-                </InfoWindow>
-
-                <Polygon
-                    paths={points}
-                    strokeColor="#0000FF"
-                    strokeOpacity={0.8}
-                    strokeWeight={2}
-                    fillColor="#0000FF"
-                    fillOpacity={0.35} />
-            </Map>
-        </div>
-    );
+                    <Polygon
+                        paths={points}
+                        strokeColor="#0000FF"
+                        strokeOpacity={0.8}
+                        strokeWeight={2}
+                        fillColor="#0000FF"
+                        fillOpacity={0.35} />
+                </Map>
+                </div>
+                );
+            
+    } else {
+        return (<div>no location</div>);
+    }
   }
 }
 
