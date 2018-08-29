@@ -58,7 +58,7 @@ app.get(`/directions`, async (request, response) => {
     // console.log(await response.text());
     const results = JSON.parse(await resp.text());
     console.log("Our resultSeconds is currently: ", results.rows[0].elements[0].duration.value);
-    
+
   }
   response.send(point);
 });
@@ -326,4 +326,3 @@ app.listen(port, () => console.log(`Server is running on port ${port}`));
   // point.long = point.long - scale;
   //
   // console.log("Our new long is: ", point.long);
-  //
