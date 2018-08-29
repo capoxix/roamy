@@ -40,10 +40,16 @@ export class MapContainer extends React.Component {
 
   render() {
 
-    let lat = 37.7749;
-    let lng = -122.4194;
-    let minutes = 15;
-    let points = Point.initEndPoints(lat,lng,minutes);
+    const lat = 37.7749;
+    const lng = -122.4194;
+    const minutes = 15;
+    const origin = new Point({
+      lat: lat,
+      lng: lng,
+      minutes: minutes
+    })
+
+    let points = origin.initEndPoints();
 
     // const triangleCoords = [
     //     {lat: 25.774, lng: -80.190},

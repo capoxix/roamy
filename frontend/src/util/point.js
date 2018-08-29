@@ -21,7 +21,6 @@ class Point {
   initEndPoints() {
     const pointsArr = [];
     
-    //find the dLat dLng
     const dLat = 0.003604 * this.minutes;
     const dLng =  0.0045402 * this.minutes;
 
@@ -35,33 +34,56 @@ class Point {
   
       currentAngle += angle;
     }
-  
+
     return pointsArr;
   }
-}
-
-export default Point;
-
-async function cloudGenerator(lat ,lng, minutes) {
-  const origin = new Point({
-    lat: lat,
-    lng: lng,
-    minutes: minutes
-  })
-  const endPoints = [];
-  let cycles = 0;
   
- 
-  endPoints = origin.initEndPoints()
-
-  while (cycles < 4) {
+  getLatLng() {
     
+  }
 
+  makeSearchStr() {
+    // resp = await fetch(`https://maps.googleapis.com/maps/api/directions/json?origin=${lat}+${long}&destination=${point.lat},%20${long}&key=AIzaSyDBghaO6vALAG_-QG2SCBN8LEB_jFM6o1Q`);
+    const start = this.makeStartStr();
+    const destinations = `&destinations=34.150532%2C-118.444918&key=AIzaSyDBghaO6vALAG_-QG2SCBN8LEB_jFM6o1Q`
+    const key = '&key=AIzaSyDBghaO6vALAG_-QG2SCBN8LEB_jFM6o1Q'
+    return start + destinations + key
   }
   
-  // while (not perfect) {
-  // do async matrix call one at a time FIRST!!!! OI
-  endPoints.forEach((point) => point.adjustPoint(resMinutes))
+  makeStartStr() {
+    const header = 'https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial';
+    const origin = `&origins=${this.lat},${this.lng}`;
+    return header + origin;
+  }
+  
+  makeDestinationsStr(destinations) {
+    const destinations = `&destinations=34.150532%2C-118.444918%7C`
+
+    for (let i = 0; i < destinations.length; i++) {
+      
+    }
+  }
 }
+
+module.export = Point;
+
+// async function cloudGenerator(lat ,lng, minutes) {
+//   const origin = new Point({
+//     lat: lat,
+//     lng: lng,
+//     minutes: minutes
+//   })
+//   const endPoints = [];
+//   let cycles = 0;
+  
+ 
+//   endPoints = origin.initEndPoints()
+
+  
+  
+//   // while (not perfect) {
+//   // do async matrix call one at a time FIRST!!!! OI
+//   endPoints.forEach((point) => point.adjustPoint(resMinutes))
+// }
 
 let o = new Point({lat: 37.7990, lng: -122.4014, minutes: 20})

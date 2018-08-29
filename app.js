@@ -1,4 +1,5 @@
-import Point from './frontend/src/util/point.js';
+// import Point from './frontend/src/util/point.js';
+const Point = require('./frontend/src/util/point.js');
 const express = require('express');
 const mongoose = require('mongoose');
 const db = require('./config/keys').mongoURI;
@@ -56,7 +57,6 @@ app.get(`/directions`, async (request, response) => {
   let endPoints;
   let responseMins = 0;
   let searches = 0;
-  let scale = 0.005402;
   
  
   endPoints = origin.initEndPoints()
