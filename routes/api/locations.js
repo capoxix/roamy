@@ -6,7 +6,7 @@ const fetch = require('node-fetch');
 const validateTrackInput = require('../../validation/track.js');
 
 router.get('/test', (req, res) => res.json({msg: 'Locations route is working'}));
-
+/* track favorite location for logged in user*/
 router.post('/track', (req,res) => {
 
     const{ errors, isValid } = validateTrackInput(req.body);
@@ -26,6 +26,13 @@ router.post('/track', (req,res) => {
         .then(location => res.json(location))
         .catch(err => console.log(err));
 
+});
+
+router.get('/favorites/:userId', (req, res) => {
+  Location.find({userId: req.params.userId})
+    .then(favorites => res.json(favorites))
+    .catch(err => console.log(err));
+    ;
 });
 
 let lat= 34.069502;

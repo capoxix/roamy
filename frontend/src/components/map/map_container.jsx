@@ -1,7 +1,7 @@
 import {Map, InfoWindow, Marker, GoogleApiWrapper, Polygon} from 'google-maps-react';
 import React from 'react';
 import Point from '../../util/point';
-import {track} from '../../util/location_api_util';
+import {track, getFavorites} from '../../util/location_api_util';
 import {connect} from 'react-redux';
 const gAPI = require('../../config/keys').gAPI;
 // import { MAP } from 'react-google-maps/lib/constants'
@@ -32,8 +32,7 @@ export class GMap extends React.Component {
                 activeMarker: null
             })
         }
-        // console.log(e.latLng);
-        // console.log('clicked lat:', e.latLng.lat(), e.latLng.lng())
+        /*get latitude and longitude from clicked point on maps */
         this.setState({clicked: {lat: e.latLng.lat(), lng: e.latLng.lng()}})
         this.setState({clickedMarker: <Marker onClick={this.onMarkerClick}
             name={'Clicked point'}
@@ -46,25 +45,23 @@ export class GMap extends React.Component {
     };
 
     trackInput() {
+        /*track the user's clicked point*/
         let trackLocation =  {name:'tracking', lat: `${this.state.clicked.lat}`, lng: `${this.state.clicked.lng}`, userId: this.props.userId};
         track(trackLocation).then(res => console.log('tracked', res));
+    }
+
+    addFavoritesToMarkers(){
+        
     }
     
 
   render() {
 
-    let lat = 37.7749;
-    let lng = -122.4194;
-    let minutes = 15;
-    let points = [];//Point.initEndPoints(lat,lng,minutes);
-    // console.log(Point.initEndPoints(lat,lng,minutes));
-    // const triangleCoords = [
-    //     {lat: 25.774, lng: -80.190},
-    //     {lat: 18.466, lng: -66.118},
-    //     {lat: 32.321, lng: -64.757},
-    //     // {lat: 25.774, lng: -80.190}
-    //   ];
-
+    // let lat = 37.7749;
+    // let lng = -122.4194;
+    // let minutes = 15;
+    let points = [];
+  
     let goldStar = {
         path: 'M 125,5 155,90 245,90 175,145 200,230 125,180 50,230 75,145 5,90 95,90 z',
         fillColor: 'yellow',
@@ -80,20 +77,14 @@ export class GMap extends React.Component {
       }
 
       const markers = [
-        <Marker
-            onClick = { this.onMarkerClick }
-            title = { 'Changing Colors Garage' }
-            position = {{ lat: 39.648209, lng: -75.711185 }}
-            name = { 'Changing Colors Garage' }
-            />,
         <Marker onClick={this.onMarkerClick}
         name={'AA'}
         position={{lat: 37.7990, lng: -122.4014}} />,
-    <Marker onClick={this.onMarkerClick}
+        <Marker onClick={this.onMarkerClick}
         name={'YOUR LOCATION!'}
         position={this.state.center}
-        icon= {{path: this.props.google.maps.SymbolPath.CIRCLE, scale:10}}
-        />];
+        icon= {{path: this.props.google.maps.SymbolPath.CIRCLE, scale:10}}/>
+    ];
 
 
     let that = this;
@@ -120,7 +111,6 @@ export class GMap extends React.Component {
                     style={style}
                     // controls[{this.props.google.maps.ControlPosition.TOP_CENTER}]
                     >
-                        
                         {markers}
                         {this.state.clickedMarker}
 
@@ -140,9 +130,9 @@ export class GMap extends React.Component {
                             fillColor="#0000FF"
                             fillOpacity={0.35} />
                     </Map>
-                    </div>
+                </div>
             </div>
-                );
+        );
             
     } else {
         return (<div>no location</div>);

@@ -1,3 +1,5 @@
+/*validation for locations that are going to be tracked */
+
 const Validator = require('validator');
 const isEmpty = require('./is-empty');
 

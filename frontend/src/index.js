@@ -10,7 +10,7 @@ import {login,
     logoutUser
 } from './actions/session_actions';
 import configureStore from './store/store';
-import {track} from './util/location_api_util';
+import {track, getFavorites} from './util/location_api_util';
 import jwt_decode from 'jwt-decode';
 
 
@@ -42,6 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
           window.location.href = '/login';
         }
       }
+      window.getFavorites = getFavorites;
 
 
     ReactDOM.render(<Root store={store}/>, root);
