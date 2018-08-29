@@ -7,6 +7,27 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
+import { createMuiTheme } from '@material-ui/core/styles';
+import bluegrey from '@material-ui/core/colors/blueGrey';
+
+const theme = createMuiTheme({
+  palette: {
+    primary: bluegrey
+  }
+});
+
+const styles = {
+  root: {
+    flexGrow: 1,
+  },
+  flex: {
+    flexGrow: 1,
+  },
+  menuButton: {
+    marginLeft: -12,
+    marginRight: 20,
+  },
+};
 
 class ButtonAppBar extends Component {
 
@@ -17,6 +38,7 @@ class ButtonAppBar extends Component {
       time: 15
     };
   }
+
 
   render(){
     return (
@@ -63,7 +85,7 @@ class ButtonAppBar extends Component {
     )}
   };
 
-  export default ButtonAppBar;
+  export default withStyles(styles)(ButtonAppBar);
 
 
   // class Form extends React.Component {
