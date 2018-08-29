@@ -51,12 +51,27 @@ export class MapContainer extends React.Component {
             title = { 'Changing Colors Garage' }
             position = {{ lat: 39.648209, lng: -75.711185 }}
             name = { 'Changing Colors Garage' }
-            />]
+            />,
+            <Marker onClick={this.onMarkerClick}
+            name={'AA'}
+            position={{lat: 37.7990, lng: -122.4014}} />];
+
+
+            let pos = {};
+            navigator.geolocation.getCurrentPosition(function(position) {
+                pos = {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude
+                }
+            });
+
+            console.log(pos);
 
     return (
         <div style={style}>
             <Map google={this.props.google}
-            onClick={this.onMapClicked}>
+            onClick={this.onMapClicked}
+            center={pos}>
                 
                 {markers}
 
@@ -80,7 +95,6 @@ export class MapContainer extends React.Component {
     );
   }
 }
-// export class MapContainer extends React.Component {}
 
 export default GoogleApiWrapper({
   apiKey: ('AIzaSyA3tKBZcqJXXbGnAGoph4_a1WEZ_QZK7-E')
