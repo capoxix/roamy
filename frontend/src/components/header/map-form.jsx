@@ -34,9 +34,9 @@ class ButtonAppBar extends Component {
 
   render(){
     return (
-      <div>
+      <div className="appbar">
         <AppBar position="static">
-          <Toolbar className="appbar">
+          <Toolbar>
             <IconButton color="inherit" aria-label="Menu">
               <MenuIcon />
             </IconButton>
