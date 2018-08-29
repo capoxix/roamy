@@ -32,3 +32,9 @@
 .login-wrapper {
   border: 1px solid grey;
 }
+
+
+.appbar {
+  display: flex;
+  justify-content: space-between;
+}

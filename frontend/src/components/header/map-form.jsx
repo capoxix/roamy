@@ -7,14 +7,6 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-import { createMuiTheme } from '@material-ui/core/styles';
-import bluegrey from '@material-ui/core/colors/blueGrey';
-
-const theme = createMuiTheme({
-  palette: {
-    primary: bluegrey
-  }
-});
 
 const styles = {
   root: {
@@ -44,7 +36,7 @@ class ButtonAppBar extends Component {
     return (
       <div>
         <AppBar position="static">
-          <Toolbar>
+          <Toolbar className="appbar">
             <IconButton color="inherit" aria-label="Menu">
               <MenuIcon />
             </IconButton>
@@ -75,8 +67,6 @@ class ButtonAppBar extends Component {
                 <button>Submit</button>
               </form>
             </div>
-          )
-        }
 
             <Button color="inherit">Login</Button>
           </Toolbar>
