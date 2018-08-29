@@ -82,13 +82,13 @@ export class MapContainer extends React.Component {
         icon= {{path: this.props.google.maps.SymbolPath.CIRCLE, scale:10}}
         />];
 
-            let pos = {};
-            navigator.geolocation.getCurrentPosition(function(position) {
-                pos = {
-                    lat: position.coords.latitude,
-                    lng: position.coords.longitude
-                }
-            });
+            // let pos = {};
+            // navigator.geolocation.getCurrentPosition(function(position) {
+            //     pos = {
+            //         lat: position.coords.latitude,
+            //         lng: position.coords.longitude
+            //     }
+            // });
 
     let that = this;
     if(navigator.geolocation){
