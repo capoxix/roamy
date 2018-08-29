@@ -9,7 +9,7 @@ export class MapContainer extends React.Component {
         selectedPlace: {},
         center: {},
         clicked: {},
-        clickedMarker: {}
+        clickedMarker: []
       };
     
     onMarkerClick = (props, marker, e) =>
@@ -32,7 +32,7 @@ export class MapContainer extends React.Component {
         this.setState({clickedMarker: <Marker onClick={this.onMarkerClick}
             name={'Clicked point'}
             position={{lat: e.latLng.lat(), lng: e.latLng.lng()}} 
-        icon={{path: this.props.google.maps.SymbolPath.BACKWARD_CLOSED_ARROW, scale: 10}}/>});
+        icon={{path: this.props.google.maps.SymbolPath.BACKWARD_CLOSED_ARROW, scale: 5}}/>});
         console.log(this.state.clicked);
        
     };
@@ -81,7 +81,6 @@ export class MapContainer extends React.Component {
         position={this.state.center}
         icon= {{path: this.props.google.maps.SymbolPath.CIRCLE, scale:10}}
         />];
-        {this.state.clickedMarker}
 
             let pos = {};
             navigator.geolocation.getCurrentPosition(function(position) {
@@ -91,7 +90,6 @@ export class MapContainer extends React.Component {
                 }
             });
 
-            console.log(pos);
     let that = this;
     if(navigator.geolocation){
         navigator.geolocation.getCurrentPosition(function(position) {
@@ -108,6 +106,7 @@ export class MapContainer extends React.Component {
                 center={this.state.center}>
                     
                     {markers}
+                    {this.state.clickedMarker}
 
                     <InfoWindow
                         marker={this.state.activeMarker}
