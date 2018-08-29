@@ -1,16 +1,19 @@
 import {Map, InfoWindow, Marker, GoogleApiWrapper, Polygon} from 'google-maps-react';
 import React from 'react';
 import Point from '../../util/point';
+import {track} from '../../util/location_api_util';
+import {connect} from 'react-redux';
 const gAPI = require('../../config/keys').gAPI;
 
-export class MapContainer extends React.Component {
+export class GMap extends React.Component {
     state = {
         showingInfoWindow: false,
         activeMarker: {},
         selectedPlace: {},
         center: {},
         clicked: {},
-        clickedMarker: []
+        clickedMarker: [],
+        favoriteMarkers: []
       };
     
     onMarkerClick = (props, marker, e) =>
@@ -38,12 +41,17 @@ export class MapContainer extends React.Component {
        
     };
 
+    trackInput() {
+        let trackLocation =  {name:'tracking', lat: this.state.clicked.lat, lng: this.state.clicked.lng, userId: this.props.userId};
+        this.props.track(trackLocation);
+    }
+
   render() {
 
     let lat = 37.7749;
     let lng = -122.4194;
     let minutes = 15;
-    let points = Point.initEndPoints(lat,lng,minutes);
+    let points = [];//Point.initEndPoints(lat,lng,minutes);
 
     // const triangleCoords = [
     //     {lat: 25.774, lng: -80.190},
@@ -83,13 +91,6 @@ export class MapContainer extends React.Component {
         icon= {{path: this.props.google.maps.SymbolPath.CIRCLE, scale:10}}
         />];
 
-            // let pos = {};
-            // navigator.geolocation.getCurrentPosition(function(position) {
-            //     pos = {
-            //         lat: position.coords.latitude,
-            //         lng: position.coords.longitude
-            //     }
-            // });
 
     let that = this;
     if(navigator.geolocation){
@@ -100,31 +101,37 @@ export class MapContainer extends React.Component {
             }
             that.setState({center: pos});
         });
+
+        // console.log('userId', this.props.userId);
+        // console.log('trackFunction', this.props.track);
+
         return (
-            <div style={style}>
-                <Map google={this.props.google}
-                onClick={this.onMapClicked}
-                center={this.state.center}>
-                    
-                    {markers}
-                    {this.state.clickedMarker}
+            <div>
+                <div style={style}>
+                    <Map google={this.props.google}
+                    onClick={this.onMapClicked}
+                    center={this.state.center}>
+                        
+                        {markers}
+                        {this.state.clickedMarker}
 
-                    <InfoWindow
-                        marker={this.state.activeMarker}
-                        visible={this.state.showingInfoWindow}>
-                        <div>
-                            <h1>{this.state.selectedPlace.name}</h1>
-                        </div>
-                    </InfoWindow>
+                        <InfoWindow
+                            marker={this.state.activeMarker}
+                            visible={this.state.showingInfoWindow}>
+                            <div>
+                                <h1>{this.state.selectedPlace.name}</h1>
+                            </div>
+                        </InfoWindow>
 
-                    <Polygon
-                        paths={points}
-                        strokeColor="#0000FF"
-                        strokeOpacity={0.8}
-                        strokeWeight={2}
-                        fillColor="#0000FF"
-                        fillOpacity={0.35} />
-                </Map>
+                        <Polygon
+                            paths={points}
+                            strokeColor="#0000FF"
+                            strokeOpacity={0.8}
+                            strokeWeight={2}
+                            fillColor="#0000FF"
+                            fillOpacity={0.35} />
+                    </Map>
+                    </div>
                 </div>
                 );
             
@@ -134,6 +141,19 @@ export class MapContainer extends React.Component {
   }
 }
 
+
+/* Connecting Map to State Shape*/
+const mapStateToProps = (state, ownProps) => ({
+    userId: state.session.id
+});
+
+const mapDispatchToProps = (dispatch) => ({
+    track: (location) => dispatch(track(location))
+});
+
+const MapContainer = connect(mapStateToProps, mapDispatchToProps)(GMap);
+
+/* Wrappe MapContainer with Google API*/
 export default GoogleApiWrapper({
   apiKey: (gAPI)
 })(MapContainer)

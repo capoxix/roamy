@@ -18,7 +18,8 @@ router.post('/track', (req,res) => {
     const location = new Location({
         name: req.body.name,
         lat: req.body.lat,
-        lng: req.body.lng
+        lng: req.body.lng,
+        userId: req.body.userId
     });
 
     location.save()
