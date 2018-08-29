@@ -44,12 +44,21 @@ export class MapContainer extends React.Component {
         height: '500px'
       }
 
+      const markers = [<Marker onClick={this.onMarkerClick}
+        name={'Current location'} />,
+        <Marker
+            onClick = { this.onMarkerClick }
+            title = { 'Changing Colors Garage' }
+            position = {{ lat: 39.648209, lng: -75.711185 }}
+            name = { 'Changing Colors Garage' }
+            />]
+
     return (
         <div style={style}>
             <Map google={this.props.google}
             onClick={this.onMapClicked}>
-                <Marker onClick={this.onMarkerClick}
-                        name={'Current location'} />
+                
+                {markers}
 
                 <InfoWindow
                     marker={this.state.activeMarker}
