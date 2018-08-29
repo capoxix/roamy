@@ -7,9 +7,9 @@ class Point {
     this.draw = false;
   }
 
-  static createEndPoint(origin, currentAngle, dLat, dLng) {
-    let pLng = origin.lng + (dLng * Math.cos((currentAngle * Math.PI)/ 180))
-    let pLat = origin.lat + (dLat * Math.sin((currentAngle * Math.PI)/ 180))
+  createEndPoint(currentAngle, dLat, dLng) {
+    let pLng = this.lng + (dLng * Math.cos((currentAngle * Math.PI)/ 180))
+    let pLat = this.lat + (dLat * Math.sin((currentAngle * Math.PI)/ 180))
     const newPoint = new Point({
       lat: pLat,
       lng: pLng,
@@ -30,7 +30,7 @@ class Point {
     let currentAngle = 0;
   
     while (currentAngle < 360) { 
-      let newPoint = Point.createEndPoint(this, currentAngle, dLat, dLng)
+      let newPoint = this.createEndPoint(currentAngle, dLat, dLng)
       pointsArr.push(newPoint)
   
       currentAngle += angle;
