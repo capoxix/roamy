@@ -3,16 +3,15 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './components/App';
 import Root from './components/root';
-import {login, 
-    register, 
-    setAuthToken, 
+import {login,
+    register,
+    setAuthToken,
     receiveCurrentUser,
     logoutUser
 } from './actions/session_actions';
 import configureStore from './store/store';
 import {track} from './util/location_api_util';
 import jwt_decode from 'jwt-decode';
-
 
 document.addEventListener('DOMContentLoaded', () => {
     const root = document.getElementById('root');
@@ -32,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const decoded = jwt_decode(localStorage.jwtToken);
         // Set user and isAuthenticated
         store.dispatch(receiveCurrentUser(decoded));
-    
+
         // Check for expired token
         const currentTime = Date.now() / 1000;
         if (decoded.exp < currentTime) {
@@ -42,9 +41,5 @@ document.addEventListener('DOMContentLoaded', () => {
           window.location.href = '/login';
         }
       }
-
-
-    ReactDOM.render(<Root store={store}/>, root);
-    
-
+       ReactDOM.render(<Root store={store}/>, root);
 })

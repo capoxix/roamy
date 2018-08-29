@@ -12,7 +12,7 @@ export class MapContainer extends React.Component {
         clicked: {},
         clickedMarker: []
       };
-    
+
     onMarkerClick = (props, marker, e) =>
         this.setState({
             selectedPlace: props,
@@ -32,10 +32,10 @@ export class MapContainer extends React.Component {
         this.setState({clicked: {lat: e.latLng.lat(), lng: e.latLng.lng()}})
         this.setState({clickedMarker: <Marker onClick={this.onMarkerClick}
             name={'Clicked point'}
-            position={{lat: e.latLng.lat(), lng: e.latLng.lng()}} 
+            position={{lat: e.latLng.lat(), lng: e.latLng.lng()}}
         icon={{path: this.props.google.maps.SymbolPath.BACKWARD_CLOSED_ARROW, scale: 5}}/>});
         console.log(this.state.clicked);
-       
+
     };
 
   render() {
@@ -105,7 +105,7 @@ export class MapContainer extends React.Component {
                 <Map google={this.props.google}
                 onClick={this.onMapClicked}
                 center={this.state.center}>
-                    
+
                     {markers}
                     {this.state.clickedMarker}
 
@@ -127,7 +127,7 @@ export class MapContainer extends React.Component {
                 </Map>
                 </div>
                 );
-            
+
     } else {
         return (<div>no location</div>);
     }
