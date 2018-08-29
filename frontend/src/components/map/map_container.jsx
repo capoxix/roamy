@@ -4,6 +4,8 @@ import Point from '../../util/point';
 import {track} from '../../util/location_api_util';
 import {connect} from 'react-redux';
 const gAPI = require('../../config/keys').gAPI;
+// import { MAP } from 'react-google-maps/lib/constants'
+
 
 export class GMap extends React.Component {
     state = {
@@ -38,13 +40,16 @@ export class GMap extends React.Component {
             position={{lat: e.latLng.lat(), lng: e.latLng.lng()}} 
         icon={{path: this.props.google.maps.SymbolPath.BACKWARD_CLOSED_ARROW, scale: 5}}/>});
         console.log(this.state.clicked);
+        console.log(props);
+        console.log(map);
        
     };
 
     trackInput() {
-        let trackLocation =  {name:'tracking', lat: this.state.clicked.lat, lng: this.state.clicked.lng, userId: this.props.userId};
-        this.props.track(trackLocation);
+        let trackLocation =  {name:'tracking', lat: `${this.state.clicked.lat}`, lng: `${this.state.clicked.lng}`, userId: this.props.userId};
+        track(trackLocation).then(res => console.log('tracked', res));
     }
+    
 
   render() {
 
@@ -52,7 +57,7 @@ export class GMap extends React.Component {
     let lng = -122.4194;
     let minutes = 15;
     let points = [];//Point.initEndPoints(lat,lng,minutes);
-
+    // console.log(Point.initEndPoints(lat,lng,minutes));
     // const triangleCoords = [
     //     {lat: 25.774, lng: -80.190},
     //     {lat: 18.466, lng: -66.118},
@@ -70,12 +75,11 @@ export class GMap extends React.Component {
       };
 
       const style = {
-        width: '500px',
-        height: '500px'
+        width: '800px',
+        height: '800px'
       }
 
-      const markers = [<Marker onClick={this.onMarkerClick}
-        name={'Current location'} />,
+      const markers = [
         <Marker
             onClick = { this.onMarkerClick }
             title = { 'Changing Colors Garage' }
@@ -105,12 +109,17 @@ export class GMap extends React.Component {
         // console.log('userId', this.props.userId);
         // console.log('trackFunction', this.props.track);
 
+        /* attempt to make a control in google maps*/
         return (
             <div>
-                <div style={style}>
+                <button type='button' onClick={()=>this.trackInput()}>TRACK FAVORITE LOCATION</button>
+                <div>
                     <Map google={this.props.google}
                     onClick={this.onMapClicked}
-                    center={this.state.center}>
+                    center={this.state.center}
+                    style={style}
+                    // controls[{this.props.google.maps.ControlPosition.TOP_CENTER}]
+                    >
                         
                         {markers}
                         {this.state.clickedMarker}
@@ -132,7 +141,7 @@ export class GMap extends React.Component {
                             fillOpacity={0.35} />
                     </Map>
                     </div>
-                </div>
+            </div>
                 );
             
     } else {
@@ -148,7 +157,7 @@ const mapStateToProps = (state, ownProps) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    track: (location) => dispatch(track(location))
+    // track: (location) => dispatch(track(location))
 });
 
 const MapContainer = connect(mapStateToProps, mapDispatchToProps)(GMap);
