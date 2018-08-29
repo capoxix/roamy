@@ -7,7 +7,7 @@ const gAPI = require('../../config/keys').gAPI;
 // import { MAP } from 'react-google-maps/lib/constants'
 
 
-export class GMap extends React.Component {
+class GMap extends React.Component {
     state = {
         showingInfoWindow: false,
         activeMarker: {},
@@ -51,7 +51,26 @@ export class GMap extends React.Component {
     }
 
     addFavoritesToMarkers(){
-        
+        let that = this;
+        getFavorites(this.props.userId).then(favorites =>  that.setMarkersIntoMap(favorites.data));
+    }
+
+    // addFavoritesToMarkers(){
+    //     getFavorites(this.props.userId).then(favorites =>  this.setState({favoriteMarkers: favorites.data.map(favorite => 
+    //         <Marker onClick={this.onMarkerClick}
+    //             name={favorite.name}
+    //             position={{lat: `${favorite.lat}`, lng: `${favorite.lng}`}}
+    //             />
+    //     )}));
+    // }
+
+    setMarkersIntoMap(favoriteDataArr){
+        let favoritesMarkersArr = favoriteDataArr.map(favorite => 
+            <Marker onClick={this.onMarkerClick}
+                name={favorite.name}
+                position={{lat: `${favorite.lat}`, lng: `${favorite.lng}`}}
+                />);
+        this.setState({favoriteMarkers: favoritesMarkersArr});
     }
     
 
@@ -76,15 +95,16 @@ export class GMap extends React.Component {
         height: '800px'
       }
 
-      const markers = [
-        <Marker onClick={this.onMarkerClick}
-        name={'AA'}
-        position={{lat: 37.7990, lng: -122.4014}} />,
-        <Marker onClick={this.onMarkerClick}
-        name={'YOUR LOCATION!'}
-        position={this.state.center}
-        icon= {{path: this.props.google.maps.SymbolPath.CIRCLE, scale:10}}/>
-    ];
+      const markers = [];
+      //[
+    //     <Marker onClick={this.onMarkerClick}
+    //     name={'AA'}
+    //     position={{lat: 37.7990, lng: -122.4014}} />,
+    //     <Marker onClick={this.onMarkerClick}
+    //     name={'YOUR LOCATION!'}
+    //     position={this.state.center}
+    //     icon= {{path: this.props.google.maps.SymbolPath.CIRCLE, scale:10}}/>
+    // ];
 
 
     let that = this;
@@ -104,6 +124,7 @@ export class GMap extends React.Component {
         return (
             <div>
                 <button type='button' onClick={()=>this.trackInput()}>TRACK FAVORITE LOCATION</button>
+                <button type='button' onClick={()=> this.addFavoritesToMarkers()}>Get Favorite Spots</button>
                 <div>
                     <Map google={this.props.google}
                     onClick={this.onMapClicked}
@@ -112,6 +133,7 @@ export class GMap extends React.Component {
                     // controls[{this.props.google.maps.ControlPosition.TOP_CENTER}]
                     >
                         {markers}
+                        {this.state.favoriteMarkers}
                         {this.state.clickedMarker}
 
                         <InfoWindow
@@ -140,19 +162,20 @@ export class GMap extends React.Component {
   }
 }
 
+export default GMap;
 
-/* Connecting Map to State Shape*/
-const mapStateToProps = (state, ownProps) => ({
-    userId: state.session.id
-});
+// /* Connecting Map to State Shape*/
+// const mapStateToProps = (state, ownProps) => ({
+//     userId: state.session.id
+// });
 
-const mapDispatchToProps = (dispatch) => ({
-    // track: (location) => dispatch(track(location))
-});
+// const mapDispatchToProps = (dispatch) => ({
+//     // track: (location) => dispatch(track(location))
+// });
 
-const MapContainer = connect(mapStateToProps, mapDispatchToProps)(GMap);
+// const MapContainer = connect(mapStateToProps, mapDispatchToProps)(GMap);
 
-/* Wrappe MapContainer with Google API*/
-export default GoogleApiWrapper({
-  apiKey: (gAPI)
-})(MapContainer)
+/* Wrapped MapContainer with Google API*/
+// export default GoogleApiWrapper({
+//   apiKey: (gAPI)
+// })(MapContainer)
