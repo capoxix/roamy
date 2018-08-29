@@ -1,3 +1,4 @@
+import Point from './frontend/src/util/point.js';
 const express = require('express');
 const mongoose = require('mongoose');
 const db = require('./config/keys').mongoURI;
@@ -20,29 +21,6 @@ mongoose
 
 const app = express();
 
-class Point {
-  constructor({lat, long}){
-    this.lat = lat;
-    this.long = long;
-    this.draw = false;
-  }
-
-  // this.distance = distance;
-  // this.time= time;
-}
-
-let point;
-
-
-let lat= 34.069502;
-let long= -118.444918;
-let minutes = 15;
-// let lat= 37.7990;
-// let long= -122.4014;
-// let minutes = 15;
-
-var resp;
-
 app.get(`/directions`, async (request, response) => {
   // make api call using fetch
   let googleMins = 0;
@@ -63,59 +41,45 @@ app.get(`/directions`, async (request, response) => {
   response.send(point);
 });
 
+app.get('/test', (req, res) => {
+  console.log("hi")
+  res.send("hit")
+})
 
+app.get(`/directions`, async (request, response) => {
+  // make api call using fetch
+  const origin = new Point({
+    lat: lat,
+    lng: lng,
+    minutes: minutes
+  })
+  let endPoints;
+  let responseMins = 0;
+  let searches = 0;
+  let scale = 0.005402;
+  
+ 
+  endPoints = origin.initEndPoints()
 
+  while(searches < 4) {
+    searches+=1;
 
-//
-// const findLat = () => {
-//
-// };
-//
-// app.get(`/directions`, async (request, response) => {
-//   // make api call using fetch
-//   let googleMins = 0;
-//   let searches = 0;
-//   let difference = minutes*0.005402;
-//   let scale = 0.005402;
-//
-//   //
-//   point = new Point({lat: lat,long: long});
-//
-//   while(googleMins !== minutes && searches < 4) {
-//     searches+=1;
-//     console.log("we are on search #: ", searches);
-//     console.log("-------------");
-//
-//
-//
-//
-//     point.lat = lat+difference;
-//
-//
-//
-//     console.log("Our first long is: ", point.long);
-//     console.log("-------------");
-//     resp = await fetch(`https://maps.googleapis.com/maps/api/directions/json?origin=${lat}+${long}&destination=${point.lat},%20${long}&key=AIzaSyDBghaO6vALAG_-QG2SCBN8LEB_jFM6o1Q`);
-//     // console.log(await response.text());
-//     const results = JSON.parse(await resp.text());
-//     console.log("Our GoogleMins is currently: ", results.routes[0].legs[0].duration.text.split(" ")[0]);
-//
-//       googleMins = parseInt(results.routes[0].legs[0].duration.text.split(" ")[0]);
-//       if (minutes === googleMins){
-//         // endpoints.push(point);
-//         // await response.send(point);
-//       } else {
-//         console.log("our point.long is: ", point.long);
-//         console.log("-------------");
-//         difference = minutes*(point.lat-lat)/googleMins;
-//         console.log("our diff is: ", difference);
-//         console.log("-------------");
-//       }
-//       // console.log("Our googlemins is currently:", googleMins);
-//     // });
-//   }
-//   response.send(point);
-// });
+    // resp = await fetch(`https://maps.googleapis.com/maps/api/directions/json?origin=${lat}+${long}&destination=${point.lat},%20${long}&key=AIzaSyDBghaO6vALAG_-QG2SCBN8LEB_jFM6o1Q`);
+
+    const results = JSON.parse(await resp.text());
+
+      responseMins = parseInt(results.routes[0].legs[0].duration.text.split(" ")[0]);
+      if (minutes === responseMins){
+        
+      } else {
+
+        difference = minutes*(point.lat-lat)/responseMins;
+
+      }
+  }
+
+  response.send(point);
+});
 
 
 

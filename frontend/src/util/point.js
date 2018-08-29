@@ -25,7 +25,7 @@ class Point {
     const dLat = 0.003604 * this.minutes;
     const dLng =  0.0045402 * this.minutes;
 
-    let numPoints = 8;
+    let numPoints = 1;
     let angle = 360 / numPoints;
     let currentAngle = 0;
   
@@ -42,16 +42,22 @@ class Point {
 
 export default Point;
 
-function cloudGenerator(lat ,lng, minutes) {
+async function cloudGenerator(lat ,lng, minutes) {
   const origin = new Point({
     lat: lat,
     lng: lng,
     minutes: minutes
   })
   const endPoints = [];
+  let cycles = 0;
   
-  // should pass in origin object instead
-  endPoints = origin.initEndPoints() 
+ 
+  endPoints = origin.initEndPoints()
+
+  while (cycles < 4) {
+    
+
+  }
   
   // while (not perfect) {
   // do async matrix call one at a time FIRST!!!! OI
