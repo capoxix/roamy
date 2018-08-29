@@ -55,3 +55,19 @@ class Point {
   }
 
 export default Point;
+
+function cloudGenerator(lat ,lng, minutes) {
+  const origin = new Point({
+    lat: lat,
+    lng: lng,
+    minutes: minutes
+  })
+  const endPoints = [];
+  
+  // should pass in origin object instead
+  endPoints = Point.initEndPoints(lat, lng, minutes) 
+  
+  // while (not perfect) {
+  // do async matrix call one at a time FIRST!!!! OI
+  endPoints.forEach((point) => point.adjustPoint(resMinutes))
+    
