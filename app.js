@@ -64,8 +64,8 @@ app.get(`/directions`, async (request, response) => {
   while(searches < 4) {
     searches+=1;
 
-    // resp = await fetch(`https://maps.googleapis.com/maps/api/directions/json?origin=${lat}+${long}&destination=${point.lat},%20${long}&key=AIzaSyDBghaO6vALAG_-QG2SCBN8LEB_jFM6o1Q`);
-
+    resp = await fetch(`https://maps.googleapis.com/maps/api/directions/json?origin=${lat}+${long}&destination=${point.lat},%20${long}&key=AIzaSyDBghaO6vALAG_-QG2SCBN8LEB_jFM6o1Q`);
+    resp = await fetch('https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=34.069502,-118.444918&destinations=34.150532%2C-118.444918&key=AIzaSyDBghaO6vALAG_-QG2SCBN8LEB_jFM6o1Q')
     const results = JSON.parse(await resp.text());
 
       responseMins = parseInt(results.routes[0].legs[0].duration.text.split(" ")[0]);
@@ -80,7 +80,6 @@ app.get(`/directions`, async (request, response) => {
 
   response.send(point);
 });
-
 
 
 

@@ -39,13 +39,13 @@ class Point {
   }
   
   getLatLng() {
-    
+    return `${this.lat}%2C${this.lng}%7C`
   }
 
   makeSearchStr() {
     // resp = await fetch(`https://maps.googleapis.com/maps/api/directions/json?origin=${lat}+${long}&destination=${point.lat},%20${long}&key=AIzaSyDBghaO6vALAG_-QG2SCBN8LEB_jFM6o1Q`);
     const start = this.makeStartStr();
-    const destinations = `&destinations=34.150532%2C-118.444918&key=AIzaSyDBghaO6vALAG_-QG2SCBN8LEB_jFM6o1Q`
+    const destinations = `&destinations=34.150532%2C-118.444918`
     const key = '&key=AIzaSyDBghaO6vALAG_-QG2SCBN8LEB_jFM6o1Q'
     return start + destinations + key
   }
@@ -57,11 +57,13 @@ class Point {
   }
   
   makeDestinationsStr(destinations) {
-    const destinations = `&destinations=34.150532%2C-118.444918%7C`
+    let destinationStr = `&destinations=34.150532%2C-118.444918%7C`
 
     for (let i = 0; i < destinations.length; i++) {
-      
+      destinationStr = destinationStr +  destinations[i].getLatLng();
     }
+
+    return destinationStr
   }
 }
 
