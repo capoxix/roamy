@@ -43,25 +43,25 @@ let minutes = 15;
 
 var resp;
 
-app.get(`/directions`, async (request, response) => {
-  // make api call using fetch
-  let googleMins = 0;
-  let searches = 0;
-  let difference = minutes*0.005402;
-  let scale = 0.005402;
-  point = new Point({lat: lat,long: long});
+// app.get(`/directions`, async (request, response) => {
+//   // make api call using fetch
+//   let googleMins = 0;
+//   let searches = 0;
+//   let difference = minutes*0.005402;
+//   let scale = 0.005402;
+//   point = new Point({lat: lat,long: long});
 
-  while(googleMins !== minutes && searches < 4) {
-    searches+=1;
-    point.lat = lat+difference;
-    resp = await fetch(`https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&mode=driving&origins=${lat},${long}&destinations=${point.lat}%2C${point.long}&key=AIzaSyDBghaO6vALAG_-QG2SCBN8LEB_jFM6o1Q`);
-    // console.log(await response.text());
-    const results = JSON.parse(await resp.text());
-    console.log("Our resultSeconds is currently: ", results.rows[0].elements[0].duration.value);
+//   while(googleMins !== minutes && searches < 4) {
+//     searches+=1;
+//     point.lat = lat+difference;
+//     resp = await fetch(`https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&mode=driving&origins=${lat},${long}&destinations=${point.lat}%2C${point.long}&key=AIzaSyDBghaO6vALAG_-QG2SCBN8LEB_jFM6o1Q`);
+//     // console.log(await response.text());
+//     const results = JSON.parse(await resp.text());
+//     console.log("Our resultSeconds is currently: ", results.rows[0].elements[0].duration.value);
 
-  }
-  response.send(point);
-});
+//   }
+//   response.send(point);
+// });
 
 
 
