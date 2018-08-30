@@ -45,7 +45,7 @@ class GMap extends React.Component {
                 activeMarker: null
             })
         }
-        console.log(this);
+        // console.log(this);
         /*get latitude and longitude from clicked point on maps */
         this.setState({clicked: {lat: e.latLng.lat(), lng: e.latLng.lng()}})
         this.setState({clickedMarker: <Marker onClick={this.onMarkerClick}
@@ -56,6 +56,7 @@ class GMap extends React.Component {
         // console.log(props);
         // console.log(map);
         // console.log(e.latLng);
+        console.log(e);
        
     };
 
@@ -111,8 +112,6 @@ class GMap extends React.Component {
 
     queryPlaces(){
         if(this.state.map && this.state.query !== '') {
-            console.log("inside");
-            // debugger;
             let request = {
                 location: this.state.map.getCenter(),
                 radius: '500',
@@ -121,26 +120,11 @@ class GMap extends React.Component {
             let that = this;
             
             function returnPlaces(results, status){
-                // let places = [];
-                if (status == that.props.google.maps.places.PlacesServiceStatus.OK) {
-                    // for (let i = 0; i < results.length; i++) {
-                    //     places.push(results[i]);
-                    // // that.state.queryPlaces.push(results[i]);
-                    // // console.log(results[i]);
-                    // // console.log(place);
-                    //             // createMarker(results[i]);
-                    // }
+                if (status == that.props.google.maps.places.PlacesServiceStatus.OK) 
                     that.setState({queryPlaces : results});
-                }
-
-                
-                // console.log(results.length);
             }
             
             this.state.service.textSearch(request,returnPlaces);
-            // console.log(this.state.queryPlaces);
-            // this.state.queryPlaces
-            // debugger; 
         }
     }
     
@@ -176,7 +160,9 @@ class GMap extends React.Component {
         strokeOpacity={0.8}
         strokeWeight={2}
         fillColor="#0000FF"
-        fillOpacity={0.35} />;
+        fillOpacity={0.35}
+        clickable={false} />;
+
     this.mapComponent =   
                 <Map google={this.props.google}
                 onClick={this.onMapClicked}
@@ -212,7 +198,7 @@ class GMap extends React.Component {
             </ul>);
             });
         
-            console.log(this.state.queryPlaces);
+            // console.log(this.state.queryPlaces);
                 // console.log(mapComponent);
                 // console.log(polygonComponent)
     /* attempt to make a control in google maps*/
