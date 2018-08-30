@@ -61,11 +61,16 @@ class GMap extends React.Component {
 
     /*set markers into map */
     setMarkersIntoMap(favoriteDataArr){
-        let favoritesMarkersArr = favoriteDataArr.map(favorite => 
-            <Marker onClick={this.onMarkerClick}
-                name={favorite.name}
-                position={{lat: `${favorite.lat}`, lng: `${favorite.lng}`}}
-                />);
+        let that = this;
+        let favoritesMarkersArr = favoriteDataArr.map(favorite => {
+            // create a new LatLng object with favorite's lat and lng
+            let latLng = new that.props.google.maps.LatLng(favorite.lat, favorite.lng);
+            //check to see if polygon contains that latlng and only create markers that are inside polygon
+            if(that.props.google.maps.geometry.poly.containsLocation(latLng,that.polygon))
+                return <Marker onClick={this.onMarkerClick}
+                    name={favorite.name}
+                    position={{lat: `${favorite.lat}`, lng: `${favorite.lng}`}}/>;
+                });
         this.setState({favoriteMarkers: favoritesMarkersArr});
     }
 
@@ -89,15 +94,16 @@ class GMap extends React.Component {
 
   render() {
 
-    // let lat = 37.7749;
-    // let lng = -122.4194;
-    // let minutes = 15;
-    let points = []; //Point.initEndPoints(lat, lng, minutes);
+    let lat = 37.7749;
+    let lng = -122.4194;
+    let minutes = 15;
+    let points =  Point.initEndPoints(lat, lng, minutes); //[];
 
     const style = {
     width: '800px',
     height: '800px'
     }
+    this.polygon = new this.props.google.maps.Polygon({paths: points});
     this.polygonComponent = 
     <Polygon
         paths={points}
