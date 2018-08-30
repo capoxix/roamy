@@ -7,14 +7,6 @@
   margin-top: 5px;
 }
 
-.drop-down-wrapper {
-  border: 1px solid grey;
-}
-
-.map-form-wrapper {
-  border: 1px solid grey;
-}
-
 .map-form {
   display: flex;
   align-items: center;
@@ -34,7 +26,7 @@
 }
 
 
-.appbar {
+Toolbar {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
 }

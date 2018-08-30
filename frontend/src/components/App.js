@@ -10,18 +10,13 @@ import ButtonAppBar from './header/map-form';
 
 class App extends Component {
 
-  
+
 
   render() {
     return (
       <div className="App-wrapper">
         <ButtonAppBar/>
-        <header className="App-header">
-          <h1 className="App-title">Welcome to Rover!</h1>
-        </header>
-        <p className="App-intro">
-          <div> Me hoping my MERN stack works.</div>
-        </p>
+        
         <p className="Directions-intro"><Directions/></p>
 
         <RegisterFormContainer/>

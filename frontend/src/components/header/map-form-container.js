@@ -5,15 +5,17 @@ import MapForm from './map-form';
 import '../../styling/header/header.css';
 
 const mapStateToProps = (state) => {
-  formType: 'login',
-  currentUser: state.entities.users
-  return ({});
+  return ({
+    formType: 'login',
+    currentUser: state.entities.users,
+  });
 }
 
 const mapDispatchToProps = (dispatch) => {
-  login: (user) => dispatch(login(user)),
-  logout: () => dispatch(logoutUser())
-  return ({});
+  return ({
+    login: (user) => dispatch(login(user)),
+    logout: () => dispatch(logoutUser())
+  });
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(MapForm);

@@ -4,13 +4,6 @@ body {
   font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
 }
 
-.App-header {
-  padding-left: 20px;
-}
-
-.App-intro {
-  padding-left: 20px;
-}
 
 .form{
   padding-left: 20px;
@@ -23,7 +16,7 @@ body {
 i {
   font-size: 20px;
   padding-bottom: 3px;
-  padding-right: 5px; 
+  padding-right: 5px;
 }
 
 .map-form {
