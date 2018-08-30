@@ -20,14 +20,14 @@ class GMap extends React.Component {
         currentLocationMarker:[]
       };
     
-    onMarkerClick = (props, marker, e) =>
+    onMarkerClick = (mapProps, marker, e) =>
         this.setState({
-            selectedPlace: props,
+            selectedPlace: mapProps,
             activeMarker: marker,
             showingInfoWindow: true
         });
 
-    onMapClicked = (props, map, e) => {
+    onMapClicked = (mapProps, map, e) => {
         if (this.state.showingInfoWindow) {
             this.setState({
                 showingInfoWindow: false,
@@ -90,6 +90,45 @@ class GMap extends React.Component {
             });
         }
     }
+
+    fetchPlaces(mapProps, map){
+        const {google} = mapProps;
+        const service = new google.maps.places.PlacesService(map);
+        // console.log(service.);
+
+    }
+
+//     var map;
+// var service;
+// var infowindow;
+
+// function initialize() {
+//   var pyrmont = new google.maps.LatLng(-33.8665433,151.1956316);
+
+//   map = new google.maps.Map(document.getElementById('map'), {
+//       center: pyrmont,
+//       zoom: 15
+//     });
+
+//   var request = {
+//     location: pyrmont,
+//     radius: '500',
+//     query: 'restaurant'
+//   };
+
+//   service = new google.maps.places.PlacesService(map);
+//   service.textSearch(request, callback);
+// }
+
+// function callback(results, status) {
+//   if (status == google.maps.places.PlacesServiceStatus.OK) {
+//     for (var i = 0; i < results.length; i++) {
+//       var place = results[i];
+//       createMarker(results[i]);
+//     }
+//   }
+// }
+
     
 
   render() {
@@ -116,6 +155,7 @@ class GMap extends React.Component {
     this.mapComponent =   
                 <Map google={this.props.google}
                 onClick={this.onMapClicked}
+                onReady={this.fetchPlaces}
                 center={this.state.center}
                 style={style}
                 // controls[{this.props.google.maps.ControlPosition.TOP_CENTER}]
