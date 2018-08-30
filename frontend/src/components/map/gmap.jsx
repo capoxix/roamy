@@ -168,7 +168,9 @@ class GMap extends React.Component {
     let lat = 37.7749;
     let lng = -122.4194;
     let minutes = 15;
-    let points =  Point.initEndPoints(lat, lng, minutes); //[];
+    let origin = new Point({lat: lat, lng: lng, minutes: minutes});
+
+    let points =  origin.initEndPoints(); //[];
 
     const style = {
     width: '800px',
