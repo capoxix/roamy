@@ -1,5 +1,4 @@
-// import Point from './frontend/src/util/point.js';
-const Point = require('./frontend/src/util/point.js');
+// const Point = require('./frontend/src/util/point.js');
 const express = require('express');
 const mongoose = require('mongoose');
 const db = require('./config/keys').mongoURI;
@@ -10,8 +9,8 @@ require('./config/passport')(passport);
 
 
 const users = require('./routes/api/users');
-// const events = require('./routes/api/events');
 const locations = require('./routes/api/locations');
+const discover = require('./routes/api/discover');
 
 
 
@@ -28,49 +27,49 @@ app.get('/test', (req, res) => {
   res.send("hit")
 })
 
-app.get(`/directions`, async (req, res) => {
-  // make api call using fetch
-  // origin will be created based on user input
+// app.get(`/directions`, async (req, res) => {
+//   // make api call using fetch
+//   // origin will be created based on user input
 
-  const origin = new Point({
-    lat: 37.7990,
-    lng: -122.4014,
-    minutes: 45
-  })
+//   const origin = new Point({
+//     lat: 37.7990,
+//     lng: -122.4014,
+//     minutes: 45
+//   })
 
-  // twin peaks
-  // const origin = new Point({lat: 37.751387, lng: -122.446333, minutes: 15})
+//   // twin peaks
+//   // const origin = new Point({lat: 37.751387, lng: -122.446333, minutes: 15})
   
-  let searches = 0;
-  let searchStr;
-  let endPoints;
+//   let searches = 0;
+//   let searchStr;
+//   let endPoints;
  
-  endPoints = origin.initEndPoints()
-  Point.inPacific(endPoints) // check if in pacific ONLY FOR SF
+//   endPoints = origin.initEndPoints()
+//   Point.inPacific(endPoints) // check if in pacific ONLY FOR SF
 
-  // while (searches < 4) {
-    searches+=1;
+//   // while (searches < 4) {
+//     searches+=1;
 
-    searchStr = origin.makeSearchStr(endPoints);
-    // console.log(searchStr)
-    promise = await fetch(searchStr);
+//     searchStr = origin.makeSearchStr(endPoints);
+//     // console.log(searchStr)
+//     promise = await fetch(searchStr);
 
-    const text = JSON.parse(await promise.text());
+//     const text = JSON.parse(await promise.text());
 
-    const addresses = text.destination_addresses;
-    const times = text.rows[0].elements;
-    console.log('t')
-    console.log('t')
-    console.log('t')
-    console.log('t')
-    console.log('t')
-    console.log('t')
-    console.log(text)
-    // origin.adjustPoints(endPoints, times, addresses)
+//     const addresses = text.destination_addresses;
+//     const times = text.rows[0].elements;
+//     console.log('t')
+//     console.log('t')
+//     console.log('t')
+//     console.log('t')
+//     console.log('t')
+//     console.log('t')
+//     console.log(text)
+//     // origin.adjustPoints(endPoints, times, addresses)
   
-  // }
-  res.send(text);
-});
+//   // }
+//   res.send(text);
+// });
 
 
 //Middleware for body parser
@@ -81,8 +80,8 @@ app.use(passport.initialize());
 
 
 app.use('/api/users', users);
-// app.use('/api/events', events);
 app.use('/api/locations', locations);
+app.use('/api/discover', discover)
 
 
 
