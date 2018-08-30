@@ -135,12 +135,17 @@ class Point {
     const topLat = 37.8135;
     const westLng = -122.5220;
 
+    console.log("------------")
+    console.log(this.lat)
+    console.log(this.lng)
     if (this.lat < topLat) {
       if (this.lng < westLng) {
         this.lng = westLng;
         this.static = true;
       }
     }
+    console.log(this.lat)
+    console.log(this.lng)
   }
 }
 

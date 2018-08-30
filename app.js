@@ -39,20 +39,14 @@ app.get(`/directions`, async (req, res) => {
   })
 
   // twin peaks
-  // const origin = new Point({
-  //   lat: 37.751387,
-  //   lng: -122.446333,
-  //   minutes: 15
-  // })
+  // const origin = new Point({lat: 37.751387, lng: -122.446333, minutes: 15})
   
   let searches = 0;
   let searchStr;
   let endPoints;
-
-  
-  // NEED A CASE STATEMENT, OF CHECKING IF ORIGIN IS IN WATER OR NOT
  
   endPoints = origin.initEndPoints()
+  Point.inPacific(endPoints) // check if in pacific ONLY FOR SF
 
   // while (searches < 4) {
     searches+=1;
