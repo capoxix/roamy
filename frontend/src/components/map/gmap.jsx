@@ -40,9 +40,10 @@ class GMap extends React.Component {
             name={'Clicked point'}
             position={{lat: e.latLng.lat(), lng: e.latLng.lng()}} 
         icon={{path: this.props.google.maps.SymbolPath.BACKWARD_CLOSED_ARROW, scale: 5}}/>});
-        console.log(this.state.clicked);
-        console.log(props);
-        console.log(map);
+        // console.log(this.state.clicked);
+        // console.log(props);
+        // console.log(map);
+        console.log(e.latLng);
        
     };
 
@@ -53,6 +54,7 @@ class GMap extends React.Component {
     }
     /*get favorites locations of user & set to map */
     addFavoritesToMarkers(){
+        // console.log(this.props.google.maps.geometry.poly.containsLocation(,this.polygonComponent));
         let that = this;
         getFavorites(this.props.userId).then(favorites =>  that.setMarkersIntoMap(favorites.data));
     }
@@ -96,14 +98,16 @@ class GMap extends React.Component {
     width: '800px',
     height: '800px'
     }
+    this.polygonComponent = 
+    <Polygon
+        paths={points}
+        strokeColor="#0000FF"
+        strokeOpacity={0.8}
+        strokeWeight={2}
+        fillColor="#0000FF"
+        fillOpacity={0.35} />;
 
-    /* attempt to make a control in google maps*/
-    return (
-        <div>
-            <button type='button' onClick={()=>this.trackInput()}>TRACK LOCATION</button>
-            <button type='button' onClick={()=> this.addFavoritesToMarkers()}>Get Favorite Spots</button>
-            <button type='button' onClick={()=> this.getCurrentLocation()}>Get Current Location</button>
-            <div>
+    this.mapComponent =   
                 <Map google={this.props.google}
                 onClick={this.onMapClicked}
                 center={this.state.center}
@@ -121,15 +125,18 @@ class GMap extends React.Component {
                             <h1>{this.state.selectedPlace.name}</h1>
                         </div>
                     </InfoWindow>
-
-                    <Polygon
-                        paths={points}
-                        strokeColor="#0000FF"
-                        strokeOpacity={0.8}
-                        strokeWeight={2}
-                        fillColor="#0000FF"
-                        fillOpacity={0.35} />
-                </Map>
+                        {this.polygonComponent}
+                </Map>;
+                // console.log(mapComponent);
+                // console.log(polygonComponent);
+    /* attempt to make a control in google maps*/
+    return (
+        <div>
+            <button type='button' onClick={()=>this.trackInput()}>TRACK LOCATION</button>
+            <button type='button' onClick={()=> this.addFavoritesToMarkers()}>Get Favorite Spots</button>
+            <button type='button' onClick={()=> this.getCurrentLocation()}>Get Current Location</button>
+            <div>
+                {this.mapComponent}
             </div>
         </div>
     );
