@@ -4,7 +4,24 @@ class Point {
     this.lng = lng;
     this.minutes = minutes;
     this.angle = angle;
-    this.draw = false;
+    this.static = false;
+  }
+
+  static makeDestinationsStr(endPoints) {
+    let destinations = `&destinations=`
+
+    for (let i = 0; i < endPoints.length; i++) {
+      destinations = destinations +  endPoints[i].getLatLng();
+    }
+
+    return destinations
+  }
+
+  static inPacific(endPoints) {
+
+    for (let i = 0; i < endPoints.length; i++) {
+      endPoints[i].tooFar(); 
+    }
   }
 
   createEndPoint(currentAngle, dLat, dLng) {
@@ -108,14 +125,22 @@ class Point {
     return header + origin;
   }
   
-  static makeDestinationsStr(endPoints) {
-    let destinations = `&destinations=`
+  
 
-    for (let i = 0; i < endPoints.length; i++) {
-      destinations = destinations +  endPoints[i].getLatLng();
+  //
+  // EndPoint check
+  //
+
+  tooFar() {
+    const topLat = 37.8135;
+    const westLng = -122.5220;
+
+    if (this.lat < topLat) {
+      if (this.lng < westLng) {
+        this.lng = westLng;
+        this.static = true;
+      }
     }
-
-    return destinations
   }
 }
 
