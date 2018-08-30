@@ -85,7 +85,7 @@ class Point {
       console.log('close enough -------------------')
       console.log('')
       console.log('')
-      this.static = true;
+      endPoint.static = true;
     } else {
       endPoint.adjust(origin)
       console.log('')
@@ -95,14 +95,34 @@ class Point {
   }
 
   adjust(origin) {
-    const scaleLat = Math.sin(Math.PI * this.angle/180)*(origin.minutes* Math.abs(this.lat - origin.lat)/this.minutes)
 
-    const scaleLng = Math.cos(Math.PI * this.angle/180)*(origin.minutes* Math.abs(this.lng - origin.lng)/this.minutes)
+    let oLat = Math.abs(origin.lat);
+    let oLng = Math.abs(origin.lng);
+
+    let tLat = Math.abs(this.lat);
+    let tLng = Math.abs(this.lng);
+
+    let hypotenuse = Math.sqrt(Math.pow(oLat - tLat, 2) + Math.pow(oLng - tLng, 2));
+
+    let newHypotenuse = hypotenuse * (origin.minutes / this.minutes);
+
+    const scaleLat = Math.sin(Math.PI * this.angle) * newHypotenuse;
+    const scaleLng = Math.cos(Math.PI * this.angle) * newHypotenuse;
+
+    // const scaleLat = Math.sin(Math.PI * this.angle/180)*(origin.minutes* Math.abs(this.lat - origin.lat)/this.minutes)
+    // const scaleLng = Math.cos(Math.PI * this.angle/180)*(origin.minutes* Math.abs(this.lng - origin.lng)/this.minutes)
+
+    // get original hypotenuse,
+    // multiply by the scale we need to adjust by
+    // return values of lat lng using sin or cosine of the points angle multiplied by the hypotenuse
+    // add whatever value it is to the original lat or lng
 
     this.lat = origin.lat + scaleLat;
     this.lng = origin.lng + scaleLng;
     console.log('new lat: ', this.lat)
     console.log('new lng: ', this.lng)
+
+
   }
 
 
