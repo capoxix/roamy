@@ -41,7 +41,7 @@ class Point {
     const dLat = 0.003604 * this.minutes;
     const dLng =  0.0045402 * this.minutes;
 
-    let numPoints = 4;
+    let numPoints = 8;
     let angle = 360 / numPoints;
     let currentAngle = 0;
   
@@ -63,41 +63,45 @@ class Point {
   adjustPoints(endPoints, data, addresses) {
 
     for (let i = 0; i < endPoints.length; i++) {
-      this.check(endPoints[i], data[i], addresses[i])
+      this.check(endPoints[i], data[i], addresses[i], i)
     }
     
   }
   
-  check(endPoint, datum, address) {
+  check(endPoint, datum, address, i) {
     if (datum.status === "ZERO_RESULTS") {
       endPoint.destroy = true;
       return
     }
-    let resultMins = datum.duration.value / 60;
+    endPoint.minutes = datum.duration.value / 60;
     let origin = this;
-    console.log('item: ')
+    console.log('item: ', i)
     console.log(endPoint)
     console.log(resultMins)
     console.log(address)
-    console.log('')
-    console.log('')
-
-    if (Math.abs(this.minutes - resultMins) < 1.2) {
+    
+    if (Math.abs(this.minutes - endPoint.minutes) < 1.2) {
       // reassign the point to the address given and make point static
       console.log('close enough -------------------')
+      console.log('')
+      console.log('')
       this.static = true;
     } else {
-      endPoint.adjust(origin, resultMins)
+      endPoint.adjust(origin)
+      console.log('')
+      console.log('')
     }
 
   }
 
-  adjust(origin, resultMins) {
-    const scaleLat = Math.sin(Math.PI * this.angle/180)*(origin.minutes* Math.abs(this.lat - origin.lat)/resultMins)
-    const scaleLng = Math.cos(Math.PI * this.angle/180)*(origin.minutes* Math.abs(this.lng - origin.lng)/resultMins)
+  adjust(origin) {
+    const scaleLat = Math.sin(Math.PI * this.angle/180)*(origin.minutes* Math.abs(this.lat - origin.lat)/this.minutes)
+    const scaleLng = Math.cos(Math.PI * this.angle/180)*(origin.minutes* Math.abs(this.lng - origin.lng)/this.minutes)
 
     this.lat = origin.lat + scaleLat;
     this.lng = origin.lng + scaleLng;
+    console.log('new lat: ', this.lat)
+    console.log('new lng: ', this.lng)
   }
 
 

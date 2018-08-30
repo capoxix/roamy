@@ -12,7 +12,7 @@ router.get(`/cars`, async (req, res) => {
   const origin = new Point({
     lat: 37.7990,
     lng: -122.4014,
-    minutes: 20
+    minutes: 30
   })
 
   // twin peaks
@@ -26,7 +26,7 @@ router.get(`/cars`, async (req, res) => {
   endPoints = origin.initEndPoints()
   Point.inPacific(endPoints) // check if in pacific ONLY FOR SF
 
-  while (searches < 4) {
+  while (searches < 5) {
     searches+=1;
 
     searchStr = origin.makeSearchStr(endPoints);
