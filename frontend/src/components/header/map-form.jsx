@@ -41,7 +41,7 @@ class ButtonAppBar extends Component {
               <MenuIcon />
             </IconButton>
             <Typography variant="title" color="inherit">
-              Rover
+              <a href="localhost:3000/#/">Roamy</a>
             </Typography>
 
             <div className="map-form">
@@ -81,7 +81,7 @@ class ButtonAppBar extends Component {
               <MenuIcon />
             </IconButton>
             <Typography variant="title" color="inherit">
-              Rover
+              <a href="/">Roamy</a>
             </Typography>
 
             <div className="map-form">

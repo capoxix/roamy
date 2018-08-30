@@ -20,12 +20,23 @@ i {
 }
 
 .map-form {
-  display: flex;
-  justify-content: space-between;
-
   height: 100%;
   padding-left: 10px;
   padding-right: 10px;
   border-radius: 3px;
+}
 
+.MuiToolbar-root-39 {
+  display: flex;
+  justify-content: space-between;
+}
+
+a{
+  text-decoration: none;
+  color: white;
+}
+
+
+.leftNav *{
+  display: inline;
 }
