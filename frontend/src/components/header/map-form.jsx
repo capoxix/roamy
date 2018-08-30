@@ -7,6 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
+import {Route, Redirect, Switch, Link, HashRouter, withRouter} from 'react-router-dom';
 
 const styles = {
   root: {
@@ -31,8 +32,10 @@ class ButtonAppBar extends Component {
     };
   }
 
+
+
   render(){
-    if (this.props.currentUser !== {}){
+    if (this.props.currentUser){
     return (
       <div className="appbar">
         <AppBar position="static">
@@ -41,7 +44,7 @@ class ButtonAppBar extends Component {
               <MenuIcon />
             </IconButton>
             <Typography variant="title" color="inherit">
-              <a href="localhost:3000/#/">Roamy</a>
+              <Link to={"/"}>Roamy</Link>
             </Typography>
 
             <div className="map-form">
@@ -68,7 +71,12 @@ class ButtonAppBar extends Component {
               </form>
             </div>
 
-            <Button color="inherit">Login</Button>
+            <Typography variant="title" color="inherit">
+              <Link to={"/signup"}>Sign Up</Link>
+            </Typography>
+            <Typography variant="title" color="inherit">
+              <Link to={"/login"}>Log In</Link>
+            </Typography>
           </Toolbar>
         </AppBar>
       </div>
@@ -81,7 +89,7 @@ class ButtonAppBar extends Component {
               <MenuIcon />
             </IconButton>
             <Typography variant="title" color="inherit">
-              <a href="/">Roamy</a>
+              <Link to={"/"}>Roamy</Link>
             </Typography>
 
             <div className="map-form">
@@ -108,7 +116,7 @@ class ButtonAppBar extends Component {
               </form>
             </div>
 
-            <Button color="inherit">Logout</Button>
+          <Link to="/" id="first_sign_up" onClick={()=> this.props.logout()}>Log Out</Link>
           </Toolbar>
         </AppBar>
       </div>
