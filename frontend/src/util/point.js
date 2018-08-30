@@ -77,7 +77,7 @@ class Point {
     let origin = this;
     console.log('item: ', i)
     console.log(endPoint)
-    console.log(resultMins)
+    console.log(endPoint.minutes)
     console.log(address)
     
     if (Math.abs(this.minutes - endPoint.minutes) < 1.2) {
@@ -96,6 +96,7 @@ class Point {
 
   adjust(origin) {
     const scaleLat = Math.sin(Math.PI * this.angle/180)*(origin.minutes* Math.abs(this.lat - origin.lat)/this.minutes)
+
     const scaleLng = Math.cos(Math.PI * this.angle/180)*(origin.minutes* Math.abs(this.lng - origin.lng)/this.minutes)
 
     this.lat = origin.lat + scaleLat;
@@ -158,3 +159,15 @@ class Point {
 // o.makeSearchStr([d1, d2]);
 
 module.exports = Point;
+
+
+//  lat: 37.72254761481811,
+// lng: -122.3050878137617,
+//  minutes: undefined,
+//  angle: 315,
+//   static: false 
+//  32.916666666666664
+//  120 Creedon Cir, Alameda, CA 94502, USA
+// new lat:  37.74973012658228
+//  new lng:  -122.33933144303798
+  
