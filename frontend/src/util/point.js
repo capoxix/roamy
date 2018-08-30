@@ -60,16 +60,20 @@ class Point {
   //
   // Adjust existing endpoints 
   //
-  adjustPoints(endPoints, times, addresses) {
+  adjustPoints(endPoints, data, addresses) {
 
     for (let i = 0; i < endPoints.length; i++) {
-      this.check(endPoints[i], times[i], addresses[i])
+      this.check(endPoints[i], data[i], addresses[i])
     }
     
   }
   
-  check(endPoint, data, address) {
-    let resultMins = data.duration.value / 60;
+  check(endPoint, datum, address) {
+    if (datum.status === "ZERO_RESULTS") {
+      endPoint.destroy = true;
+      return
+    }
+    let resultMins = datum.duration.value / 60;
     let origin = this;
     console.log('item: ')
     console.log(endPoint)
@@ -79,8 +83,9 @@ class Point {
     console.log('')
 
     if (Math.abs(this.minutes - resultMins) < 1.2) {
-      // use the address to keep the exact point
-      console.log('close enough')
+      // reassign the point to the address given and make point static
+      console.log('close enough -------------------')
+      this.static = true;
     } else {
       endPoint.adjust(origin, resultMins)
     }
@@ -91,16 +96,8 @@ class Point {
     const scaleLat = Math.sin(Math.PI * this.angle/180)*(origin.minutes* Math.abs(this.lat - origin.lat)/resultMins)
     const scaleLng = Math.cos(Math.PI * this.angle/180)*(origin.minutes* Math.abs(this.lng - origin.lng)/resultMins)
 
-    // console.log('after')
-    // console.log(scaleLat)
-    // console.log(scaleLng)
-    // console.log(this.lat)
-    // console.log(this.lng)
     this.lat = origin.lat + scaleLat;
     this.lng = origin.lng + scaleLng;
-    // console.log('before')
-    // console.log(this.lat)
-    // console.log(this.lng)
   }
 
 
