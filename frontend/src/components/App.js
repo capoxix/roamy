@@ -5,7 +5,7 @@ import RegisterFormContainer  from './user/register_form_container';
 import LoginFormContainer from './session/login_form_container';
 // import Header from './header/header';
 // import HeaderContainer from './header/header_container';
-import MapContainer from './map/map_container';
+import MapContainer from './map/map_container.js';
 import ButtonAppBar from './header/map-form';
 import Footer from './footer/footer';
 
@@ -18,8 +18,6 @@ class App extends Component {
         <ButtonAppBar/>
         <RegisterFormContainer/>
         <LoginFormContainer/>
-
-        <HeaderContainer/>
 
         <MapContainer/>
       </div>

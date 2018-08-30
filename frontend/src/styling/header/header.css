@@ -20,7 +20,8 @@
 }
 
 .footer {
-  margin-top: 500px;
+  position: absolute;
+  bottom: 100px;
   display: grid;
   grid-template-columns: minmax(250px, 1fr) minmax(250px, 3fr);
   grid-template-rows: repeat(3, 1fr);

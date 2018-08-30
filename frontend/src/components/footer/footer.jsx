@@ -4,11 +4,11 @@ const footer = () => {
   return (
     <div className="footer">
           <div className="links">
-            <div className="ft-headers">© 2018 ROVER</div>
+            <div className="ft-headers">© 2018 Roamy</div>
             <div className="ft-headers">FOLLOW</div>
             <div className="ft2-1">
               <p>
-                ROVER is a map based web application that allows users to see areas they can access given free time.
+                Roamy is a map based web application that allows users to see areas they can access given free time.
               </p>
             </div>
             <div className="ft2-2">
