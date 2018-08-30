@@ -3,6 +3,7 @@ import React from 'react';
 import Point from '../../util/point';
 import {track, getFavorites} from '../../util/location_api_util';
 import {connect} from 'react-redux';
+import { RSA_PKCS1_OAEP_PADDING } from 'constants';
 const gAPI = require('../../config/keys').gAPI;
 // import { MAP } from 'react-google-maps/lib/constants'
 
@@ -25,8 +26,8 @@ class GMap extends React.Component {
         currentLocationMarker:[],
         queryPlaces: [],
         query: '',
-        service: {},
-        map: {},
+        service: undefined,
+        map: undefined,
 
       };
     
@@ -107,8 +108,13 @@ class GMap extends React.Component {
         // let that = this;
         const {google} = mapProps;
         const service = new google.maps.places.PlacesService(map);
-        this.state.service = service;
-        this.state.map = map;
+        // this.state.service = service;
+        // console.log(service);
+        // console.log(map);
+        this.setState({map: map, service: service});
+        // console.log("after setting to state, check state");
+        // console.log(this.state.map);
+        // console.log(this.state.service);
         // console.log(this.state.service);    
         // console.log(service.);
         // let sf = new google.maps.LatLng(37.7749,-122.4194);
@@ -133,23 +139,37 @@ class GMap extends React.Component {
     }
 
     queryPlaces(){
-        let request = {
-            location: this.state.map.getCenter(),
-            radius: '500',
-            query: this.state.query
-        }
-
-        function printPlaces(results, status){
-            if (status == this.props.google.maps.places.PlacesServiceStatus.OK) {
-                for (let i = 0; i < results.length; i++) {
-                let place = results[i];
-                console.log(place);
-                            // createMarker(results[i]);
-                }
+        if(this.state.map) {
+            console.log("inside");
+            // debugger;
+            let request = {
+                location: this.state.map.getCenter(),
+                radius: '500',
+                query: this.state.query
             }
-            console.log(results.length);
+            let that = this;
+            
+            function returnPlaces(results, status){
+                let places = [];
+                if (status == that.props.google.maps.places.PlacesServiceStatus.OK) {
+                    for (let i = 0; i < results.length; i++) {
+                        places.push(results[i]);
+                    // that.state.queryPlaces.push(results[i]);
+                    // console.log(results[i]);
+                    // console.log(place);
+                                // createMarker(results[i]);
+                    }
+                    that.setState({queryPlaces : places});
+                }
+
+                
+                // console.log(results.length);
+            }
+            this.state.service.textSearch(request,returnPlaces);
+            // console.log(this.state.queryPlaces);
+            // this.state.queryPlaces
+            // debugger; 
         }
-        this.state.service.textSearch(request,printPlaces);
     }
     
     update(field){
@@ -208,7 +228,24 @@ class GMap extends React.Component {
                 </Map>;
 
         // console.log(this.mapComponent);
-        console.log(this.state.query);
+        // console.log(this.state.query);
+        // debugger;
+        // console.log('service',this.state.service);
+        // console.log('map', this.state.map);
+        this.queryPlaces();
+        let result = this.state.queryPlaces.map(place => {
+            return (
+                <ul>
+            <li>Name: {place.name}</li>
+            <li>Address: {place.formatted_address}</li>
+            <li>Lat: {place.geometry.location.lat()} Lng: {place.geometry.location.lng()}</li>
+            <li><img src={place.icon}></img></li>
+            {/* <li>{place.formatted_address}</li> */}
+            {/* <li>{place.geometry}</li> */}
+            </ul>);
+            });
+        
+            console.log(this.state.queryPlaces);
                 // console.log(mapComponent);
                 // console.log(polygonComponent);
     /* attempt to make a control in google maps*/
@@ -222,8 +259,44 @@ class GMap extends React.Component {
                 value={this.state.query}
                 placeholder="Search"/>
             <div>
+                <ul>{result}</ul>
+            </div>
+            <div>
                 {this.mapComponent}
             </div>
+
+                <div className="footer">
+                    <div className="links">
+                      <div className="ft-headers">© 2018 ROVER</div>
+                      <div className="ft-headers">FOLLOW</div>
+                      <div className="ft2-1">
+                        <p>
+                          ROVER is a map based web application that allows users to see areas they can access given free time.
+                        </p>
+                      </div>
+                      <div className="ft2-2">
+                        <a className="socials" href="mailto:tonywzhang@gmail.com">
+                          <i className="fab fa-google"></i>
+                        </a>
+                        <br/>
+                        <a className="socials" href="tel:+16508883357">
+                          <i className="fas fa-mobile"></i>
+                        </a>
+                        <br/>
+                        <a className="socials" href='https://www.facebook.com/tonywzhang'>
+                          <i className="fab fa-facebook"></i>
+                        </a>
+                        <br/>
+                        <a className="socials" href="https://www.linkedin.com/in/kevin-ou-b56a768b/">
+                          <i className="fab fa-linkedin"></i>
+                        </a>
+                        <br/>
+                        <a className="socials" href="https://github.com/capoxix/intro-mongo">
+                          <i className="fab fa-github"></i>
+                        </a>
+                      </div>
+                  </div>
+                </div>
         </div>
     );
   }
