@@ -28,15 +28,18 @@ app.get('/test', (req, res) => {
   res.send("hit")
 })
 
-app.get(`/directions`, (req, res) => {
+app.get(`/directions`, async (req, res) => {
   // make api call using fetch
   // origin will be created based on user input
-  console.log(Point)
-  const origin = new Point({
-    lat: 37.7790,
-    lng: 122.4014,
-    minutes: 10
-  })
+
+  // const origin = new Point({
+  //   lat: 37.7790,
+  //   lng: 122.4014,
+  //   minutes: 10
+  // })
+
+  let origin = new Point({lat: 37.7990, lng: -122.4014, minutes: 10})
+
   let responseMins = 0;
   let searches = 0;
   let searchStr;
@@ -45,16 +48,26 @@ app.get(`/directions`, (req, res) => {
   // NEED A CASE STATEMENT, OF CHECKING IF ORIGIN IS IN WATER OR NOT
  
   endPoints = origin.initEndPoints()
-  console.log(endPoints)
 
-  while(searches < 4) {
+  while (searches < 2) {
     searches+=1;
 
     searchStr = origin.makeSearchStr(endPoints);
-    // resp = await fetch(`https://maps.googleapis.com/maps/api/directions/json?origin=${lat}+${long}&destination=${point.lat},%20${long}&key=AIzaSyDBghaO6vALAG_-QG2SCBN8LEB_jFM6o1Q`);
-    
-    // const results = JSON.parse(await resp.text());
+    // console.log(searchStr)
+    promise = await fetch(searchStr);
 
+    const text = JSON.parse(await promise.text());
+
+    const addresses = text.destination_addresses;
+    const times = text.rows[0].elements;
+
+    console.log('addresses is: ',addresses)
+    console.log('destinations is: ',destinations)
+    console.log('t')
+    console.log('t')
+    console.log('t')
+
+    Point.adjustPoints(endPoints, times)
       // responseMins = parseInt(results.routes[0].legs[0].duration.text.split(" ")[0]);
       // if (minutes === responseMins){
         
@@ -62,11 +75,10 @@ app.get(`/directions`, (req, res) => {
 
       //   difference = minutes*(point.lat-lat)/responseMins;
 
-      console.log(searchStr)
       // }
+  
   }
-
-  res.send(endPoints);
+  res.send(text);
 });
 
 
