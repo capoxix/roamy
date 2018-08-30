@@ -92,11 +92,44 @@ class GMap extends React.Component {
     }
 
     fetchPlaces(mapProps, map){
+        // let that = this;
         const {google} = mapProps;
         const service = new google.maps.places.PlacesService(map);
         // console.log(service.);
+        // let sf = new google.maps.LatLng(37.7749,-122.4194);
+        let request = {
+            location: map.getCenter(),
+            radius: '500',
+            query: 'AMC Van Ness 14'
+        }
+        // console.log(sf);
+        // debugger;
+        function printPlaces(results, status){
+            if (status == google.maps.places.PlacesServiceStatus.OK) {
+                for (let i = 0; i < results.length; i++) {
+                let place = results[i];
+                console.log(place);
+                            // createMarker(results[i]);
+                }
+            }
+            console.log(results.length);
+        }
+        
+        service.textSearch(request,printPlaces);
 
     }
+
+    // printPlaces(results, status){
+    //     if (status == this.props.google.maps.places.PlacesServiceStatus.OK) {
+    //         for (let i = 0; i < results.length; i++) {
+    //         let place = results[i];
+    //         console.log(place);
+    //                     // createMarker(results[i]);
+    //         }
+    //     }
+    // }
+    
+    
 
 //     var map;
 // var service;
