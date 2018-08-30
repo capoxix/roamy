@@ -18,6 +18,9 @@ class App extends Component {
         <ButtonAppBar/>
         <RegisterFormContainer/>
         <LoginFormContainer/>
+
+        <HeaderContainer/>
+
         <MapContainer/>
       </div>
     );
