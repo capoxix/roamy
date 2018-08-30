@@ -105,7 +105,7 @@ export class MapContainer extends React.Component {
                 <Map google={this.props.google}
                 onClick={this.onMapClicked}
                 center={this.state.center}>
-
+                
                     {markers}
                     {this.state.clickedMarker}
 

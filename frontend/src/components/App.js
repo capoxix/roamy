@@ -16,15 +16,8 @@ class App extends Component {
     return (
       <div className="App-wrapper">
         <ButtonAppBar/>
-        
-        <p className="Directions-intro"><Directions/></p>
-
         <RegisterFormContainer/>
-
         <LoginFormContainer/>
-
-
-
         <MapContainer/>
       </div>
     );

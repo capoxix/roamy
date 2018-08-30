@@ -26,7 +26,13 @@
 }
 
 
-Toolbar {
-  display: flex;
-  justify-content: space-evenly;
+
+.footer {
+  height: 600px;
+  width: 100vw;
+  background-image: image-url("lion-pride.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  text-shadow: 1px 1px black;
 }
