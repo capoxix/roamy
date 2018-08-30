@@ -8,6 +8,10 @@ const gAPI = require('../../config/keys').gAPI;
 
 
 class GMap extends React.Component {
+    constructor(props){
+        super(props);
+        this.fetchPlaces = this.fetchPlaces.bind(this);
+    }
     state = {
         showingInfoWindow: false,
         activeMarker: {},
@@ -17,7 +21,10 @@ class GMap extends React.Component {
         clickedMarker: [],
         favoriteMarkers: [],
         trackName: '',
-        currentLocationMarker:[]
+        currentLocationMarker:[],
+        queryPlaces: [],
+        query: '',
+        service: {},
       };
     
     onMarkerClick = (mapProps, marker, e) =>
@@ -34,6 +41,7 @@ class GMap extends React.Component {
                 activeMarker: null
             })
         }
+        console.log(this);
         /*get latitude and longitude from clicked point on maps */
         this.setState({clicked: {lat: e.latLng.lat(), lng: e.latLng.lng()}})
         this.setState({clickedMarker: <Marker onClick={this.onMarkerClick}
@@ -43,7 +51,7 @@ class GMap extends React.Component {
         // console.log(this.state.clicked);
         // console.log(props);
         // console.log(map);
-        console.log(e.latLng);
+        // console.log(e.latLng);
        
     };
 
@@ -92,9 +100,12 @@ class GMap extends React.Component {
     }
 
     fetchPlaces(mapProps, map){
+        // console.log(this);
         // let that = this;
         const {google} = mapProps;
         const service = new google.maps.places.PlacesService(map);
+        this.state.service = service;
+        console.log(this.state.service);
         // console.log(service.);
         // let sf = new google.maps.LatLng(37.7749,-122.4194);
         let request = {
@@ -114,53 +125,8 @@ class GMap extends React.Component {
             }
             console.log(results.length);
         }
-        
         service.textSearch(request,printPlaces);
-
     }
-
-    // printPlaces(results, status){
-    //     if (status == this.props.google.maps.places.PlacesServiceStatus.OK) {
-    //         for (let i = 0; i < results.length; i++) {
-    //         let place = results[i];
-    //         console.log(place);
-    //                     // createMarker(results[i]);
-    //         }
-    //     }
-    // }
-    
-    
-
-//     var map;
-// var service;
-// var infowindow;
-
-// function initialize() {
-//   var pyrmont = new google.maps.LatLng(-33.8665433,151.1956316);
-
-//   map = new google.maps.Map(document.getElementById('map'), {
-//       center: pyrmont,
-//       zoom: 15
-//     });
-
-//   var request = {
-//     location: pyrmont,
-//     radius: '500',
-//     query: 'restaurant'
-//   };
-
-//   service = new google.maps.places.PlacesService(map);
-//   service.textSearch(request, callback);
-// }
-
-// function callback(results, status) {
-//   if (status == google.maps.places.PlacesServiceStatus.OK) {
-//     for (var i = 0; i < results.length; i++) {
-//       var place = results[i];
-//       createMarker(results[i]);
-//     }
-//   }
-// }
 
     
 
