@@ -4,11 +4,11 @@ const footer = () => {
   return (
     <div className="footer">
           <div className="links">
-            <div className="ft-headers">© 2018 720HD</div>
+            <div className="ft-headers">© 2018 ROVER</div>
             <div className="ft-headers">FOLLOW</div>
             <div className="ft2-1">
               <p>
-                720HD is the leading social network for photographers to connect, improve, and share their best work.
+                ROVER is a map based web application that allows users to see areas they can access given free time.
               </p>
             </div>
             <div className="ft2-2">
@@ -24,15 +24,16 @@ const footer = () => {
                 <i className="fab fa-facebook"></i>
               </a>
               <br/>
-              <a className="socials" href="https://www.linkedin.com/in/tony-wzhang/">
+              <a className="socials" href="https://www.linkedin.com/in/kevin-ou-b56a768b/">
                 <i className="fab fa-linkedin"></i>
               </a>
               <br/>
-                <a className="socials" href="https://github.com/tonywzhang/720HD">
+                <a className="socials" href="https://github.com/capoxix/intro-mongo">
                   <i className="fab fa-github"></i>
                 </a>
             </div>
           </div>
+        </div>
   )
 }
 

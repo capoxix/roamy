@@ -101,11 +101,12 @@ export class MapContainer extends React.Component {
             that.setState({center: pos});
         });
         return (
-            <div style={style}>
+            <div className = "mapContainer">
                 <Map google={this.props.google}
                 onClick={this.onMapClicked}
-                center={this.state.center}>
-                
+                center={this.state.center}
+                style={style}>
+
                     {markers}
                     {this.state.clickedMarker}
 

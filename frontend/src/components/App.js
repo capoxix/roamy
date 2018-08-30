@@ -7,10 +7,10 @@ import LoginFormContainer from './session/login_form_container';
 // import HeaderContainer from './header/header_container';
 import MapContainer from './map/map_container';
 import ButtonAppBar from './header/map-form';
+import Footer from './footer/footer';
+
 
 class App extends Component {
-
-
 
   render() {
     return (
@@ -19,6 +19,7 @@ class App extends Component {
         <RegisterFormContainer/>
         <LoginFormContainer/>
         <MapContainer/>
+        <Footer/>
       </div>
     );
   }
