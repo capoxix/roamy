@@ -1,24 +1,10 @@
 .header-wrapper {
-  border: 1px solid blue;
+  border: 1px solid grey;
   display: flex;
-  justify-content: space-between;
   width: 100%;
   height: 56px;
-}
-
-.drop-down-wrapper {
-  border: 1px solid blue;
-}
-
-.map-form-wrapper {
-  border: 1px solid blue;
-}
-
-.map-form {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 100%;
+  padding-right: 10px;
+  margin-top: 5px;
 }
 
 .time-label > input {
@@ -30,5 +16,22 @@
 }
 
 .login-wrapper {
-  border: 1px solid blue;
+  border: 1px solid grey;
+}
+
+.footer {
+  margin-top: 500px;
+  display: grid;
+  grid-template-columns: minmax(250px, 1fr) minmax(250px, 3fr);
+  grid-template-rows: repeat(3, 1fr);
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 600px;
+  width: 100vw;
+  background-image: url('./siberian-tiger.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  text-shadow: 1px 1px black;
 }

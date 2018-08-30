@@ -7,8 +7,6 @@ class Header extends React.Component {
 
   constructor(props) {
     super(props)
-
-
   }
 
   render() {
@@ -17,12 +15,8 @@ class Header extends React.Component {
       return (
         <div className="header-wrapper">
 
-          <div className="drop-down-wrapper">
-            Possible Dropdown here for regular shtuff
-          </div>
-
           <div className="map-form-wrapper">
-            <MapForm/> 
+            <MapForm/>
           </div>
 
           <div className="login-wrapper">
@@ -36,12 +30,9 @@ class Header extends React.Component {
           <div className="user">
             <p>Hello, {this.props.currentUser.name}</p>
           </div>
-          <div className="drop-down-wrapper">
-            Possible Dropdown here for regular shtuff
-          </div>
 
           <div className="map-form-wrapper">
-            <MapForm/> 
+            <MapForm/>
           </div>
 
           <div className="login-wrapper">
