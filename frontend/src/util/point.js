@@ -24,7 +24,7 @@ class Point {
     const dLat = 0.003604 * this.minutes;
     const dLng =  0.0045402 * this.minutes;
 
-    let numPoints = 2;
+    let numPoints = 4;
     let angle = 360 / numPoints;
     let currentAngle = 0;
   
@@ -54,22 +54,36 @@ class Point {
   check(endPoint, data, address) {
     let resultMins = data.duration.value / 60;
     let origin = this;
-    
-    if (Math.abs(this.minutes - resultMins) < 75) {
+    console.log('item: ')
+    console.log(endPoint)
+    console.log(resultMins)
+    console.log(address)
+    console.log('')
+    console.log('')
+
+    if (Math.abs(this.minutes - resultMins) < 1.2) {
       // use the address to keep the exact point
-      console.log(address)
+      console.log('close enough')
     } else {
       endPoint.adjust(origin, resultMins)
     }
 
   }
 
-  adjustPoint(origin, resultMins) {
+  adjust(origin, resultMins) {
     const scaleLat = Math.sin(Math.PI * this.angle/180)*(origin.minutes* Math.abs(this.lat - origin.lat)/resultMins)
     const scaleLng = Math.cos(Math.PI * this.angle/180)*(origin.minutes* Math.abs(this.lng - origin.lng)/resultMins)
 
+    // console.log('after')
+    // console.log(scaleLat)
+    // console.log(scaleLng)
+    // console.log(this.lat)
+    // console.log(this.lng)
     this.lat = origin.lat + scaleLat;
     this.lng = origin.lng + scaleLng;
+    // console.log('before')
+    // console.log(this.lat)
+    // console.log(this.lng)
   }
 
 
