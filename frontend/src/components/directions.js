@@ -34,9 +34,3 @@ class Directions extends Component {
 }
 
 export default Directions;
-
-//rect.body
-
-//  <div>
-  //   Our end location is {this.result.routes[0].legs[0].end_address}
-  // </div>
