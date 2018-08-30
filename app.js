@@ -67,7 +67,7 @@ app.get(`/directions`, async (req, res) => {
     console.log('t')
     console.log('t')
 
-    Point.adjustPoints(endPoints, times)
+    origin.adjustEndPoints(endPoints, times, addresses)
       // responseMins = parseInt(results.routes[0].legs[0].duration.text.split(" ")[0]);
       // if (minutes === responseMins){
         

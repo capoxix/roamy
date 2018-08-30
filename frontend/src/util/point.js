@@ -38,10 +38,36 @@ class Point {
     return pointsArr;
   }
 
-  adjustEndPoints(endPoints) {
+  adjustEndPoints(endPoints, times, addresses) {
 
+    for (let i = 0; i < endPoints.length; i++) {
+      endPoints[i].checkEndPoint(this, times[i], addresses[i])
+    }
+    
   }
   
+  checkEndPoint(origin, data, address) {
+    let minutes = data.duration.value / 60;
+
+    if (Math.abs(origin.minutes - minutes) < 75) {
+      // use the address to keep the exact point
+      console.log(address)
+    } else {
+      this.adjustPoint(origin, minutes)
+    }
+
+  }
+
+  adjustPoint(origin, resultMins) {
+    const scaleLat = Math.sin(Math.PI * this.angle/180)*(origin.minutes* Math.abs(this.lat - origin.lat)/resultMins)
+    const scaleLng = Math.cos(Math.PI * this.angle/180)*(origin.minutes* Math.abs(this.lng - origin.lng)/resultMins)
+
+    this.lat = origin.lat + scaleLat;
+    this.lng = origin.lng + scaleLng;
+  }
+
+  
+  // Query String functions
   getLatLng() {
     return `${this.lat}%2C${this.lng}%7C`
   }
