@@ -38,22 +38,28 @@ class Point {
     return pointsArr;
   }
 
-  adjustEndPoints(endPoints, times, addresses) {
+
+
+  //
+  // Adjust existing endpoints 
+  //
+  adjustPoints(endPoints, times, addresses) {
 
     for (let i = 0; i < endPoints.length; i++) {
-      endPoints[i].checkEndPoint(this, times[i], addresses[i])
+      this.check(endPoints[i], times[i], addresses[i])
     }
     
   }
   
-  checkEndPoint(origin, data, address) {
-    let minutes = data.duration.value / 60;
-
-    if (Math.abs(origin.minutes - minutes) < 75) {
+  check(endPoint, data, address) {
+    let resultMins = data.duration.value / 60;
+    let origin = this;
+    
+    if (Math.abs(this.minutes - resultMins) < 75) {
       // use the address to keep the exact point
       console.log(address)
     } else {
-      this.adjustPoint(origin, minutes)
+      endPoint.adjust(origin, resultMins)
     }
 
   }
@@ -66,14 +72,16 @@ class Point {
     this.lng = origin.lng + scaleLng;
   }
 
-  
+
+
+  //
   // Query String functions
+  //
   getLatLng() {
     return `${this.lat}%2C${this.lng}%7C`
   }
 
   makeSearchStr(endPoints) {
-    // resp = await fetch(`https://maps.googleapis.com/maps/api/directions/json?origin=${lat}+${long}&destination=${point.lat},%20${long}&key=AIzaSyDBghaO6vALAG_-QG2SCBN8LEB_jFM6o1Q`);
     const start = this.makeStartStr();
     const destinations = Point.makeDestinationsStr(endPoints);
     const key = '&key=AIzaSyDBghaO6vALAG_-QG2SCBN8LEB_jFM6o1Q'
