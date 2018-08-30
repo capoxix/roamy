@@ -11,7 +11,7 @@ const gAPI = require('../../config/keys').gAPI;
 class GMap extends React.Component {
     constructor(props){
         super(props);
-        this.fetchPlaces = this.fetchPlaces.bind(this);
+        this.getServiceAndMap = this.getServiceAndMap.bind(this);
         this.update = this.update.bind(this);
     }
     state = {
@@ -102,44 +102,15 @@ class GMap extends React.Component {
             });
         }
     }
-
-    fetchPlaces(mapProps, map){
-        // console.log(this);
-        // let that = this;
+    /* get service and map for place searching*/
+    getServiceAndMap(mapProps, map){
         const {google} = mapProps;
         const service = new google.maps.places.PlacesService(map);
-        // this.state.service = service;
-        // console.log(service);
-        // console.log(map);
         this.setState({map: map, service: service});
-        // console.log("after setting to state, check state");
-        // console.log(this.state.map);
-        // console.log(this.state.service);
-        // console.log(this.state.service);    
-        // console.log(service.);
-        // let sf = new google.maps.LatLng(37.7749,-122.4194);
-        // let request = {
-        //     location: map.getCenter(),
-        //     radius: '500',
-        //     query: this.state.query
-        // }
-        // // console.log(sf);
-        // // debugger;
-        // function printPlaces(results, status){
-        //     if (status == google.maps.places.PlacesServiceStatus.OK) {
-        //         for (let i = 0; i < results.length; i++) {
-        //         let place = results[i];
-        //         console.log(place);
-        //                     // createMarker(results[i]);
-        //         }
-        //     }
-        //     console.log(results.length);
-        // }
-        // service.textSearch(request,printPlaces);
     }
 
     queryPlaces(){
-        if(this.state.map) {
+        if(this.state.map && this.state.query !== '') {
             console.log("inside");
             // debugger;
             let request = {
@@ -150,21 +121,22 @@ class GMap extends React.Component {
             let that = this;
             
             function returnPlaces(results, status){
-                let places = [];
+                // let places = [];
                 if (status == that.props.google.maps.places.PlacesServiceStatus.OK) {
-                    for (let i = 0; i < results.length; i++) {
-                        places.push(results[i]);
-                    // that.state.queryPlaces.push(results[i]);
-                    // console.log(results[i]);
-                    // console.log(place);
-                                // createMarker(results[i]);
-                    }
-                    that.setState({queryPlaces : places});
+                    // for (let i = 0; i < results.length; i++) {
+                    //     places.push(results[i]);
+                    // // that.state.queryPlaces.push(results[i]);
+                    // // console.log(results[i]);
+                    // // console.log(place);
+                    //             // createMarker(results[i]);
+                    // }
+                    that.setState({queryPlaces : results});
                 }
 
                 
                 // console.log(results.length);
             }
+            
             this.state.service.textSearch(request,returnPlaces);
             // console.log(this.state.queryPlaces);
             // this.state.queryPlaces
@@ -208,7 +180,7 @@ class GMap extends React.Component {
     this.mapComponent =   
                 <Map google={this.props.google}
                 onClick={this.onMapClicked}
-                onReady={this.fetchPlaces}
+                onReady={this.getServiceAndMap}
                 center={this.state.center}
                 style={style}
                 // controls[{this.props.google.maps.ControlPosition.TOP_CENTER}]
@@ -227,11 +199,6 @@ class GMap extends React.Component {
                         {this.polygonComponent}
                 </Map>;
 
-        // console.log(this.mapComponent);
-        // console.log(this.state.query);
-        // debugger;
-        // console.log('service',this.state.service);
-        // console.log('map', this.state.map);
         this.queryPlaces();
         let result = this.state.queryPlaces.map(place => {
             return (
@@ -247,7 +214,7 @@ class GMap extends React.Component {
         
             console.log(this.state.queryPlaces);
                 // console.log(mapComponent);
-                // console.log(polygonComponent);
+                // console.log(polygonComponent)
     /* attempt to make a control in google maps*/
     return (
         <div>
