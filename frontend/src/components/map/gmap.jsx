@@ -11,6 +11,7 @@ class GMap extends React.Component {
     constructor(props){
         super(props);
         this.fetchPlaces = this.fetchPlaces.bind(this);
+        this.update = this.update.bind(this);
     }
     state = {
         showingInfoWindow: false,
@@ -25,6 +26,8 @@ class GMap extends React.Component {
         queryPlaces: [],
         query: '',
         service: {},
+        map: {},
+
       };
     
     onMarkerClick = (mapProps, marker, e) =>
@@ -105,18 +108,39 @@ class GMap extends React.Component {
         const {google} = mapProps;
         const service = new google.maps.places.PlacesService(map);
         this.state.service = service;
-        console.log(this.state.service);
+        this.state.map = map;
+        // console.log(this.state.service);    
         // console.log(service.);
         // let sf = new google.maps.LatLng(37.7749,-122.4194);
+        // let request = {
+        //     location: map.getCenter(),
+        //     radius: '500',
+        //     query: this.state.query
+        // }
+        // // console.log(sf);
+        // // debugger;
+        // function printPlaces(results, status){
+        //     if (status == google.maps.places.PlacesServiceStatus.OK) {
+        //         for (let i = 0; i < results.length; i++) {
+        //         let place = results[i];
+        //         console.log(place);
+        //                     // createMarker(results[i]);
+        //         }
+        //     }
+        //     console.log(results.length);
+        // }
+        // service.textSearch(request,printPlaces);
+    }
+
+    queryPlaces(){
         let request = {
-            location: map.getCenter(),
+            location: this.state.map.getCenter(),
             radius: '500',
-            query: 'AMC Van Ness 14'
+            query: this.state.query
         }
-        // console.log(sf);
-        // debugger;
+
         function printPlaces(results, status){
-            if (status == google.maps.places.PlacesServiceStatus.OK) {
+            if (status == this.props.google.maps.places.PlacesServiceStatus.OK) {
                 for (let i = 0; i < results.length; i++) {
                 let place = results[i];
                 console.log(place);
@@ -125,8 +149,17 @@ class GMap extends React.Component {
             }
             console.log(results.length);
         }
-        service.textSearch(request,printPlaces);
+        this.state.service.textSearch(request,printPlaces);
     }
+    
+    update(field){
+        return(e) => {
+            this.setState({[field]: e.target.value});
+        }
+    }
+
+
+
 
     
 
@@ -150,7 +183,6 @@ class GMap extends React.Component {
         strokeWeight={2}
         fillColor="#0000FF"
         fillOpacity={0.35} />;
-
     this.mapComponent =   
                 <Map google={this.props.google}
                 onClick={this.onMapClicked}
@@ -172,6 +204,9 @@ class GMap extends React.Component {
                     </InfoWindow>
                         {this.polygonComponent}
                 </Map>;
+
+        // console.log(this.mapComponent);
+        console.log(this.state.query);
                 // console.log(mapComponent);
                 // console.log(polygonComponent);
     /* attempt to make a control in google maps*/
@@ -180,6 +215,10 @@ class GMap extends React.Component {
             <button type='button' onClick={()=>this.trackInput()}>TRACK LOCATION</button>
             <button type='button' onClick={()=> this.addFavoritesToMarkers()}>Get Favorite Spots</button>
             <button type='button' onClick={()=> this.getCurrentLocation()}>Get Current Location</button>
+            <input type='text'
+                onChange={this.update('query')}
+                value={this.state.query}
+                placeholder="Search"/>
             <div>
                 {this.mapComponent}
             </div>
