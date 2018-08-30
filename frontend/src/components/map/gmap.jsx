@@ -3,7 +3,8 @@ import React from 'react';
 import Point from '../../util/point';
 import {track, getFavorites} from '../../util/location_api_util';
 import {connect} from 'react-redux';
-import { RSA_PKCS1_OAEP_PADDING } from 'constants';
+import SearchIndex from './search_index';
+
 const gAPI = require('../../config/keys').gAPI;
 // import { MAP } from 'react-google-maps/lib/constants'
 
@@ -46,16 +47,12 @@ class GMap extends React.Component {
             })
         }
         // console.log(this);
-        /*get latitude and longitude from clicked point on maps */
+        /*get latitude and longitude from clicked point on maps and set marker to show clicked point*/
         this.setState({clicked: {lat: e.latLng.lat(), lng: e.latLng.lng()}})
         this.setState({clickedMarker: <Marker onClick={this.onMarkerClick}
             name={'Clicked point'}
             position={{lat: e.latLng.lat(), lng: e.latLng.lng()}} 
         icon={{path: this.props.google.maps.SymbolPath.BACKWARD_CLOSED_ARROW, scale: 5}}/>});
-        // console.log(this.state.clicked);
-        // console.log(props);
-        // console.log(map);
-        // console.log(e.latLng);
         console.log(e);
        
     };
@@ -186,17 +183,19 @@ class GMap extends React.Component {
                 </Map>;
 
         this.queryPlaces();
-        let result = this.state.queryPlaces.map(place => {
-            return (
-                <ul>
-            <li>Name: {place.name}</li>
-            <li>Address: {place.formatted_address}</li>
-            <li>Lat: {place.geometry.location.lat()} Lng: {place.geometry.location.lng()}</li>
-            <li><img src={place.icon}></img></li>
-            {/* <li>{place.formatted_address}</li> */}
-            {/* <li>{place.geometry}</li> */}
-            </ul>);
-            });
+        let places = this.state.queryPlaces;
+        // console.log(places);
+        // let result = this.state.queryPlaces.map(place => {
+        //     return (
+        //         <ul>
+        //     <li>Name: {place.name}</li>
+        //     <li>Address: {place.formatted_address}</li>
+        //     <li>Lat: {place.geometry.location.lat()} Lng: {place.geometry.location.lng()}</li>
+        //     <li><img src={place.icon}></img></li>
+        //     {/* <li>{place.formatted_address}</li> */}
+        //     {/* <li>{place.geometry}</li> */}
+        //     </ul>);
+        //     });
         
             // console.log(this.state.queryPlaces);
                 // console.log(mapComponent);
@@ -210,9 +209,9 @@ class GMap extends React.Component {
             <input type='text'
                 onChange={this.update('query')}
                 value={this.state.query}
-                placeholder="Search"/>
+                placeholder="Search Place"/>
             <div>
-                <ul>{result}</ul>
+                <SearchIndex places={places}/>
             </div>
             <div>
                 {this.mapComponent}
