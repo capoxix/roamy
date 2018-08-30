@@ -25,7 +25,7 @@ router.get(`/cars`, async (req, res) => {
   endPoints = origin.initEndPoints()
   Point.inPacific(endPoints) // check if in pacific ONLY FOR SF
 
-  // while (searches < 4) {
+  // while (searches < 4 && requireReadjust) {
     searches+=1;
 
     searchStr = origin.makeSearchStr(endPoints);
