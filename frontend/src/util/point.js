@@ -56,7 +56,6 @@ class Point {
 
 
 
-  //
   // Adjust existing endpoints 
   //
   adjustPoints(endPoints, data, addresses) {
@@ -72,14 +71,15 @@ class Point {
       endPoint.destroy = true;
       return
     } else if (endPoint.static) {
-      return
+      endPoint.minutes = datum.duration.value / 60;
+      return 
     }
     endPoint.minutes = datum.duration.value / 60;
     let origin = this;
     console.log('item: ', i)
     console.log(endPoint)
-    console.log(endPoint.minutes)
-    console.log(address)
+    console.log('minutes: ', endPoint.minutes)
+    console.log('address: ', address)
     
     if (Math.abs(this.minutes - endPoint.minutes) < 1.2) {
       // reassign the point to the address given and make point static
@@ -120,12 +120,17 @@ class Point {
   }
 
 
-
-  //
+ 
   // Query String functions
   //
   getLatLng() {
     return `${this.lat}%2C${this.lng}%7C`
+  }
+  
+  makeStartStr() {
+    const header = 'https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial';
+    const origin = `&origins=${this.lat},${this.lng}`;
+    return header + origin;
   }
 
   makeSearchStr(endPoints) {
@@ -134,16 +139,9 @@ class Point {
     const key = '&key=AIzaSyDBghaO6vALAG_-QG2SCBN8LEB_jFM6o1Q'
     return start + destinations + key
   }
-  
-  makeStartStr() {
-    const header = 'https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial';
-    const origin = `&origins=${this.lat},${this.lng}`;
-    return header + origin;
-  }
-  
-  
 
-  //
+
+
   // EndPoint check
   //
 
@@ -151,17 +149,12 @@ class Point {
     const topLat = 37.8135;
     const westLng = -122.5220;
 
-    console.log("------------")
-    console.log(this.lat)
-    console.log(this.lng)
     if (this.lat < topLat) {
       if (this.lng < westLng) {
         this.lng = westLng;
         this.static = true;
       }
     }
-    console.log(this.lat)
-    console.log(this.lng)
   }
 }
 

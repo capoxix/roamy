@@ -8,7 +8,7 @@ router.get('/test', (req, res) => {
   res.send('hi')
 })
 
-router.post(`/cars`, async (req, res) => {
+router.get(`/cars`, async (req, res) => {
 
   //decode(req.)
 
@@ -22,15 +22,20 @@ router.post(`/cars`, async (req, res) => {
   Object.freeze(origin);
 
   let searches = 0;
-  let searchStr, endPoints, text;
+  let searchStr, endPoints, duped, text;
  
   endPoints = origin.initEndPoints()
   Point.inPacific(endPoints) // check if in pacific ONLY FOR SF
+  duped = endPoints.slice();
 
   while (searches < 4) {
+    console.log('num left', duped.length)
+    console.log('num left', duped.length)
+    console.log('num left', duped.length)
+    console.log('num left', duped.length)
     searches+=1;
 
-    searchStr = origin.makeSearchStr(endPoints);
+    searchStr = origin.makeSearchStr(duped);
 
     promise = await fetch(searchStr);
     text = JSON.parse(await promise.text());
@@ -38,12 +43,23 @@ router.post(`/cars`, async (req, res) => {
     const addresses = text.destination_addresses;
     const times = text.rows[0].elements;
 
-    origin.adjustPoints(endPoints, times, addresses)
-  
+    origin.adjustPoints(duped, times, addresses)
+    duped = modify(duped);
   }
 
   res.send(text);
 });
+
+function modify(endPoints) {
+  activePoints = [];
+  
+  for(let i = 0; i < endPoints.length; i++) {
+    if (endPoints[i].static === false) {activePoints.push(endPoints[i])}
+  }
+  console.log('before', endPoints)
+  console.log('after', activePoints)
+  return activePoints;
+}
 
 module.exports = router;
 
