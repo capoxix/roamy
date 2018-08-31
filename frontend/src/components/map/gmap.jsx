@@ -89,7 +89,7 @@ class GMap extends React.Component {
     );
   }
 
-  /*set markers into map */
+  /*set favorite markers into map */
   setMarkersIntoMap(favoriteDataArr) {
     let that = this;
     let favoritesMarkersArr = favoriteDataArr.map(favorite => {
