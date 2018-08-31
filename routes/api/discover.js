@@ -9,11 +9,14 @@ router.get(`/cars`, async (req, res) => {
   // make api call using fetch
   // origin will be created based on user input
 
+  //decode(req.)
+
   const origin = new Point({
     lat: 37.7990,
     lng: -122.4014,
-    minutes: 10
+    minutes: 45
   })
+  Object.freeze(origin);
 
   // twin peaks
   // const origin = new Point({lat: 37.751387, lng: -122.446333, minutes: 15})
@@ -21,18 +24,19 @@ router.get(`/cars`, async (req, res) => {
   let searches = 0;
   let searchStr;
   let endPoints;
+  let text;
  
   endPoints = origin.initEndPoints()
   Point.inPacific(endPoints) // check if in pacific ONLY FOR SF
 
-  // while (searches < 4 && requireReadjust) {
+  while (searches < 4) {
     searches+=1;
 
     searchStr = origin.makeSearchStr(endPoints);
     // console.log(searchStr)
     promise = await fetch(searchStr);
 
-    const text = JSON.parse(await promise.text());
+    text = JSON.parse(await promise.text());
 
     const addresses = text.destination_addresses;
     const times = text.rows[0].elements;
@@ -43,9 +47,9 @@ router.get(`/cars`, async (req, res) => {
     console.log('t')
     console.log('t')
     console.log(text)
-    // origin.adjustPoints(endPoints, times, addresses)
+    origin.adjustPoints(endPoints, times, addresses)
   
-  // }
+  }
   res.send(text);
 });
 
