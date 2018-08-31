@@ -172,10 +172,6 @@ class GMap extends React.Component {
 
         let points =  origin.initEndPoints(); //[];
 
-        const style = {
-          width: '800px',
-          height: '800px'
-        }
         this.polygon = new this.props.google.maps.Polygon({paths: points});
         this.polygonComponent =
         <Polygon
@@ -185,12 +181,13 @@ class GMap extends React.Component {
           strokeWeight={2}
           fillColor="#0000FF"
           fillOpacity={0.35} />;
+
         this.mapComponent =
         <Map google={this.props.google}
           onClick={this.onMapClicked}
           onReady={this.fetchPlaces}
           center={this.state.center}
-          style={style}
+          className="mapWrapper1"
           // controls[{this.props.google.maps.ControlPosition.TOP_CENTER}]
           >
           {this.state.currentLocationMarker}
@@ -213,18 +210,24 @@ class GMap extends React.Component {
         // console.log(polygonComponent);
         /* attempt to make a control in google maps*/
         return (
-          <div>
+          <div className="bodyWrapper">
             <div>
-              <button type='button' onClick={()=>this.trackInput()}>TRACK LOCATION</button>
-              <button type='button' onClick={()=> this.addFavoritesToMarkers()}>Get Favorite Spots</button>
-              <button type='button' onClick={()=> this.getCurrentLocation()}>Get Current Location</button>
-              <input type='text'
-                onChange={this.update('query')}
-                value={this.state.query}
-                placeholder="Search"/>
               <div>
-                {this.mapComponent}
+                <button type='button' onClick={()=>this.trackInput()}>TRACK LOCATION</button>
+                <button type='button' onClick={()=> this.addFavoritesToMarkers()}>Get Favorite Spots</button>
+                <button type='button' onClick={()=> this.getCurrentLocation()}>Get Current Location</button>
+                <input type='text'
+                  onChange={this.update('query')}
+                  value={this.state.query}
+                  placeholder="Search"/>
+                <div className="mapWrapper2">
+                  {this.mapComponent}
+                </div>
               </div>
+            </div>
+
+            <div className="sideWrapper">
+              
             </div>
           </div>
         );
