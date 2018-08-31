@@ -218,8 +218,9 @@ class GMap extends React.Component {
           that.setState({ foundPlace: result[0] });
           that.markFoundPlace(result[0])
           console.log(result);
+        } else {
+          console.log(result);
         }
-        console.log(result);
         // console.log("foundPlace", result[0]);
         // that.setMarkersIntoMap([result]);
       }
