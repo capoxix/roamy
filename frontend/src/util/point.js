@@ -37,11 +37,10 @@ class Point {
 
   initEndPoints() {
     const pointsArr = [];
-    
     const dLat = 0.003604 * this.minutes;
     const dLng =  0.0045402 * this.minutes;
 
-    let numPoints = 4;
+    let numPoints = 8;
     let angle = 360 / numPoints;
     let currentAngle = 0;
   
@@ -60,47 +59,64 @@ class Point {
   //
   // Adjust existing endpoints 
   //
-  adjustPoints(endPoints, times, addresses) {
+  adjustPoints(endPoints, data, addresses) {
 
     for (let i = 0; i < endPoints.length; i++) {
-      this.check(endPoints[i], times[i], addresses[i])
+      this.check(endPoints[i], data[i], addresses[i], i)
     }
     
   }
   
-  check(endPoint, data, address) {
-    let resultMins = data.duration.value / 60;
+  check(endPoint, datum, address, i) {
+    if (datum.status === "ZERO_RESULTS") {
+      endPoint.destroy = true;
+      return
+    } else if (endPoint.static) {
+      return
+    }
+    endPoint.minutes = datum.duration.value / 60;
     let origin = this;
-    console.log('item: ')
+    console.log('item: ', i)
     console.log(endPoint)
-    console.log(resultMins)
+    console.log(endPoint.minutes)
     console.log(address)
-    console.log('')
-    console.log('')
-
-    if (Math.abs(this.minutes - resultMins) < 1.2) {
-      // use the address to keep the exact point
-      console.log('close enough')
+    
+    if (Math.abs(this.minutes - endPoint.minutes) < 1.2) {
+      // reassign the point to the address given and make point static
+      console.log('close enough -------------------')
+      console.log('')
+      console.log('')
+      endPoint.static = true;
     } else {
-      endPoint.adjust(origin, resultMins)
+      endPoint.adjust(origin)
+      console.log('')
+      console.log('')
     }
 
   }
 
-  adjust(origin, resultMins) {
-    const scaleLat = Math.sin(Math.PI * this.angle/180)*(origin.minutes* Math.abs(this.lat - origin.lat)/resultMins)
-    const scaleLng = Math.cos(Math.PI * this.angle/180)*(origin.minutes* Math.abs(this.lng - origin.lng)/resultMins)
+  adjust(origin) {
 
-    // console.log('after')
-    // console.log(scaleLat)
-    // console.log(scaleLng)
-    // console.log(this.lat)
-    // console.log(this.lng)
+    let oLat = Math.abs(origin.lat);
+    let oLng = Math.abs(origin.lng);
+
+    let tLat = Math.abs(this.lat);
+    let tLng = Math.abs(this.lng);
+
+    let hypotenuse = Math.sqrt(Math.pow(oLat - tLat, 2) + Math.pow(oLng - tLng, 2));
+
+    let newHypotenuse = hypotenuse * (origin.minutes / this.minutes);
+
+    const scaleLat = Math.sin((Math.PI * this.angle) / 180) * newHypotenuse;
+    const scaleLng = Math.cos((Math.PI * this.angle) / 180) * newHypotenuse;
+
     this.lat = origin.lat + scaleLat;
     this.lng = origin.lng + scaleLng;
-    // console.log('before')
-    // console.log(this.lat)
-    // console.log(this.lng)
+    console.log('new lat: ', this.lat)
+    console.log('new lng: ', this.lng)
+    this.tooFar();
+
+
   }
 
 
@@ -157,3 +173,15 @@ class Point {
 // o.makeSearchStr([d1, d2]);
 
 module.exports = Point;
+
+
+//  lat: 37.72254761481811,
+// lng: -122.3050878137617,
+//  minutes: undefined,
+//  angle: 315,
+//   static: false 
+//  32.916666666666664
+//  120 Creedon Cir, Alameda, CA 94502, USA
+// new lat:  37.74973012658228
+//  new lng:  -122.33933144303798
+  

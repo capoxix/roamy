@@ -3,58 +3,57 @@ import React from 'react';
 import Point from '../../util/point';
 import {track, getFavorites} from '../../util/location_api_util';
 import {connect} from 'react-redux';
+import SearchIndex from './search_index';
+
 const gAPI = require('../../config/keys').gAPI;
 // import { MAP } from 'react-google-maps/lib/constants'
 
 
 class GMap extends React.Component {
-  constructor(props){
-    super(props);
-    this.fetchPlaces = this.fetchPlaces.bind(this);
-    this.update = this.update.bind(this);
-  }
-  state = {
-    showingInfoWindow: false,
-    activeMarker: {},
-    selectedPlace: {},
-    center: {},
-    clicked: {},
-    clickedMarker: [],
-    favoriteMarkers: [],
-    trackName: '',
-    currentLocationMarker:[],
-    queryPlaces: [],
-    query: '',
-    service: {},
-    map: {},
-
-  };
-
-  onMarkerClick = (mapProps, marker, e) =>
-  this.setState({
-    selectedPlace: mapProps,
-    activeMarker: marker,
-    showingInfoWindow: true
-  });
-
-  onMapClicked = (mapProps, map, e) => {
-    if (this.state.showingInfoWindow) {
-      this.setState({
-        showingInfoWindow: false,
-        activeMarker: null
-      })
+    constructor(props){
+        super(props);
+        this.getServiceAndMap = this.getServiceAndMap.bind(this);
+        this.update = this.update.bind(this);
     }
-    console.log(this);
-    /*get latitude and longitude from clicked point on maps */
-    this.setState({clicked: {lat: e.latLng.lat(), lng: e.latLng.lng()}})
-    this.setState({clickedMarker: <Marker onClick={this.onMarkerClick}
-      name={'Clicked point'}
-      position={{lat: e.latLng.lat(), lng: e.latLng.lng()}}
-      icon={{path: this.props.google.maps.SymbolPath.BACKWARD_CLOSED_ARROW, scale: 5}}/>});
-      // console.log(this.state.clicked);
-      // console.log(props);
-      // console.log(map);
-      // console.log(e.latLng);
+    state = {
+        showingInfoWindow: false,
+        activeMarker: {},
+        selectedPlace: {},
+        center: {},
+        clicked: {},
+        clickedMarker: [],
+        favoriteMarkers: [],
+        trackName: '',
+        currentLocationMarker:[],
+        queryPlaces: [],
+        query: '',
+        service: undefined,
+        map: undefined,
+        foundPlace: undefined
+      };
+
+    onMarkerClick = (mapProps, marker, e) =>
+        this.setState({
+            selectedPlace: mapProps,
+            activeMarker: marker,
+            showingInfoWindow: true
+        });
+
+    onMapClicked = (mapProps, map, e) => {
+        if (this.state.showingInfoWindow) {
+            this.setState({
+                showingInfoWindow: false,
+                activeMarker: null
+            })
+        }
+        // console.log(this);
+        /*get latitude and longitude from clicked point on maps and set marker to show clicked point*/
+        this.setState({clicked: {lat: e.latLng.lat(), lng: e.latLng.lng()}})
+        this.setState({clickedMarker: <Marker onClick={this.onMarkerClick}
+            name={'Clicked point'}
+            position={{lat: e.latLng.lat(), lng: e.latLng.lng()}}
+        icon={{path: this.props.google.maps.SymbolPath.BACKWARD_CLOSED_ARROW, scale: 5}}/>});
+        console.log(e);
 
     };
 
@@ -100,70 +99,62 @@ class GMap extends React.Component {
             icon= {{path: that.props.google.maps.SymbolPath.CIRCLE, scale:10}}/>});
           });
         }
-      }
-
-      fetchPlaces(mapProps, map){
-        // console.log(this);
-        // let that = this;
+    }
+    /* get service and map for place searching*/
+    getServiceAndMap(mapProps, map){
         const {google} = mapProps;
         const service = new google.maps.places.PlacesService(map);
-        this.state.service = service;
-        this.state.map = map;
-        // console.log(this.state.service);
-        // console.log(service.);
-        // let sf = new google.maps.LatLng(37.7749,-122.4194);
-        // let request = {
-        //     location: map.getCenter(),
-        //     radius: '500',
-        //     query: this.state.query
-        // }
-        // // console.log(sf);
-        // // debugger;
-        // function printPlaces(results, status){
-        //     if (status == google.maps.places.PlacesServiceStatus.OK) {
-        //         for (let i = 0; i < results.length; i++) {
-        //         let place = results[i];
-        //         console.log(place);
-        //                     // createMarker(results[i]);
-        //         }
-        //     }
-        //     console.log(results.length);
-        // }
-        // service.textSearch(request,printPlaces);
-      }
+        this.setState({map: map, service: service});
+        console.log(google);
+        //google.maps.ElevationService
+    }
 
-      queryPlaces(){
-        let request = {
-          location: this.state.map.getCenter(),
-          radius: '500',
-          query: this.state.query
-        }
-
-        function printPlaces(results, status){
-          if (status == this.props.google.maps.places.PlacesServiceStatus.OK) {
-            for (let i = 0; i < results.length; i++) {
-              let place = results[i];
-              console.log(place);
-              // createMarker(results[i]);
+    queryPlaces(){
+        if(this.state.map && this.state.query !== '') {
+            let request = {
+                location: this.state.map.getCenter(),
+                radius: '500',
+                query: this.state.query
             }
-          }
-          console.log(results.length);
-        }
-        this.state.service.textSearch(request,printPlaces);
-      }
+            let that = this;
 
-      update(field){
+            function returnPlaces(results, status){
+                if (status == that.props.google.maps.places.PlacesServiceStatus.OK)
+                    that.setState({queryPlaces : results});
+            }
+
+            this.state.service.textSearch(request,returnPlaces);
+        }
+    }
+
+    /*find place and mark it in map */
+    findPlaceAndMark(){
+        if(this.state.map && this.state.query !== '' && this.state.query.length > 5){
+            console.log("trying to find place");
+            let request = {
+                query: this.state.query,
+                fields: ['photos', 'formatted_address', 'name', 'rating', 'opening_hours', 'geometry']
+            }
+
+        let that = this;
+        function findPlace(result, status){
+            if (status == that.props.google.maps.places.PlacesServiceStatus.OK)
+                that.setState({foundPlace : result});
+                console.log("foundPlace", result);
+                // that.setMarkersIntoMap([result]);
+            }
+            console.log(this.state.service);
+            this.state.service.findPlaceFromQuery(request, findPlace);
+        }
+    }
+
+    update(field){
         return(e) => {
           this.setState({[field]: e.target.value});
         }
       }
 
-
-
-
-
-
-      render() {
+    render() {
 
         let lat = 37.7749;
         let lng = -122.4194;
@@ -172,62 +163,101 @@ class GMap extends React.Component {
 
         let points =  origin.initEndPoints(); //[];
 
+        const style = {
+        width: '800px',
+        height: '800px'
+        }
         this.polygon = new this.props.google.maps.Polygon({paths: points});
         this.polygonComponent =
         <Polygon
-          paths={points}
-          strokeColor="#0000FF"
-          strokeOpacity={0.8}
-          strokeWeight={2}
-          fillColor="#0000FF"
-          fillOpacity={0.35} />;
+            paths={points}
+            strokeColor="#0000FF"
+            strokeOpacity={0.8}
+            strokeWeight={2}
+            fillColor="#0000FF"
+            fillOpacity={0.35}
+            clickable={false} />;
 
         this.mapComponent =
-        <Map google={this.props.google}
-          onClick={this.onMapClicked}
-          onReady={this.fetchPlaces}
-          center={this.state.center}
-          className="mapWrapper1"
-          // controls[{this.props.google.maps.ControlPosition.TOP_CENTER}]
-          >
-          {this.state.currentLocationMarker}
-          {this.state.favoriteMarkers}
-          {this.state.clickedMarker}
+                    <Map google={this.props.google}
+                    onClick={this.onMapClicked}
+                    onReady={this.getServiceAndMap}
+                    center={this.state.center}
+                    style={style}
+                    // controls[{this.props.google.maps.ControlPosition.TOP_CENTER}]
+                    >
+                        {this.state.currentLocationMarker}
+                        {this.state.favoriteMarkers}
+                        {this.state.clickedMarker}
 
-          <InfoWindow
-            marker={this.state.activeMarker}
-            visible={this.state.showingInfoWindow}>
-            <div>
-              <h1>{this.state.selectedPlace.name}</h1>
-            </div>
-          </InfoWindow>
-          {this.polygonComponent}
-        </Map>;
+                        <InfoWindow
+                            marker={this.state.activeMarker}
+                            visible={this.state.showingInfoWindow}>
+                            <div>
+                                <h1>{this.state.selectedPlace.name}</h1>
+                            </div>
+                        </InfoWindow>
+                            {this.polygonComponent}
+                    </Map>;
 
-        // console.log(this.mapComponent);
-        console.log(this.state.query);
-        // console.log(mapComponent);
-        // console.log(polygonComponent);
-        /* attempt to make a control in google maps*/
+            this.queryPlaces();
+            let places = this.state.queryPlaces;
         return (
-          <div className="bodyWrapper">
             <div>
-              <div>
                 <button type='button' onClick={()=>this.trackInput()}>TRACK LOCATION</button>
                 <button type='button' onClick={()=> this.addFavoritesToMarkers()}>Get Favorite Spots</button>
                 <button type='button' onClick={()=> this.getCurrentLocation()}>Get Current Location</button>
                 <input type='text'
-                  onChange={this.update('query')}
-                  value={this.state.query}
-                  placeholder="Search"/>
-                <div className="mapWrapper2">
-                  {this.mapComponent}
+                    onChange={this.update('query')}
+                    value={this.state.query}
+                    placeholder="Search Place"/>
+                <button type='button' onClick={()=>this.findPlaceAndMark()}>Go to location</button>
+                <div>
+                    <SearchIndex places={places}/>
                 </div>
-              </div>
+                <div>
+                    {this.mapComponent}
+                </div>
+
+                    <div className="footer">
+                        <div className="links">
+                        <div className="ft-headers">© 2018 ROVER</div>
+                        <div className="ft-headers">FOLLOW</div>
+                        <div className="ft2-1">
+                            <p>
+                            ROVER is a map based web application that allows users to see areas they can access given free time.
+                            </p>
+                        </div>
+                        <div className="ft2-2">
+                            <a className="socials" href="mailto:tonywzhang@gmail.com">
+                            <i className="fab fa-google"></i>
+                            </a>
+                            <br/>
+                            <a className="socials" href="tel:+16508883357">
+                            <i className="fas fa-mobile"></i>
+                            </a>
+                            <br/>
+                            <a className="socials" href='https://www.facebook.com/tonywzhang'>
+                            <i className="fab fa-facebook"></i>
+                            </a>
+                            <br/>
+                            <a className="socials" href="https://www.linkedin.com/in/kevin-ou-b56a768b/">
+                            <i className="fab fa-linkedin"></i>
+                            </a>
+                            <br/>
+                            <a className="socials" href="https://github.com/capoxix/intro-mongo">
+                            <i className="fab fa-github"></i>
+                            </a>
+                        </div>
+                    </div>
+                    </div>
             </div>
+        );
+    }
+    }
 
             <div className="sideWrapper">
-              
+
             </div>
           </div>
         );
