@@ -31,6 +31,12 @@ class GMap extends React.Component {
         map: undefined,
         foundPlace: undefined
       };
+
+    discover = (e) => {
+      e.preventDefault();
+      console.log("hihi")
+      // this.props.sendQuery(this.state.clicked)
+    } 
     
     onMarkerClick = (mapProps, marker, e) =>
         this.setState({
@@ -48,7 +54,7 @@ class GMap extends React.Component {
         }
         // console.log(this);
         /*get latitude and longitude from clicked point on maps and set marker to show clicked point*/
-        this.setState({clicked: {lat: e.latLng.lat(), lng: e.latLng.lng()}})
+        this.setState({clicked: {lat: e.latLng.lat(), lng: e.latLng.lng(), minutes: 10}})
         this.setState({clickedMarker: <Marker onClick={this.onMarkerClick}
             name={'Clicked point'}
             position={{lat: e.latLng.lat(), lng: e.latLng.lng()}} 
@@ -212,6 +218,7 @@ class GMap extends React.Component {
                     value={this.state.query}
                     placeholder="Search Place"/>
                 <button type='button' onClick={()=>this.findPlaceAndMark()}>Go to location</button>
+                <button type='button' onClick={this.discover}>Discover</button>
                 <div>
                     <SearchIndex places={places}/>
                 </div>
