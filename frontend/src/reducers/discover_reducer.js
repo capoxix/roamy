@@ -1,4 +1,4 @@
-import { RECEIVE_END_POINTS, RECEIVE_QUERY_ERRORS_} from '../action/discover_actions';
+import { RECEIVE_END_POINTS } from '../action/discover_actions';
 import merge from 'lodash/merge';
 
 export const discoverReducer = (state = {}, action) {

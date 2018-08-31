@@ -9,6 +9,12 @@ const receiveEndPoints = (endPoints) => {
     endPoints
   })
 }
+const receiveQueryErrors = (errors) => {
+  return ({
+    type: RECEIVE_QUERY_ERRORS,
+    errors
+  })
+}
 
 export const sendQuery = (query) => (dispatch) => {
   API.discoverCar(query)
