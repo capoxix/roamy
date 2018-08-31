@@ -191,11 +191,22 @@ class GMap extends React.Component {
       };
 
       let that = this;
+      /*find place when given location address or name or lat,lng */
+      
       function findPlace(result, status) {
+          /* result is resulting places, which comes in as an array of objects 
+          EX: [{formatted_address: "....", 
+                geometry: {location: {lat(), lng()}}, 
+                name: "......."}] 
+                OR
+                null if address/name cannot be found
+                */
+
+        /*TO ACESS LAT OR LNG, do place.geometry.location.lat() AND place.geomtry.location.lng() [shown in markFoundPlace]*/
         if (status == that.props.google.maps.places.PlacesServiceStatus.OK) {
           that.setState({ foundPlace: result[0] });
           that.markFoundPlace(result[0])
-        //   console.log(result);
+          console.log(result);
         }
 
         console.log(result);
