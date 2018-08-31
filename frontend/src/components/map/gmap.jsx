@@ -14,6 +14,9 @@ class GMap extends React.Component {
         super(props);
         this.getServiceAndMap = this.getServiceAndMap.bind(this);
         this.update = this.update.bind(this);
+        console.log("hi")
+        console.log(props)
+        console.log("hi")
     }
     state = {
         showingInfoWindow: false,

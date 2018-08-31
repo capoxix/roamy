@@ -8,7 +8,7 @@ router.get('/test', (req, res) => {
   res.send('hi')
 })
 
-router.get(`/cars`, async (req, res) => {
+router.post(`/cars`, async (req, res) => {
 
   //decode(req.)
 
