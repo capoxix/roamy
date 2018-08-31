@@ -7,7 +7,8 @@ const gAPI = require('../../config/keys').gAPI;
 
 /* Connecting Map to State Shape*/
 const mapStateToProps = (state, ownProps) => ({
-    userId: state.session.id
+    userId: state.session.id,
+    endPoints: state.entities.discoveries.cars
 });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -14,9 +14,6 @@ class GMap extends React.Component {
         super(props);
         this.getServiceAndMap = this.getServiceAndMap.bind(this);
         this.update = this.update.bind(this);
-        console.log("hi")
-        console.log(props)
-        console.log("hi")
     }
     state = {
         showingInfoWindow: false,
@@ -37,7 +34,6 @@ class GMap extends React.Component {
 
     discover = (e) => {
       e.preventDefault();
-      console.log("hihi")
       this.props.sendQuery(this.state.clicked)
     } 
     
@@ -163,29 +159,38 @@ class GMap extends React.Component {
         }
     }
 
+    updatePolygon = (endPoints) => {
+
+      if (!endPoints || endPoints.length === 0) {
+        return
+      }
+
+
+      this.polygon = new this.props.google.maps.Polygon({paths: endPoints});
+      this.polygonComponent = 
+      <Polygon
+          paths={endPoints}
+          strokeColor="#0000FF"
+          strokeOpacity={0.8}
+          strokeWeight={2}
+          fillColor="#0000FF"
+          fillOpacity={0.35}
+          clickable={false} />;
+
+    }
+
     render() {
+      console.log("hi")
+      console.log(this.props)
+      console.log("hi")
 
-        let lat = 37.7749;
-        let lng = -122.4194;
-        let minutes = 15;
-        let origin = new Point({lat: lat, lng: lng, minutes: minutes});
+      this.updatePolygon(this.props.endPoints)
 
-        let points =  origin.initEndPoints(); //[];
 
         const style = {
         width: '800px',
         height: '800px'
         }
-        this.polygon = new this.props.google.maps.Polygon({paths: points});
-        this.polygonComponent = 
-        <Polygon
-            paths={points}
-            strokeColor="#0000FF"
-            strokeOpacity={0.8}
-            strokeWeight={2}
-            fillColor="#0000FF"
-            fillOpacity={0.35}
-            clickable={false} />;
 
         this.mapComponent =   
                     <Map google={this.props.google}

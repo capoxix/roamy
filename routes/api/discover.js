@@ -10,6 +10,7 @@ router.get('/test', (req, res) => {
 
 router.get(`/car`, async (req, res) => {
 
+  // console.log(req)
   const origin = new Point({
     lat: 37.7990,
     lng: -122.4014,
