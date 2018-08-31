@@ -38,7 +38,7 @@ class GMap extends React.Component {
     discover = (e) => {
       e.preventDefault();
       console.log("hihi")
-      // this.props.sendQuery(this.state.clicked)
+      this.props.sendQuery(this.state.clicked)
     } 
     
     onMarkerClick = (mapProps, marker, e) =>

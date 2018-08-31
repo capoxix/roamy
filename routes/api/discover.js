@@ -8,9 +8,7 @@ router.get('/test', (req, res) => {
   res.send('hi')
 })
 
-router.post(`/cars`, async (req, res) => {
-
-  //decode(req.)
+router.get(`/car`, async (req, res) => {
 
   const origin = new Point({
     lat: 37.7990,
@@ -47,7 +45,7 @@ router.post(`/cars`, async (req, res) => {
     duped = modify(duped);
   }
 
-  res.send(text);
+  res.send(endPoints);
 });
 
 function modify(endPoints) {
