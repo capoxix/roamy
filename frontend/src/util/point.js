@@ -17,6 +17,17 @@ class Point {
     return destinations
   }
 
+  static modify(endPoints) {
+    const activePoints = [];
+    
+    for(let i = 0; i < endPoints.length; i++) {
+      if (endPoints[i].static === false) {activePoints.push(endPoints[i])}
+    }
+    console.log('before', endPoints)
+    console.log('after', activePoints)
+    return activePoints;
+  }
+
   static inPacific(endPoints) {
 
     for (let i = 0; i < endPoints.length; i++) {

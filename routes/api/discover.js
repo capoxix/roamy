@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Point = require('../../frontend/src/util/point.js');
 const fetch = require('node-fetch');
+const NodeGeocoder = require('node-geocoder');
 
 
 router.get('/test', (req, res) => {
@@ -39,7 +40,7 @@ router.get(`/car`, async (req, res) => {
     const times = text.rows[0].elements;
 
     origin.adjustPoints(duped, times, addresses)
-    duped = modify(duped);
+    duped = Point.modify(duped);
   }
 
   res.send(text);
