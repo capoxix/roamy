@@ -21,17 +21,13 @@ router.get(`/car`, async (req, res) => {
   Object.freeze(origin);
 
   let searches = 0;
-  let searchStr, endPoints, duped, text;
+  let searchStr, endPoints, duped, text, addresses;
  
   endPoints = origin.initEndPoints()
   Point.inPacific(endPoints) // check if in pacific ONLY FOR SF
   duped = endPoints.slice();
 
   while (searches < 4) {
-    console.log('num left', duped.length)
-    console.log('num left', duped.length)
-    console.log('num left', duped.length)
-    console.log('num left', duped.length)
     searches+=1;
 
     searchStr = origin.makeSearchStr(duped);
@@ -39,14 +35,14 @@ router.get(`/car`, async (req, res) => {
     promise = await fetch(searchStr);
     text = JSON.parse(await promise.text());
 
-    const addresses = text.destination_addresses;
+    addresses = text.destination_addresses;
     const times = text.rows[0].elements;
 
     origin.adjustPoints(duped, times, addresses)
     duped = modify(duped);
   }
 
-  res.send(endPoints);
+  res.send(text);
 });
 
 function modify(endPoints) {
