@@ -72,6 +72,8 @@ class Point {
     if (datum.status === "ZERO_RESULTS") {
       endPoint.destroy = true;
       return
+    } else if (endPoint.static) {
+      return
     }
     endPoint.minutes = datum.duration.value / 60;
     let origin = this;
@@ -106,8 +108,8 @@ class Point {
 
     let newHypotenuse = hypotenuse * (origin.minutes / this.minutes);
 
-    const scaleLat = Math.sin(Math.PI * this.angle) * newHypotenuse;
-    const scaleLng = Math.cos(Math.PI * this.angle) * newHypotenuse;
+    const scaleLat = Math.sin((Math.PI * this.angle) / 180) * newHypotenuse;
+    const scaleLng = Math.cos((Math.PI * this.angle) / 180) * newHypotenuse;
 
     // const scaleLat = Math.sin(Math.PI * this.angle/180)*(origin.minutes* Math.abs(this.lat - origin.lat)/this.minutes)
     // const scaleLng = Math.cos(Math.PI * this.angle/180)*(origin.minutes* Math.abs(this.lng - origin.lng)/this.minutes)
@@ -121,6 +123,7 @@ class Point {
     this.lng = origin.lng + scaleLng;
     console.log('new lat: ', this.lat)
     console.log('new lng: ', this.lng)
+    this.tooFar();
 
 
   }

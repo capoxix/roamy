@@ -12,7 +12,7 @@ router.get(`/cars`, async (req, res) => {
   const origin = new Point({
     lat: 37.7990,
     lng: -122.4014,
-    minutes: 30
+    minutes: 45
   })
   Object.freeze(origin);
 
