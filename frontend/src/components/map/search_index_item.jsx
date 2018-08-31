@@ -3,7 +3,7 @@ import React from 'react';
 class SearchIndexItem extends React.Component{
     render(){
         const {place} = this.props;
-        console.log('place in SearchIndexItem', place);
+        // console.log('place in SearchIndexItem', place);
         // console.log(place.place);
         return (
             <div>
