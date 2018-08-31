@@ -74,7 +74,7 @@ class GMap extends React.Component {
   trackInput() {
     /*track the user's clicked point*/
     let trackLocation = {
-      name: "tracking",
+      name: `${this.state.trackName}`,
       lat: `${this.state.clicked.lat}`,
       lng: `${this.state.clicked.lng}`,
       userId: this.props.userId
@@ -313,8 +313,14 @@ class GMap extends React.Component {
     return (
       <div>
         <div>
+        <input
+            type="text"
+            onChange={this.update("trackName")}
+            value={this.state.trackName}
+            placeholder="Favorite place name"
+          />
           <button type="button" onClick={() => this.trackInput()}>
-            TRACK LOCATION
+            TRACK FAVORITE LOCATION
           </button>
           <button type="button" onClick={() => this.addFavoritesToMarkers()}>
             Get Favorite Spots

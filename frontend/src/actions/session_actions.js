@@ -11,8 +11,12 @@ export const RECEIVE_SIGNUP_ERRORS = 'RECEIVE_SIGNUP_ERRORS';
 
 //set default header
 export const setAuthToken = token => {
+    debugger
+
   if (token) {
     // Apply to every request
+    debugger
+    
     axios.defaults.headers.common['Authorization'] = token;
   } else {
     // Delete auth header
@@ -36,6 +40,7 @@ export const receiveErrors = errors => ({
 export const register = formUser => dispatch => API.register(formUser)
     .then(res => {
         // Save to localStorage
+        
         const { token } = res.data;
         // Set token to ls
         localStorage.setItem('jwtToken', token);
@@ -71,6 +76,7 @@ export const logoutUser = () => dispatch => {
     // Remove token from localStorage
     localStorage.removeItem('jwtToken');
     // Remove auth header for future requests
+    debugger
     setAuthToken(false);
     // Set current user to {} which will set isAuthenticated to false
     dispatch(receiveCurrentUser({}));

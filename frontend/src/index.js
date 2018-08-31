@@ -26,6 +26,8 @@ document.addEventListener('DOMContentLoaded', () => {
     //check for token
     if (localStorage.jwtToken) {
         // Set auth token header auth
+    debugger
+
         setAuthToken(localStorage.jwtToken);
         // Decode token and get user info and exp
         const decoded = jwt_decode(localStorage.jwtToken);
