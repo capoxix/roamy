@@ -31,7 +31,7 @@ class GMap extends React.Component {
         map: undefined,
         foundPlace: undefined
       };
-    
+
     onMarkerClick = (mapProps, marker, e) =>
         this.setState({
             selectedPlace: mapProps,
@@ -51,53 +51,53 @@ class GMap extends React.Component {
         this.setState({clicked: {lat: e.latLng.lat(), lng: e.latLng.lng()}})
         this.setState({clickedMarker: <Marker onClick={this.onMarkerClick}
             name={'Clicked point'}
-            position={{lat: e.latLng.lat(), lng: e.latLng.lng()}} 
+            position={{lat: e.latLng.lat(), lng: e.latLng.lng()}}
         icon={{path: this.props.google.maps.SymbolPath.BACKWARD_CLOSED_ARROW, scale: 5}}/>});
         console.log(e);
-       
+
     };
 
     trackInput() {
-        /*track the user's clicked point*/
-        let trackLocation =  {name:'tracking', lat: `${this.state.clicked.lat}`, lng: `${this.state.clicked.lng}`, userId: this.props.userId};
-        track(trackLocation).then(res => console.log('tracked', res));
+      /*track the user's clicked point*/
+      let trackLocation =  {name:'tracking', lat: `${this.state.clicked.lat}`, lng: `${this.state.clicked.lng}`, userId: this.props.userId};
+      track(trackLocation).then(res => console.log('tracked', res));
     }
     /*get favorites locations of user & set to map */
     addFavoritesToMarkers(){
-        // console.log(this.props.google.maps.geometry.poly.containsLocation(,this.polygonComponent));
-        let that = this;
-        getFavorites(this.props.userId).then(favorites =>  that.setMarkersIntoMap(favorites.data));
+      // console.log(this.props.google.maps.geometry.poly.containsLocation(,this.polygonComponent));
+      let that = this;
+      getFavorites(this.props.userId).then(favorites =>  that.setMarkersIntoMap(favorites.data));
     }
 
     /*set markers into map */
     setMarkersIntoMap(favoriteDataArr){
-        let that = this;
-        let favoritesMarkersArr = favoriteDataArr.map(favorite => {
-            // create a new LatLng object with favorite's lat and lng
-            let latLng = new that.props.google.maps.LatLng(favorite.lat, favorite.lng);
-            //check to see if polygon contains that latlng and only create markers that are inside polygon
-            if(that.props.google.maps.geometry.poly.containsLocation(latLng,that.polygon))
-                return <Marker onClick={this.onMarkerClick}
-                    name={favorite.name}
-                    position={{lat: `${favorite.lat}`, lng: `${favorite.lng}`}}/>;
-                });
-        this.setState({favoriteMarkers: favoritesMarkersArr});
+      let that = this;
+      let favoritesMarkersArr = favoriteDataArr.map(favorite => {
+        // create a new LatLng object with favorite's lat and lng
+        let latLng = new that.props.google.maps.LatLng(favorite.lat, favorite.lng);
+        //check to see if polygon contains that latlng and only create markers that are inside polygon
+        if(that.props.google.maps.geometry.poly.containsLocation(latLng,that.polygon))
+        return <Marker onClick={this.onMarkerClick}
+          name={favorite.name}
+          position={{lat: `${favorite.lat}`, lng: `${favorite.lng}`}}/>;
+      });
+      this.setState({favoriteMarkers: favoritesMarkersArr});
     }
 
     getCurrentLocation(){
-        let that = this;
-        if(navigator.geolocation){
-            navigator.geolocation.getCurrentPosition(function(position) {
-                let pos = {
-                    lat: position.coords.latitude,
-                    lng: position.coords.longitude
-                }
-                that.setState({center: pos});
-                that.setState({currentLocationMarker: <Marker onClick={that.onMarkerClick}
-                    name={'YOUR LOCATION!'}
-                    position={that.state.center}
-                    icon= {{path: that.props.google.maps.SymbolPath.CIRCLE, scale:10}}/>});
-            });
+      let that = this;
+      if(navigator.geolocation){
+        navigator.geolocation.getCurrentPosition(function(position) {
+          let pos = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+          }
+          that.setState({center: pos});
+          that.setState({currentLocationMarker: <Marker onClick={that.onMarkerClick}
+            name={'YOUR LOCATION!'}
+            position={that.state.center}
+            icon= {{path: that.props.google.maps.SymbolPath.CIRCLE, scale:10}}/>});
+          });
         }
     }
     /* get service and map for place searching*/
@@ -117,12 +117,12 @@ class GMap extends React.Component {
                 query: this.state.query
             }
             let that = this;
-            
+
             function returnPlaces(results, status){
-                if (status == that.props.google.maps.places.PlacesServiceStatus.OK) 
+                if (status == that.props.google.maps.places.PlacesServiceStatus.OK)
                     that.setState({queryPlaces : results});
             }
-            
+
             this.state.service.textSearch(request,returnPlaces);
         }
     }
@@ -135,10 +135,10 @@ class GMap extends React.Component {
                 query: this.state.query,
                 fields: ['photos', 'formatted_address', 'name', 'rating', 'opening_hours', 'geometry']
             }
-        
+
         let that = this;
         function findPlace(result, status){
-            if (status == that.props.google.maps.places.PlacesServiceStatus.OK) 
+            if (status == that.props.google.maps.places.PlacesServiceStatus.OK)
                 that.setState({foundPlace : result});
                 console.log("foundPlace", result);
                 // that.setMarkersIntoMap([result]);
@@ -147,12 +147,12 @@ class GMap extends React.Component {
             this.state.service.findPlaceFromQuery(request, findPlace);
         }
     }
-    
+
     update(field){
         return(e) => {
-            this.setState({[field]: e.target.value});
+          this.setState({[field]: e.target.value});
         }
-    }
+      }
 
     render() {
 
@@ -168,7 +168,7 @@ class GMap extends React.Component {
         height: '800px'
         }
         this.polygon = new this.props.google.maps.Polygon({paths: points});
-        this.polygonComponent = 
+        this.polygonComponent =
         <Polygon
             paths={points}
             strokeColor="#0000FF"
@@ -178,7 +178,7 @@ class GMap extends React.Component {
             fillOpacity={0.35}
             clickable={false} />;
 
-        this.mapComponent =   
+        this.mapComponent =
                     <Map google={this.props.google}
                     onClick={this.onMapClicked}
                     onReady={this.getServiceAndMap}
@@ -256,4 +256,12 @@ class GMap extends React.Component {
     }
     }
 
-export default GMap;
+            <div className="sideWrapper">
+
+            </div>
+          </div>
+        );
+      }
+    }
+
+    export default GMap;
