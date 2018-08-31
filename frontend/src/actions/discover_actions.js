@@ -1,11 +1,11 @@
 import * as API from '../util/discover_api_util';
 
-export const RECEIVE_END_POINTS = 'RECEIVE_END_POINTS';
+export const RECEIVE_CAR_END_POINTS = 'RECEIVE_CAR_END_POINTS';
 export const RECEIVE_QUERY_ERRORS = 'RECEIVE_QUERY_ERRORS';
 
-const receiveEndPoints = (endPoints) => {
+const receiveCarEndPoints = (endPoints) => {
   return ({
-    type: RECEIVE_END_POINTS,
+    type: RECEIVE_CAR_END_POINTS,
     endPoints
   })
 }
@@ -19,5 +19,5 @@ const receiveQueryErrors = (errors) => {
 export const sendQuery = (query) => (dispatch) => {
   API.discoverCar(query)
     .then((res) => console.log(res))
-    // .then((res) => receiveEndPoints(res))
+    // .then((res) => receiveCarEndPoints(res))
 }
