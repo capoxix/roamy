@@ -105,10 +105,6 @@ class GMap extends React.Component {
         const {google} = mapProps;
         const service = new google.maps.places.PlacesService(map);
         this.setState({map: map, service: service});
-
-
-        // console.log(service);
-        // console.log(map);
         console.log(google);
         //google.maps.ElevationService
     }
@@ -135,10 +131,7 @@ class GMap extends React.Component {
     findPlaceAndMark(){
         if(this.state.map && this.state.query !== '' && this.state.query.length > 5){
             console.log("trying to find place");
-            // console.log("query: ", this.state.query);
             let request = {
-                // location: this.state.map.getCenter(),
-                // radius: '500',
                 query: this.state.query,
                 fields: ['photos', 'formatted_address', 'name', 'rating', 'opening_hours', 'geometry']
             }
@@ -209,24 +202,6 @@ class GMap extends React.Component {
 
             this.queryPlaces();
             let places = this.state.queryPlaces;
-            // console.log(places);
-            // console.log(places);
-            // let result = this.state.queryPlaces.map(place => {
-            //     return (
-            //         <ul>
-            //     <li>Name: {place.name}</li>
-            //     <li>Address: {place.formatted_address}</li>
-            //     <li>Lat: {place.geometry.location.lat()} Lng: {place.geometry.location.lng()}</li>
-            //     <li><img src={place.icon}></img></li>
-            //     {/* <li>{place.formatted_address}</li> */}
-            //     {/* <li>{place.geometry}</li> */}
-            //     </ul>);
-            //     });
-            
-                // console.log(this.state.queryPlaces);
-                    // console.log(mapComponent);
-                    // console.log(polygonComponent)
-        /* attempt to make a control in google maps*/
         return (
             <div>
                 <button type='button' onClick={()=>this.trackInput()}>TRACK LOCATION</button>
