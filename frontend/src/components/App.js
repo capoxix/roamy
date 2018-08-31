@@ -19,7 +19,6 @@ class App extends Component {
         <RegisterFormContainer/>
         <LoginFormContainer/>
 
-        {/* <HeaderContainer/> */}
 
         <MapContainer/>
       </div>
