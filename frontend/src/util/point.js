@@ -37,7 +37,6 @@ class Point {
 
   initEndPoints() {
     const pointsArr = [];
-    
     const dLat = 0.003604 * this.minutes;
     const dLng =  0.0045402 * this.minutes;
 
@@ -110,14 +109,6 @@ class Point {
 
     const scaleLat = Math.sin((Math.PI * this.angle) / 180) * newHypotenuse;
     const scaleLng = Math.cos((Math.PI * this.angle) / 180) * newHypotenuse;
-
-    // const scaleLat = Math.sin(Math.PI * this.angle/180)*(origin.minutes* Math.abs(this.lat - origin.lat)/this.minutes)
-    // const scaleLng = Math.cos(Math.PI * this.angle/180)*(origin.minutes* Math.abs(this.lng - origin.lng)/this.minutes)
-
-    // get original hypotenuse,
-    // multiply by the scale we need to adjust by
-    // return values of lat lng using sin or cosine of the points angle multiplied by the hypotenuse
-    // add whatever value it is to the original lat or lng
 
     this.lat = origin.lat + scaleLat;
     this.lng = origin.lng + scaleLng;
