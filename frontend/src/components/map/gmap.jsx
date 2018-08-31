@@ -161,8 +161,19 @@ class GMap extends React.Component {
       let that = this;
 
       function returnPlaces(results, status) {
+          let filtered = [];
+        //   const searched = that.state.query;
         if (status == that.props.google.maps.places.PlacesServiceStatus.OK)
-          that.setState({ queryPlaces: results });
+            // for(let i = 0; i < results.length; i++) {
+            //     if(results[i].formatted_address.includes(searched)
+            //         || results[i].name.includes(searched))
+
+            //         filtered.push(results[i]);
+                that.setState({ queryPlaces: results });
+
+            // }
+        // that.setState({ queryPlaces: filtered });
+        // console.log(filtered);
       }
 
       this.state.service.textSearch(request, returnPlaces);
@@ -208,7 +219,6 @@ class GMap extends React.Component {
           that.markFoundPlace(result[0])
           console.log(result);
         }
-
         console.log(result);
         // console.log("foundPlace", result[0]);
         // that.setMarkersIntoMap([result]);
@@ -271,7 +281,7 @@ class GMap extends React.Component {
     
     let address;
     if(this.state.foundPlace) address = this.state.foundPlace.formatted_address;
-    console.log(address);
+    // console.log(address);
     this.mapComponent = (
       <Map
         google={this.props.google}
