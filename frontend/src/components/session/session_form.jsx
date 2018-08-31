@@ -1,8 +1,6 @@
 import React from 'react';
 import {Link, withRouter} from 'react-router-dom';
 
-
-
 class SessionForm extends React.Component {
 
   constructor(props) {
@@ -31,7 +29,7 @@ class SessionForm extends React.Component {
       <div className='form-container'>
         <div className='form'>
           <ul className='error'>
-         
+
           </ul>
           <h1>{this.props.formType}</h1>
 

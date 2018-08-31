@@ -3,6 +3,20 @@ import {login, logoutUser} from '../../actions/session_actions';
 import {Link, withRouter} from 'react-router-dom';
 import MapForm from './map-form';
 import '../../styling/header/header.css';
+import { withStyles } from '@material-ui/core/styles';
+
+const styles = {
+  root: {
+    flexGrow: 1,
+  },
+  flex: {
+    flexGrow: 1,
+  },
+  menuButton: {
+    marginLeft: -12,
+    marginRight: 20,
+  },
+};
 
 const mapStateToProps = (state) => {
   return ({
@@ -18,4 +32,6 @@ const mapDispatchToProps = (dispatch) => {
   });
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(MapForm);
+const MapFormContainer = connect(mapStateToProps, mapDispatchToProps)(MapForm);
+
+export default withStyles(styles)(MapFormContainer);

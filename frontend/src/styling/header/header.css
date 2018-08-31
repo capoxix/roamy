@@ -19,8 +19,34 @@
   border: 1px solid grey;
 }
 
+.bodyWrapper {
+  display: grid;
+  grid-template-columns: minmax(250px, 2fr) minmax(250px, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 600px;
+  width: 100vw;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.mapWrapper1 {
+  width: 500px !important;
+  height: 500px !important;
+  z-index: 1;
+  position: flex !important;
+}
+.mapWrapper2 {
+  width: 500px;
+  height: 500px;
+}
+
+
+
 .footer {
-  margin-top: 500px;
   display: grid;
   grid-template-columns: minmax(250px, 1fr) minmax(250px, 3fr);
   grid-template-rows: repeat(3, 1fr);
@@ -29,7 +55,6 @@
   text-align: center;
   height: 600px;
   width: 100vw;
-  background-image: url('./siberian-tiger.jpg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;

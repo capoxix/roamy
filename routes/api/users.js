@@ -72,6 +72,7 @@ router.post('/login', (req, res) => {
   const { errors, isValid } = validateLoginInput(req.body);
 
   if (!isValid) {
+    debugger;
     return res.status(400).json(errors);
   }
 
@@ -82,6 +83,7 @@ router.post('/login', (req, res) => {
   User.findOne({email})
     .then(user => {
       if (!user) {
+        debugger
         return res.status(404).json({email: 'This user does not exist'});
       }
 
@@ -102,6 +104,7 @@ router.post('/login', (req, res) => {
               });
               });
           } else {
+            debugger;
           return res.status(400).json({password: 'Incorrect password'});
           }
       })
