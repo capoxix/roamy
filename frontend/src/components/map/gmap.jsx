@@ -67,7 +67,7 @@ class GMap extends React.Component {
         />
       )
     });
-    console.log(e);
+    // console.log(e);
   };
 
   trackInput() {
@@ -193,7 +193,10 @@ class GMap extends React.Component {
         if (status == that.props.google.maps.places.PlacesServiceStatus.OK) {
           that.setState({ foundPlace: result[0] });
           that.markFoundPlace(result[0])
+        //   console.log(result);
         }
+
+        console.log(result);
         // console.log("foundPlace", result[0]);
         // that.setMarkersIntoMap([result]);
       }
@@ -255,7 +258,7 @@ class GMap extends React.Component {
     
     let address;
     if(this.state.foundPlace) address = this.state.foundPlace.formatted_address;
-    
+    console.log(address);
     this.mapComponent = (
       <Map
         google={this.props.google}
@@ -272,10 +275,10 @@ class GMap extends React.Component {
         <InfoWindow
           marker={this.state.activeMarker}
           visible={this.state.showingInfoWindow}
-          content={address}
         >
           <div>
             <h1>{this.state.selectedPlace.name}</h1>
+            <p>{address}</p>
           </div>
         </InfoWindow>
         {this.polygonComponent}
