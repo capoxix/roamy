@@ -38,11 +38,11 @@ class GMap extends React.Component {
   };
 
   onMarkerClick = (mapProps, marker, e) =>
-    this.setState({
-      selectedPlace: mapProps,
-      activeMarker: marker,
-      showingInfoWindow: true
-    });
+  this.setState({
+    selectedPlace: mapProps,
+    activeMarker: marker,
+    showingInfoWindow: true
+  });
 
   onMapClicked = (mapProps, map, e) => {
     if (this.state.showingInfoWindow) {
@@ -65,7 +65,7 @@ class GMap extends React.Component {
             path: this.props.google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
             scale: 5
           }}
-        />
+          />
       )
     });
     // console.log(e);
@@ -106,13 +106,13 @@ class GMap extends React.Component {
           that.polygon
         )
       )
-        return (
-          <Marker
-            onClick={this.onMarkerClick}
-            name={favorite.name}
-            position={{ lat: `${favorite.lat}`, lng: `${favorite.lng}` }}
+      return (
+        <Marker
+          onClick={this.onMarkerClick}
+          name={favorite.name}
+          position={{ lat: `${favorite.lat}`, lng: `${favorite.lng}` }}
           />
-        );
+      );
     });
     this.setState({ favoriteMarkers: favoritesMarkersArr });
   }
@@ -136,7 +136,7 @@ class GMap extends React.Component {
                 path: that.props.google.maps.SymbolPath.CIRCLE,
                 scale: 10
               }}
-            />
+              />
           )
         });
       });
@@ -161,10 +161,10 @@ class GMap extends React.Component {
       let that = this;
 
       function returnPlaces(results, status) {
-          let filtered = [];
+        let filtered = [];
         //   const searched = that.state.query;
         if (status == that.props.google.maps.places.PlacesServiceStatus.OK)
-          that.setState({ queryPlaces: results });
+        that.setState({ queryPlaces: results });
       }
 
       this.state.service.textSearch(request, returnPlaces);
@@ -196,13 +196,13 @@ class GMap extends React.Component {
       /*find place when given location address or name or lat,lng */
 
       function findPlace(result, status) {
-          /* result is resulting places, which comes in as an array of objects
-          EX: [{formatted_address: "....",
-                geometry: {location: {lat(), lng()}},
-                name: "......."}]
-                OR
-                null if address/name cannot be found
-                */
+        /* result is resulting places, which comes in as an array of objects
+        EX: [{formatted_address: "....",
+        geometry: {location: {lat(), lng()}},
+        name: "......."}]
+        OR
+        null if address/name cannot be found
+        */
 
         /*TO ACESS LAT OR LNG, do place.geometry.location.lat() AND place.geomtry.location.lng() [shown in markFoundPlace]*/
         if (status == that.props.google.maps.places.PlacesServiceStatus.OK) {
@@ -215,7 +215,7 @@ class GMap extends React.Component {
         // console.log("foundPlace", result[0]);
         // that.setMarkersIntoMap([result]);
       }
-    //   console.log(this.state.service);
+      //   console.log(this.state.service);
       this.state.service.findPlaceFromQuery(request, findPlace);
     }
   }
@@ -224,18 +224,18 @@ class GMap extends React.Component {
 
     this.setState({ clicked: { lat: place.geometry.location.lat(), lng: place.geometry.location.lng(), minutes: 10 } });
     this.setState({
-        clickedMarker: (
-          <Marker
-            onClick={this.onMarkerClick}
-            name={place.name}
-            position={{ lat: place.geometry.location.lat(), lng: place.geometry.location.lng() }}
-            icon={{
-              path: this.props.google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
-              scale: 5
-            }}
+      clickedMarker: (
+        <Marker
+          onClick={this.onMarkerClick}
+          name={place.name}
+          position={{ lat: place.geometry.location.lat(), lng: place.geometry.location.lng() }}
+          icon={{
+            path: this.props.google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
+            scale: 5
+          }}
           />
-        )
-      })
+      )
+    })
   }
 
   updatePolygon = (endPoints) => {
@@ -248,15 +248,15 @@ class GMap extends React.Component {
     this.polygon = new this.props.google.maps.Polygon({paths: endPoints});
     this.polygonComponent =
     <Polygon
-        paths={endPoints}
-        strokeColor="#0000FF"
-        strokeOpacity={0.8}
-        strokeWeight={2}
-        fillColor="#0000FF"
-        fillOpacity={0.35}
-        clickable={false} />;
+      paths={endPoints}
+      strokeColor="#0000FF"
+      strokeOpacity={0.8}
+      strokeWeight={2}
+      fillColor="#0000FF"
+      fillOpacity={0.35}
+      clickable={false} />;
 
-    }
+  }
 
   update(field) {
     return e => {
@@ -290,7 +290,7 @@ class GMap extends React.Component {
         center={this.state.center}
         style={style}
         // controls[{this.props.google.maps.ControlPosition.TOP_CENTER}]
-      >
+        >
         {this.state.currentLocationMarker}
         {this.state.favoriteMarkers}
         {this.state.clickedMarker}
@@ -298,7 +298,7 @@ class GMap extends React.Component {
         <InfoWindow
           marker={this.state.activeMarker}
           visible={this.state.showingInfoWindow}
-        >
+          >
           <div>
             <h1>{this.state.selectedPlace.name}</h1>
             <p>{address}</p>
@@ -312,41 +312,32 @@ class GMap extends React.Component {
     let places = this.state.queryPlaces;
     return (
       <div>
-        <div>
-        <input
-            type="text"
-            onChange={this.update("trackName")}
-            value={this.state.trackName}
-            placeholder="Favorite place name"
-          />
-          <button type="button" onClick={() => this.trackInput()}>
-            TRACK FAVORITE LOCATION
-          </button>
-          <button type="button" onClick={() => this.addFavoritesToMarkers()}>
-            Get Favorite Spots
-          </button>
-          <button type="button" onClick={() => this.getCurrentLocation()}>
-            Get Current Location
-          </button>
-          <input
-            type="text"
-            onChange={this.update("query")}
-            value={this.state.query}
-            placeholder="Search Place"
-          />
-          <button type="button" onClick={() => this.findPlaceAndMark()}>
-            Go to location
-          </button>
-          <button type='button' onClick={this.discover}>Discover</button>
-          <div>
-            <SearchIndex places={places} />
-          </div>
-          <div>{this.mapComponent}</div>
-          </div>
+          <div className="bodyWrapper">
+            <div className="mapWrapper1">
+              {this.mapComponent}
+            </div>
+            <div className="sideBar">
+              <div className="stickyButtons">
+                <button type='button' onClick={()=>this.trackInput()}>TRACK LOCATION</button>
+                <button type='button' onClick={()=> this.addFavoritesToMarkers()}>Get Favorite Spots</button>
+                <button type='button' onClick={()=> this.getCurrentLocation()}>Get Current Location</button>
+                <input type='text'
+                  onChange={this.update('query')}
+                  value={this.state.query}
+                  placeholder="Search Place"/>
+                <button type='button' onClick={()=>this.findPlaceAndMark()}>Go to location</button>
+              </div>
+              <div className="searchResults">
+                <SearchIndex places={places}/>
+              </div>
+            </div>
           </div>
 
-    );
+
+        </div>
+
+      );
+    }
   }
-}
 
-export default GMap;
+  export default GMap;
