@@ -22,12 +22,24 @@ class SessionForm extends React.Component {
   handleSubmit(e){
     e.preventDefault();
     const user = Object.assign({}, this.state);
-    this.props.processForm(user).then(() => this.props.history.push('/events'));
+    this.props.processForm(user).then(() => this.props.history.push('/login'));
   }
 
   update(field){
     return (e) => (
       this.setState({[field]: e.target.value})
+    );
+  }
+
+  renderErrors() {
+    return(
+      <ul>
+        {this.props.errors.map((error, i) => (
+          <li key={`error-${i}`}>
+            {error}
+          </li>
+        ))}
+      </ul>
     );
   }
 
@@ -55,7 +67,7 @@ class SessionForm extends React.Component {
 
           </ul>
           <h1 className="formType">{this.props.formType}</h1>
-
+          {this.renderErrors()}
           <form onSubmit={this.handleSubmit}>
 
             <TextField

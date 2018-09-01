@@ -22,6 +22,7 @@ const mapStateToProps = (state) => {
   return ({
     formType: 'login',
     currentUser: state.entities.users,
+    name: state.entities.users.name
   });
 }
 
