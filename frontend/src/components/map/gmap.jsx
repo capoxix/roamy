@@ -288,6 +288,7 @@ class GMap extends React.Component {
         onClick={this.onMapClicked}
         onReady={this.getServiceAndMap}
         center={this.state.center}
+        zoom={13}
         className="mapWrapper2"
         // controls[{this.props.google.maps.ControlPosition.TOP_CENTER}]
       >
