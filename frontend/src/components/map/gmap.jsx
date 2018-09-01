@@ -164,16 +164,7 @@ class GMap extends React.Component {
           let filtered = [];
         //   const searched = that.state.query;
         if (status == that.props.google.maps.places.PlacesServiceStatus.OK)
-            // for(let i = 0; i < results.length; i++) {
-            //     if(results[i].formatted_address.includes(searched)
-            //         || results[i].name.includes(searched))
-
-            //         filtered.push(results[i]);
-                that.setState({ queryPlaces: results });
-
-            // }
-        // that.setState({ queryPlaces: filtered });
-        // console.log(filtered);
+          that.setState({ queryPlaces: results });
       }
 
       this.state.service.textSearch(request, returnPlaces);
@@ -248,7 +239,7 @@ class GMap extends React.Component {
   }
 
   updatePolygon = (endPoints) => {
-
+    console.log("updating polygon");
     if (!endPoints || endPoints.length === 0) {
       return
     }
@@ -280,10 +271,7 @@ class GMap extends React.Component {
 
   
   render() {
-    console.log("hi")
-    console.log(this.props)
-    console.log("hi")
-
+ 
     this.updatePolygon(this.props.endPoints)
 
     const style = {
