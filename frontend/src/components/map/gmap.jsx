@@ -342,6 +342,8 @@ class GMap extends React.Component {
             <SearchIndex places={places} />
           </div>
           <div>{this.mapComponent}</div>
+          </div>
+          </div>
 
     );
   }
