@@ -315,15 +315,17 @@ class GMap extends React.Component {
 
     this.queryPlaces();
     let places = this.state.queryPlaces;
-    let trackButtons =  [];
+    let userButtons =  [];
     if(this.props.userId) {
-      trackButtons =  [<input
+      userButtons =  [<input
                           type="text"
                           onChange={this.update("trackName")}
                           value={this.state.trackName}
                           placeholder="Favorite place name"
                         />,
-                        <button type='button' onClick={()=>this.trackInput()}>TRACK LOCATION</button>];
+                        <button type='button' onClick={()=>this.trackInput()}>TRACK LOCATION</button>,
+                        <button type='button' onClick={()=> this.addFavoritesToMarkers()}>Get Favorite Spots</button>
+                      ];
                       }
     // console.log(this.state.minutes);
     return (
@@ -337,8 +339,7 @@ class GMap extends React.Component {
                 </div>
                 <div className="sideBar">
                   <div className="stickyButtons">
-                 {trackButtons}
-                  <button type='button' onClick={()=> this.addFavoritesToMarkers()}>Get Favorite Spots</button>
+                 {userButtons}
                   <button type='button' onClick={()=> this.getCurrentLocation()}>Get Current Location</button>
                   <input type='text'
                       onChange={this.update('query')}
