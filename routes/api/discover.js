@@ -43,18 +43,11 @@ router.get(`/car`, async (req, res) => {
     duped = Point.modify(duped);
   }
 
-  res.send(text);
+  res.send(endPoints);
 });
 
 function modify(endPoints) {
-  activePoints = [];
-  
-  for(let i = 0; i < endPoints.length; i++) {
-    if (endPoints[i].static === false) {activePoints.push(endPoints[i])}
-  }
-  console.log('before', endPoints)
-  console.log('after', activePoints)
-  return activePoints;
+
 }
 
 module.exports = router;
