@@ -13,13 +13,9 @@ class SearchIndexItem extends React.Component{
                         {place.name}
                     </div>
                 </div>
-  
+
                 <div className="place-address">
                     {place.formatted_address}
-                </div>
-                <div className="lat-lng">
-                    <div className="lat">{place.geometry.location.lat()}</div>
-                    <div className="lng">{place.geometry.location.lng()}</div>
                 </div>
             </div>
         );

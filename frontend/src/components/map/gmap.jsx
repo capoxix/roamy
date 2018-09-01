@@ -171,7 +171,7 @@ class GMap extends React.Component {
     }
   }
 
-  /*find place and mark it in map  */ 
+  /*find place and mark it in map  */
   /*USED TO PICK ORIGIN POINTS BY SETTING IT TO CLICKED AND CLICKED MARKERS */
   findPlaceAndMark() {
     if (
@@ -194,12 +194,12 @@ class GMap extends React.Component {
 
       let that = this;
       /*find place when given location address or name or lat,lng */
-      
+
       function findPlace(result, status) {
-          /* result is resulting places, which comes in as an array of objects 
-          EX: [{formatted_address: "....", 
-                geometry: {location: {lat(), lng()}}, 
-                name: "......."}] 
+          /* result is resulting places, which comes in as an array of objects
+          EX: [{formatted_address: "....",
+                geometry: {location: {lat(), lng()}},
+                name: "......."}]
                 OR
                 null if address/name cannot be found
                 */
@@ -221,7 +221,7 @@ class GMap extends React.Component {
   }
 
   markFoundPlace(place){
-    
+
     this.setState({ clicked: { lat: place.geometry.location.lat(), lng: place.geometry.location.lng(), minutes: 10 } });
     this.setState({
         clickedMarker: (
@@ -246,7 +246,7 @@ class GMap extends React.Component {
 
 
     this.polygon = new this.props.google.maps.Polygon({paths: endPoints});
-    this.polygonComponent = 
+    this.polygonComponent =
     <Polygon
         paths={endPoints}
         strokeColor="#0000FF"
@@ -269,16 +269,16 @@ class GMap extends React.Component {
     this.props.sendQuery(this.state.clicked)
   }
 
-  
+
   render() {
- 
+
     this.updatePolygon(this.props.endPoints)
 
     const style = {
       width: "800px",
       height: "800px"
     };
-    
+
     let address;
     if(this.state.foundPlace) address = this.state.foundPlace.formatted_address;
     // console.log(address);
@@ -343,51 +343,6 @@ class GMap extends React.Component {
           </div>
           <div>{this.mapComponent}</div>
 
-          <div className="footer">
-            <div className="links">
-              <div className="ft-headers">© 2018 ROVER</div>
-              <div className="ft-headers">FOLLOW</div>
-              <div className="ft2-1">
-                <p>
-                  ROVER is a map based web application that allows users to see
-                  areas they can access given free time.
-                </p>
-              </div>
-              <div className="ft2-2">
-                <a className="socials" href="mailto:tonywzhang@gmail.com">
-                  <i className="fab fa-google" />
-                </a>
-                <br />
-                <a className="socials" href="tel:+16508883357">
-                  <i className="fas fa-mobile" />
-                </a>
-                <br />
-                <a
-                  className="socials"
-                  href="https://www.facebook.com/tonywzhang"
-                >
-                  <i className="fab fa-facebook" />
-                </a>
-                <br />
-                <a
-                  className="socials"
-                  href="https://www.linkedin.com/in/kevin-ou-b56a768b/"
-                >
-                  <i className="fab fa-linkedin" />
-                </a>
-                <br />
-                <a
-                  className="socials"
-                  href="https://github.com/capoxix/intro-mongo"
-                >
-                  <i className="fab fa-github" />
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      <div className="sideWrapper" />
-      </div>
     );
   }
 }

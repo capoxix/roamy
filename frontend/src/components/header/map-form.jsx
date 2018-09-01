@@ -32,7 +32,7 @@ class ButtonAppBar extends Component {
               <MenuIcon />
             </IconButton>
             <Typography variant="title" color="inherit">
-              <Link to={"/"}>Roamy</Link>
+              <Link className="navBarLink" to={"/"}>Roamy</Link>
             </Typography>
 
             <div className="map-form">
@@ -60,10 +60,10 @@ class ButtonAppBar extends Component {
             </div>
 
             <Typography variant="title" color="inherit">
-              <Link to={"/signup"}>Sign Up</Link>
+              <Link className="navBarLink" to={"/signup"}>Sign Up</Link>
             </Typography>
             <Typography variant="title" color="inherit">
-              <Link to={"/login"}>Log In</Link>
+              <Link className="navBarLink" to={"/login"}>Log In</Link>
             </Typography>
           </Toolbar>
         </AppBar>
@@ -77,7 +77,7 @@ class ButtonAppBar extends Component {
               <MenuIcon />
             </IconButton>
             <Typography variant="title" color="inherit">
-              <Link to={"/"}>Roamy</Link>
+              <Link className="navBarLink" to={"/"}>Roamy</Link>
             </Typography>
 
             <div className="map-form">
@@ -104,7 +104,7 @@ class ButtonAppBar extends Component {
               </form>
             </div>
 
-          <Link to="/" onClick={()=> this.props.logout()}>Log Out</Link>
+          <Link className="navBarLink" to="/" onClick={()=> this.props.logout()}>Log Out</Link>
           </Toolbar>
         </AppBar>
       </div>

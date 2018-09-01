@@ -1,5 +1,12 @@
 import React from 'react';
 import {Link, withRouter} from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+import MenuItem from '@material-ui/core/MenuItem';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import Icon from '@material-ui/core/Icon';
+import classNames from 'classnames';
 
 class SessionForm extends React.Component {
 
@@ -24,6 +31,22 @@ class SessionForm extends React.Component {
     );
   }
 
+// //<input
+//   type="email"
+//   onChange={this.update("email")}
+//   value={this.state.email}
+//   placeholder="Email Address"
+//   />
+//
+// <input
+//   type="password"
+//   onChange={this.update("password")}
+//   value={this.state.password}
+//   placeholder="Password"
+//   />
+//
+            //<input className="submit" type='submit' value='Sign In'/>
+
   render(){
     return(
       <div className='form-container'>
@@ -31,26 +54,35 @@ class SessionForm extends React.Component {
           <ul className='error'>
 
           </ul>
-          <h1>{this.props.formType}</h1>
+          <h1 className="formType">{this.props.formType}</h1>
 
           <form onSubmit={this.handleSubmit}>
 
-            <input
-              type="email"
-              onChange={this.update("email")}
+            <TextField
+              id="email"
+              label="Email"
               value={this.state.email}
-              placeholder="Email Address"
+              onChange={this.update("email")}
+              margin="normal"
+              className="textfield"
               />
+            <br/>
 
-            <input
-              type="password"
-              onChange={this.update("password")}
-              value={this.state.password}
-              placeholder="Password"
-              />
+              <TextField
+                id="password"
+                label="Password"
+                value={this.state.password}
+                onChange={this.update("password")}
+                margin="normal"
+                className="textfield"
+                type="password"
+                />
+              <br/>
+                <Button variant="contained" color="primary" type="submit">
+                  <i class="far fa-caret-square-right"></i>
+                  Submit
+                </Button>
 
-
-            <input type='submit' value='SIGN IN'/>
 
           </form>
         </div>

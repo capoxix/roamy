@@ -39,24 +39,25 @@
   z-index: 1;
   position: flex !important;
 }
+
 .mapWrapper2 {
-  width: 500px;
-  height: 500px;
+  width: 67vw !important;
+  height: 500px !important;
+  z-index: 1;
+  position: flex !important;
 }
 
 
 
-.footer {
-  display: grid;
-  grid-template-columns: minmax(250px, 1fr) minmax(250px, 3fr);
-  grid-template-rows: repeat(3, 1fr);
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  height: 600px;
-  width: 100vw;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  text-shadow: 1px 1px black;
+.sideBar{
+  overflow-y:auto;
+  height: 500px;
+}
+
+.stickyButtons{
+  position: fixed;
+}
+
+.searchResults{
+  padding-top: 50px;
 }

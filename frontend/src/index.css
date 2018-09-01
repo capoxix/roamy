@@ -40,3 +40,65 @@ a{
 .leftNav *{
   display: inline;
 }
+
+.MuiInput-input-115 {
+  width: 175px;
+  margin: 0 auto;
+  font-size: 14px;
+}
+
+.MuiFormControl-root-91.MuiFormControl-marginNormal-92.textfield{
+  margin-right: 5px;
+}
+
+.form-container *{
+  display: block;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.submit{
+  background-color: green;
+  color: white;
+  width: 185px;
+  font-weight: bolder;
+  background-color: #0099e5;
+}
+
+.submit:hover{
+  background-color: #008080;
+}
+
+.navBarLink{
+  text-decoration: none;
+  color: white;
+}
+
+.navBarLink:hover{
+  color: #999999;
+}
+
+.footer {
+  position: absolute;
+  display: flex;
+  justify-content: space-between;
+  bottom: 0px;
+  display: flex;
+  height: 100px !important;
+  width: 100vw;
+}
+
+.MuiButtonBase-root-49.MuiButton-root-91.MuiButton-text-93.MuiButton-flat-96{
+  width: 150px;
+  height: 100px;
+}
+
+
+.socials {
+  color: black;
+}
+
+.socials:hover{
+  color: #0099e5;
+}
