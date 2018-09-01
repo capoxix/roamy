@@ -6,7 +6,6 @@
   padding-right: 10px;
   margin-top: 5px;
 }
-
 .time-label > input {
   width: 50px;
   height: 40px;
@@ -14,50 +13,40 @@
   font-size: 28px;
   text-align: center;
 }
-
 .login-wrapper {
   border: 1px solid grey;
 }
-
 .bodyWrapper {
   display: grid;
   grid-template-columns: minmax(250px, 2fr) minmax(250px, 1fr);
-  grid-template-rows: repeat(3, 1fr);
   justify-content: center;
   align-items: center;
   text-align: center;
-  height: 600px;
+  height: 800px;
   width: 100vw;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
 }
-
 .mapWrapper1 {
   width: 500px !important;
-  height: 500px !important;
+  height: 800px !important;
   z-index: 1;
   position: flex !important;
 }
-
 .mapWrapper2 {
   width: 67vw !important;
-  height: 500px !important;
+  height: 800px !important;
   z-index: 1;
   position: flex !important;
 }
-
-
-
 .sideBar{
   overflow-y:auto;
-  height: 500px;
+  height: 800px;
 }
-
 .stickyButtons{
   position: fixed;
 }
-
 .searchResults{
   padding-top: 50px;
 }
