@@ -1,3 +1,5 @@
+const NodeGeocoder = require('node-geocoder');
+
 class Point {
   constructor({lat, lng, minutes, angle}){
     this.lat = lat;
@@ -70,6 +72,19 @@ class Point {
   // Adjust existing endpoints 
   //
   adjustPoints(endPoints, data, addresses) {
+    const options = {
+      provider: 'google',
+      apiKey: 'AIzaSyDBghaO6vALAG_-QG2SCBN8LEB_jFM6o1Q'
+    }
+    const geocoder = NodeGeocoder(options)
+
+    geocoder.geocode('825 Battery St, San Francisco, CA')
+      .then((res) => {
+        console.log(res[0])
+        console.log(res[0].latitude)
+        console.log(res[0].longitude)
+      })
+
 
     for (let i = 0; i < endPoints.length; i++) {
       this.check(endPoints[i], data[i], addresses[i], i)
@@ -83,6 +98,7 @@ class Point {
       return
     } else if (endPoint.static) {
       endPoint.minutes = datum.duration.value / 60;
+      // geolocate point based on address
       return 
     }
     endPoint.minutes = datum.duration.value / 60;
