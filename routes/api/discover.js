@@ -4,18 +4,11 @@ const Point = require('../../frontend/src/util/point.js');
 const fetch = require('node-fetch');
 const NodeGeocoder = require('node-geocoder');
 
-
-router.get('/test', (req, res) => {
-  res.send('hi')
-})
-
-router.get(`/car`, async (req, res) => {
-
-  // console.log(req)
+router.post(`/car`, async (req, res) => {
   const origin = new Point({
-    lat: 37.7990,
-    lng: -122.4014,
-    minutes: 45
+    lat: req.body.lat,
+    lng: req.body.lng,
+    minutes: req.body.minutes
   })
   // twin peaks
   // const origin = new Point({lat: 37.751387, lng: -122.446333, minutes: 15})
@@ -46,9 +39,6 @@ router.get(`/car`, async (req, res) => {
   res.send(endPoints);
 });
 
-function modify(endPoints) {
-
-}
 
 module.exports = router;
 

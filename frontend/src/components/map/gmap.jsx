@@ -54,7 +54,7 @@ class GMap extends React.Component {
     // console.log(this);
     /*get latitude and longitude from clicked point on maps and set marker to show clicked point*/
     /* USED TO PICK ORIGIN POINTS BY SETTING IT TO CLICKED AND CLICKED MARKERS */
-    this.setState({ clicked: { lat: e.latLng.lat(), lng: e.latLng.lng() } });
+    this.setState({ clicked: { lat: e.latLng.lat(), lng: e.latLng.lng(), minutes: 10 } });
     this.setState({
       clickedMarker: (
         <Marker
