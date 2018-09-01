@@ -36,8 +36,15 @@ router.post(`/car`, async (req, res) => {
     duped = Point.modify(duped);
   }
 
+  results = prunePoints(endPoints)
+
   res.send(endPoints);
 });
+
+function prunePoints(endPoints) {
+
+  
+}
 
 
 module.exports = router;
