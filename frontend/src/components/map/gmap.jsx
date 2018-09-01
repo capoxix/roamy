@@ -27,6 +27,7 @@ class GMap extends React.Component {
     center: {},
     clicked: {},
     clickedMarker: [],
+    minutes: '5',
     favoriteMarkers: [],
     trackName: "",
     currentLocationMarker: [],
@@ -34,7 +35,7 @@ class GMap extends React.Component {
     query: "",
     service: undefined,
     map: undefined,
-    foundPlace: undefined
+    foundPlace: undefined,
   };
 
   onMarkerClick = (mapProps, marker, e) =>
@@ -54,7 +55,7 @@ class GMap extends React.Component {
     // console.log(this);
     /*get latitude and longitude from clicked point on maps and set marker to show clicked point*/
     /* USED TO PICK ORIGIN POINTS BY SETTING IT TO CLICKED AND CLICKED MARKERS */
-    this.setState({ clicked: { lat: e.latLng.lat(), lng: e.latLng.lng(), minutes: 10 } });
+    this.setState({ clicked: { lat: e.latLng.lat(), lng: e.latLng.lng(), minutes: this.state.minutes } });
     this.setState({
       clickedMarker: (
         <Marker
@@ -222,7 +223,7 @@ class GMap extends React.Component {
 
   markFoundPlace(place){
 
-    this.setState({ clicked: { lat: place.geometry.location.lat(), lng: place.geometry.location.lng(), minutes: 10 } });
+    this.setState({ clicked: { lat: place.geometry.location.lat(), lng: place.geometry.location.lng(), minutes: this.state.minutes } });
     this.setState({
         clickedMarker: (
           <Marker
@@ -261,11 +262,14 @@ class GMap extends React.Component {
   update(field) {
     return e => {
       this.setState({ [field]: e.target.value });
+      console.log(field, field==='minutes');
+      if(field === 'minutes') this.setState( {clicked: { lat: this.state.clicked.lat, lng: this.state.clicked.lng, minutes: e.target.value } });
     };
   }
 
   discover = (e) => {
     e.preventDefault();
+    console.log("info passed to discover:" ,this.state.clicked)
     this.props.sendQuery(this.state.clicked)
   }
 
@@ -321,7 +325,7 @@ class GMap extends React.Component {
                         />,
                         <button type='button' onClick={()=>this.trackInput()}>TRACK LOCATION</button>];
                       }
-
+    // console.log(this.state.minutes);
     return (
       <div>
         <div>
@@ -341,6 +345,20 @@ class GMap extends React.Component {
                       value={this.state.query}
                       placeholder="Search Place"/>
                   <button type='button' onClick={()=>this.findPlaceAndMark()}>Go to location</button>
+                  <select id="time" name="time" onChange={this.update("minutes")}>
+                    <option value="5" selected="true">5</option>
+                    <option value="10">10</option>
+                    <option value="15">15</option>
+                    <option value="20">20</option>
+                    <option value="25">25</option>
+                    <option value="30">30</option>
+                    <option value="35">35</option>
+                    <option value="40">40</option>
+                    <option value="45">45</option>
+                    <option value="50">50</option>
+                    <option value="55">55</option>
+                    <option value="60">60</option>
+                  </select>
                   <button type='button' onClick={this.discover}>Discover</button>
                   </div>
                   <div className="searchResults">
