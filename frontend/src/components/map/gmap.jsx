@@ -231,7 +231,7 @@ class GMap extends React.Component {
 
   markFoundPlace(place){
     
-    this.setState({ clicked: { lat: place.geometry.location.lat(), lng: place.geometry.location.lng() } });
+    this.setState({ clicked: { lat: place.geometry.location.lat(), lng: place.geometry.location.lng(), minutes: 10 } });
     this.setState({
         clickedMarker: (
           <Marker
@@ -247,7 +247,25 @@ class GMap extends React.Component {
       })
   }
 
-  
+  updatePolygon = (endPoints) => {
+
+    if (!endPoints || endPoints.length === 0) {
+      return
+    }
+
+
+    this.polygon = new this.props.google.maps.Polygon({paths: endPoints});
+    this.polygonComponent = 
+    <Polygon
+        paths={endPoints}
+        strokeColor="#0000FF"
+        strokeOpacity={0.8}
+        strokeWeight={2}
+        fillColor="#0000FF"
+        fillOpacity={0.35}
+        clickable={false} />;
+
+    }
 
   update(field) {
     return e => {
@@ -255,30 +273,23 @@ class GMap extends React.Component {
     };
   }
 
-  render() {
-    let lat = 37.7749;
-    let lng = -122.4194;
-    let minutes = 15;
-    let origin = new Point({ lat: lat, lng: lng, minutes: minutes });
+  discover = (e) => {
+    e.preventDefault();
+    this.props.sendQuery(this.state.clicked)
+  }
 
-    let points = origin.initEndPoints(); //[];
+  
+  render() {
+    console.log("hi")
+    console.log(this.props)
+    console.log("hi")
+
+    this.updatePolygon(this.props.endPoints)
 
     const style = {
       width: "800px",
       height: "800px"
     };
-    this.polygon = new this.props.google.maps.Polygon({ paths: points });
-    this.polygonComponent = (
-      <Polygon
-        paths={points}
-        strokeColor="#0000FF"
-        strokeOpacity={0.8}
-        strokeWeight={2}
-        fillColor="#0000FF"
-        fillOpacity={0.35}
-        clickable={false}
-      />
-    );
     
     let address;
     if(this.state.foundPlace) address = this.state.foundPlace.formatted_address;
@@ -338,6 +349,7 @@ class GMap extends React.Component {
           <button type="button" onClick={() => this.findPlaceAndMark()}>
             Go to location
           </button>
+          <button type='button' onClick={this.discover}>Discover</button>
           <div>
             <SearchIndex places={places} />
           </div>
