@@ -163,10 +163,6 @@ class GMap extends React.Component {
 
         let points =  origin.initEndPoints(); //[];
 
-        const style = {
-        width: '800px',
-        height: '800px'
-        }
         this.polygon = new this.props.google.maps.Polygon({paths: points});
         this.polygonComponent =
         <Polygon
@@ -183,7 +179,7 @@ class GMap extends React.Component {
                     onClick={this.onMapClicked}
                     onReady={this.getServiceAndMap}
                     center={this.state.center}
-                    style={style}
+                    className="mapWrapper2"
                     // controls[{this.props.google.maps.ControlPosition.TOP_CENTER}]
                     >
                         {this.state.currentLocationMarker}
@@ -203,62 +199,34 @@ class GMap extends React.Component {
             this.queryPlaces();
             let places = this.state.queryPlaces;
         return (
+          <div>
             <div>
-                <button type='button' onClick={()=>this.trackInput()}>TRACK LOCATION</button>
-                <button type='button' onClick={()=> this.addFavoritesToMarkers()}>Get Favorite Spots</button>
-                <button type='button' onClick={()=> this.getCurrentLocation()}>Get Current Location</button>
-                <input type='text'
-                    onChange={this.update('query')}
-                    value={this.state.query}
-                    placeholder="Search Place"/>
-                <button type='button' onClick={()=>this.findPlaceAndMark()}>Go to location</button>
-                <div>
-                    <SearchIndex places={places}/>
-                </div>
-                <div>
-                    {this.mapComponent}
-                </div>
 
-                    <div className="footer">
-                        <div className="links">
-                        <div className="ft-headers">© 2018 ROVER</div>
-                        <div className="ft-headers">FOLLOW</div>
-                        <div className="ft2-1">
-                            <p>
-                            ROVER is a map based web application that allows users to see areas they can access given free time.
-                            </p>
-                        </div>
-                        <div className="ft2-2">
-                            <a className="socials" href="mailto:tonywzhang@gmail.com">
-                            <i className="fab fa-google"></i>
-                            </a>
-                            <br/>
-                            <a className="socials" href="tel:+16508883357">
-                            <i className="fas fa-mobile"></i>
-                            </a>
-                            <br/>
-                            <a className="socials" href='https://www.facebook.com/tonywzhang'>
-                            <i className="fab fa-facebook"></i>
-                            </a>
-                            <br/>
-                            <a className="socials" href="https://www.linkedin.com/in/kevin-ou-b56a768b/">
-                            <i className="fab fa-linkedin"></i>
-                            </a>
-                            <br/>
-                            <a className="socials" href="https://github.com/capoxix/intro-mongo">
-                            <i className="fab fa-github"></i>
-                            </a>
+
+                <div className="bodyWrapper">
+                    <div className="mapWrapper1">
+                      {this.mapComponent}
+                    </div>
+                    <div className="sideBar">
+                      <div className="stickyButtons">
+                      <button type='button' onClick={()=>this.trackInput()}>TRACK LOCATION</button>
+                      <button type='button' onClick={()=> this.addFavoritesToMarkers()}>Get Favorite Spots</button>
+                      <button type='button' onClick={()=> this.getCurrentLocation()}>Get Current Location</button>
+                      <input type='text'
+                          onChange={this.update('query')}
+                          value={this.state.query}
+                          placeholder="Search Place"/>
+                      <button type='button' onClick={()=>this.findPlaceAndMark()}>Go to location</button>
+                      </div>
+                      <div className="searchResults">
+                        <SearchIndex places={places}/>
                         </div>
                     </div>
-                    </div>
-            </div>
-        );
-    }
-    }
+                </div>
 
-            <div className="sideWrapper">
 
             </div>
+
           </div>
         );
       }

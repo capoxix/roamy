@@ -22,6 +22,7 @@ class App extends Component {
           <AuthRoute exact path="/login" component={LoginFormContainer}/>
           <MapContainer/>
         </Switch>
+        <Footer/>
       </div>
     );
   }

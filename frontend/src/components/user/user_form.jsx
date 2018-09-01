@@ -1,5 +1,12 @@
 import React from 'react';
 import {Link, withRouter} from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+import MenuItem from '@material-ui/core/MenuItem';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import Icon from '@material-ui/core/Icon';
+import classNames from 'classnames';
 
 class UserForm extends React.Component {
 
@@ -21,54 +28,100 @@ class UserForm extends React.Component {
     );
   }
 
+  // // //  <input
+  // //     type="text"
+  // //     onChange={this.update("name")}
+  // //     value={this.state.name}
+  // //     placeholder="Username"
+  // //     />
+  //
+  // <input
+  //   type="email"
+  //   onChange={this.update("email")}
+  //   value={this.state.email}
+  //   placeholder="Email address"
+  //   />
+  //
+  // <input
+  //   type="password"
+  //   onChange={this.update("password")}
+  //   value={this.state.password}
+  //   placeholder="Password"
+  //   />
+  //
+  //
+  // <input
+  //   type="password"
+  //   onChange={this.update("password2")}
+  //   value={this.state.password2}
+  //   placeholder="Confirm Password"
+  //   />
+
+  //  <input className="submit" type='submit' value="Register"/>
+
   render(){
-      <Link to = '/login'>If you've already done this before, click here to log in</Link>;
+    <Link to = '/login'>If you've already done this before, click here to log in</Link>;
 
 
-    return(
-      <div className= "form-container">
-        <div className="form">
-          <ul className="error">
-          </ul>
-          <h1>{this.props.formType}</h1>
-          <form onSubmit={this.handleSubmit}>
 
-              <input
-                type="text"
-                onChange={this.update("name")}
+
+      return(
+        <div className= "form-container">
+          <div className="form">
+            <ul className="error">
+            </ul>
+            <h1 className="formType">{this.props.formType}</h1>
+            <form onSubmit={this.handleSubmit}>
+
+              <TextField
+                id="name"
+                label="Username"
                 value={this.state.name}
-                placeholder="First name (or nickname)"
+                onChange={this.update("name")}
+                margin="normal"
+                className="textfield"
+                />
+              <TextField
+                id="email"
+                label="Email"
+                value={this.state.email}
+                onChange={this.update("email")}
+                margin="normal"
+                className="textfield"
                 />
 
-            <input
-              type="email"
-              onChange={this.update("email")}
-              value={this.state.email}
-              placeholder="Email address"
-              />
+              <br/>
+              <TextField
+                id="password"
+                label="Password"
+                value={this.state.password}
+                onChange={this.update("password")}
+                margin="normal"
+                className="textfield"
+                type="password"
+                />
 
-            <input
-              type="password"
-              onChange={this.update("password")}
-              value={this.state.password}
-              placeholder="Password (at least 6 characters you won't forget!)"
-              />
+              <TextField
+                id="password2"
+                label="Confirm Password"
+                value={this.state.password2}
+                onChange={this.update("password2")}
+                margin="normal"
+                className="textfield"
+                type="password"
+                />
 
+              <Button variant="contained" color="primary" type="submit">
+                <i class="far fa-caret-square-right"></i>
+                Submit
+              </Button>
 
-            <input
-              type="password"
-              onChange={this.update("password2")}
-              value={this.state.password2}
-              placeholder="Password (at least 6 characters you won't forget!)"
-              />
+            </form>
 
-          <input type='submit' value="Register"/>
-          </form>
-
+          </div>
         </div>
-      </div>
-    );
+      );
+    }
   }
-}
 
-export default withRouter(UserForm);
+  export default withRouter(UserForm);
