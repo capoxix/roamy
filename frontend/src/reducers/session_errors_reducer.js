@@ -7,7 +7,7 @@ import {
     Object.freeze(state);
     switch (action.type) {
       case RECEIVE_ERRORS:
-        return action.errors;
+        return Object.values(action.errors);
       case RECEIVE_CURRENT_USER:
         return [];
       default:
