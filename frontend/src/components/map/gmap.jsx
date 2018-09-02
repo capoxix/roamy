@@ -357,7 +357,7 @@ class GMap extends React.Component {
                   </select>
                   <button type='button' onClick={this.discover}>Discover</button>
                   </div>
-                  <div className="searchResults">
+                  <div className="searchResults fadeIn">
                     <SearchIndex places={places}/>
                     </div>
                 </div>

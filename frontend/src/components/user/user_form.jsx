@@ -93,7 +93,6 @@ class UserForm extends React.Component {
             <h1 className="formType">{this.props.formType}</h1>
               {this.renderErrors()}
             <form onSubmit={this.handleSubmit}>
-
               <TextField
                 id="name"
                 label="Username"
