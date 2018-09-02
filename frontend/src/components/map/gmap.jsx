@@ -19,6 +19,7 @@ class GMap extends React.Component {
     super(props);
     this.getServiceAndMap = this.getServiceAndMap.bind(this);
     this.update = this.update.bind(this);
+    this.trackInput = this.trackInput.bind(this);
   }
   state = {
     showingInfoWindow: false,
@@ -78,7 +79,8 @@ class GMap extends React.Component {
     if(this.props.userId) this.addFavoritesToMarkers();
   }
 
-  trackInput() {
+  trackInput(e) {
+    e.preventDefault();
     /*track the user's clicked point*/
     let trackLocation = {
       name: `${this.state.trackName}`,
@@ -340,7 +342,7 @@ class GMap extends React.Component {
     let places = this.state.queryPlaces;
     let userButtons =  [];
     if(this.props.userId) {
-      userButtons =  [<form onSubmit={()=>this.trackInput()}>
+      userButtons =  [<form onSubmit={this.trackInput}>
                       <input
                           type="text"
                           onChange={this.update("trackName")}
