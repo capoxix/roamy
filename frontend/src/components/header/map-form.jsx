@@ -52,6 +52,7 @@ class ButtonAppBar extends Component {
         <AppBar position="static">
           <Toolbar>
             <Help/>
+            <About/>
             <Typography variant="title" color="inherit">
               <Link className="navBarLink" to={"/"}>Roamy</Link>
             </Typography>
