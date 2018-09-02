@@ -7,12 +7,11 @@ const fetch = require('node-fetch');
 const passport = require('passport');
 require('./config/passport')(passport);
 
+const path = require('path');
 
 const users = require('./routes/api/users');
 const locations = require('./routes/api/locations');
 const discover = require('./routes/api/discover');
-
-
 
 mongoose
   .connect(db)
@@ -22,11 +21,18 @@ mongoose
 const app = express();
 
 
-app.get('/test', (req, res) => {
-  console.log("hi")
-  res.send("hit")
-})
+// app.get('/test', (req, res) => {
+//   console.log("hi")
+//   res.send("hit")
+// })
 
+
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('frontend/build'));
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'));
+  })
+}
 
 //Middleware for body parser
 app.use(bodyParser.urlencoded({extended: false}));
