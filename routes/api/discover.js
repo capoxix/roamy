@@ -8,7 +8,7 @@ router.post(`/car`, async (req, res) => {
   const origin = new Point({
     lat: req.body.lat,
     lng: req.body.lng,
-    minutes: req.body.minutes
+    minutes: parseInt(req.body.minutes)
   })
   // twin peaks
   // const origin = new Point({lat: 37.751387, lng: -122.446333, minutes: 15})
@@ -18,7 +18,7 @@ router.post(`/car`, async (req, res) => {
   let searchStr, endPoints, duped, text, addresses, results;
 
   endPoints = origin.initEndPoints()
-  Point.inPacific(endPoints) // check if in pacific ONLY FOR SF
+  origin.validSFPoints(endPoints) // check if in pacific ONLY FOR SF
   duped = endPoints.slice();
 
   while (searches < 3) {
@@ -53,8 +53,8 @@ async function curryPoints(endPoints, origin) {
   const geocoder = NodeGeocoder(options)
 
   for (let i = 0 ; i <  endPoints.length; i++) {
-    if (!endPoints[i].destroy && (origin.minutes + 2.5) < endPoints[i].minutes) {
-      console.log("endpoints: ", endPoints[i])
+    // && (origin.minutes + 2.5) < endPoints[i].minutes
+    if (!endPoints[i].destroy && (origin.minutes + 2.5) > endPoints[i].minutes) {
       results.push(endPoints[i])
       await fixLatLng(endPoints[i], geocoder)
     }
@@ -68,6 +68,8 @@ async function fixLatLng(point, geocoder) {
   const promise = await geocoder.geocode(point.address)
     console.log(promise[0].latitude)
     console.log(promise[0].longitude)
+    // if point difference is too big, just keep original points
+    // if (Math.abs(point.lat - promise[0].latitude)
     point.lat = promise[0].latitude
     point.lng = promise[0].longitude
 }

@@ -27,10 +27,10 @@ class Point {
     return activePoints;
   }
 
-  static inPacific(endPoints) {
+  validSFPoints(endPoints) {
 
     for (let i = 0; i < endPoints.length; i++) {
-      endPoints[i].tooFar(); 
+      endPoints[i].inPacific(); 
     }
   }
 
@@ -95,15 +95,9 @@ class Point {
     console.log('address: ', address)
     
     if (Math.abs(this.minutes - endPoint.minutes) < 1.2) {
-      // reassign the point to the address given and make point static
-      console.log('close enough -------------------')
-      console.log('')
-      console.log('')
       endPoint.static = true;
     } else {
       endPoint.adjust(origin)
-      console.log('')
-      console.log('')
     }
 
   }
@@ -124,7 +118,7 @@ class Point {
     this.lat = origin.lat + scaleLat;
     this.lng = origin.lng + scaleLng;
 
-    this.tooFar();
+    this.inPacific();
   }
 
 
@@ -153,7 +147,7 @@ class Point {
   // EndPoint check
   //
 
-  tooFar() {
+  inPacific() {
     const topLat = 37.8135;
     const westLng = -122.5220;
 
