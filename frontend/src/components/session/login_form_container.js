@@ -5,7 +5,7 @@ import {Link, withRouter} from 'react-router-dom';
 
 const msp = (state, ownProps) => ({
   formType: 'login',
-  errors: state.errors
+  errors: state.errors.session
 });
 
 const mdp = (dispatch, ownProps) => ({

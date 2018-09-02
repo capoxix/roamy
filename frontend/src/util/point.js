@@ -43,8 +43,8 @@ class Point {
     const pointsArr = [];
     const dLat = 0.003604 * this.minutes;
     const dLng =  0.0045402 * this.minutes;
-    
-    let numPoints = 4;
+
+    let numPoints = 8;
     let angle = 360 / numPoints;
     let currentAngle = 0;
   
