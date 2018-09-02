@@ -1,7 +1,7 @@
 // const Point = require('./frontend/src/util/point.js');
 const express = require('express');
 const mongoose = require('mongoose');
-let db = require('./config/keys').mongoURI;
+const db = require('./config/keys').mongoURI;
 const bodyParser = require('body-parser');
 const fetch = require('node-fetch');
 const passport = require('passport');
@@ -12,10 +12,6 @@ const path = require('path');
 const users = require('./routes/api/users');
 const locations = require('./routes/api/locations');
 const discover = require('./routes/api/discover');
-
-if(process.env.NODE_ENV === 'production') {
-  db = require('./config/keys_prod').mongoURI; 
-}
 
 mongoose
   .connect(db)
