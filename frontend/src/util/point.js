@@ -1,5 +1,3 @@
-const NodeGeocoder = require('node-geocoder');
-
 class Point {
   constructor({lat, lng, minutes, angle}){
     this.lat = lat;
@@ -7,6 +5,7 @@ class Point {
     this.minutes = minutes;
     this.angle = angle;
     this.static = false;
+    this.destroy = false;
   }
 
   static makeDestinationsStr(endPoints) {
@@ -25,8 +24,6 @@ class Point {
     for(let i = 0; i < endPoints.length; i++) {
       if (endPoints[i].static === false) {activePoints.push(endPoints[i])}
     }
-    console.log('before', endPoints)
-    console.log('after', activePoints)
     return activePoints;
   }
 
@@ -72,26 +69,14 @@ class Point {
   // Adjust existing endpoints 
   //
   adjustPoints(endPoints, data, addresses) {
-    const options = {
-      provider: 'google',
-      apiKey: 'AIzaSyDBghaO6vALAG_-QG2SCBN8LEB_jFM6o1Q'
-    }
-    const geocoder = NodeGeocoder(options)
-
-    // geocoder.geocode('825 Battery St, San Francisco, CA')
-    //   .then((res) => {
-    //     console.log(res[0])
-    //     console.log(res[0].latitude)
-    //     console.log(res[0].longitude)
-    //   })
 
     for (let i = 0; i < endPoints.length; i++) {
-      this.check(endPoints[i], data[i], addresses[i], i, geocoder)
+      this.check(endPoints[i], data[i], addresses[i], i)
     }
     
   }
   
-  check(endPoint, datum, address, i, geocoder) {
+  check(endPoint, datum, address, i) {
     if (datum.status === "ZERO_RESULTS") {
       endPoint.destroy = true;
       return
