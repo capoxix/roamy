@@ -9,7 +9,6 @@ require('./config/passport')(passport);
 
 const path = require('path');
 
-
 const users = require('./routes/api/users');
 const locations = require('./routes/api/locations');
 const discover = require('./routes/api/discover');
