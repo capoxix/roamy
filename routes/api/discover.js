@@ -53,7 +53,7 @@ async function curryPoints(endPoints, origin) {
   const geocoder = NodeGeocoder(options)
 
   for (let i = 0 ; i <  endPoints.length; i++) {
-    if (!endPoints[i].destroy || origin.minutes + 2.5 < endPoints[i].minutes) {
+    if (!endPoints[i].destroy && (origin.minutes + 2.5) < endPoints[i].minutes) {
       console.log("endpoints: ", endPoints[i])
       results.push(endPoints[i])
       await fixLatLng(endPoints[i], geocoder)
