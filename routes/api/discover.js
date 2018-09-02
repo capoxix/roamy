@@ -72,13 +72,19 @@ async function curryPoints(endPoints, origin) {
 };
 
 async function fixLatLng(point, geocoder) {
-  const dLatkm = 0.003604 * 2.5;
-  const dLngkm =  0.0045402 * 2.5;
+  const dLat600m = 0.003604 * 1.5;
+  const dLng600m =  0.0045402 * 1.5;
 
   const promise = await geocoder.geocode(point.address)
     // if point difference is too big, just keep original points
-    if (Math.abs(point.lat - promise[0].latitude) < dLatkm
-      && Math.abs(point.lng - promise[0].longitude) < dLngkm) {
+    if (Math.abs(point.lat - promise[0].latitude) < dLat600m
+      && Math.abs(point.lng - promise[0].longitude) < dLng600m) {
+
+      console.log('dlat is: ', Math.abs(point.lat - promise[0].latitude))
+      console.log('dlng is: ', Math.abs(point.lng - promise[0].longitude))
+      console.log('dlat is bool: ', Math.abs(point.lat - promise[0].latitude) < dLat600m)
+      console.log('dlng is bool: ', Math.abs(point.lng - promise[0].longitude) < dLng600m)
+      
       point.lat = promise[0].latitude
       point.lng = promise[0].longitude
     }
