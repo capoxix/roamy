@@ -28,6 +28,18 @@ class UserForm extends React.Component {
     );
   }
 
+  renderErrors() {
+    return(
+      <ul>
+        {this.props.errors.map((error, i) => (
+          <li key={`error-${i}`}>
+            {error}
+          </li>
+        ))}
+      </ul>
+    );
+  }
+
   // // //  <input
   // //     type="text"
   // //     onChange={this.update("name")}
@@ -62,15 +74,13 @@ class UserForm extends React.Component {
   render(){
     <Link to = '/login'>If you've already done this before, click here to log in</Link>;
 
-
-
-
       return(
         <div className= "form-container">
           <div className="form">
             <ul className="error">
             </ul>
             <h1 className="formType">{this.props.formType}</h1>
+              {this.renderErrors()}
             <form onSubmit={this.handleSubmit}>
 
               <TextField
@@ -112,7 +122,7 @@ class UserForm extends React.Component {
                 />
 
               <Button variant="contained" color="primary" type="submit">
-                <i class="far fa-caret-square-right"></i>
+                <i className="far fa-caret-square-right"></i>
                 Submit
               </Button>
 

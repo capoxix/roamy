@@ -16,7 +16,7 @@ router.post(`/car`, async (req, res) => {
 
   let searches = 0;
   let searchStr, endPoints, duped, text, addresses, results;
- 
+
   endPoints = origin.initEndPoints()
   Point.inPacific(endPoints) // check if in pacific ONLY FOR SF
   duped = endPoints.slice();
@@ -51,7 +51,7 @@ async function curryPoints(endPoints, origin) {
     apiKey: 'AIzaSyDBghaO6vALAG_-QG2SCBN8LEB_jFM6o1Q'
   }
   const geocoder = NodeGeocoder(options)
-  
+
   for (let i = 0 ; i <  endPoints.length; i++) {
     if (!endPoints[i].destroy || origin.minutes + 2.5 < endPoints[i].minutes) {
       results.push(endPoints[i])
@@ -63,7 +63,7 @@ async function curryPoints(endPoints, origin) {
 };
 
 async function fixLatLng(point, geocoder) {
-  
+
   const promise = await geocoder.geocode(point.address)
     console.log(promise[0].latitude)
     console.log(promise[0].longitude)
@@ -76,7 +76,7 @@ async function fixLatLng(point, geocoder) {
 // .then((res) => {
 //   point.lat = res[0].latitude
 //   point.lng = res[0].longitude
-  
+
 //   console.log("Point------")
 //   console.log(counter.count)
 //   counter.count += 1;
@@ -95,7 +95,7 @@ module.exports = router;
 
 
 
-// returns a lat lng 
+// returns a lat lng
 // https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=&key=AIzaSyDBghaO6vALAG_-QG2SCBN8LEB_jFM6o1Q
 
 // returns the name

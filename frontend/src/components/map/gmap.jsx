@@ -27,6 +27,7 @@ class GMap extends React.Component {
     center: {},
     clicked: {},
     clickedMarker: [],
+    minutes: '5',
     favoriteMarkers: [],
     trackName: "",
     currentLocationMarker: [],
@@ -34,7 +35,7 @@ class GMap extends React.Component {
     query: "",
     service: undefined,
     map: undefined,
-    foundPlace: undefined
+    foundPlace: undefined,
   };
 
   onMarkerClick = (mapProps, marker, e) =>
@@ -54,7 +55,7 @@ class GMap extends React.Component {
     // console.log(this);
     /*get latitude and longitude from clicked point on maps and set marker to show clicked point*/
     /* USED TO PICK ORIGIN POINTS BY SETTING IT TO CLICKED AND CLICKED MARKERS */
-    this.setState({ clicked: { lat: e.latLng.lat(), lng: e.latLng.lng(), minutes: 10 } });
+    this.setState({ clicked: { lat: e.latLng.lat(), lng: e.latLng.lng(), minutes: this.state.minutes } });
     this.setState({
       clickedMarker: (
         <Marker
@@ -71,6 +72,11 @@ class GMap extends React.Component {
     // console.log(e);
   };
 
+  componentWillReceiveProps(){
+    console.log("component receiving props");
+    this.addFavoritesToMarkers();
+  }
+
   trackInput() {
     /*track the user's clicked point*/
     let trackLocation = {
@@ -85,6 +91,7 @@ class GMap extends React.Component {
   addFavoritesToMarkers() {
     // console.log(this.props.google.maps.geometry.poly.containsLocation(,this.polygonComponent));
     let that = this;
+    // if(this.props.google.maps.geometry)
     getFavorites(this.props.userId).then(favorites =>
       that.setMarkersIntoMap(favorites.data)
     );
@@ -114,6 +121,7 @@ class GMap extends React.Component {
           />
         );
     });
+    console.log("setting markets into map");
     this.setState({ favoriteMarkers: favoritesMarkersArr });
   }
 
@@ -222,7 +230,7 @@ class GMap extends React.Component {
 
   markFoundPlace(place){
 
-    this.setState({ clicked: { lat: place.geometry.location.lat(), lng: place.geometry.location.lng(), minutes: 10 } });
+    this.setState({ clicked: { lat: place.geometry.location.lat(), lng: place.geometry.location.lng(), minutes: this.state.minutes } });
     this.setState({
         clickedMarker: (
           <Marker
@@ -254,29 +262,25 @@ class GMap extends React.Component {
         fillColor="#0000FF"
         fillOpacity={0.35}
         clickable={false} />;
-
     }
 
   update(field) {
     return e => {
       this.setState({ [field]: e.target.value });
+      console.log(field, field==='minutes');
+      if(field === 'minutes') this.setState( {clicked: { lat: this.state.clicked.lat, lng: this.state.clicked.lng, minutes: e.target.value } });
     };
   }
 
   discover = (e) => {
     e.preventDefault();
-    this.props.sendQuery(this.state.clicked)
+    this.props.sendQuery(this.state.clicked);
   }
 
 
   render() {
 
     this.updatePolygon(this.props.endPoints)
-
-    // const style = {
-    //   width: "800px",
-    //   height: "800px"
-    // };
 
     let address;
     if(this.state.foundPlace) address = this.state.foundPlace.formatted_address;
@@ -287,6 +291,7 @@ class GMap extends React.Component {
         onClick={this.onMapClicked}
         onReady={this.getServiceAndMap}
         center={this.state.center}
+        zoom={13}
         className="mapWrapper2"
         // controls[{this.props.google.maps.ControlPosition.TOP_CENTER}]
       >
@@ -309,44 +314,58 @@ class GMap extends React.Component {
 
     this.queryPlaces();
     let places = this.state.queryPlaces;
-
+    let userButtons =  [];
+    if(this.props.userId) {
+      userButtons =  [<input
+                          type="text"
+                          onChange={this.update("trackName")}
+                          value={this.state.trackName}
+                          placeholder="Favorite place name"
+                        />,
+                        <button type='button' onClick={()=>this.trackInput()}>TRACK LOCATION</button>,
+                      ];
+                      }
     return (
       <div>
         <div>
-
-
             <div className="bodyWrapper">
                 <div className="mapWrapper1">
                   {this.mapComponent}
                 </div>
                 <div className="sideBar">
                   <div className="stickyButtons">
-                  <input
-            type="text"
-            onChange={this.update("trackName")}
-            value={this.state.trackName}
-            placeholder="Favorite place name"
-          />
-              <button type='button' onClick={()=>this.trackInput()}>TRACK LOCATION</button>
-              <button type='button' onClick={()=> this.addFavoritesToMarkers()}>Get Favorite Spots</button>
-              <button type='button' onClick={()=> this.getCurrentLocation()}>Get Current Location</button>
-              <input type='text'
-                  onChange={this.update('query')}
-                  value={this.state.query}
-                  placeholder="Search Place"/>
-              <button type='button' onClick={()=>this.findPlaceAndMark()}>Go to location</button>
-              <button type='button' onClick={this.discover}>Discover</button>
-              </div>
-              <div className="searchResults">
-                <SearchIndex places={places}/>
+                 {userButtons}
+                  <button type='button' onClick={()=> this.getCurrentLocation()}>Get Current Location</button>
+                  <input type='text'
+                      onChange={this.update('query')}
+                      value={this.state.query}
+                      placeholder="Search Place"/>
+                  <button type='button' onClick={()=>this.findPlaceAndMark()}>Go to location</button>
+                  <select id="time" name="time" onChange={this.update("minutes")}>
+                    <option value="5" selected="true">5</option>
+                    <option value="10">10</option>
+                    <option value="15">15</option>
+                    <option value="20">20</option>
+                    <option value="25">25</option>
+                    <option value="30">30</option>
+                    <option value="35">35</option>
+                    <option value="40">40</option>
+                    <option value="45">45</option>
+                    <option value="50">50</option>
+                    <option value="55">55</option>
+                    <option value="60">60</option>
+                  </select>
+                  <button type='button' onClick={this.discover}>Discover</button>
+                  </div>
+                  <div className="searchResults">
+                    <SearchIndex places={places}/>
+                    </div>
                 </div>
             </div>
         </div>
 
 
         </div>
-
-      </div>
     );
   }
 }

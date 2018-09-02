@@ -22,7 +22,7 @@ class SessionForm extends React.Component {
   handleSubmit(e){
     e.preventDefault();
     const user = Object.assign({}, this.state);
-    this.props.processForm(user).then(() => this.props.history.push('/events'));
+    this.props.processForm(user).then(() => this.props.history.push('/login'));
   }
 
   update(field){
@@ -31,21 +31,18 @@ class SessionForm extends React.Component {
     );
   }
 
-// //<input
-//   type="email"
-//   onChange={this.update("email")}
-//   value={this.state.email}
-//   placeholder="Email Address"
-//   />
-//
-// <input
-//   type="password"
-//   onChange={this.update("password")}
-//   value={this.state.password}
-//   placeholder="Password"
-//   />
-//
-            //<input className="submit" type='submit' value='Sign In'/>
+  renderErrors() {
+    return(
+      <ul>
+        {this.props.errors.map((error, i) => (
+          <li key={`error-${i}`}>
+            {error}
+          </li>
+        ))}
+      </ul>
+    );
+  }
+
 
   render(){
     return(
@@ -55,7 +52,7 @@ class SessionForm extends React.Component {
 
           </ul>
           <h1 className="formType">{this.props.formType}</h1>
-
+          {this.renderErrors()}
           <form onSubmit={this.handleSubmit}>
 
             <TextField
@@ -79,7 +76,7 @@ class SessionForm extends React.Component {
                 />
               <br/>
                 <Button variant="contained" color="primary" type="submit">
-                  <i class="far fa-caret-square-right"></i>
+                  <i className="far fa-caret-square-right"></i>
                   Submit
                 </Button>
 

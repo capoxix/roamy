@@ -17,7 +17,7 @@ const receiveQueryErrors = (errors) => {
 }
 
 export const sendQuery = (query) => (dispatch) => {
-  API.discoverCar(query)
+  return API.discoverCar(query)
   .then((res) => {
     console.log(res)
     dispatch(receiveCarEndPoints(res.data))
