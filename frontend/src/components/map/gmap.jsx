@@ -340,13 +340,16 @@ class GMap extends React.Component {
     let places = this.state.queryPlaces;
     let userButtons =  [];
     if(this.props.userId) {
-      userButtons =  [<input
+      userButtons =  [<form onSubmit={()=>this.trackInput()}>
+                      <input
                           type="text"
                           onChange={this.update("trackName")}
                           value={this.state.trackName}
                           placeholder="Favorite place name"
-                        />,
-                        <button type='button' onClick={()=>this.trackInput()}>TRACK LOCATION</button>,
+                          required
+                        />
+                        <input type='submit' value="TRACK LOCATION"/>
+                        </form>
                       ];
                       }
     return (
