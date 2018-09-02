@@ -10,7 +10,7 @@ const msp = (state, ownProps) => ({
     email: '',
     password: '',
     password2: ''},
-  errors: state.errors
+  errors: state.errors.session
 });
 
 const mdp = (dispatch, ownProps) => ({
