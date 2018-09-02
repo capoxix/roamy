@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import {login, logoutUser} from '../../actions/session_actions';
+import {login, logoutUser, removeErrors} from '../../actions/session_actions';
 import {Link, withRouter} from 'react-router-dom';
 import MapForm from './map-form';
 import '../../styling/header/header.css';
@@ -29,7 +29,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return ({
     login: (user) => dispatch(login(user)),
-    logout: () => dispatch(logoutUser())
+    logout: () => dispatch(logoutUser()),
+    removeErrors: () => dispatch(removeErrors())
   });
 }
 

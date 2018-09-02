@@ -43,21 +43,6 @@ class SessionForm extends React.Component {
     );
   }
 
-// //<input
-//   type="email"
-//   onChange={this.update("email")}
-//   value={this.state.email}
-//   placeholder="Email Address"
-//   />
-//
-// <input
-//   type="password"
-//   onChange={this.update("password")}
-//   value={this.state.password}
-//   placeholder="Password"
-//   />
-//
-            //<input className="submit" type='submit' value='Sign In'/>
 
   render(){
     return(

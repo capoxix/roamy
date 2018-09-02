@@ -8,7 +8,6 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import {Route, Redirect, Switch, Link, HashRouter, withRouter} from 'react-router-dom';
 
-
 class ButtonAppBar extends Component {
 
   constructor(props) {
@@ -19,7 +18,9 @@ class ButtonAppBar extends Component {
     };
   }
 
-
+  componentWillMount(){
+    this.props.removeErrors();
+  }
 
   render(){
     console.log(this.props);
@@ -32,14 +33,14 @@ class ButtonAppBar extends Component {
               <MenuIcon />
             </IconButton>
             <Typography variant="title" color="inherit">
-              <Link className="navBarLink" to={"/"}>Roamy</Link>
+              <Link className="navBarLink" to={"/"} onClick={()=>this.props.removeErrors()}>Roamy</Link>
             </Typography>
 
             <Typography variant="title" color="inherit">
-              <Link className="navBarLink" to={"/signup"}>Sign Up</Link>
+              <Link className="navBarLink" to={"/signup"} onClick={()=>this.props.removeErrors()}>Sign Up</Link>
             </Typography>
             <Typography variant="title" color="inherit">
-              <Link className="navBarLink" to={"/login"}>Log In</Link>
+              <Link className="navBarLink" to={"/login"} onClick={()=>this.props.removeErrors()}>Log In</Link>
             </Typography>
           </Toolbar>
         </AppBar>
