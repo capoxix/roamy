@@ -15,13 +15,13 @@ router.post(`/car`, async (req, res) => {
   Object.freeze(origin);
 
   let searches = 0;
-  let searchStr, endPoints, duped, text, addresses;
+  let searchStr, endPoints, duped, text, addresses, results;
  
   endPoints = origin.initEndPoints()
   Point.inPacific(endPoints) // check if in pacific ONLY FOR SF
   duped = endPoints.slice();
 
-  while (searches < 4) {
+  while (searches < 3) {
     searches+=1;
 
     searchStr = origin.makeSearchStr(duped);
@@ -36,9 +36,60 @@ router.post(`/car`, async (req, res) => {
     duped = Point.modify(duped);
   }
 
-  res.send(endPoints);
+  results = await curryPoints(endPoints).then((res1) => {
+    console.log(res1)
+    results = res1
+    res.send(results);
+  })
 });
 
+async function curryPoints(endPoints) {
+  const results = [];
+
+  const options = {
+    provider: 'google',
+    apiKey: 'AIzaSyDBghaO6vALAG_-QG2SCBN8LEB_jFM6o1Q'
+  }
+  const geocoder = NodeGeocoder(options)
+  
+  for (let i = 0 ; i <  endPoints.length; i++) {
+    if (!endPoints[i].destroy) {
+      results.push(endPoints[i])
+      await fixLatLng(endPoints[i], geocoder)
+    }
+  }
+
+  return results
+};
+
+async function fixLatLng(point, geocoder) {
+  
+  const promise = await geocoder.geocode(point.address)
+    console.log(promise[0].latitude)
+    console.log(promise[0].longitude)
+    point.lat = promise[0].latitude
+    point.lng = promise[0].longitude
+}
+
+
+// geocoder.geocode(point.address)
+// .then((res) => {
+//   point.lat = res[0].latitude
+//   point.lng = res[0].longitude
+  
+//   console.log("Point------")
+//   console.log(counter.count)
+//   counter.count += 1;
+//   console.log(counter.count)
+
+//   console.log(point.address)
+//   console.log(point.angle)
+//   console.log(point.lat)
+//   console.log(point.lng)
+//   console.log("----------------")
+//   console.log("-")
+//   // console.log(res[0])
+// })
 
 module.exports = router;
 

@@ -5,6 +5,7 @@ class Point {
     this.minutes = minutes;
     this.angle = angle;
     this.static = false;
+    this.destroy = false;
   }
 
   static makeDestinationsStr(endPoints) {
@@ -23,8 +24,6 @@ class Point {
     for(let i = 0; i < endPoints.length; i++) {
       if (endPoints[i].static === false) {activePoints.push(endPoints[i])}
     }
-    console.log('before', endPoints)
-    console.log('after', activePoints)
     return activePoints;
   }
 
@@ -83,9 +82,12 @@ class Point {
       return
     } else if (endPoint.static) {
       endPoint.minutes = datum.duration.value / 60;
+      endPoint.address = address;
       return 
     }
+
     endPoint.minutes = datum.duration.value / 60;
+    endPoint.address = address;
     let origin = this;
     console.log('item: ', i)
     console.log(endPoint)
@@ -110,12 +112,10 @@ class Point {
 
     let oLat = Math.abs(origin.lat);
     let oLng = Math.abs(origin.lng);
-
     let tLat = Math.abs(this.lat);
     let tLng = Math.abs(this.lng);
 
     let hypotenuse = Math.sqrt(Math.pow(oLat - tLat, 2) + Math.pow(oLng - tLng, 2));
-
     let newHypotenuse = hypotenuse * (origin.minutes / this.minutes);
 
     const scaleLat = Math.sin((Math.PI * this.angle) / 180) * newHypotenuse;
@@ -123,11 +123,8 @@ class Point {
 
     this.lat = origin.lat + scaleLat;
     this.lng = origin.lng + scaleLng;
-    console.log('new lat: ', this.lat)
-    console.log('new lng: ', this.lng)
+
     this.tooFar();
-
-
   }
 
 
@@ -169,23 +166,6 @@ class Point {
   }
 }
 
-// let o = new Point({lat: 37.7990, lng: -122.4014, minutes: 10})
-// let d1 = new Point({lat: 37.775181, lng: -122.409909})
-// let d2 = new Point({lat: 37.781402, lng:  -122.411327})
-// let arr = o.initEndPoints();
-
-// o.makeSearchStr([d1, d2]);
-
 module.exports = Point;
 
-
-//  lat: 37.72254761481811,
-// lng: -122.3050878137617,
-//  minutes: undefined,
-//  angle: 315,
-//   static: false 
-//  32.916666666666664
-//  120 Creedon Cir, Alameda, CA 94502, USA
-// new lat:  37.74973012658228
-//  new lng:  -122.33933144303798
   

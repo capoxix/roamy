@@ -244,7 +244,6 @@ class GMap extends React.Component {
       return
     }
 
-
     this.polygon = new this.props.google.maps.Polygon({paths: endPoints});
     this.polygonComponent =
     <Polygon
@@ -328,21 +327,21 @@ class GMap extends React.Component {
             value={this.state.trackName}
             placeholder="Favorite place name"
           />
-                  <button type='button' onClick={()=>this.trackInput()}>TRACK LOCATION</button>
-                  <button type='button' onClick={()=> this.addFavoritesToMarkers()}>Get Favorite Spots</button>
-                  <button type='button' onClick={()=> this.getCurrentLocation()}>Get Current Location</button>
-                  <input type='text'
-                      onChange={this.update('query')}
-                      value={this.state.query}
-                      placeholder="Search Place"/>
-                  <button type='button' onClick={()=>this.findPlaceAndMark()}>Go to location</button>
-                  <button type='button' onClick={this.discover}>Discover</button>
-                  </div>
-                  <div className="searchResults">
-                    <SearchIndex places={places}/>
-                    </div>
+              <button type='button' onClick={()=>this.trackInput()}>TRACK LOCATION</button>
+              <button type='button' onClick={()=> this.addFavoritesToMarkers()}>Get Favorite Spots</button>
+              <button type='button' onClick={()=> this.getCurrentLocation()}>Get Current Location</button>
+              <input type='text'
+                  onChange={this.update('query')}
+                  value={this.state.query}
+                  placeholder="Search Place"/>
+              <button type='button' onClick={()=>this.findPlaceAndMark()}>Go to location</button>
+              <button type='button' onClick={this.discover}>Discover</button>
+              </div>
+              <div className="searchResults">
+                <SearchIndex places={places}/>
                 </div>
             </div>
+        </div>
 
 
         </div>
