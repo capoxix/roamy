@@ -252,7 +252,6 @@ class GMap extends React.Component {
       return
     }
 
-
     this.polygon = new this.props.google.maps.Polygon({paths: endPoints});
     this.polygonComponent =
     <Polygon
@@ -363,11 +362,10 @@ class GMap extends React.Component {
                     </div>
                 </div>
             </div>
+        </div>
 
 
         </div>
-
-      </div>
     );
   }
 }
