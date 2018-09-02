@@ -27,6 +27,7 @@ class GMap extends React.Component {
     center: {},
     clicked: {},
     clickedMarker: [],
+    trackedMarker: [],
     minutes: '5',
     favoriteMarkers: [],
     trackName: "",
@@ -86,7 +87,20 @@ class GMap extends React.Component {
       lng: `${this.state.clicked.lng}`,
       userId: this.props.userId
     };
-    track(trackLocation).then(res => console.log("tracked", res));
+
+    let trackedMarker = 
+    <Marker
+          onClick={this.onMarkerClick}
+          name={this.state.trackName}
+          position={{ lat: this.state.clicked.lat, lng: this.state.clicked.lng }}
+          icon={{
+            path: this.props.google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
+            scale: 5
+          }}
+        />;
+
+    let that = this;
+    track(trackLocation).then(that.setState({trackedMarker: trackedMarker}));;//then(res => console.log("tracked", res));
   }
   /*get favorites locations of user & set to map */
   addFavoritesToMarkers() {
@@ -271,7 +285,7 @@ class GMap extends React.Component {
   update(field) {
     return e => {
       this.setState({ [field]: e.target.value });
-      console.log(field, field==='minutes');
+      // console.log(field, field==='minutes');
       if(field === 'minutes') this.setState( {clicked: { lat: this.state.clicked.lat, lng: this.state.clicked.lng, minutes: e.target.value } });
     };
   }
@@ -285,9 +299,10 @@ class GMap extends React.Component {
   render() {
 
     this.updatePolygon(this.props.endPoints)
-
-    let address;
-    if(this.state.foundPlace) address = this.state.foundPlace.formatted_address;
+    let trackedMarker = [];
+    if (this.props.userId) trackedMarker = this.state.trackedMarker;
+    // let address;
+    // if(this.state.foundPlace) address = this.state.foundPlace.formatted_address;
     // console.log(address);
     this.mapComponent = (
       <Map
@@ -302,6 +317,7 @@ class GMap extends React.Component {
         {this.state.currentLocationMarker}
         {this.state.favoriteMarkers}
         {this.state.clickedMarker}
+        {trackedMarker}
 
         <InfoWindow
           marker={this.state.activeMarker}
@@ -309,7 +325,6 @@ class GMap extends React.Component {
         >
           <div>
             <h1>{this.state.selectedPlace.name}</h1>
-            <p>{address}</p>
           </div>
         </InfoWindow>
         {this.polygonComponent}
