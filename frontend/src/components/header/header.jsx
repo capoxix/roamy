@@ -2,6 +2,7 @@ import React from 'react';
 
 import MapForm from './map-form';
 import '../../styling/header/header.css';
+import '../../index.css';
 
 class Header extends React.Component {
 

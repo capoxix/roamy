@@ -7,6 +7,8 @@ import {
 import React from "react";
 import { track, getFavorites } from "../../util/location_api_util";
 import SearchIndex from "./search_index";
+import '../../styling/header/header.css';
+import '../../index.css';
 
 class GMap extends React.Component {
   constructor(props) {
@@ -362,7 +364,7 @@ class GMap extends React.Component {
                   </select>
                   <button type='button' onClick={this.discover}>Discover</button>
                   </div>
-                  <div className="searchResults">
+                  <div className="searchResults fadeIn">
                     <SearchIndex places={places}/>
                     </div>
                 </div>

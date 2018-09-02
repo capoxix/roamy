@@ -9,6 +9,17 @@ import MenuIcon from '@material-ui/icons/Menu';
 import {Route, Redirect, Switch, Link, HashRouter, withRouter} from 'react-router-dom';
 import Help from './help';
 import About from './about';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import lightBlue from '@material-ui/core/colors/lightBlue';
+import '../../styling/header/header.css';
+import '../../index.css';
+
+const theme = createMuiTheme({
+  palette: {
+    primary: { main: lightBlue[900] }, // Purple and green play nicely together.
+    // secondary: { main: '#11cb5f' }, // This is just green.A700 as hex.
+  },
+});
 
 class ButtonAppBar extends Component {
 
@@ -29,13 +40,16 @@ class ButtonAppBar extends Component {
     if (!this.props.currentUser.id){
     return (
       <div className="appbar">
-        <AppBar position="static">
+        <MuiThemeProvider theme={theme}>
+        <AppBar position="static" color="primary">
           <Toolbar>
-            <Help/>
-            <About/>
             <Typography variant="title" color="inherit">
               <Link className="navBarLink" to={"/"} onClick={()=>this.props.removeErrors()}>Roamy</Link>
             </Typography>
+
+            <Help/>
+            <About/>
+
 
             <Typography variant="title" color="inherit">
               <Link className="navBarLink" to={"/signup"} onClick={()=>this.props.removeErrors()}>Sign Up</Link>
@@ -45,17 +59,20 @@ class ButtonAppBar extends Component {
             </Typography>
           </Toolbar>
         </AppBar>
+      </MuiThemeProvider>
       </div>
     )}else{
     return (
       <div className="appbar">
-        <AppBar position="static">
+        <MuiThemeProvider theme={theme}>
+        <AppBar position="static" color="primary">
           <Toolbar>
-            <Help/>
-            <About/>
             <Typography variant="title" color="inherit">
               <Link className="navBarLink" to={"/"}>Roamy</Link>
             </Typography>
+
+            <Help/>
+            <About/>
 
             <div>
               Hello {this.props.name}!
@@ -64,6 +81,7 @@ class ButtonAppBar extends Component {
           <Link className="navBarLink" to="/" onClick={()=> this.props.logout()}>Log Out</Link>
           </Toolbar>
         </AppBar>
+      </MuiThemeProvider>
       </div>
     )
   }

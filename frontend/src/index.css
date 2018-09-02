@@ -60,7 +60,7 @@ a{
 
 .submit{
   background-color: green;
-  color: white;
+  color: black;
   width: 185px;
   font-weight: bolder;
   background-color: #0099e5;
@@ -80,18 +80,31 @@ a{
 }
 
 .footer {
-  position: absolute;
   display: flex;
   justify-content: space-between;
   bottom: 0px;
   display: flex;
-  height: 100px !important;
+  height: 60px !important;
   width: 100vw;
+  background-color: #0A466D;
 }
 
 .MuiButtonBase-root-49.MuiButton-root-91.MuiButton-text-93.MuiButton-flat-96{
-  width: 150px;
-  height: 100px;
+  width: 100px;
+  height: 50px;
+}
+
+.socialLinks{
+  display: flex;
+  justify-content: space-between;
+  padding-top: 10px;
+}
+
+.MuiButtonBase-root-146.MuiButton-root-120.MuiButton-text-122.MuiButton-flat-125{
+  color: white;
+}
+.MuiButtonBase-root-146.MuiButton-root-120.MuiButton-text-122.MuiButton-flat-125:hover{
+  color: grey;
 }
 
 
@@ -101,4 +114,11 @@ a{
 
 .socials:hover{
   color: #0099e5;
+}
+
+.githubRepo{
+  color: white;
+}
+.githubRepo:hover{
+  color: grey;
 }
