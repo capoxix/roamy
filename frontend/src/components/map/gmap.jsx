@@ -273,10 +273,10 @@ class GMap extends React.Component {
 
     this.updatePolygon(this.props.endPoints)
 
-    const style = {
-      width: "800px",
-      height: "800px"
-    };
+    // const style = {
+    //   width: "800px",
+    //   height: "800px"
+    // };
 
     let address;
     if(this.state.foundPlace) address = this.state.foundPlace.formatted_address;
@@ -287,7 +287,7 @@ class GMap extends React.Component {
         onClick={this.onMapClicked}
         onReady={this.getServiceAndMap}
         center={this.state.center}
-        style={style}
+        className="mapWrapper2"
         // controls[{this.props.google.maps.ControlPosition.TOP_CENTER}]
       >
         {this.state.currentLocationMarker}
@@ -309,41 +309,44 @@ class GMap extends React.Component {
 
     this.queryPlaces();
     let places = this.state.queryPlaces;
+
     return (
       <div>
         <div>
-        <input
+
+
+            <div className="bodyWrapper">
+                <div className="mapWrapper1">
+                  {this.mapComponent}
+                </div>
+                <div className="sideBar">
+                  <div className="stickyButtons">
+                  <input
             type="text"
             onChange={this.update("trackName")}
             value={this.state.trackName}
             placeholder="Favorite place name"
           />
-          <button type="button" onClick={() => this.trackInput()}>
-            TRACK FAVORITE LOCATION
-          </button>
-          <button type="button" onClick={() => this.addFavoritesToMarkers()}>
-            Get Favorite Spots
-          </button>
-          <button type="button" onClick={() => this.getCurrentLocation()}>
-            Get Current Location
-          </button>
-          <input
-            type="text"
-            onChange={this.update("query")}
-            value={this.state.query}
-            placeholder="Search Place"
-          />
-          <button type="button" onClick={() => this.findPlaceAndMark()}>
-            Go to location
-          </button>
-          <button type='button' onClick={this.discover}>Discover</button>
-          <div>
-            <SearchIndex places={places} />
-          </div>
-          <div>{this.mapComponent}</div>
-        </div> 
-      </div>
+              <button type='button' onClick={()=>this.trackInput()}>TRACK LOCATION</button>
+              <button type='button' onClick={()=> this.addFavoritesToMarkers()}>Get Favorite Spots</button>
+              <button type='button' onClick={()=> this.getCurrentLocation()}>Get Current Location</button>
+              <input type='text'
+                  onChange={this.update('query')}
+                  value={this.state.query}
+                  placeholder="Search Place"/>
+              <button type='button' onClick={()=>this.findPlaceAndMark()}>Go to location</button>
+              <button type='button' onClick={this.discover}>Discover</button>
+              </div>
+              <div className="searchResults">
+                <SearchIndex places={places}/>
+                </div>
+            </div>
+        </div>
 
+
+        </div>
+
+      </div>
     );
   }
 }
