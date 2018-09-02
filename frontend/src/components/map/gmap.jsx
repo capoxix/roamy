@@ -72,6 +72,11 @@ class GMap extends React.Component {
     // console.log(e);
   };
 
+  componentWillReceiveProps(){
+    console.log("component receiving props");
+    this.addFavoritesToMarkers();
+  }
+
   trackInput() {
     /*track the user's clicked point*/
     let trackLocation = {
@@ -86,6 +91,7 @@ class GMap extends React.Component {
   addFavoritesToMarkers() {
     // console.log(this.props.google.maps.geometry.poly.containsLocation(,this.polygonComponent));
     let that = this;
+    // if(this.props.google.maps.geometry)
     getFavorites(this.props.userId).then(favorites =>
       that.setMarkersIntoMap(favorites.data)
     );
@@ -115,6 +121,7 @@ class GMap extends React.Component {
           />
         );
     });
+    console.log("setting markets into map");
     this.setState({ favoriteMarkers: favoritesMarkersArr });
   }
 
@@ -256,7 +263,6 @@ class GMap extends React.Component {
         fillColor="#0000FF"
         fillOpacity={0.35}
         clickable={false} />;
-
     }
 
   update(field) {
@@ -269,19 +275,13 @@ class GMap extends React.Component {
 
   discover = (e) => {
     e.preventDefault();
-    console.log("info passed to discover:" ,this.state.clicked)
-    this.props.sendQuery(this.state.clicked)
+    this.props.sendQuery(this.state.clicked);
   }
 
 
   render() {
 
     this.updatePolygon(this.props.endPoints)
-
-    // const style = {
-    //   width: "800px",
-    //   height: "800px"
-    // };
 
     let address;
     if(this.state.foundPlace) address = this.state.foundPlace.formatted_address;
@@ -324,10 +324,8 @@ class GMap extends React.Component {
                           placeholder="Favorite place name"
                         />,
                         <button type='button' onClick={()=>this.trackInput()}>TRACK LOCATION</button>,
-                        <button type='button' onClick={()=> this.addFavoritesToMarkers()}>Get Favorite Spots</button>
                       ];
                       }
-    // console.log(this.state.minutes);
     return (
       <div>
         <div>
