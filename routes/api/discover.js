@@ -23,11 +23,19 @@ router.post(`/car`, async (req, res) => {
 
   while (searches < 3) {
     searches+=1;
-
     searchStr = origin.makeSearchStr(duped);
 
-    promise = await fetch(searchStr);
-    text = JSON.parse(await promise.text());
+    try {
+      promise = await fetch(searchStr);
+    } catch (errors) {
+      res.send(errors)
+    }
+
+    try {
+      text = JSON.parse(await promise.text());
+    } catch (errors) {
+      res.send(errors)
+    }
 
     addresses = text.destination_addresses;
     const times = text.rows[0].elements;
@@ -64,13 +72,13 @@ async function curryPoints(endPoints, origin) {
 };
 
 async function fixLatLng(point, geocoder) {
-  const dLat800m = 0.003604 * 2;
-  const dLng800m =  0.0045402 * 2;
+  const dLatkm = 0.003604 * 2.5;
+  const dLngkm =  0.0045402 * 2.5;
 
   const promise = await geocoder.geocode(point.address)
     // if point difference is too big, just keep original points
-    if (Math.abs(point.lat - promise[0].latitude) < dLat800m
-      && Math.abs(point.lng - promise[0].longitude) < dLng800m) {
+    if (Math.abs(point.lat - promise[0].latitude) < dLatkm
+      && Math.abs(point.lng - promise[0].longitude) < dLngkm) {
       point.lat = promise[0].latitude
       point.lng = promise[0].longitude
     }
