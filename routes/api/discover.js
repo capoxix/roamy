@@ -18,7 +18,7 @@ router.post(`/car`, async (req, res) => {
   let searchStr, endPoints, duped, text, addresses, results;
 
   endPoints = origin.initEndPoints()
-  origin.validSFPoints(endPoints) // check if in pacific ONLY FOR SF
+  origin.endPointsInWater(endPoints) // check if ENDPOINTS IN PACIFIC OR NEAR ANGEL
   duped = endPoints.slice();
 
   while (searches < 3) {
