@@ -7,7 +7,7 @@ import '../../index.css';
 
 const msp = (state, ownProps) => ({
   formType: 'Login',
-  errors: state.errors
+  errors: state.errors.session
 });
 
 const mdp = (dispatch, ownProps) => ({
