@@ -152,11 +152,12 @@ class GMap extends React.Component {
           lng: position.coords.longitude
         };
         that.setState({ center: pos });
+        that.setState({ clicked: { lat: pos.lat, lng: pos.lng, minutes: that.state.minutes } });
         that.setState({
           currentLocationMarker: (
             <Marker
               onClick={that.onMarkerClick}
-              name={"YOUR LOCATION!"}
+              name={"CURRENT LOCATION"}
               position={that.state.center}
               icon={{
                 path: that.props.google.maps.SymbolPath.CIRCLE,
