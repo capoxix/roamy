@@ -36,14 +36,14 @@ router.post(`/car`, async (req, res) => {
     duped = Point.modify(duped);
   }
 
-  results = await curryPoints(endPoints).then((res1) => {
+  results = await curryPoints(endPoints, origin).then((res1) => {
     console.log(res1)
     results = res1
     res.send(results);
   })
 });
 
-async function curryPoints(endPoints) {
+async function curryPoints(endPoints, origin) {
   const results = [];
 
   const options = {
@@ -53,7 +53,7 @@ async function curryPoints(endPoints) {
   const geocoder = NodeGeocoder(options)
   
   for (let i = 0 ; i <  endPoints.length; i++) {
-    if (!endPoints[i].destroy) {
+    if (!endPoints[i].destroy || origin.minutes + 2.5 < endPoints[i].minutes) {
       results.push(endPoints[i])
       await fixLatLng(endPoints[i], geocoder)
     }
