@@ -2,17 +2,11 @@ import {
   Map,
   InfoWindow,
   Marker,
-  GoogleApiWrapper,
   Polygon
 } from "google-maps-react";
 import React from "react";
-import Point from "../../util/point";
 import { track, getFavorites } from "../../util/location_api_util";
-import { connect } from "react-redux";
 import SearchIndex from "./search_index";
-
-const gAPI = require("../../config/keys").gAPI;
-// import { MAP } from 'react-google-maps/lib/constants'
 
 class GMap extends React.Component {
   constructor(props) {
@@ -54,7 +48,6 @@ class GMap extends React.Component {
         activeMarker: null
       });
     }
-    // console.log(this);
     /*get latitude and longitude from clicked point on maps and set marker to show clicked point*/
     /* USED TO PICK ORIGIN POINTS BY SETTING IT TO CLICKED AND CLICKED MARKERS */
     this.setState({ clicked: { lat: e.latLng.lat(), lng: e.latLng.lng(), minutes: this.state.minutes } });
@@ -74,7 +67,6 @@ class GMap extends React.Component {
   };
 
   componentWillReceiveProps(){
-    console.log("component receiving props");
     //only show markers for logged in users
     if(this.props.userId) this.addFavoritesToMarkers();
   }
@@ -101,13 +93,11 @@ class GMap extends React.Component {
         />;
     this.setState({trackName: ''});
     let that = this;
-    track(trackLocation).then(that.setState({trackedMarker: trackedMarker}));;//then(res => console.log("tracked", res));
+    track(trackLocation).then(that.setState({trackedMarker: trackedMarker}));
   }
   /*get favorites locations of user & set to map */
   addFavoritesToMarkers() {
-    // console.log(this.props.google.maps.geometry.poly.containsLocation(,this.polygonComponent));
     let that = this;
-    // if(this.props.google.maps.geometry)
     getFavorites(this.props.userId).then(favorites =>
       that.setMarkersIntoMap(favorites.data)
     );
@@ -144,7 +134,6 @@ class GMap extends React.Component {
           );
         }
     });
-    console.log("setting markets into map");
     this.setState({ favoriteMarkers: favoritesMarkersArr });
   }
 
@@ -179,8 +168,6 @@ class GMap extends React.Component {
     const { google } = mapProps;
     const service = new google.maps.places.PlacesService(map);
     this.setState({ map: map, service: service });
-    console.log(google);
-    //google.maps.ElevationService
   }
 
   queryPlaces() {
@@ -193,7 +180,6 @@ class GMap extends React.Component {
       let that = this;
 
       function returnPlaces(results, status) {
-          let filtered = [];
         //   const searched = that.state.query;
         if (status == that.props.google.maps.places.PlacesServiceStatus.OK)
           that.setState({ queryPlaces: results });
@@ -211,7 +197,6 @@ class GMap extends React.Component {
       this.state.query !== "" &&
       this.state.query.length > 5
     ) {
-      console.log("trying to find place");
       let request = {
         query: this.state.query,
         fields: [
@@ -241,14 +226,8 @@ class GMap extends React.Component {
           that.setState({query: ''});
           that.setState({ foundPlace: result[0] });
           that.markFoundPlace(result[0])
-          console.log(result);
-        } else {
-          console.log(result);
         }
-        // console.log("foundPlace", result[0]);
-        // that.setMarkersIntoMap([result]);
       }
-    //   console.log(this.state.service);
       this.state.service.findPlaceFromQuery(request, findPlace);
     }
   }
@@ -272,7 +251,6 @@ class GMap extends React.Component {
   }
 
   updatePolygon = (endPoints) => {
-    // console.log("updating polygon");
     // if (!endPoints || endPoints.length === 0) {
     //   return
     // }
@@ -292,7 +270,6 @@ class GMap extends React.Component {
   update(field) {
     return e => {
       this.setState({ [field]: e.target.value });
-      // console.log(field, field==='minutes');
       if(field === 'minutes') this.setState( {clicked: { lat: this.state.clicked.lat, lng: this.state.clicked.lng, minutes: e.target.value } });
     };
   }
@@ -311,7 +288,6 @@ class GMap extends React.Component {
     if (this.props.userId) trackedMarker = this.state.trackedMarker;
     // let address;
     // if(this.state.foundPlace) address = this.state.foundPlace.formatted_address;
-    // console.log(address);
     this.mapComponent = (
       <Map
         google={this.props.google}
@@ -338,7 +314,6 @@ class GMap extends React.Component {
         {this.polygonComponent}
       </Map>
     );
-    console.log("HEROKUUUUUUUUU");
     this.queryPlaces();
     let places = this.state.queryPlaces;
     let userButtons =  [];
