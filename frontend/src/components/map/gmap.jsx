@@ -74,7 +74,8 @@ class GMap extends React.Component {
 
   componentWillReceiveProps(){
     console.log("component receiving props");
-    this.addFavoritesToMarkers();
+    //only show markers for logged in users
+    if(this.props.userId) this.addFavoritesToMarkers();
   }
 
   trackInput() {
@@ -107,19 +108,22 @@ class GMap extends React.Component {
         favorite.lng
       );
       //check to see if polygon contains that latlng and only create markers that are inside polygon
-      if (
-        that.props.google.maps.geometry.poly.containsLocation(
-          latLng,
-          that.polygon
+      // debugger;
+      if (that.props.google.maps.geometry) {
+        if (
+          that.props.google.maps.geometry.poly.containsLocation(
+            latLng,
+            that.polygon
+          )
         )
-      )
-        return (
-          <Marker
-            onClick={this.onMarkerClick}
-            name={favorite.name}
-            position={{ lat: `${favorite.lat}`, lng: `${favorite.lng}` }}
-          />
-        );
+          return (
+            <Marker
+              onClick={this.onMarkerClick}
+              name={favorite.name}
+              position={{ lat: `${favorite.lat}`, lng: `${favorite.lng}` }}
+            />
+          );
+        }
     });
     console.log("setting markets into map");
     this.setState({ favoriteMarkers: favoritesMarkersArr });
