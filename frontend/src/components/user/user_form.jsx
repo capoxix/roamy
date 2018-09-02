@@ -122,7 +122,7 @@ class UserForm extends React.Component {
                 />
 
               <Button variant="contained" color="primary" type="submit">
-                <i class="far fa-caret-square-right"></i>
+                <i className="far fa-caret-square-right"></i>
                 Submit
               </Button>
 

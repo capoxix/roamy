@@ -50,3 +50,29 @@
 .searchResults{
   padding-top: 50px;
 }
+
+.MuiButton-label-44{
+  color: white;
+  font-size: 18px;
+}
+.MuiButton-label-44:hover{
+  color: grey;
+}
+
+.MuiPaper-root-12.MuiPaper-elevation24-38.MuiPaper-rounded-13.MuiDialog-paper-83.MuiDialog-paperScrollPaper-84.MuiDialog-paperWidthSm-87{
+  width: 500px;
+  height:500px;
+}
+
+.helpPoint{
+  padding-left: 10px;
+  padding-bottom: 5px;
+  font-size: 20px;
+}
+
+.info{
+  padding-top: 100px;
+  padding-left: 10px;
+  padding-bottom: 5px;
+  font-size: 20px;
+}
