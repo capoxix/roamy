@@ -251,10 +251,10 @@ class GMap extends React.Component {
   }
 
   updatePolygon = (endPoints) => {
-    console.log("updating polygon");
-    if (!endPoints || endPoints.length === 0) {
-      return
-    }
+    // console.log("updating polygon");
+    // if (!endPoints || endPoints.length === 0) {
+    //   return
+    // }
 
     this.polygon = new this.props.google.maps.Polygon({paths: endPoints});
     this.polygonComponent =
