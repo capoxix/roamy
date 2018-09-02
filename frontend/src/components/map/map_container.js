@@ -2,6 +2,8 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper, Polygon} from 'google-maps-re
 import {connect} from 'react-redux';
 import GMap from './gmap';
 import { sendQuery } from '../../actions/discover_actions';
+import '../../styling/header/header.css';
+import '../../index.css';
 
 const gAPI = require('../../config/keys').gAPI;
 

@@ -5,6 +5,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Kevin from './kevin';
 import Garbo from './garbo';
 import Tony from './tony';
+import '../../styling/header/header.css';
+import '../../index.css';
 
 class Footer extends React.Component {
 

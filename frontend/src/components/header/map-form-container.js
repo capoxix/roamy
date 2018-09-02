@@ -3,6 +3,7 @@ import {login, logoutUser, removeErrors} from '../../actions/session_actions';
 import {Link, withRouter} from 'react-router-dom';
 import MapForm from './map-form';
 import '../../styling/header/header.css';
+import '../../index.css';
 import { withStyles } from '@material-ui/core/styles';
 
 const styles = {

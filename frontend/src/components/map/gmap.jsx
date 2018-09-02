@@ -10,6 +10,8 @@ import Point from "../../util/point";
 import { track, getFavorites } from "../../util/location_api_util";
 import { connect } from "react-redux";
 import SearchIndex from "./search_index";
+import '../../styling/header/header.css';
+import '../../index.css';
 
 const gAPI = require("../../config/keys").gAPI;
 // import { MAP } from 'react-google-maps/lib/constants'

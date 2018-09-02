@@ -2,6 +2,9 @@ import {connect} from 'react-redux';
 import Header from './header';
 import {login, logoutUser} from '../../actions/session_actions';
 import {Link, withRouter} from 'react-router-dom';
+import '../../styling/header/header.css';
+import '../../index.css';
+
 
 const msp = (state, ownProps) => ({
   formType: 'Login',

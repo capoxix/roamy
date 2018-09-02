@@ -1,6 +1,8 @@
 import {connect} from 'react-redux';
 import UserForm from './user_form';
 import {register, removeErrors} from '../../actions/session_actions';
+import '../../styling/header/header.css';
+import '../../index.css';
 
 const msp = (state, ownProps) => ({
 //   errors: state.errors,

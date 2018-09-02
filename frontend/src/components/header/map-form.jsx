@@ -11,6 +11,8 @@ import Help from './help';
 import About from './about';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import lightBlue from '@material-ui/core/colors/lightBlue';
+import '../../styling/header/header.css';
+import '../../index.css';
 
 const theme = createMuiTheme({
   palette: {

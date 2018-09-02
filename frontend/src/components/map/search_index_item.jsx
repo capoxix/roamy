@@ -1,4 +1,6 @@
 import React from 'react';
+import '../../styling/header/header.css';
+import '../../index.css';
 
 class SearchIndexItem extends React.Component{
     render(){

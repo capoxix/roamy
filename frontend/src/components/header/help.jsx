@@ -13,6 +13,8 @@ import PersonIcon from '@material-ui/icons/Person';
 import AddIcon from '@material-ui/icons/Add';
 import Typography from '@material-ui/core/Typography';
 import blue from '@material-ui/core/colors/blue';
+import '../../styling/header/header.css';
+import '../../index.css';
 
 const styles = {
   avatar: {
