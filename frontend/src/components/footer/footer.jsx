@@ -5,7 +5,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Kevin from './kevin';
 import Garbo from './garbo';
 import Tony from './tony';
-
+import '../../styling/header/header.css';
+import '../../index.css';
 
 class Footer extends React.Component {
 
@@ -23,18 +24,20 @@ class Footer extends React.Component {
   render(){
     const { anchorEl } = this.state;
     return (
-      <div className="footer">
-        <Kevin/>
-        <Garbo/>
-        <Tony/>
+      <div className="footer" color="primary">
+        <div className="socialLinks">
+          <Kevin/>
+          <Garbo/>
+          <Tony/>
+        </div>
 
-      <div className="projectLinks">
-        <br/>
-        <br/>
-        <a className="socials" href="https://github.com/capoxix/intro-mongo">
-                <i className="fab fa-github"></i>
-              </a>
-      </div>
+        <div className="projectLinks">
+          <br/>
+          <br/>
+          <a className="githubRepo" href="https://github.com/capoxix/intro-mongo">
+            <i className="fab fa-github"></i>
+          </a>
+        </div>
 
 
       </div>

@@ -13,6 +13,8 @@ import PersonIcon from '@material-ui/icons/Person';
 import AddIcon from '@material-ui/icons/Add';
 import Typography from '@material-ui/core/Typography';
 import blue from '@material-ui/core/colors/blue';
+import '../../styling/header/header.css';
+import '../../index.css';
 
 const styles = {
   avatar: {
@@ -38,16 +40,29 @@ class SimpleDialog extends React.Component {
         <DialogTitle id="simple-dialog-title">Directions</DialogTitle>
 
         <div className="helpPoint">
-          • Step 1
+          • For All Users:
         </div>
         <div className="helpPoint">
-          • Step 2
+          1. Set Origin Location (Refer to Step 2)
         </div>
         <div className="helpPoint">
-          • Step 3
+          2. Click on Map, Type Location in SearchBar & Click "Go To Location" button, or Click on "Get Current Location" button
         </div>
         <div className="helpPoint">
-          • Enjoy!
+          3. Set Timeframe
+        </div>
+        <div className="helpPoint">
+          4. Click "Discover" Button
+        </div>
+        <div className="helpPoint">
+          5. Voila!
+        </div>
+        <br/>
+        <div className="helpPoint">
+          • For Logged-in Users:
+        </div>
+        <div className="helpPoint">
+           • Users can set and render their "favorite locations"
         </div>
 
       </Dialog>
@@ -63,7 +78,7 @@ SimpleDialog.propTypes = {
 
 const SimpleDialogWrapped = withStyles(styles)(SimpleDialog);
 
-class SimpleDialogDemo extends React.Component {
+class Help extends React.Component {
   state = {
     open: false
   };
@@ -94,4 +109,4 @@ class SimpleDialogDemo extends React.Component {
   }
 }
 
-export default SimpleDialogDemo;
+export default Help;

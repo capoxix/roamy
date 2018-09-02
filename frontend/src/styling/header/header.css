@@ -22,7 +22,7 @@
   justify-content: center;
   align-items: center;
   text-align: center;
-  height: 800px;
+  height: 850px;
   width: 100vw;
   background-position: center;
   background-repeat: no-repeat;
@@ -30,19 +30,19 @@
 }
 .mapWrapper1 {
   width: 500px !important;
-  height: 800px !important;
+  height: 850px !important;
   z-index: 1;
   position: flex !important;
 }
 .mapWrapper2 {
   width: 67vw !important;
-  height: 800px !important;
+  height: 850px !important;
   z-index: 1;
   position: flex !important;
 }
 .sideBar{
   overflow-y:auto;
-  height: 800px;
+  height: 850px;
 }
 .stickyButtons{
   position: fixed;
@@ -56,13 +56,12 @@
   font-size: 18px;
 }
 .MuiButton-label-44:hover{
-  color: white;
+  color: #0099e5;
 }
 
-/* .MuiPaper-root-12.MuiPaper-elevation24-38.MuiPaper-rounded-13.MuiDialog-paper-83.MuiDialog-paperScrollPaper-84.MuiDialog-paperWidthSm-87{
-  width: 500px;
-  height:500px;
-} */
+.MuiButton-root-120{
+  color: white;
+}
 
 .helpPoint{
   padding-left: 10px;
@@ -72,14 +71,11 @@
 
 .info{
   padding-left: 10px;
-  font-size: 14px;
+  font-size: 18px;
   padding-bottom: 10px;
 }
 
 .howToUse *{
   color: white;
   font-size: 18px;
-}
-.MuiButton-label-44:hover{
-  color: white;
 }

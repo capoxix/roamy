@@ -2,6 +2,8 @@ import {GoogleApiWrapper} from 'google-maps-react';
 import {connect} from 'react-redux';
 import GMap from './gmap';
 import { sendQuery } from '../../actions/discover_actions';
+import '../../styling/header/header.css';
+import '../../index.css';
 
 const gAPI = require('../../config/keys').gAPI;
 

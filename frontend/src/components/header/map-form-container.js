@@ -3,6 +3,7 @@ import {login, logoutUser, removeErrors} from '../../actions/session_actions';
 import {Link, withRouter} from 'react-router-dom';
 import MapForm from './map-form';
 import '../../styling/header/header.css';
+import '../../index.css';
 import { withStyles } from '@material-ui/core/styles';
 
 const styles = {
@@ -20,7 +21,7 @@ const styles = {
 
 const mapStateToProps = (state) => {
   return ({
-    formType: 'login',
+    formType: 'Login',
     currentUser: state.entities.users,
     name: state.entities.users.name
   });

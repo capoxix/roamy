@@ -2,9 +2,11 @@ import {connect} from 'react-redux';
 import SessionForm from './session_form';
 import {login, removeErrors} from '../../actions/session_actions';
 import {Link, withRouter} from 'react-router-dom';
+import '../../styling/header/header.css';
+import '../../index.css';
 
 const msp = (state, ownProps) => ({
-  formType: 'login',
+  formType: 'Login',
   errors: state.errors.session
 });
 
