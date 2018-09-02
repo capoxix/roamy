@@ -8,6 +8,7 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import {Route, Redirect, Switch, Link, HashRouter, withRouter} from 'react-router-dom';
 import Help from './help';
+import About from './about';
 
 class ButtonAppBar extends Component {
 
@@ -31,6 +32,7 @@ class ButtonAppBar extends Component {
         <AppBar position="static">
           <Toolbar>
             <Help/>
+            <About/>
             <Typography variant="title" color="inherit">
               <Link className="navBarLink" to={"/"} onClick={()=>this.props.removeErrors()}>Roamy</Link>
             </Typography>

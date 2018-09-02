@@ -35,21 +35,10 @@ class SimpleDialog extends React.Component {
 
     return (
       <Dialog onClose={this.handleClose} aria-labelledby="simple-dialog-title" {...other}>
-        <DialogTitle id="simple-dialog-title">Directions</DialogTitle>
-
-        <div className="helpPoint">
-          • Step 1
+        <DialogTitle id="simple-dialog-title">About</DialogTitle>
+        <div className="info">
+          Roamy is a single page web-application used to render a bubble that represents the area that a user can travel to given their current location, mode of transportation, and the time they have at their disposal. The user can also label their favorite points on the map and show the favorite points that are currently inside their travel bubble.
         </div>
-        <div className="helpPoint">
-          • Step 2
-        </div>
-        <div className="helpPoint">
-          • Step 3
-        </div>
-        <div className="helpPoint">
-          • Enjoy!
-        </div>
-
       </Dialog>
     );
   }
@@ -82,7 +71,7 @@ class SimpleDialogDemo extends React.Component {
     return (
       <div>
         <div className="howToUse">
-        <Button onClick={this.handleClickOpen}>How To Use</Button>
+        <Button onClick={this.handleClickOpen}>About</Button>
         </div>
         <SimpleDialogWrapped
           selectedValue={this.state.selectedValue}
