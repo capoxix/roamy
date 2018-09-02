@@ -9,7 +9,8 @@
     "server": "nodemon app.js",
     "frontend": "npm start --prefix frontend",
     "dev": "concurrently \"npm run server\" \"npm run frontend\"",
-    "debug": "node --inspect app.js"
+    "debug": "node --inspect app.js",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
   "author": "Tony Zhang",
   "license": "MIT",

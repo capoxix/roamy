@@ -70,10 +70,6 @@ class GMap extends React.Component {
         />
       )
     });
-    // console.log(this.state.clickedMarker);
-    console.log(this.props.google.maps.Size);
-    console.log(this.props.google.maps.Size(10,10,10,10));
-    // console.log(this.props.google.maps.Size(10,10));
   };
 
   componentWillReceiveProps(){
@@ -101,7 +97,7 @@ class GMap extends React.Component {
             scaledSize: new this.props.google.maps.Size(30,30)
           }}
         />;
-
+    this.setState({trackName: ''});
     let that = this;
     track(trackLocation).then(that.setState({trackedMarker: trackedMarker}));;//then(res => console.log("tracked", res));
   }
