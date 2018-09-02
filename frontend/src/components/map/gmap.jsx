@@ -338,7 +338,7 @@ class GMap extends React.Component {
         {this.polygonComponent}
       </Map>
     );
-
+    console.log("HEROKUUUUUUUUU");
     this.queryPlaces();
     let places = this.state.queryPlaces;
     let userButtons =  [];
