@@ -8,6 +8,16 @@ import Button from '@material-ui/core/Button';
 import Icon from '@material-ui/core/Icon';
 import classNames from 'classnames';
 
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import blue from '@material-ui/core/colors/blue';
+
+const theme = createMuiTheme({
+  palette: {
+    primary: { main: blue[900] }, // Purple and green play nicely together.
+    // secondary: { main: '#11cb5f' }, // This is just green.A700 as hex.
+  },
+});
+
 class UserForm extends React.Component {
 
   constructor(props) {
@@ -76,6 +86,7 @@ class UserForm extends React.Component {
 
       return(
         <div className= "form-container">
+          <MuiThemeProvider theme={theme}>
           <div className="form">
             <ul className="error">
             </ul>
@@ -129,6 +140,8 @@ class UserForm extends React.Component {
             </form>
 
           </div>
+        </MuiThemeProvider>
+        <br/>
         </div>
       );
     }

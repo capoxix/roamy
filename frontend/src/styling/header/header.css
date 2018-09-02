@@ -22,7 +22,7 @@
   justify-content: center;
   align-items: center;
   text-align: center;
-  height: 800px;
+  height: 850px;
   width: 100vw;
   background-position: center;
   background-repeat: no-repeat;
@@ -30,19 +30,19 @@
 }
 .mapWrapper1 {
   width: 500px !important;
-  height: 800px !important;
+  height: 850px !important;
   z-index: 1;
   position: flex !important;
 }
 .mapWrapper2 {
   width: 67vw !important;
-  height: 800px !important;
+  height: 850px !important;
   z-index: 1;
   position: flex !important;
 }
 .sideBar{
   overflow-y:auto;
-  height: 800px;
+  height: 850px;
 }
 .stickyButtons{
   position: fixed;
@@ -57,6 +57,10 @@
 }
 .MuiButton-label-44:hover{
   color: #0099e5;
+}
+
+.MuiButton-root-120{
+  color: white;
 }
 
 .helpPoint{

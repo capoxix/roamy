@@ -20,7 +20,7 @@ const styles = {
 
 const mapStateToProps = (state) => {
   return ({
-    formType: 'login',
+    formType: 'Login',
     currentUser: state.entities.users,
     name: state.entities.users.name
   });

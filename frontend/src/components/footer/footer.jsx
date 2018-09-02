@@ -6,7 +6,6 @@ import Kevin from './kevin';
 import Garbo from './garbo';
 import Tony from './tony';
 
-
 class Footer extends React.Component {
 
   state = {
@@ -23,7 +22,7 @@ class Footer extends React.Component {
   render(){
     const { anchorEl } = this.state;
     return (
-      <div className="footer">
+      <div className="footer" color="primary">
         <div className="socialLinks">
           <Kevin/>
           <Garbo/>
@@ -33,7 +32,7 @@ class Footer extends React.Component {
         <div className="projectLinks">
           <br/>
           <br/>
-          <a className="socials" href="https://github.com/capoxix/intro-mongo">
+          <a className="githubRepo" href="https://github.com/capoxix/intro-mongo">
             <i className="fab fa-github"></i>
           </a>
         </div>

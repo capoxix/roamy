@@ -4,7 +4,7 @@ import {register, removeErrors} from '../../actions/session_actions';
 
 const msp = (state, ownProps) => ({
 //   errors: state.errors,
-  formType: 'register',
+  formType: 'Register',
   user: {
     name: '',
     email: '',

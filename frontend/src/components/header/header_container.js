@@ -4,7 +4,7 @@ import {login, logoutUser} from '../../actions/session_actions';
 import {Link, withRouter} from 'react-router-dom';
 
 const msp = (state, ownProps) => ({
-  formType: 'login',
+  formType: 'Login',
   currentUser: state.entities.users
 });
 

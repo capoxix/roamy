@@ -8,6 +8,16 @@ import Button from '@material-ui/core/Button';
 import Icon from '@material-ui/core/Icon';
 import classNames from 'classnames';
 
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import blue from '@material-ui/core/colors/blue';
+
+const theme = createMuiTheme({
+  palette: {
+    primary: { main: blue[900] }, // Purple and green play nicely together.
+    // secondary: { main: '#11cb5f' }, // This is just green.A700 as hex.
+  },
+});
+
 class SessionForm extends React.Component {
 
   constructor(props) {
@@ -47,6 +57,7 @@ class SessionForm extends React.Component {
   render(){
     return(
       <div className='form-container'>
+        <MuiThemeProvider theme={theme}>
         <div className='form'>
           <ul className='error'>
 
@@ -75,7 +86,7 @@ class SessionForm extends React.Component {
                 type="password"
                 />
               <br/>
-                <Button variant="contained" color="primary" type="submit">
+                <Button variant="contained" color="primary" type="submit" color="primary">
                   <i className="far fa-caret-square-right"></i>
                   Submit
                 </Button>
@@ -83,6 +94,8 @@ class SessionForm extends React.Component {
 
           </form>
         </div>
+      </MuiThemeProvider>
+      <br/>
       </div>
     );
   }

@@ -4,7 +4,7 @@ import {login, removeErrors} from '../../actions/session_actions';
 import {Link, withRouter} from 'react-router-dom';
 
 const msp = (state, ownProps) => ({
-  formType: 'login',
+  formType: 'Login',
   errors: state.errors
 });
 
