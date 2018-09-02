@@ -63,7 +63,7 @@ SimpleDialog.propTypes = {
 
 const SimpleDialogWrapped = withStyles(styles)(SimpleDialog);
 
-class SimpleDialogDemo extends React.Component {
+class Help extends React.Component {
   state = {
     open: false
   };
@@ -94,4 +94,4 @@ class SimpleDialogDemo extends React.Component {
   }
 }
 
-export default SimpleDialogDemo;
+export default Help;

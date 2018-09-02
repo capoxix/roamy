@@ -56,13 +56,8 @@
   font-size: 18px;
 }
 .MuiButton-label-44:hover{
-  color: white;
+  color: #0099e5;
 }
-
-/* .MuiPaper-root-12.MuiPaper-elevation24-38.MuiPaper-rounded-13.MuiDialog-paper-83.MuiDialog-paperScrollPaper-84.MuiDialog-paperWidthSm-87{
-  width: 500px;
-  height:500px;
-} */
 
 .helpPoint{
   padding-left: 10px;
@@ -79,7 +74,4 @@
 .howToUse *{
   color: white;
   font-size: 18px;
-}
-.MuiButton-label-44:hover{
-  color: white;
 }

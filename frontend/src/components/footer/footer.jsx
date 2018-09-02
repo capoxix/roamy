@@ -24,17 +24,19 @@ class Footer extends React.Component {
     const { anchorEl } = this.state;
     return (
       <div className="footer">
-        <Kevin/>
-        <Garbo/>
-        <Tony/>
+        <div className="socialLinks">
+          <Kevin/>
+          <Garbo/>
+          <Tony/>
+        </div>
 
-      <div className="projectLinks">
-        <br/>
-        <br/>
-        <a className="socials" href="https://github.com/capoxix/intro-mongo">
-                <i className="fab fa-github"></i>
-              </a>
-      </div>
+        <div className="projectLinks">
+          <br/>
+          <br/>
+          <a className="socials" href="https://github.com/capoxix/intro-mongo">
+            <i className="fab fa-github"></i>
+          </a>
+        </div>
 
 
       </div>

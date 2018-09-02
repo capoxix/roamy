@@ -60,7 +60,7 @@ a{
 
 .submit{
   background-color: green;
-  color: white;
+  color: black;
   width: 185px;
   font-weight: bolder;
   background-color: #0099e5;
@@ -80,7 +80,6 @@ a{
 }
 
 .footer {
-  position: absolute;
   display: flex;
   justify-content: space-between;
   bottom: 0px;
@@ -90,8 +89,14 @@ a{
 }
 
 .MuiButtonBase-root-49.MuiButton-root-91.MuiButton-text-93.MuiButton-flat-96{
-  width: 150px;
-  height: 100px;
+  width: 100px;
+  height: 50px;
+}
+
+.socialLinks{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
 }
 
 
