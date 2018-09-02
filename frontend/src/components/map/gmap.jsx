@@ -64,13 +64,16 @@ class GMap extends React.Component {
           name={"Clicked point"}
           position={{ lat: e.latLng.lat(), lng: e.latLng.lng() }}
           icon={{
-            path: this.props.google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
-            scale: 5
+            url: 'https://s3-us-west-1.amazonaws.com/sports-with-strangers-dev/clicked_icon.png',
+            scaledSize: new this.props.google.maps.Size(30,30)
           }}
         />
       )
     });
-    // console.log(e);
+    // console.log(this.state.clickedMarker);
+    console.log(this.props.google.maps.Size);
+    console.log(this.props.google.maps.Size(10,10,10,10));
+    // console.log(this.props.google.maps.Size(10,10));
   };
 
   componentWillReceiveProps(){
@@ -94,8 +97,8 @@ class GMap extends React.Component {
           name={this.state.trackName}
           position={{ lat: this.state.clicked.lat, lng: this.state.clicked.lng }}
           icon={{
-            path: this.props.google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
-            scale: 5
+            url: 'https://s3-us-west-1.amazonaws.com/sports-with-strangers-dev/track_icon.png',
+            scaledSize: new this.props.google.maps.Size(30,30)
           }}
         />;
 
@@ -135,6 +138,10 @@ class GMap extends React.Component {
               onClick={this.onMarkerClick}
               name={favorite.name}
               position={{ lat: `${favorite.lat}`, lng: `${favorite.lng}` }}
+              icon={{
+                url: 'https://s3-us-west-1.amazonaws.com/sports-with-strangers-dev/favorite_icon.png',
+                scaledSize: new this.props.google.maps.Size(30,30)
+              }}
             />
           );
         }
@@ -160,8 +167,8 @@ class GMap extends React.Component {
               name={"CURRENT LOCATION"}
               position={that.state.center}
               icon={{
-                path: that.props.google.maps.SymbolPath.CIRCLE,
-                scale: 10
+                url: 'https://s3-us-west-1.amazonaws.com/sports-with-strangers-dev/current_location.png',
+                scaledSize: new that.props.google.maps.Size(30,30)
               }}
             />
           )
@@ -248,7 +255,7 @@ class GMap extends React.Component {
   }
 
   markFoundPlace(place){
-
+    let that = this;
     this.setState({ clicked: { lat: place.geometry.location.lat(), lng: place.geometry.location.lng(), minutes: this.state.minutes } });
     this.setState({
         clickedMarker: (
@@ -257,8 +264,8 @@ class GMap extends React.Component {
             name={place.name}
             position={{ lat: place.geometry.location.lat(), lng: place.geometry.location.lng() }}
             icon={{
-              path: this.props.google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
-              scale: 5
+              url: 'https://s3-us-west-1.amazonaws.com/sports-with-strangers-dev/clicked_icon.png',
+              scaledSize: new that.props.google.maps.Size(30,30)
             }}
           />
         )
@@ -293,7 +300,8 @@ class GMap extends React.Component {
 
   discover = (e) => {
     e.preventDefault();
-    this.props.sendQuery(this.state.clicked);
+    let that = this;
+    this.props.sendQuery(this.state.clicked).then(that.setState({trackedMarker: []}));
   }
 
 
