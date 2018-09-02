@@ -329,8 +329,6 @@ class GMap extends React.Component {
     return (
       <div>
         <div>
-
-
             <div className="bodyWrapper">
                 <div className="mapWrapper1">
                   {this.mapComponent}
