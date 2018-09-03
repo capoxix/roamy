@@ -8,7 +8,7 @@ class SearchIndexItem extends React.Component{
         // console.log('place in SearchIndexItem', place);
         // console.log(place.place);
         return (
-            <div>
+            <div className="index-item">
                 <div className="place-icon">
                     <img src={place.icon}></img>
                     <div className="place-name">
