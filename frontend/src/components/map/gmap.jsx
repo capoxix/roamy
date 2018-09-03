@@ -339,34 +339,37 @@ class GMap extends React.Component {
                 <div className="mapWrapper1">
                   {this.mapComponent}
                 </div>
+
                 <div className="sideBar">
                   <div className="stickyButtons">
-                 {userButtons}
-                  <button type='button' onClick={()=> this.getCurrentLocation()}>Get Current Location</button>
-                  <input type='text'
+                    {userButtons}
+                    <button type='button' onClick={()=> this.getCurrentLocation()}>Get Current Location</button>
+                    <input type='text'
                       onChange={this.update('query')}
                       value={this.state.query}
                       placeholder="Search Place"/>
-                  <button type='button' onClick={()=>this.findPlaceAndMark()}>Go to location</button>
-                  <select id="time" name="time" onChange={this.update("minutes")}>
-                    <option value="5" selected="true">5</option>
-                    <option value="10">10</option>
-                    <option value="15">15</option>
-                    <option value="20">20</option>
-                    <option value="25">25</option>
-                    <option value="30">30</option>
-                    <option value="35">35</option>
-                    <option value="40">40</option>
-                    <option value="45">45</option>
-                    <option value="50">50</option>
-                    <option value="55">55</option>
-                    <option value="60">60</option>
-                  </select>
-                  <button type='button' onClick={this.discover}>Discover</button>
+                    <button type='button' onClick={()=>this.findPlaceAndMark()}>Go to location</button>
+                    <select id="time" name="time" onChange={this.update("minutes")}>
+                      <option value="5" selected="true">5</option>
+                      <option value="10">10</option>
+                      <option value="15">15</option>
+                      <option value="20">20</option>
+                      <option value="25">25</option>
+                      <option value="30">30</option>
+                      <option value="35">35</option>
+                      <option value="40">40</option>
+                      <option value="45">45</option>
+                      <option value="50">50</option>
+                      <option value="55">55</option>
+                      <option value="60">60</option>
+                    </select>
+                    <button type='button' onClick={this.discover}>Discover</button>
                   </div>
+
                   <div className="searchResults fadeIn">
                     <SearchIndex places={places}/>
-                    </div>
+                  </div>
+                  
                 </div>
             </div>
         </div>
