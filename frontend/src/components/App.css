@@ -152,6 +152,7 @@ body {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    position: relative;
   }
   .mapWrapper1 {
     width: 500px !important;
@@ -166,20 +167,21 @@ body {
     position: flex !important;
   }
   .sideBar{
-    overflow-y:auto;
     height: 850px;
   }
   #sticky-buttons{
-    float: left;
   }
   
-  .sticky {
+  .search-sticky {
     position: fixed;
     top: 0;
     align-items: center;
+    background-color: white;
   }
   .searchResults{
     padding-top: 50px;
+    overflow-y: auto;
+    height: 700px;
   }
   
   .MuiButton-label-44{

@@ -283,27 +283,6 @@ class GMap extends React.Component {
   }
 
 
-  componentDidMount() {
-    
-    function stickeh() {
-      if (window.pageYOffset >= 64) {
-        node.classList.add("sticky")
-      } else {
-        node.classList.remove("sticky");
-      }
-    }
-
-    window.onscroll = () => stickeh(); 
-    const node = document.getElementById("sticky-buttons")
-    console.log(node)
-    // console.log(window)
-  }
-
-  monitorNav = () => {
-
-  }
-
-
   render() {
 
     this.updatePolygon(this.props.endPoints)
