@@ -37,9 +37,31 @@ class SimpleDialog extends React.Component {
 
     return (
       <Dialog onClose={this.handleClose} aria-labelledby="simple-dialog-title" {...other}>
-        <DialogTitle id="simple-dialog-title">About</DialogTitle>
         <div className="info">
-          Roamy is a single page web-application used to render a bubble that represents the area that a user can travel to given their current location, mode of transportation, and the time they have at their disposal. The user can also label their favorite points on the map and show the favorite points that are currently inside their travel bubble.
+          <div className="1-1">
+            Roamy is a single page web-application used to render a bubble that represents the area that a user can travel to, by car, considering the time they have at their disposal.
+          </div>
+
+          <div className="1-2">
+            <img src="https://www.mavenwave.com/wp-content/uploads/2016/07/locate.png"></img>
+          </div>
+
+          <div className="2-1">
+            <img src="https://www.mavenwave.com/wp-content/uploads/2016/07/engage.png"></img>
+          </div>
+
+          <div className="2-2">
+            The bubble is dynamically updated using Google's Distance Matrix API.
+          </div>
+          <div className="3-1">
+            The user can also label their favorite points on the map and show the favorite points that are currently inside their travel bubble.
+          </div>
+
+          <div className="3-2">
+            <img src="https://www.mavenwave.com/wp-content/uploads/2016/07/act.png"></img>
+          </div>
+
+
         </div>
       </Dialog>
     );
@@ -73,13 +95,13 @@ class About extends React.Component {
     return (
       <div>
         <div className="howToUse">
-        <Button onClick={this.handleClickOpen}>About</Button>
+          <Button onClick={this.handleClickOpen}>About</Button>
         </div>
         <SimpleDialogWrapped
           selectedValue={this.state.selectedValue}
           open={this.state.open}
           onClose={this.handleClose}
-        />
+          />
       </div>
     );
   }

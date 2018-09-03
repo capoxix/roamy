@@ -37,33 +37,35 @@ class SimpleDialog extends React.Component {
 
     return (
       <Dialog onClose={this.handleClose} aria-labelledby="simple-dialog-title" {...other}>
-        <DialogTitle id="simple-dialog-title">Directions</DialogTitle>
+        <div className="directions">
+        <div className="1-1">
+          Set Origin Location, by either clicking the "Get Current Location" button, typing in location and clicking on "Go To Location" button, or simply by clicking on the map.
+        </div>
 
-        <div className="helpPoint">
-          • For All Users:
+        <div className="1-2">
+          <img src="http://tse4.mm.bing.net/th?id=OIP.KlbjRykc-rX0K-_YClTK9wHaHa&w=190&h=190&c=8&o=5&pid=1.7"></img>
         </div>
-        <div className="helpPoint">
-          1. Set Origin Location (Refer to Step 2)
+
+        <div className="2-1">
+          <img src="https://tse1.mm.bing.net/th?id=OIP.TAAU5G5Z_vQCM2wJYedbBAHaHa&w=190&h=190&c=8&o=5&pid=1.7"></img>
         </div>
-        <div className="helpPoint">
-          2. Click on Map, Type Location in SearchBar & Click "Go To Location" button, or Click on "Get Current Location" button
+
+        <div className="2-2">
+          Select timeframe available.
         </div>
-        <div className="helpPoint">
-          3. Set Timeframe
+        <div className="3-1">
+          Click "Discover" Button to fire off your search and enjoy!
         </div>
-        <div className="helpPoint">
-          4. Click "Discover" Button
+        <div className="3-2">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5M0M5Xbl-NY88IO6Hk_1HpytW-7bN0HWePs_bvisPtGKKGx5v"></img>
         </div>
-        <div className="helpPoint">
-          5. Voila!
+        <div className="5-1">
+          <img src="https://tse4.mm.bing.net/th?id=OIP.9_WA93uE6tx2Poz_J6IzKAHaHa&w=190&h=190&c=8&o=5&pid=1.7"></img>
         </div>
-        <br/>
-        <div className="helpPoint">
-          • For Logged-in Users:
+        <div className="5-2">
+           Logged in users have the additional option to set and view their favorite locations.
         </div>
-        <div className="helpPoint">
-           • Users can set and render their "favorite locations"
-        </div>
+      </div>
 
       </Dialog>
     );
