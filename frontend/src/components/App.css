@@ -1,0 +1,207 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
+  }
+  
+  
+  .form{
+    padding-left: 20px;
+  }
+  
+  .searchBar{
+    padding-left: 0px;
+  }
+  
+  i {
+    font-size: 20px;
+    padding-bottom: 3px;
+    padding-right: 5px;
+  }
+  
+  .map-form {
+    height: 100%;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 3px;
+  }
+  
+  .MuiToolbar-root-39 {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  a{
+    text-decoration: none;
+    color: white;
+  }
+  
+  
+  .leftNav *{
+    display: inline;
+  }
+  
+  .MuiInput-input-115 {
+    width: 175px;
+    margin: 0 auto;
+    font-size: 14px;
+  }
+  
+  .MuiFormControl-root-91.MuiFormControl-marginNormal-92.textfield{
+    margin-right: 5px;
+  }
+  
+  .form-container *{
+    display: block;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  
+  .submit{
+    background-color: green;
+    color: black;
+    width: 185px;
+    font-weight: bolder;
+    background-color: #0099e5;
+  }
+  
+  .submit:hover{
+    background-color: #008080;
+  }
+  
+  .navBarLink{
+    text-decoration: none;
+    color: white;
+  }
+  
+  .navBarLink:hover{
+    color: #999999;
+  }
+  
+  .footer {
+    display: flex;
+    justify-content: space-between;
+    bottom: 0px;
+    display: flex;
+    height: 60px !important;
+    width: 100vw;
+    background-color: #0A466D;
+  }
+  
+  .MuiButtonBase-root-49.MuiButton-root-91.MuiButton-text-93.MuiButton-flat-96{
+    width: 100px;
+    height: 50px;
+  }
+  
+  .socialLinks{
+    display: flex;
+    justify-content: space-between;
+    padding-top: 10px;
+  }
+  
+  .MuiButtonBase-root-146.MuiButton-root-120.MuiButton-text-122.MuiButton-flat-125{
+    color: white;
+  }
+  .MuiButtonBase-root-146.MuiButton-root-120.MuiButton-text-122.MuiButton-flat-125:hover{
+    color: grey;
+  }
+  
+  
+  .socials {
+    color: black;
+  }
+  
+  .socials:hover{
+    color: #0099e5;
+  }
+  
+  .githubRepo{
+    color: white;
+  }
+  .githubRepo:hover{
+    color: grey;
+  }
+  
+  .header-wrapper {
+    border: 1px solid grey;
+    display: flex;
+    width: 100%;
+    height: 56px;
+    padding-right: 10px;
+    margin-top: 5px;
+  }
+  .time-label > input {
+    width: 50px;
+    height: 40px;
+    border-radius: 4px;
+    font-size: 28px;
+    text-align: center;
+  }
+  .login-wrapper {
+    border: 1px solid grey;
+  }
+  .bodyWrapper {
+    display: grid;
+    grid-template-columns: minmax(250px, 2fr) minmax(250px, 1fr);
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 850px;
+    width: 100vw;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  .mapWrapper1 {
+    width: 500px !important;
+    height: 850px !important;
+    z-index: 1;
+    position: flex !important;
+  }
+  .mapWrapper2 {
+    width: 67vw !important;
+    height: 850px !important;
+    z-index: 1;
+    position: flex !important;
+  }
+  .sideBar{
+    overflow-y:auto;
+    height: 850px;
+  }
+  .stickyButtons{
+    position: fixed;
+  }
+  .searchResults{
+    padding-top: 50px;
+  }
+  
+  .MuiButton-label-44{
+    color: black;
+    font-size: 18px;
+  }
+  .MuiButton-label-44:hover{
+    color: #0099e5;
+  }
+  
+  .MuiButton-root-120{
+    color: white;
+  }
+  
+  .helpPoint{
+    padding-left: 10px;
+    padding-bottom: 10px;
+    font-size: 20px;
+  }
+  
+  .info{
+    padding-left: 10px;
+    font-size: 18px;
+    padding-bottom: 10px;
+  }
+  
+  .howToUse *{
+    color: white;
+    font-size: 18px;
+  }
+  

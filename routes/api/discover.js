@@ -63,8 +63,10 @@ async function curryPoints(endPoints, origin) {
   for (let i = 0 ; i <  endPoints.length; i++) {
     // && (origin.minutes + 2.5) < endPoints[i].minutes
     if (!endPoints[i].destroy && (origin.minutes + 2.5) > endPoints[i].minutes) {
-      results.push(endPoints[i])
-      await fixLatLng(endPoints[i], geocoder)
+      if (endPoints[i].lat && endPoints[i].lng && endPoints[i].minutes) {
+        results.push(endPoints[i])
+        await fixLatLng(endPoints[i], geocoder)
+      }
     }
   }
 
@@ -72,16 +74,35 @@ async function curryPoints(endPoints, origin) {
 };
 
 async function fixLatLng(point, geocoder) {
-  const dLatkm = 0.003604 * 2.5;
-  const dLngkm =  0.0045402 * 2.5;
+  const dLat200m = 0.003604 * 0.5;
+  const dLng200m =  0.0045402 * 0.5;
 
   const promise = await geocoder.geocode(point.address)
     // if point difference is too big, just keep original points
-    if (Math.abs(point.lat - promise[0].latitude) < dLatkm
-      && Math.abs(point.lng - promise[0].longitude) < dLngkm) {
+    console.log('llllllllllllllllllllllllll')
+    console.log(point.lat)
+    console.log(promise[0].latitude)
+    console.log('dlat is: ', Math.abs(point.lat - promise[0].latitude))
+    console.log('dlat is bool: ', Math.abs(point.lat - promise[0].latitude) < dLat200m)
+    console.log(point.lng)
+    console.log(promise[0].longitude)
+    console.log('dlng is: ', Math.abs(point.lng - promise[0].longitude))
+    console.log('dlng is bool: ', Math.abs(point.lng - promise[0].longitude) < dLng200m)
+
+    if (!promise[0].latitude || !promise[0].longitude) { return }
+
+    if (Math.abs(point.lat - promise[0].latitude) > dLat200m || Math.abs(point.lng - promise[0].longitude) > dLng200m) {
+
+      console.log('hit')
+      console.log('hit')
+      
       point.lat = promise[0].latitude
       point.lng = promise[0].longitude
     }
+    console.log('')
+    console.log('')
+    console.log('')
+    console.log('')
 }
 
 

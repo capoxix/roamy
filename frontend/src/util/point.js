@@ -44,7 +44,7 @@ class Point {
     const dLat = 0.003604 * this.minutes;
     const dLng =  0.0045402 * this.minutes;
 
-    let numPoints = 8;
+    let numPoints = 20;
     let angle = 360 / numPoints;
     let currentAngle = 0;
   
@@ -173,7 +173,7 @@ class Point {
     const topLat = 37.87214;
     const botLat = 37.814642;
     const westLng = -122.45507;
-    const eastLng = 122.39318;
+    const eastLng = -122.39318;
 
     if (this.lat < topLat
       && this.lat > botLat
