@@ -14,13 +14,13 @@ export const receiveFavorites = favorites => ({
     favorites
 });
 
-export const receiveTrackedInput = trackInput => ({
+export const receiveTrackedInput = trackedInput => ({
     type: RECEIVE_TRACKED_INPUT,
-    trackedIput
+    trackedInput
 })
 
 export const getFavoritePoints = (userId) => (dispatch) => API.getFavorites(userId)
-    .then(favorites => dispatch(receiveFavorites(favorites)));
+    .then(favorites => dispatch(receiveFavorites(favorites.data)));
 
 export const trackInput = (location) => (dispatch) => API.track(location)
-    .then(location => dispatch(receiveTrackedInput(location)));
+    .then(location => dispatch(receiveTrackedInput(location.data)));
