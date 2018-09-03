@@ -171,7 +171,7 @@ body {
   }
 
   .sticky-buttons {
-    padding-top: 12px;
+    padding-top: 6px;
     font-size: 24px;
 
 
@@ -180,7 +180,7 @@ body {
   .discover-wrapper {
     padding-top: 9px;
     padding-bottom: 9px;
-    border-bottom: 1px solid gray;
+    border-bottom: 1px solid #eaeaea;
   }
 
   .discover-wrapper select {
@@ -214,6 +214,18 @@ body {
     cursor: pointer;
   }
   
+
+  form > button {
+    color: white;
+    font-size: 18px;
+    font-weight: 700;
+    border: none;
+    background-color: white;
+    padding: 7px 9px 7px 9px;
+    border-radius: 4px;
+    background-color: #01579b;
+    margin-right: 9px;
+  }
   .sticky-buttons > button {
     color: white;
     font-size: 18px;
@@ -233,6 +245,7 @@ body {
     padding: 7px 9px 7px 9px;
     border-radius: 4px;
     margin-right: 9px;
+    margin-top: 8px;
   }
   
   
@@ -246,6 +259,22 @@ body {
     padding-top: 50px;
     overflow-y: auto;
     height: 700px;
+    background-color: #eaeaea;
+  }
+  
+  .search-index {
+    /* border: 1px solid blue;
+    border-radius: 4px;
+    align-content: center; */
+    
+  }
+  
+  .index-item {
+    border-radius: 6px;
+    width: 94%;
+    margin: 0 auto;
+    margin-bottom: 8px;
+    background-color: white;
   }
   
   .MuiButton-label-44{

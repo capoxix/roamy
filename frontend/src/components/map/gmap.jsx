@@ -330,7 +330,7 @@ class GMap extends React.Component {
                           placeholder="Favorite place name"
                           required
                         />
-                        <input type='submit' value="TRACK LOCATION"/>
+                        <button type='submit'>TRACK LOCATION</button>
                         </form>
                       ];
                       }
