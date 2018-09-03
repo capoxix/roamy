@@ -16,6 +16,8 @@ class GMap extends React.Component {
     this.getServiceAndMap = this.getServiceAndMap.bind(this);
     this.update = this.update.bind(this);
     this.trackInput = this.trackInput.bind(this);
+    this.addFavoritesToMarkers = this.addFavoritesToMarkers.bind(this);
+    this.setMarkersIntoMap = this.setMarkersIntoMap.bind(this);
   }
   state = {
     showingInfoWindow: false,
@@ -213,7 +215,6 @@ class GMap extends React.Component {
 
       let that = this;
       /*find place when given location address or name or lat,lng */
-      /* repush */
 
       function findPlace(result, status) {
           /* result is resulting places, which comes in as an array of objects
