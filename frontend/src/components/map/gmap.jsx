@@ -102,13 +102,16 @@ class GMap extends React.Component {
   /*get favorites locations of user & set to map */
   addFavoritesToMarkers() {
     let that = this;
-    getFavorites(this.props.userId).then(favorites =>
-      that.setMarkersIntoMap(favorites.data)
+    getFavorites(this.props.userId).then(favorites => {
+      console.log("in addFavoritesToMarkers", favorites.data);
+      that.setMarkersIntoMap(favorites.data);
+      }
     );
   }
 
   /*set favorite markers into map */
   setMarkersIntoMap(favoriteDataArr) {
+    console.log("in setMarketsIntoMap",favoriteDataArr);
     let that = this;
     let favoritesMarkersArr = favoriteDataArr.map(favorite => {
       // create a new LatLng object with favorite's lat and lng
