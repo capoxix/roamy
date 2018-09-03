@@ -24,6 +24,10 @@ i {
   display: flex;
   justify-content: space-between;
 }
+.jss39.jss41.jss40{
+  display: flex;
+  justify-content: space-between;
+}
 a{
   text-decoration: none;
   color: white;
@@ -36,7 +40,15 @@ a{
   margin: 0 auto;
   font-size: 14px;
 }
+.jss115{
+  width: 175px;
+  margin: 0 auto;
+  font-size: 14px;
+}
 .MuiFormControl-root-91.MuiFormControl-marginNormal-92.textfield{
+  margin-right: 5px;
+}
+.jss91.jss92{
   margin-right: 5px;
 }
 .form-container *{
@@ -75,6 +87,10 @@ a{
   width: 100px;
   height: 50px;
 }
+.jss49.jss91.jss93.jss96{
+  width: 100px;
+  height: 50px;
+}
 .socialLinks{
   display: flex;
   justify-content: space-between;
@@ -84,6 +100,12 @@ a{
   color: white;
 }
 .MuiButtonBase-root-146.MuiButton-root-120.MuiButton-text-122.MuiButton-flat-125:hover{
+  color: grey;
+}
+.jss146.jss120.jss122.jss125{
+  color: white;
+}
+.jss146.jss120.jss122.jss125:hover{
   color: grey;
 }
 .socials {
@@ -154,13 +176,26 @@ a{
   color: black;
   font-size: 18px;
 }
+.jss44{
+  color: black;
+  font-size: 18px;
+}
+.jss44{
+  color: #0099e5;
+}
 .MuiButton-label-44:hover{
   color: #0099e5;
 }
 .MuiButton-root-120{
   color: white;
 }
+.jss120{
+  color: white;
+}
 .jss121{
+  color: white;
+}
+.jss122{
   color: white;
 }
 .helpPoint{
