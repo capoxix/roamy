@@ -283,6 +283,27 @@ class GMap extends React.Component {
   }
 
 
+  componentDidMount() {
+    
+    function stickeh() {
+      if (window.pageYOffset >= 64) {
+        node.classList.add("sticky")
+      } else {
+        node.classList.remove("sticky");
+      }
+    }
+
+    window.onscroll = () => stickeh(); 
+    const node = document.getElementById("sticky-buttons")
+    console.log(node)
+    // console.log(window)
+  }
+
+  monitorNav = () => {
+
+  }
+
+
   render() {
 
     this.updatePolygon(this.props.endPoints)
@@ -341,7 +362,7 @@ class GMap extends React.Component {
                 </div>
 
                 <div className="sideBar">
-                  <div className="stickyButtons">
+                  <div id="sticky-buttons">
                     {userButtons}
                     <button type='button' onClick={()=> this.getCurrentLocation()}>Get Current Location</button>
                     <input type='text'
@@ -369,7 +390,7 @@ class GMap extends React.Component {
                   <div className="searchResults fadeIn">
                     <SearchIndex places={places}/>
                   </div>
-                  
+
                 </div>
             </div>
         </div>

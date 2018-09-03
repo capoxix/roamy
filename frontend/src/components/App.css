@@ -169,8 +169,14 @@ body {
     overflow-y:auto;
     height: 850px;
   }
-  .stickyButtons{
+  #sticky-buttons{
+    float: left;
+  }
+  
+  .sticky {
     position: fixed;
+    top: 0;
+    align-items: center;
   }
   .searchResults{
     padding-top: 50px;
