@@ -213,6 +213,7 @@ class GMap extends React.Component {
 
       let that = this;
       /*find place when given location address or name or lat,lng */
+      /* repush */
 
       function findPlace(result, status) {
           /* result is resulting places, which comes in as an array of objects
