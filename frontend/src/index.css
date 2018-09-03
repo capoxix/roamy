@@ -198,16 +198,49 @@ a{
 .jss122{
   color: white;
 }
+
+.MuiButton-label-186{
+  color: white;
+}
+
+.jss186{
+  color: white;
+}
+
+.jss211.jss185.jss187.jss190{
+  color:white;
+}
+
 .helpPoint{
   padding-left: 10px;
   padding-bottom: 10px;
   font-size: 20px;
 }
 .info{
+  display: grid;
+  grid-template-columns: minmax(250px, 2fr) minmax(250px, 1fr);
+  justify-content: center;
+  align-items: center;
+  text-align: center;
   padding-left: 10px;
   font-size: 18px;
   padding-bottom: 10px;
 }
+.directions{
+  display: grid;
+  grid-template-columns: minmax(250px, 2fr) minmax(250px, 1fr);
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding-left: 10px;
+  font-size: 18px;
+  padding-bottom: 10px;
+}
+
+.div2-1{
+  display: block;
+}
+
 .howToUse *{
   color: white;
   font-size: 18px;
