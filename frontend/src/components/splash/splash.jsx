@@ -6,16 +6,24 @@ const splash = () => {
     <div className="splash_container">
       <div className="header">
         <div id="large_header_text" className="animated fadeIn delay-2s">How Far Are You From Everywhere You Want To Go?</div>
-        <div id="medium_header_text" className="animated fadeIn delay-2s">Find your happy places in your immediate vicinity!</div>
-        <Link to="/signup" id="second_sign_up">Join Roamy</Link>
+        <div id="medium_header_text" className="animated fadeIn delay-2s">Discover great places in your immediate vicinity!</div>
+        <Link to="/map" id="second_sign_up">Let's Go!</Link>
       </div>
-      <div className="splash_header_1">The top photos, chosen by you</div>
+      <div className="splash_header_1">Favorite locations, chosen by you</div>
       <div className="splash_caption_1">Discover what’s trending according to photographers around the world.</div>
       <div className="top_photos">
-        <div className="1-1"><img src="./assets/images/patagonia1.jpg"></img></div>
-        <div className="1-2"><img src="../../assets/images/patagonia1.jpg"></img></div>
-        <div className="2-1"><img src="../../assets/images/patagonia1.jpg"></img></div>
-        <div className="2-2"><img src="../../assets/images/patagonia1.jpg"></img></div>
+        <div className="1-1">
+          <img src="https://s3-us-west-1.amazonaws.com/720hd-prod/banff2.jpg"></img>
+        </div>
+        <div className="1-2">
+          <img src="https://s3-us-west-1.amazonaws.com/720hd-prod/patagonia.jpg"></img>
+        </div>
+        <div className="2-1">
+          <img src="https://s3-us-west-1.amazonaws.com/720hd-prod/yosemite.jpg"></img>
+        </div>
+        <div className="2-2">
+          <img src="https://s3-us-west-1.amazonaws.com/720hd-prod/patagonia2.jpg"></img>
+        </div>
       </div>
 
 
@@ -23,7 +31,7 @@ const splash = () => {
       <div className="splash_caption_2">Become part of a community that celebrates incredible photography.</div>
 
       <div className="features">
-        <div className="1-1"><img src="intro-mongo/frontend/public/patagonia2.jpg"></img></div>
+        <div className="1-1"><img src="https://s3-us-west-1.amazonaws.com/720hd-prod/banff2.jpg"></img></div>
         <div className="1-2">
           <div>
             <h2>
@@ -44,8 +52,8 @@ const splash = () => {
             </p>
           </div>
         </div>
-        <div className="2-2"><img src="intro-mongo/frontend/public/patagonia2.jpg"></img></div>
-        <div className="3-1"><img src="intro-mongo/frontend/public/patagonia2.jpg"></img></div>
+        <div className="2-2"><img src="https://s3-us-west-1.amazonaws.com/720hd-prod/banff2.jpg"></img></div>
+        <div className="3-1"><img src="https://s3-us-west-1.amazonaws.com/720hd-prod/banff2.jpg"></img></div>
         <div className="3-3">
           <div>
             <h2>
@@ -59,16 +67,16 @@ const splash = () => {
         <div className="div4-1">
           <div>
             <div className="splash_header_3">Loved by people around the world</div>
-            <div className="splash_caption_3">Join over 13 million other photographers who already use 720HD.</div>
+            <div className="splash_caption_3">Join over 13 million other photographers who already use Roamy  .</div>
           </div>
         </div>
         <div className="footer">
           <div className="links">
-            <div className="ft-headers">© 2018 720HD</div>
+            <div className="ft-headers">© 2018 ROAMY</div>
             <div className="ft-headers">FOLLOW</div>
             <div className="ft2-1">
               <p>
-                720HD is the leading social network for photographers to connect, improve, and share their best work.
+                Roamy is the leading social network for photographers to connect, improve, and share their best work.
               </p>
             </div>
             <div className="ft2-2">

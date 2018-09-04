@@ -74,15 +74,7 @@ a{
 .navBarLink:hover{
   color: #999999;
 }
-/* .footer {
-  display: flex;
-  justify-content: space-between;
-  bottom: 0px;
-  display: flex;
-  height: 60px !important;
-  width: 100vw;
-  background-color: #0A466D;
-} */
+
 .MuiButtonBase-root-49.MuiButton-root-91.MuiButton-text-93.MuiButton-flat-96{
   width: 100px;
   height: 50px;
@@ -295,11 +287,11 @@ a{
   margin: 100px;
   height: 1200px;
   margin-bottom: 150px;
-  img{
-    object-fit: cover;
-    width: 100%;
-    height: 100%;
-  }
+}
+img{
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
 }
 .features{
   display: grid;
