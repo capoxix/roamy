@@ -45,27 +45,33 @@ router.post(`/car`, async (req, res) => {
   }
 
   results = selectPoints(endPoints, origin)
-
-  geolocate(results, cb)
+  console.log(results)
+  console.log(results)
+  console.log(results)
+  console.log(results)
+  console.log(results)
+  console.log(results)
+  geolocate(results, (response) => res.send(response))
 
 });
 
-function geolocate(points, cb) {
-
-  const results = [];
+function geolocate(endPoints, cb) {
   const options = {
     provider: 'google',
     apiKey: 'AIzaSyDBghaO6vALAG_-QG2SCBN8LEB_jFM6o1Q'
   }
+  const geocoder = NodeGeocoder(options)
 
-  for (i = 0; i < points.length; i++) {
-
+  for (i = 0; i < endPoints.length; i++) {
+    geocoder.geocode(endPoints[i].address).then( (response) => {
+      console.log(response)
+    })
 
   }
 }
 
 function selectPoints(endPoints, origin) {
-  const geocoder = NodeGeocoder(options)
+  const results = [];
 
   for (let i = 0 ; i <  endPoints.length; i++) {
     if (!endPoints[i].destroy && (origin.minutes + 2.5) > endPoints[i].minutes) {
@@ -77,7 +83,7 @@ function selectPoints(endPoints, origin) {
   return results
 };
 
-async function fixLatLng(point, geocoder) {
+async function fixLatLng(point) {
   const dLat200m = 0.003604 * 0.5;
   const dLng200m =  0.0045402 * 0.5;
 
