@@ -60,16 +60,18 @@ const splash = () => {
               Make Money Doing What You Love
             </h2>
             <p>
-              Submit your photos to 720HD and license your content through our exclusive distribution partners.
+              Submit your photos to Roamy and license your content through our exclusive distribution partners.
             </p>
           </div>
         </div>
+      </div>
         <div className="div4-1">
           <div>
             <div className="splash_header_3">Loved by people around the world</div>
             <div className="splash_caption_3">Join over 13 million other photographers who already use Roamy  .</div>
           </div>
         </div>
+
         <div className="footer">
           <div className="links">
             <div className="ft-headers">© 2018 ROAMY</div>
@@ -102,7 +104,6 @@ const splash = () => {
             </div>
           </div>
         </div>
-      </div>
     </div>
   );
 };
