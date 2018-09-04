@@ -12,10 +12,10 @@ const splash = () => {
       <div className="splash_header_1">The top photos, chosen by you</div>
       <div className="splash_caption_1">Discover what’s trending according to photographers around the world.</div>
       <div className="top_photos">
-        <div className="1-1"><img src="patagonia1.jpg"></img></div>
-        <div className="1-2"><img src="intro-mongo/frontend/public/yosemite.jpg"></img></div>
-        <div className="2-1"><img src="intro-mongo/frontend/public/banff2.jpg"></img></div>
-        <div className="2-2"><img src="intro-mongo/frontend/public/patagonia2.jpg"></img></div>
+        <div className="1-1"><img src="./assets/images/patagonia1.jpg"></img></div>
+        <div className="1-2"><img src="../../assets/images/patagonia1.jpg"></img></div>
+        <div className="2-1"><img src="../../assets/images/patagonia1.jpg"></img></div>
+        <div className="2-2"><img src="../../assets/images/patagonia1.jpg"></img></div>
       </div>
 
 
