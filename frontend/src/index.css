@@ -245,3 +245,203 @@ a{
   color: white;
   font-size: 18px;
 }
+
+
+
+
+/* splashpagecss */
+
+.splash_container{
+  font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
+}
+
+.header {
+  text-align: center;
+  background-image: image-url("patagonia.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 555px;
+  margin-bottom: 120px;
+}
+
+.header * {
+  text-decoration: none;
+}
+
+.splash_header_1 {
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 36px;
+  padding-bottom: 20px;
+}
+
+.splash_caption_1 {
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 18px;
+  padding-bottom: 60px;
+}
+
+.top_photos{
+  display: grid;
+  background-color: white;
+  grid-template-columns: minmax(250px, 1fr) minmax(250px, 1fr);
+  grid-column-gap: 10px;
+  grid-template-rows: repeat(2, 1fr);
+  grid-row-gap: 10px;
+  margin: 100px;
+  height: 1200px;
+  margin-bottom: 150px;
+  img{
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+  }
+}
+.features{
+  display: grid;
+  background-color: white;
+  grid-template-columns: minmax(250px, 1fr) minmax(250px, 1fr);
+  grid-column-gap: 10px;
+  grid-template-rows: repeat(3, 1fr);
+  grid-row-gap: 10px;
+  height: 800px;
+  margin-bottom: 800px;
+  color: $darkgray;
+  align-items: center;
+
+  img{
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+  }
+
+  h2{
+    font-size: 36px;
+    padding: 0 60px;
+    font-weight: 400;
+  }
+
+  p{
+    font-size: 18px;
+    padding: 0 60px;
+  }
+
+  .div4-1{
+    grid-column-start: 1;
+    grid-column-end: 3;
+    justify-content: center;
+    align-items: center;
+
+  }
+}
+
+.footer {
+  height: 600px;
+  width: 100vw;
+  background-image: image-url("lion-pride.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  text-shadow: 1px 1px black;
+}
+
+.links{
+  display: grid;
+  grid-template-columns: minmax(250px, 1fr) minmax(250px, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  * {
+    color: white;
+  }
+
+  p {
+    width: 250px;
+    align-items: center;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .ft-headers{
+    font-size: 14px;
+  }
+
+  .socials{
+    font-size: 25px;
+  }
+
+  i:hover{
+    color: #0099e5;
+  }
+}
+
+.splash_header_2 {
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 36px;
+  padding-bottom: 20px;
+}
+
+.splash_caption_2 {
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 18px;
+  padding-bottom: 50px;
+}
+
+.splash_header_3 {
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 36px;
+  padding-top: 50px;
+  padding-bottom: 20px;
+}
+
+.splash_caption_3 {
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 18px;
+  padding-bottom: 40px;
+}
+
+#large_header_text{
+  color: white;
+  font-size: 48px;
+  align-items: center;
+  padding-top: 190px;
+  text-shadow: 1px 1px black;
+}
+
+#medium_header_text{
+  color: white;
+  font-size: 24px;
+  align-items: center;
+  padding-top: 35px;
+  padding-bottom: 50px;
+  text-shadow: 1px 1px black;
+}
+
+#second_sign_up {
+  background-color: #0099e5;
+  color: white;
+  border-radius: 25px;
+  border: 1px solid #0099e5;
+  font-size: 20px;
+  height: 15%;
+  line-height: 26px;
+  width: 20%;
+  padding: 15px 20px 15px 20px;
+}
+
+#second_sign_up:hover{
+  background-color: #00b3e5;
+}
