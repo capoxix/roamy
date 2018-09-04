@@ -257,7 +257,7 @@ a{
 
 .header {
   text-align: center;
-  background-image: image-url("patagonia.jpg");
+  background-image: image-url("intro-mongo/frontend/public/patagonia.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;

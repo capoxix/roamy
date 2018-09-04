@@ -19,7 +19,7 @@ class App extends Component {
       <div className="App-wrapper">
         <ButtonAppBar/>
         <Switch>
-          <Route exact path="/" component={Splash}>
+          <Route exact path="/" component={Splash}/>
           <AuthRoute exact path="/signup" component= {RegisterFormContainer}/>
           <AuthRoute exact path="/login" component={LoginFormContainer}/>
           <MapContainer/>
