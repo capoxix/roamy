@@ -74,7 +74,7 @@ a{
 .navBarLink:hover{
   color: #999999;
 }
-.footer {
+/* .footer {
   display: flex;
   justify-content: space-between;
   bottom: 0px;
@@ -82,7 +82,7 @@ a{
   height: 60px !important;
   width: 100vw;
   background-color: #0A466D;
-}
+} */
 .MuiButtonBase-root-49.MuiButton-root-91.MuiButton-text-93.MuiButton-flat-96{
   width: 100px;
   height: 50px;
@@ -257,7 +257,7 @@ a{
 
 .header {
   text-align: center;
-  background-image: image-url("intro-mongo/frontend/public/patagonia.jpg");
+  background-image: image-url("frontend/public/patagonia.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -342,7 +342,7 @@ a{
 .footer {
   height: 600px;
   width: 100vw;
-  background-image: image-url("lion-pride.png");
+  background-image: image-url("intro-mongo/frontend/public/lion-pride.png");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;

@@ -12,10 +12,10 @@ const splash = () => {
       <div className="splash_header_1">The top photos, chosen by you</div>
       <div className="splash_caption_1">Discover what’s trending according to photographers around the world.</div>
       <div className="top_photos">
-        <div className="1-1"><img src={window.images.pat1}></img></div>
-        <div className="1-2"><img src={window.images.yosemite}></img></div>
-        <div className="2-1"><img src={window.images.banff2}></img></div>
-        <div className="2-2"><img src={window.images.pat2}></img></div>
+        <div className="1-1"><img src="intro-mongo/frontend/public/patagonia1.jpg"></img></div>
+        <div className="1-2"><img src="intro-mongo/frontend/public/yosemite.jpg"></img></div>
+        <div className="2-1"><img src="intro-mongo/frontend/public/banff2.jpg"></img></div>
+        <div className="2-2"><img src="intro-mongo/frontend/public/patagonia2.jpg"></img></div>
       </div>
 
 
@@ -23,7 +23,7 @@ const splash = () => {
       <div className="splash_caption_2">Become part of a community that celebrates incredible photography.</div>
 
       <div className="features">
-        <div className="1-1"><img src={window.images.sample1}></img></div>
+        <div className="1-1"><img src="intro-mongo/frontend/public/patagonia2.jpg"></img></div>
         <div className="1-2">
           <div>
             <h2>
@@ -44,8 +44,8 @@ const splash = () => {
             </p>
           </div>
         </div>
-        <div className="2-2"><img src={window.images.sample2}></img></div>
-        <div className="3-1"><img src={window.images.sample3}></img></div>
+        <div className="2-2"><img src="intro-mongo/frontend/public/patagonia2.jpg"></img></div>
+        <div className="3-1"><img src="intro-mongo/frontend/public/patagonia2.jpg"></img></div>
         <div className="3-3">
           <div>
             <h2>
