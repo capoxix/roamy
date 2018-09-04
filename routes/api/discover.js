@@ -56,32 +56,60 @@ router.post(`/car`, async (req, res) => {
 });
 
 function geolocate(endPoints, cb) {
+  let counter = 0;
+  for (i = 0; i < endPoints.length; i++) {
+    convertAddress(endPoints[i]).then( (response) => {
+      const { latitude, longitude} = response[0];
+      counter += 1
+      console.log(response[0])
+      console.log(latitude)
+      console.log(longitude)
+      console.log(counter)
+
+      if (counter === 15) {
+        console.log(endPoints)
+        console.log(cb)
+        console.log("HIT")
+        console.log("HIT")
+        console.log("HIT")
+        console.log("HIT")
+        console.log("HIT")
+        console.log("HIT")
+        console.log("HIT")
+        console.log("HIT")
+        console.log("HIT")
+        cb(endPoints)
+      }
+    })
+  }
+
+}
+
+function convertAddress(point) {
   const options = {
     provider: 'google',
     apiKey: 'AIzaSyDBghaO6vALAG_-QG2SCBN8LEB_jFM6o1Q'
   }
   const geocoder = NodeGeocoder(options)
-
-  for (i = 0; i < endPoints.length; i++) {
-    geocoder.geocode(endPoints[i].address).then( (response) => {
-      console.log(response)
-    })
-
-  }
+  return geocoder.geocode(point.address)
 }
+
+//
 
 function selectPoints(endPoints, origin) {
   const results = [];
-
   for (let i = 0 ; i <  endPoints.length; i++) {
     if (!endPoints[i].destroy && (origin.minutes + 2.5) > endPoints[i].minutes) {
-      if (endPoints[i].lat && endPoints[i].lng && endPoints[i].minutes) {
+      if (endPoints[i].lat && endPoints[i].lng && endPoints[i].minutes && endPoints[i].address) {
         results.push(endPoints[i])     
       }
     }
   }
   return results
 };
+
+
+
 
 async function fixLatLng(point) {
   const dLat200m = 0.003604 * 0.5;
