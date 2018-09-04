@@ -16,7 +16,7 @@ class GMap extends React.Component {
     this.getServiceAndMap = this.getServiceAndMap.bind(this);
     this.update = this.update.bind(this);
     this.trackInput = this.trackInput.bind(this);
-    this.addFavoritesToMarkers = this.addFavoritesToMarkers.bind(this);
+    // this.addFavoritesToMarkers = this.addFavoritesToMarkers.bind(this);
     this.setMarkersIntoMap = this.setMarkersIntoMap.bind(this);
   }
   state = {
@@ -28,7 +28,6 @@ class GMap extends React.Component {
     clickedMarker: [],
     trackedMarker: [],
     minutes: '5',
-    favoriteMarkers: [],
     trackName: "",
     currentLocationMarker: [],
     queryPlaces: [],
@@ -70,9 +69,10 @@ class GMap extends React.Component {
     });
   };
 
-  componentWillReceiveProps(){
-    //only show markers for logged in users
-    if(this.props.userId) this.addFavoritesToMarkers();
+  componentDidMount(){
+    if(this.props.userId) {
+      this.props.getFavoritePoints(this.props.userId);
+    }
   }
 
   trackInput(e) {
@@ -99,21 +99,12 @@ class GMap extends React.Component {
     let that = this;
     track(trackLocation).then(that.setState({trackedMarker: trackedMarker}));
   }
-  /*get favorites locations of user & set to map */
-  addFavoritesToMarkers() {
-    let that = this;
-    getFavorites(this.props.userId).then(favorites => {
-      console.log("in addFavoritesToMarkers", favorites.data);
-      that.setMarkersIntoMap(favorites.data);
-      }
-    );
-  }
-
+ 
   /*set favorite markers into map */
-  setMarkersIntoMap(favoriteDataArr) {
-    console.log("in setMarketsIntoMap",favoriteDataArr);
+  setMarkersIntoMap() {
+    // console.log("in setMarketsIntoMap",favoriteDataArr);
     let that = this;
-    let favoritesMarkersArr = favoriteDataArr.map(favorite => {
+    let favoritesMarkersArr = this.props.locations.map(favorite => {
       // create a new LatLng object with favorite's lat and lng
       let latLng = new that.props.google.maps.LatLng(
         favorite.lat,
@@ -141,7 +132,7 @@ class GMap extends React.Component {
           );
         }
     });
-    this.setState({ favoriteMarkers: favoritesMarkersArr });
+    return favoritesMarkersArr;
   }
 
   getCurrentLocation() {
@@ -283,18 +274,19 @@ class GMap extends React.Component {
 
   discover = (e) => {
     e.preventDefault();
+    console.log("in discover", this);
     let that = this;
-    this.props.sendQuery(this.state.clicked).then(that.setState({trackedMarker: []}));
+    this.props.sendQuery(this.state.clicked).then(that.setState({trackedMarker: []}));//.then(that.setMarkersIntoMap());
   }
 
 
   render() {
 
-    this.updatePolygon(this.props.endPoints)
+    this.updatePolygon(this.props.endPoints);
+    let favoritesMarkersArr = this.setMarkersIntoMap();
     let trackedMarker = [];
     if (this.props.userId) trackedMarker = this.state.trackedMarker;
-    // let address;
-    // if(this.state.foundPlace) address = this.state.foundPlace.formatted_address;
+
     this.mapComponent = (
       <Map
         google={this.props.google}
@@ -306,7 +298,7 @@ class GMap extends React.Component {
         // controls[{this.props.google.maps.ControlPosition.TOP_CENTER}]
       >
         {this.state.currentLocationMarker}
-        {this.state.favoriteMarkers}
+        {favoritesMarkersArr}
         {this.state.clickedMarker}
         {trackedMarker}
 
