@@ -5,14 +5,14 @@ const splash = () => {
   return (
     <div className="splash_container">
       <div className="header">
-        <div id="large_header_text" className="animated fadeIn delay-2s">How Far Are You From Everywhere You Want To Go</div>
-        <div id="medium_header_text" className="animated fadeIn delay-2s">Find your home among the world's best photographers</div>
-        <Link to="/signup" id="second_sign_up">Join 720HD</Link>
+        <div id="large_header_text" className="animated fadeIn delay-2s">How Far Are You From Everywhere You Want To Go?</div>
+        <div id="medium_header_text" className="animated fadeIn delay-2s">Find your happy places in your immediate vicinity!</div>
+        <Link to="/signup" id="second_sign_up">Join Roamy</Link>
       </div>
       <div className="splash_header_1">The top photos, chosen by you</div>
       <div className="splash_caption_1">Discover what’s trending according to photographers around the world.</div>
       <div className="top_photos">
-        <div className="1-1"><img src="intro-mongo/frontend/public/patagonia1.jpg"></img></div>
+        <div className="1-1"><img src="patagonia1.jpg"></img></div>
         <div className="1-2"><img src="intro-mongo/frontend/public/yosemite.jpg"></img></div>
         <div className="2-1"><img src="intro-mongo/frontend/public/banff2.jpg"></img></div>
         <div className="2-2"><img src="intro-mongo/frontend/public/patagonia2.jpg"></img></div>

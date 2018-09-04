@@ -44,7 +44,7 @@ class ButtonAppBar extends Component {
         <AppBar position="static" color="primary">
           <Toolbar>
             <Typography variant="title" color="inherit">
-              <Link className="navBarLink" to={"/"} onClick={()=>this.props.removeErrors()}>Roamy</Link>
+              <Link className="navBarLink" to={"/app"} onClick={()=>this.props.removeErrors()}>Roamy</Link>
             </Typography>
 
             <Help/>

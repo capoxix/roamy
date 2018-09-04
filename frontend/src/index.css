@@ -257,7 +257,7 @@ a{
 
 .header {
   text-align: center;
-  background-image: image-url("frontend/public/patagonia.jpg");
+  background-image: url("assets/images/patagonia.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
