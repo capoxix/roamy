@@ -44,32 +44,36 @@ router.post(`/car`, async (req, res) => {
     duped = Point.modify(duped);
   }
 
-  results = await curryPoints(endPoints, origin).then((res1) => {
-    console.log(res1)
-    results = res1
-    res.send(results);
-  })
+  results = selectPoints(endPoints, origin)
+
+  geolocate(results, cb)
+
 });
 
-async function curryPoints(endPoints, origin) {
-  const results = [];
+function geolocate(points, cb) {
 
+  const results = [];
   const options = {
     provider: 'google',
     apiKey: 'AIzaSyDBghaO6vALAG_-QG2SCBN8LEB_jFM6o1Q'
   }
+
+  for (i = 0; i < points.length; i++) {
+
+
+  }
+}
+
+function selectPoints(endPoints, origin) {
   const geocoder = NodeGeocoder(options)
 
   for (let i = 0 ; i <  endPoints.length; i++) {
-    // && (origin.minutes + 2.5) < endPoints[i].minutes
     if (!endPoints[i].destroy && (origin.minutes + 2.5) > endPoints[i].minutes) {
       if (endPoints[i].lat && endPoints[i].lng && endPoints[i].minutes) {
-        results.push(endPoints[i])
-        await fixLatLng(endPoints[i], geocoder)
+        results.push(endPoints[i])     
       }
     }
   }
-
   return results
 };
 
@@ -77,7 +81,7 @@ async function fixLatLng(point, geocoder) {
   const dLat200m = 0.003604 * 0.5;
   const dLng200m =  0.0045402 * 0.5;
 
-  const promise = await geocoder.geocode(point.address)
+  const promise = geocoder.geocode(point.address)
     // if point difference is too big, just keep original points
     console.log('llllllllllllllllllllllllll')
     console.log(point.lat)
