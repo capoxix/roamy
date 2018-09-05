@@ -8,7 +8,8 @@ const locationsReducer = (state = [], action) => {
         case RECEIVE_FAVORITE_POINTS:
             return action.favorites;
         case RECEIVE_TRACKED_INPUT:
-            return newArr.push(action.trackedInput);
+            newArr.push(action.trackedInput);
+            return newArr;
         default:
             return state;
     }

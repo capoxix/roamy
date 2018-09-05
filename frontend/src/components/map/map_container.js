@@ -4,7 +4,7 @@ import GMap from './gmap';
 import { sendQuery } from '../../actions/discover_actions';
 import '../../styling/header/header.css';
 import '../../index.css';
-import {getFavoritePoints} from '../../actions/location_actions';
+import {getFavoritePoints, trackInput} from '../../actions/location_actions';
 
 const gAPI = require('../../config/keys').gAPI;
 
@@ -18,7 +18,9 @@ const mapStateToProps = (state, ownProps) => ({
 const mapDispatchToProps = (dispatch) => ({
     // track: (location) => dispatch(track(location))
     sendQuery: (query) => dispatch(sendQuery(query)),
-    getFavoritePoints: (userId) => dispatch(getFavoritePoints(userId))
+    getFavoritePoints: (userId) => dispatch(getFavoritePoints(userId)),
+    trackInput: (location) => dispatch(trackInput(location))
+
 });
 
 const MapContainer = connect(mapStateToProps, mapDispatchToProps)(GMap);

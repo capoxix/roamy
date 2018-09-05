@@ -97,7 +97,8 @@ class GMap extends React.Component {
         />;
     this.setState({trackName: ''});
     let that = this;
-    track(trackLocation).then(that.setState({trackedMarker: trackedMarker}));
+    // track(trackLocation).then(that.setState({trackedMarker: trackedMarker}));
+    this.props.trackInput(trackLocation).then(that.setState({trackedMarker: trackedMarker}));
   }
  
   /*set favorite markers into map */
