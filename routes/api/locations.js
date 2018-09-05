@@ -30,11 +30,10 @@ router.post('/track', (req,res) => {
 
 });
 
-router.get('/favorites/:userId', passport.authenticate('jwt', { session: false }), (req, res) => {
-  Location.find({userId: req.params.userId})
+router.post('/favorites', (req, res) => {
+  Location.find({userId: req.body.userId})
     .then(favorites => res.json(favorites))
     .catch(err => console.log(err));
-    ;
 });
 
 let lat= 34.069502;
