@@ -26,7 +26,7 @@ class GMap extends React.Component {
     center: {},
     clicked: {},
     clickedMarker: [],
-    trackedMarker: [],
+    trackedMarker: null,
     minutes: '5',
     trackName: "",
     currentLocationMarker: [],
@@ -105,6 +105,7 @@ class GMap extends React.Component {
   setMarkersIntoMap() {
     // console.log("in setMarketsIntoMap",favoriteDataArr);
     let that = this;
+    console.log(this.state.trackedMarker);
     let favoritesMarkersArr = this.props.locations.map(favorite => {
       // create a new LatLng object with favorite's lat and lng
       let latLng = new that.props.google.maps.LatLng(
@@ -113,12 +114,13 @@ class GMap extends React.Component {
       );
       //check to see if polygon contains that latlng and only create markers that are inside polygon
       // debugger;
+     
       if (that.props.google.maps.geometry) {
         if (
           that.props.google.maps.geometry.poly.containsLocation(
             latLng,
             that.polygon
-          )
+          ) && (that.state.trackedMarker ? (that.state.trackedMarker.props.position.lat != favorite.lat && that.state.trackedMarker.props.position.lng != favorite.lng) : true)
         )
           return (
             <Marker
@@ -277,7 +279,7 @@ class GMap extends React.Component {
     e.preventDefault();
     console.log("in discover", this);
     let that = this;
-    this.props.sendQuery(this.state.clicked).then(that.setState({trackedMarker: []}));//.then(that.setMarkersIntoMap());
+    this.props.sendQuery(this.state.clicked).then(that.setState({trackedMarker: null}));//.then(that.setMarkersIntoMap());
   }
 
 
@@ -285,7 +287,7 @@ class GMap extends React.Component {
 
     this.updatePolygon(this.props.endPoints);
     let favoritesMarkersArr = this.setMarkersIntoMap();
-    let trackedMarker = [];
+    let trackedMarker = null;
     if (this.props.userId) trackedMarker = this.state.trackedMarker;
 
     this.mapComponent = (
