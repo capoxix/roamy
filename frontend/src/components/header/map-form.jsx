@@ -57,6 +57,9 @@ class ButtonAppBar extends Component {
             <Typography variant="title" color="inherit">
               <Link className="navBarLink" to={"/login"} onClick={()=>this.props.removeErrors()}>Log In</Link>
             </Typography>
+            <Typography variant="title" color="inherit">
+              <Link className="navBarLink" to={"/"} onClick={()=>this.props.login({email:'garbocheng93@gmail.com', password: '123456'})}>Demo Login</Link>
+            </Typography>
           </Toolbar>
         </AppBar>
       </MuiThemeProvider>

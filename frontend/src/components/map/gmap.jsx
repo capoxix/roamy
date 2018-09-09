@@ -26,7 +26,7 @@ class GMap extends React.Component {
     center: {},
     clicked: {},
     clickedMarker: [],
-    trackedMarker: null,
+    trackedMarker: undefined,
     minutes: '5',
     trackName: "",
     currentLocationMarker: [],
@@ -75,6 +75,12 @@ class GMap extends React.Component {
     }
   }
 
+  componentDidUpdate(prevProps){
+    if (this.props.userId != prevProps.userId){
+      this.props.getFavoritePoints(this.props.userId);
+    }
+  }
+
   trackInput(e) {
     e.preventDefault();
     /*track the user's clicked point*/
@@ -105,7 +111,7 @@ class GMap extends React.Component {
   setMarkersIntoMap() {
     // console.log("in setMarketsIntoMap",favoriteDataArr);
     let that = this;
-    console.log(this.state.trackedMarker);
+    // console.log(this.state.trackedMarker);
     let favoritesMarkersArr = this.props.locations.map(favorite => {
       // create a new LatLng object with favorite's lat and lng
       let latLng = new that.props.google.maps.LatLng(
@@ -278,9 +284,8 @@ class GMap extends React.Component {
 
   discover = (e) => {
     e.preventDefault();
-    console.log("in discover", this);
     let that = this;
-    this.props.sendQuery(this.state.clicked).then(that.setState({trackedMarker: null}));//.then(that.setMarkersIntoMap());
+    this.props.sendQuery(this.state.clicked).then(that.setState({trackedMarker: undefined}));//.then(that.setMarkersIntoMap());
   }
 
 
