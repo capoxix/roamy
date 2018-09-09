@@ -224,6 +224,7 @@ class GMap extends React.Component {
 
         /*TO ACESS LAT OR LNG, do place.geometry.location.lat() AND place.geomtry.location.lng() [shown in markFoundPlace]*/
         if (status == that.props.google.maps.places.PlacesServiceStatus.OK) {
+          that.setState({center: { lat: result[0].geometry.location.lat(), lng: result[0].geometry.location.lng()}});
           that.setState({query: ''});
           that.setState({ foundPlace: result[0] });
           that.markFoundPlace(result[0])
