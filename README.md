@@ -11,7 +11,7 @@
 
 * Logged In Users
     1. Track favorite places
-    2. Display favorite places inside visual cloud
+    2. Display favorite places located inside visual cloud
 
 
 # Technologies and Technical Challenges
