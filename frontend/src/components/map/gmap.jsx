@@ -103,15 +103,12 @@ class GMap extends React.Component {
         />;
     this.setState({trackName: ''});
     let that = this;
-    // track(trackLocation).then(that.setState({trackedMarker: trackedMarker}));
     this.props.trackInput(trackLocation).then(that.setState({trackedMarker: trackedMarker}));
   }
  
   /*set favorite markers into map */
   setMarkersIntoMap() {
-    // console.log("in setMarketsIntoMap",favoriteDataArr);
     let that = this;
-    // console.log(this.state.trackedMarker);
     let favoritesMarkersArr = this.props.locations.map(favorite => {
       // create a new LatLng object with favorite's lat and lng
       let latLng = new that.props.google.maps.LatLng(
@@ -119,7 +116,6 @@ class GMap extends React.Component {
         favorite.lng
       );
       //check to see if polygon contains that latlng and only create markers that are inside polygon
-      // debugger;
      
       if (that.props.google.maps.geometry) {
         if (
@@ -187,9 +183,8 @@ class GMap extends React.Component {
       let that = this;
 
       function returnPlaces(results, status) {
-        //   const searched = that.state.query;
         if (status == that.props.google.maps.places.PlacesServiceStatus.OK)
-          that.setState({ queryPlaces: results });
+          that.setState({ queryPlaces: results }) 
       }
 
       this.state.service.textSearch(request, returnPlaces);
@@ -324,6 +319,9 @@ class GMap extends React.Component {
     );
     this.queryPlaces();
     let places = this.state.queryPlaces;
+
+    if (this.state.query === "") places =[];
+
     let userButtons =  [];
     if(this.props.userId) {
       userButtons =  [<form onSubmit={this.trackInput}>

@@ -1,6 +1,6 @@
 # Background and Overview
 
-“Peripatetic” is an interactive map application, based on the concept of MoneyMile, that allows users to see a defined area where they can go on a given time frame. The area will be impacted by current traffic conditions, construction, weather, and other factors . This allows people to drop pins on any location and have a visual representation of places are within reach according to the time they have available.
+“Roamy” is an interactive map application, based on the concept of MoneyMile, that allows users to see a defined area where they can go on a given time frame. The area will be impacted by current traffic conditions, construction, weather, and other factors . This allows people to drop pins on any location and have a visual representation of places are within reach according to the time they have available.
 
 # Functionality and MVP
 
@@ -25,6 +25,42 @@
     * The determined area of travel based on time will have to be based on the given roads and current traffic situation. We will use a (generic latitude/longitude change per minute ) scale to generate the first Google Maps Distance Matrix call. 
     * We will then adjust our API calls accordingly based on the return time of each endpoint vs the time available to the User. We will then adjust each respective endpoint until each of our endpoints is less than or equal to the user request time.
     * Natural barriers such as deserts parks and water will have to be taken into consideration.
+
+    ```js
+     updatePolygon = (endPoints) => {
+    this.polygon = new this.props.google.maps.Polygon({paths: endPoints});
+    this.polygonComponent =
+        <Polygon
+            paths={endPoints}
+            strokeColor="#0000FF"
+            strokeOpacity={0.8}
+            strokeWeight={2}
+            fillColor="#0000FF"
+            fillOpacity={0.35}
+            clickable={false} />;
+    }
+    ```
+* **Google Search Places**
+    * Utilized Google Maps Places API to allow users to search places and display place user is looking for in Google Maps
+    ```js
+    queryPlaces() {
+        if (this.state.map && this.state.query !== "") {
+        let request = {
+            location: this.state.map.getCenter(),
+            radius: "500",
+            query: this.state.query
+        };
+        let that = this;
+
+        function returnPlaces(results, status) {
+            if (status == that.props.google.maps.places.PlacesServiceStatus.OK)
+            that.setState({ queryPlaces: results }) 
+        }
+
+        this.state.service.textSearch(request, returnPlaces);
+        }
+    }
+    ```
 * **UX**
     * The Frontend will display a large google maps with a nav-bar at the top
     * There will be a simple input form that can take in an integer for time and a location. Users can drop a pin to enter a location as well. 
