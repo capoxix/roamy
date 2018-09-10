@@ -2,14 +2,17 @@
 
 “Roamy” is an interactive map application, based on the concept of MoneyMile, that allows users to see a defined area where they can go on a given time frame. The area will be impacted by current traffic conditions, construction, weather, and other factors . This allows people to drop pins on any location and have a visual representation of places are within reach according to the time they have available.
 
-# Functionality and MVP
+# Features
+* General
+    1. Display visual cloud of area reachable within given time frame
+    2. Get current location
+    3. Search Places Information
+    4. Find place in Google Maps
 
-1. Have algorithm return reachable points when a user inputs a start pin and time
-2. Get visual cloud to render on Google maps (visually appealing)
-3. User signup/login
-4. Track favorite places(logged in users)
-5. Integrate other modes of transportation
-6. Intuitive UI, animations for markers and visual cloud (if time permits)
+* Logged In Users
+    1. Track favorite places
+    2. Display favorite places inside visual cloud
+
 
 # Technologies and Technical Challenges
 
@@ -17,7 +20,9 @@
 2. Express
 3. React/ Redux
 4. Node.js
-5. Google Maps API (Directions/Distance Matrix)
+5. Google Maps Distance Matrix API 
+6. Google Maps Places API
+7. Google Maps Geocoder API
 
 * **Integrating Google Maps:** 
     * Google maps currently provides a distance matrix service where it computes multiple start and end point travel times and distances. This utility allows us to determine how long and far it takes to reach multiple endpoints with a single API call.
@@ -69,11 +74,7 @@
 
     ![link](readme-images/Maps1.png)
     ![link](readme-images/Maps2.png)
-* **Backend**
-    * The backend will take in the start location and deconstruct it to a latitude longitude.
-    * Multiple endpoints will radiate out from said location and a distance matrix will be generated to find the time taken to reach each point.
-    * If the travel time to a point is less than the given param, expand that radius further out. If the time exceeds the param, retry with a closer point. If the time is equal to the param, save the point and explore the areas around it??
-    * A final set up points will be returned to the frontend for google maps to draw out
+
 
 
 
