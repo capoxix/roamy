@@ -12,6 +12,7 @@ import {login,
 import configureStore from './store/store';
 import {track, getFavorites} from './util/location_api_util';
 import jwt_decode from 'jwt-decode';
+import {getFavoritePoints, trackInput} from './actions/location_actions';
 
 document.addEventListener('DOMContentLoaded', () => {
     const root = document.getElementById('root');
@@ -23,6 +24,10 @@ document.addEventListener('DOMContentLoaded', () => {
     let store = configureStore();
     window.dispatch = store.dispatch;
     window.getState = store.getState;
+
+    window.getFavoritePoints = getFavoritePoints;
+    window.trackInput = trackInput;
+    window.getFavorites = getFavorites;
     //check for token
     if (localStorage.jwtToken) {
         // Set auth token header auth
