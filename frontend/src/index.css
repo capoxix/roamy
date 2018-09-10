@@ -296,7 +296,8 @@ a{
   height: 1200px;
   /* margin-bottom: 150px; */
 }
-img{
+
+.top_photos img{
   object-fit: cover;
   width: 100%;
   height: 100%;
