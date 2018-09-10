@@ -38,54 +38,56 @@ class ButtonAppBar extends Component {
   render(){
     // console.log(this.props);
     if (!this.props.currentUser.id){
-    return (
-      <div className="appbar">
-        <MuiThemeProvider theme={theme}>
-        <AppBar position="static" color="primary">
-          <Toolbar>
-            <Typography variant="title" color="inherit">
-              <Link className="navBarLink" to={"/map"} onClick={()=>this.props.removeErrors()}>Roamy</Link>
-            </Typography>
+      return (
+        <div className="appbar">
+          <MuiThemeProvider theme={theme}>
+            <AppBar position="static" color="primary">
+              <Toolbar>
+                  <Typography variant="title" color="inherit">
+                    <Link className="navBarLink" to={"/map"} onClick={()=>this.props.removeErrors()}>Roamy</Link>
+                  </Typography>
+                  <Help/>
+                  <About/>
 
-            <Help/>
-            <About/>
+                  <Typography variant="title" color="inherit">
+                    <Link className="navBarLink" to={"/signup"} onClick={()=>this.props.removeErrors()}>Sign Up</Link>
+                  </Typography>
+                  <Typography variant="title" color="inherit">
+                    <Link className="navBarLink" to={"/login"} onClick={()=>this.props.removeErrors()}>Log In</Link>
+                  </Typography>
 
-
-            <Typography variant="title" color="inherit">
-              <Link className="navBarLink" to={"/signup"} onClick={()=>this.props.removeErrors()}>Sign Up</Link>
-            </Typography>
-            <Typography variant="title" color="inherit">
-              <Link className="navBarLink" to={"/login"} onClick={()=>this.props.removeErrors()}>Log In</Link>
-            </Typography>
-          </Toolbar>
-        </AppBar>
-      </MuiThemeProvider>
-      </div>
-    )}else{
-    return (
-      <div className="appbar">
-        <MuiThemeProvider theme={theme}>
-        <AppBar position="static" color="primary">
-          <Toolbar>
-            <Typography variant="title" color="inherit">
-              <Link className="navBarLink" to={"/"}>Roamy</Link>
-            </Typography>
-
-            <Help/>
-            <About/>
-
-            <div>
-              Hello {this.props.name}!
+                  </Toolbar>
+                </AppBar>
+              </MuiThemeProvider>
             </div>
+          )}else{
+            return (
+              <div className="appbar">
+                <MuiThemeProvider theme={theme}>
+                  <AppBar position="static" color="primary">
+                    <Toolbar>
+                      <div className="leftNavBar">
+                      <Typography variant="title" color="inherit">
+                        <Link className="navBarLink" to={"/"}>Roamy</Link>
+                      </Typography>
 
-          <Link className="navBarLink" to="/" onClick={()=> this.props.logout()}>Log Out</Link>
-          </Toolbar>
-        </AppBar>
-      </MuiThemeProvider>
-      </div>
-    )
-  }
-  }
-};
+                      <Help/>
+                      <About/>
+                      </div>
 
-export default ButtonAppBar;
+                      <div className="rightNavBar">
+                      <div>
+                        Hello {this.props.name}!
+                      </div>
+                      <Link className="navBarLink" to="/" onClick={()=> this.props.logout()}>Log Out</Link>
+                      </div>
+                    </Toolbar>
+                  </AppBar>
+                </MuiThemeProvider>
+              </div>
+            )
+          }
+        }
+      };
+
+      export default ButtonAppBar;

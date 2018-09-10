@@ -100,6 +100,14 @@ a{
 .jss146.jss120.jss122.jss125:hover{
   color: grey;
 }
+
+.ft2-2{
+  display: block;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+
 .socials {
   color: black;
 }
@@ -249,12 +257,12 @@ a{
 
 .header {
   text-align: center;
-  background-image: url("assets/images/patagonia.jpg");
+  background-image: url("assets/images/stunning2.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   height: 555px;
-  margin-bottom: 120px;
+  margin-bottom: 60px;
 }
 
 .header * {
@@ -274,7 +282,7 @@ a{
   justify-content: center;
   text-align: center;
   font-size: 18px;
-  padding-bottom: 60px;
+  padding-bottom: 30px;
 }
 
 .top_photos{
@@ -284,9 +292,9 @@ a{
   grid-column-gap: 10px;
   grid-template-rows: repeat(2, 1fr);
   grid-row-gap: 10px;
-  margin: 100px;
+  margin: 50px;
   height: 1200px;
-  margin-bottom: 150px;
+  /* margin-bottom: 150px; */
 }
 img{
   object-fit: cover;
@@ -328,7 +336,7 @@ p{
 .footer {
   height: 600px;
   width: 100vw;
-  background-image: url("assets/images/lion-pride.png");
+  background-image: url("assets/images/stunning.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;

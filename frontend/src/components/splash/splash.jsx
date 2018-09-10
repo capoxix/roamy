@@ -10,7 +10,7 @@ const splash = () => {
         <Link to="/map" id="second_sign_up">Let's Go!</Link>
       </div>
       <div className="splash_header_1">Favorite locations, chosen by you</div>
-      <div className="splash_caption_1">Discover what’s trending according to photographers around the world.</div>
+      <div className="splash_caption_1">Discover your next adventure!</div>
       <div className="top_photos">
         <div className="1-1">
           <img src="https://s3-us-west-1.amazonaws.com/720hd-prod/banff2.jpg"></img>
@@ -26,84 +26,48 @@ const splash = () => {
         </div>
       </div>
 
-
-      <div className="splash_header_2">Get motivated to share your best work</div>
-      <div className="splash_caption_2">Become part of a community that celebrates incredible photography.</div>
-
-      <div className="features">
-        <div className="1-1"><img src="https://s3-us-west-1.amazonaws.com/720hd-prod/banff2.jpg"></img></div>
-        <div className="1-2">
-          <div>
-            <h2>
-              Get Global Exposure
-            </h2>
+      <div className="footer">
+        <div className="links">
+          <div className="ft-headers">© 2018 ROAMY</div>
+          <div className="ft-headers">FOLLOW</div>
+          <div className="ft2-1">
             <p>
-              Imagine having your photos seen by photographers like you from all over the world. When you upload your photos, they’re shared with 720HD members worldwide. Watch as your photos get reactions from the community—and see if your shot makes it to Popular.
+              Roamy is a single page application that relies on several Google Map APIs to render a visual representation of the places a user can travel to given a reasonable amount of time.
             </p>
           </div>
-        </div>
-        <div className="2-1">
-          <div>
-            <h2>
-              Connect with Photographers Everywhere
-            </h2>
-            <p>
-              You’re not just joining a network—you’re joining a real community. Follow photographers to get their newest photos appearing in your home feed, share your thoughts by liking and commenting on photos, and discuss all the details of photography in groups.
-            </p>
-          </div>
-        </div>
-        <div className="2-2"><img src="https://s3-us-west-1.amazonaws.com/720hd-prod/banff2.jpg"></img></div>
-        <div className="3-1"><img src="https://s3-us-west-1.amazonaws.com/720hd-prod/banff2.jpg"></img></div>
-        <div className="3-3">
-          <div>
-            <h2>
-              Make Money Doing What You Love
-            </h2>
-            <p>
-              Submit your photos to Roamy and license your content through our exclusive distribution partners.
-            </p>
-          </div>
-        </div>
-      </div>
-        <div className="div4-1">
-          <div>
-            <div className="splash_header_3">Loved by people around the world</div>
-            <div className="splash_caption_3">Join over 13 million other photographers who already use Roamy  .</div>
-          </div>
-        </div>
-
-        <div className="footer">
-          <div className="links">
-            <div className="ft-headers">© 2018 ROAMY</div>
-            <div className="ft-headers">FOLLOW</div>
-            <div className="ft2-1">
-              <p>
-                Roamy is the leading social network for photographers to connect, improve, and share their best work.
-              </p>
+          <div className="ft2-2">
+            <div>
+              <a className="socials" href="https://www.linkedin.com/in/kevin-ou-b56a768b/">
+                <i className="fab fa-linkedin"></i>
+              </a>
+              <a className="socials" href="https://github.com/VietnameseCoffee">
+                <i className="fab fa-github"></i>
+              </a>
             </div>
-            <div className="ft2-2">
-              <a className="socials" href="mailto:tonywzhang@gmail.com">
-                <i className="fab fa-google"></i>
+            <div>
+              <a className="socials" href="https://www.linkedin.com/in/garbo-cheng-ye/">
+                <i className="fab fa-linkedin"></i>
               </a>
-              <br/>
-              <a className="socials" href="tel:+16508883357">
-                <i className="fas fa-mobile"></i>
+              <a className="socials" href="https://github.com/capoxix">
+                <i className="fab fa-github"></i>
               </a>
-              <br/>
-              <a className="socials" href='https://www.facebook.com/tonywzhang'>
-                <i className="fab fa-facebook"></i>
-              </a>
-              <br/>
+            </div>
+            <div>
               <a className="socials" href="https://www.linkedin.com/in/tony-wzhang/">
                 <i className="fab fa-linkedin"></i>
               </a>
-              <br/>
-                <a className="socials" href="https://github.com/tonywzhang/720HD">
-                  <i className="fab fa-github"></i>
-                </a>
+              <a className="socials" href="https://github.com/tonywzhang/720HD">
+                <i className="fab fa-github"></i>
+              </a>
+            </div>
+            <div>
+              <a className="socials tooltip" href="https://github.com/capoxix/intro-mongo">
+                <i className="fab fa-github"></i>
+              </a>
             </div>
           </div>
         </div>
+      </div>
     </div>
   );
 };
