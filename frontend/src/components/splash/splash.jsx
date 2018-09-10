@@ -32,7 +32,7 @@ const splash = () => {
           <div className="ft-headers">FOLLOW</div>
           <div className="ft2-1">
             <p>
-              Roamy is a single page application that relies on several Google Map APIs to render a visual representation of the places a user can travel to given a reasonable amount of time.
+              Roamy is a single page application that integrates several Google Map APIs to render a visual representation of the places a user can travel to given a reasonable amount of time.
             </p>
           </div>
           <div className="ft2-2">

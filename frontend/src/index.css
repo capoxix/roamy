@@ -317,7 +317,6 @@ img{
 }
 h2{
   font-size: 36px;
-  padding: 0 60px;
   font-weight: 400;
 }
 
@@ -334,7 +333,7 @@ p{
 }
 
 .footer {
-  height: 600px;
+  height: 310px;
   width: 100vw;
   background-image: url("assets/images/stunning.jpg");
   background-position: center;
@@ -447,4 +446,19 @@ i:hover{
 
 #second_sign_up:hover{
   background-color: #00b3e5;
+}
+
+
+.leftNavBar{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rightNavBar {
+  display: flex;
+}
+
+.navBarLink {
+  padding-left: 10px;
 }

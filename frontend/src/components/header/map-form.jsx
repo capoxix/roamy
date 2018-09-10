@@ -43,18 +43,22 @@ class ButtonAppBar extends Component {
           <MuiThemeProvider theme={theme}>
             <AppBar position="static" color="primary">
               <Toolbar>
+                <div className="leftNavBar">
                   <Typography variant="title" color="inherit">
                     <Link className="navBarLink" to={"/map"} onClick={()=>this.props.removeErrors()}>Roamy</Link>
                   </Typography>
                   <Help/>
                   <About/>
+                  </div>
 
+                  <div className="rightNavBar">
                   <Typography variant="title" color="inherit">
                     <Link className="navBarLink" to={"/signup"} onClick={()=>this.props.removeErrors()}>Sign Up</Link>
                   </Typography>
                   <Typography variant="title" color="inherit">
                     <Link className="navBarLink" to={"/login"} onClick={()=>this.props.removeErrors()}>Log In</Link>
                   </Typography>
+                </div>
 
                   </Toolbar>
                 </AppBar>
