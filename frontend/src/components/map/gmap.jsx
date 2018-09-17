@@ -5,7 +5,6 @@ import {
   Polygon
 } from "google-maps-react";
 import React from "react";
-import { track, getFavorites } from "../../util/location_api_util";
 import SearchIndex from "./search_index";
 import '../../styling/header/header.css';
 import '../../index.css';
@@ -18,6 +17,11 @@ class GMap extends React.Component {
     this.trackInput = this.trackInput.bind(this);
     // this.addFavoritesToMarkers = this.addFavoritesToMarkers.bind(this);
     this.setMarkersIntoMap = this.setMarkersIntoMap.bind(this);
+
+    this.queryPlaces = this.queryPlaces.bind(this);
+    this.findPlaceAndMark = this.findPlaceAndMark.bind(this);
+    this.markFoundPlace = this.markFoundPlace.bind(this);
+
   }
   state = {
     showingInfoWindow: false,
@@ -387,3 +391,5 @@ class GMap extends React.Component {
 }
 
 export default GMap;
+
+// queryPlaces={this.queryPlaces} findPlaceAndMark={this.findPlaceAndMark} markFoundPlace={this.markFoundPlace}
