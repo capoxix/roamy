@@ -58,43 +58,14 @@ class ButtonAppBar extends Component {
                   <Typography variant="title" color="inherit">
                     <Link className="navBarLink" to={"/login"} onClick={()=>this.props.removeErrors()}>Log In</Link>
                   </Typography>
+
+                  <Typography variant="title" color="inherit">
+                    <Link className="navBarLink" to={"/map"} onClick={()=>this.props.login({email:'garbocheng93@gmail.com', password: '123456'})}>Demo Login</Link>
+                  </Typography>
                 </div>
-
-<<<<<<< HEAD
-
-            <Typography variant="title" color="inherit">
-              <Link className="navBarLink" to={"/signup"} onClick={()=>this.props.removeErrors()}>Sign Up</Link>
-            </Typography>
-            <Typography variant="title" color="inherit">
-              <Link className="navBarLink" to={"/login"} onClick={()=>this.props.removeErrors()}>Log In</Link>
-            </Typography>
-            <Typography variant="title" color="inherit">
-              <Link className="navBarLink" to={"/"} onClick={()=>this.props.login({email:'garbocheng93@gmail.com', password: '123456'})}>Demo Login</Link>
-            </Typography>
-          </Toolbar>
-        </AppBar>
-      </MuiThemeProvider>
-      </div>
-    )}else{
-    return (
-      <div className="appbar">
-        <MuiThemeProvider theme={theme}>
-        <AppBar position="static" color="primary">
-          <Toolbar>
-            <Typography variant="title" color="inherit">
-              <Link className="navBarLink" to={"/"}>Roamy</Link>
-            </Typography>
-
-            <Help/>
-            <About/>
-
-            <div>
-              Hello {this.props.name}!
-=======
                   </Toolbar>
                 </AppBar>
               </MuiThemeProvider>
->>>>>>> 9c758ca7576a76bfd50cf79ea6ad25e4daccd2e5
             </div>
           )}else{
             return (

@@ -27,11 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     window.getFavoritePoints = getFavoritePoints;
     window.trackInput = trackInput;
-<<<<<<< HEAD
-    window.getFavorites = getFavorites
-=======
     window.getFavorites = getFavorites;
->>>>>>> 9c758ca7576a76bfd50cf79ea6ad25e4daccd2e5
     //check for token
     if (localStorage.jwtToken) {
         // Set auth token header auth
