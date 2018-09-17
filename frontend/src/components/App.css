@@ -3,61 +3,61 @@ body {
     padding: 0;
     font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
   }
-  
-  
+
+
   .form{
     padding-left: 20px;
   }
-  
+
   .searchBar{
     padding-left: 0px;
   }
-  
+
   i {
     font-size: 20px;
     padding-bottom: 3px;
     padding-right: 5px;
   }
-  
+
   .map-form {
     height: 100%;
     padding-left: 10px;
     padding-right: 10px;
     border-radius: 3px;
   }
-  
+
   .MuiToolbar-root-39 {
     display: flex;
     justify-content: space-between;
   }
-  
+
   a{
     text-decoration: none;
     color: white;
   }
-  
-  
+
+
   .leftNav *{
     display: inline;
   }
-  
+
   .MuiInput-input-115 {
     width: 175px;
     margin: 0 auto;
     font-size: 14px;
   }
-  
+
   .MuiFormControl-root-91.MuiFormControl-marginNormal-92.textfield{
     margin-right: 5px;
   }
-  
+
   .form-container *{
     display: block;
     align-items: center;
     justify-content: center;
     text-align: center;
   }
-  
+
   .submit{
     background-color: green;
     color: black;
@@ -65,21 +65,21 @@ body {
     font-weight: bolder;
     background-color: #0099e5;
   }
-  
+
   .submit:hover{
     background-color: #008080;
   }
-  
+
   .navBarLink{
     text-decoration: none;
     color: white;
   }
-  
+
   .navBarLink:hover{
     color: #999999;
   }
-  
-  .footer {
+
+  /* .footer {
     display: flex;
     justify-content: space-between;
     bottom: 0px;
@@ -87,42 +87,42 @@ body {
     height: 60px !important;
     width: 100vw;
     background-color: #0A466D;
-  }
-  
+  } */
+
   .MuiButtonBase-root-49.MuiButton-root-91.MuiButton-text-93.MuiButton-flat-96{
     width: 100px;
     height: 50px;
   }
-  
+
   .socialLinks{
     display: flex;
     justify-content: space-between;
     padding-top: 10px;
   }
-  
+
   .MuiButtonBase-root-146.MuiButton-root-120.MuiButton-text-122.MuiButton-flat-125{
     color: white;
   }
   .MuiButtonBase-root-146.MuiButton-root-120.MuiButton-text-122.MuiButton-flat-125:hover{
     color: grey;
   }
-  
-  
+
+
   .socials {
     color: black;
   }
-  
+
   .socials:hover{
     color: #0099e5;
   }
-  
+
   .githubRepo{
     color: white;
   }
   .githubRepo:hover{
     color: grey;
   }
-  
+
   .header-wrapper {
     border: 1px solid grey;
     display: flex;
@@ -194,9 +194,9 @@ body {
     padding: 4px 6px 8px 18px;
     border-radius: 4px;
     margin-right: 9px;
-    
+
   }
-  
+
   .discover-wrapper button {
     margin-right: 12px;
     padding: 12px 18px 12px 18px;
@@ -213,7 +213,7 @@ body {
   button:hover {
     cursor: pointer;
   }
-  
+
 
   form > button {
     color: white;
@@ -247,8 +247,7 @@ body {
     margin-right: 9px;
     margin-top: 8px;
   }
-  
-  
+
   .search-sticky {
     position: fixed;
     top: 0;
@@ -261,14 +260,14 @@ body {
     height: 700px;
     background-color: #eaeaea;
   }
-  
+
   .search-index {
     /* border: 1px solid blue;
     border-radius: 4px;
     align-content: center; */
-    
+
   }
-  
+
   .index-item {
     border-radius: 6px;
     width: 94%;
@@ -276,7 +275,7 @@ body {
     margin-bottom: 8px;
     background-color: white;
   }
-  
+
   .MuiButton-label-44{
     color: black;
     font-size: 18px;
@@ -284,25 +283,24 @@ body {
   .MuiButton-label-44:hover{
     color: #0099e5;
   }
-  
+
   .MuiButton-root-120{
     color: white;
   }
-  
+
   .helpPoint{
     padding-left: 10px;
     padding-bottom: 10px;
     font-size: 20px;
   }
-  
+
   .info{
     padding-left: 10px;
     font-size: 18px;
     padding-bottom: 10px;
   }
-  
+
   .howToUse *{
     color: white;
     font-size: 18px;
   }
-  
