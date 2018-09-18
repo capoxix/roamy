@@ -39,6 +39,7 @@ class GMap extends React.Component {
     service: undefined,
     map: undefined,
     foundPlace: undefined,
+    favoriteMarkers: undefined
   };
 
   onMarkerClick = (mapProps, marker, e) =>
@@ -141,7 +142,8 @@ class GMap extends React.Component {
           );
         }
     });
-    return favoritesMarkersArr;
+    if (favoritesMarkersArr) this.setState({favoriteMarkers: favoritesMarkersArr});
+    // return favoritesMarkersArr;
   }
 
   getCurrentLocation() {
@@ -284,14 +286,17 @@ class GMap extends React.Component {
   discover = (e) => {
     e.preventDefault();
     let that = this;
-    this.props.sendQuery(this.state.clicked).then(that.setState({trackedMarker: undefined}));//.then(that.setMarkersIntoMap());
+    this.props.sendQuery(this.state.clicked).then(() => {
+      that.setMarkersIntoMap();
+      that.setState({trackedMarker: undefined});
+    });//.then(that.setMarkersIntoMap());
   }
 
 
   render() {
 
     this.updatePolygon(this.props.endPoints);
-    let favoritesMarkersArr = this.setMarkersIntoMap();
+    // let favoritesMarkersArr = this.setMarkersIntoMap();
     let trackedMarker = null;
     if (this.props.userId) trackedMarker = this.state.trackedMarker;
 
@@ -306,7 +311,8 @@ class GMap extends React.Component {
         // controls[{this.props.google.maps.ControlPosition.TOP_CENTER}]
       >
         {this.state.currentLocationMarker}
-        {favoritesMarkersArr}
+        {this.state.favoriteMarkers}
+        {/* {favoritesMarkersArr} */}
         {this.state.clickedMarker}
         {trackedMarker}
 

@@ -142,9 +142,9 @@ class MapForm extends React.Component{
     }
 }
 
-export default MapForm;
+export default SearchForm;
 
-<MapForm getCurrentLocation={this.getCurrentLocation} 
+<SearchForm getCurrentLocation={this.getCurrentLocation} 
             findPlaceAndMark = {this.findPlaceAndMark}
             update= {this.update} 
             discover= {this.discover} 
