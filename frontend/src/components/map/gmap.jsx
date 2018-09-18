@@ -15,7 +15,6 @@ class GMap extends React.Component {
     this.getServiceAndMap = this.getServiceAndMap.bind(this);
     this.update = this.update.bind(this);
     this.trackInput = this.trackInput.bind(this);
-    // this.addFavoritesToMarkers = this.addFavoritesToMarkers.bind(this);
     this.setMarkersIntoMap = this.setMarkersIntoMap.bind(this);
 
     this.queryPlaces = this.queryPlaces.bind(this);
@@ -176,6 +175,9 @@ class GMap extends React.Component {
   getServiceAndMap(mapProps, map) {
     const { google } = mapProps;
     const service = new google.maps.places.PlacesService(map);
+    let centerControlDiv = document.createElement('div');
+    let centerControl = this.centerControl(centerControlDiv, map);
+    map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(centerControlDiv);
     this.setState({ map: map, service: service });
   }
 
@@ -292,9 +294,40 @@ class GMap extends React.Component {
     });//.then(that.setMarkersIntoMap());
   }
 
+  centerControl(controlDiv, map) {
+    
+    // Set CSS for the control border.
+    var controlUI = document.createElement('div');
+    controlUI.style.backgroundColor = '#fff';
+    controlUI.style.border = '2px solid #fff';
+    controlUI.style.borderRadius = '3px';
+    controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
+    controlUI.style.cursor = 'pointer';
+    controlUI.title = 'Click to recenter the map';
+    controlUI.style.marginRight = '9px';
+    controlUI.style.padding = '1px';
+    controlDiv.appendChild(controlUI);
+
+    // Set CSS for the control interior.
+    let controlImg = document.createElement('img');
+    controlImg.style.height = '21px';
+    controlImg.style.width = '22px';
+    controlImg.src = "https://s3-us-west-1.amazonaws.com/sports-with-strangers-dev/location_button.png";
+
+    controlUI.appendChild(controlImg);
+    let that = this;
+    // Setup the click event listeners: simply set the map to Chicago.
+    controlUI.addEventListener('click', function() {
+      that.getCurrentLocation();
+    });
+
+  }
+
+
 
   render() {
-
+    console.log(this.state.map);
+    console.log(this.props.google);
     this.updatePolygon(this.props.endPoints);
     // let favoritesMarkersArr = this.setMarkersIntoMap();
     let trackedMarker = null;
@@ -357,7 +390,6 @@ class GMap extends React.Component {
                 <div className="sideBar">
                   <div className="sticky-buttons">
                     {userButtons}
-                    <button type='button' onClick={()=> this.getCurrentLocation()}>Get Current Location</button>
                     <input type='text'
                       onChange={this.update('query')}
                       value={this.state.query}
