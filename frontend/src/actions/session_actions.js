@@ -16,16 +16,12 @@ export const setAuthToken = token => {
 
   if (token) {
     // Apply to every request
-
-
     axios.defaults.headers.common['Authorization'] = token;
   } else {
     // Delete auth header
     delete axios.defaults.headers.common['Authorization'];
   }
 };
-
-// export default setAuthToken;
 
 
 export const receiveCurrentUser = currentUser => ({
@@ -58,7 +54,6 @@ export const register = formUser => dispatch => API.register(formUser)
         dispatch(receiveCurrentUser(decoded));
         return "successful";
     })
-    //err.response.data instead of errors.responseJSON
     .catch((errors) => {
        dispatch(receiveErrors(errors.response.data));
        return "fail";
@@ -79,7 +74,6 @@ export const login = formUser => dispatch => API.login(formUser)
         dispatch(receiveCurrentUser(decoded));
         return "successful";
     })
-        //err.response.data instead of errors.responseJSON?
     .catch((errors) => {
         dispatch(receiveErrors(errors.response.data));
         return "fail";
