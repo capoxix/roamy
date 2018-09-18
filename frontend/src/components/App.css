@@ -184,7 +184,7 @@ body {
   }
 
   .discover-wrapper select {
-    font: 30px 'roboto', sans-serif;
+    font: 20px 'roboto', sans-serif;
     margin-right: 12px;
     border: 2px solid;
     color: black;
@@ -199,9 +199,12 @@ body {
 
   .discover-wrapper button {
     margin-right: 12px;
-    padding: 12px 18px 12px 18px;
+    /* padding: 12px 18px 12px 18px; */
+    /* padding: 4px 6px 8px 18px; */
+    padding: 6px;
+
     color: white;
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 700;
     border: none;
     background-color: white;
@@ -217,22 +220,24 @@ body {
 
   form > button {
     color: white;
-    font-size: 18px;
+    font-size: 20px;
     font-weight: 700;
     border: none;
+    width: 160px;
     background-color: white;
-    padding: 7px 9px 7px 9px;
+    padding: 5px 9px 9px 9px;
     border-radius: 4px;
     background-color: #01579b;
     margin-right: 9px;
   }
   .sticky-buttons > button {
     color: white;
-    font-size: 18px;
+    font-size: 20px;
     font-weight: 700;
     border: none;
+    width: 160px;
     background-color: white;
-    padding: 7px 9px 7px 9px;
+    padding: 5px 9px 9px 9px;
     border-radius: 4px;
     background-color: #01579b;
     margin-right: 9px;
@@ -246,6 +251,8 @@ body {
     border-radius: 4px;
     margin-right: 9px;
     margin-top: 8px;
+    width: 135px;
+
   }
 
   .search-sticky {
@@ -255,9 +262,9 @@ body {
     background-color: white;
   }
   .searchResults{
-    padding-top: 50px;
+    padding-top: 10px;
     overflow-y: auto;
-    height: 700px;
+    height: 630px;
     background-color: #eaeaea;
   }
 
