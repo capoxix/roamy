@@ -104,7 +104,7 @@ router.post('/login', (req, res) => {
               });
               });
           } else {
-            debugger;
+            // debugger;
           return res.status(400).json({password: 'Incorrect password'});
           }
       })

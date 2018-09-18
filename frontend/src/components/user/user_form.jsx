@@ -31,7 +31,7 @@ class UserForm extends React.Component {
   handleSubmit(e){
     e.preventDefault();
     const user = Object.assign({}, this.state);
-    this.props.processForm(user);
+    this.props.processForm(user).then((msg) => {if(msg === 'successful')this.props.history.push('/map')});;
   }
 
   update(field){

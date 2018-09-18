@@ -56,10 +56,12 @@ export const register = formUser => dispatch => API.register(formUser)
         // Set current user
         console.log('inside action decoded:', decoded)
         dispatch(receiveCurrentUser(decoded));
+        return "successful";
     })
     //err.response.data instead of errors.responseJSON
     .catch((errors) => {
        dispatch(receiveErrors(errors.response.data));
+       return "fail";
     });
 
 
@@ -75,10 +77,12 @@ export const login = formUser => dispatch => API.login(formUser)
         const decoded = jwt_decode(token);
         // Set current user
         dispatch(receiveCurrentUser(decoded));
+        return "successful";
     })
         //err.response.data instead of errors.responseJSON?
     .catch((errors) => {
         dispatch(receiveErrors(errors.response.data));
+        return "fail";
     });
 
     // Log user out
