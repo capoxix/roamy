@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const Location = require('../../models/Location');
 const fetch = require('node-fetch');
+const passport = require('passport');
+
 
 const validateTrackInput = require('../../validation/track.js');
 
@@ -28,11 +30,10 @@ router.post('/track', (req,res) => {
 
 });
 
-router.get('/favorites/:userId', (req, res) => {
-  Location.find({userId: req.params.userId})
+router.post('/favorites', (req, res) => {
+  Location.find({userId: req.body.userId})
     .then(favorites => res.json(favorites))
     .catch(err => console.log(err));
-    ;
 });
 
 let lat= 34.069502;

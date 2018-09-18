@@ -19,8 +19,17 @@ export const receiveTrackedInput = trackedInput => ({
     trackedInput
 })
 
-export const getFavoritePoints = (userId) => (dispatch) => API.getFavorites(userId)
-    .then(favorites => dispatch(receiveFavorites(favorites.data)));
+export const getFavoritePoints = (userId) => (dispatch) => {
+    return API.getFavorites(userId)
+    .then((res) => {
+      console.log(res)
+      dispatch(receiveFavorites(res.data))
+    })
+  }
+
+// export const getFavoritePoints = (userId) => (dispatch) => {API.getFavorites(userId)
+//     .then(favorites => dispatch(receiveFavorites(favorites.data)))
+// };
 
 export const trackInput = (location) => (dispatch) => API.track(location)
     .then(location => dispatch(receiveTrackedInput(location.data)));
