@@ -142,7 +142,6 @@ class GMap extends React.Component {
         }
     });
     if (favoritesMarkersArr) this.setState({favoriteMarkers: favoritesMarkersArr});
-    // return favoritesMarkersArr;
   }
 
   getCurrentLocation() {
@@ -171,10 +170,12 @@ class GMap extends React.Component {
       });
     }
   }
+
   /* get service and map for place searching*/
   getServiceAndMap(mapProps, map) {
     const { google } = mapProps;
     const service = new google.maps.places.PlacesService(map);
+    /* add controller to map */
     let centerControlDiv = document.createElement('div');
     let centerControl = this.centerControl(centerControlDiv, map);
     map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(centerControlDiv);
@@ -291,7 +292,7 @@ class GMap extends React.Component {
     this.props.sendQuery(this.state.clicked).then(() => {
       that.setMarkersIntoMap();
       that.setState({trackedMarker: undefined});
-    });//.then(that.setMarkersIntoMap());
+    });
   }
 
   centerControl(controlDiv, map) {
@@ -326,8 +327,6 @@ class GMap extends React.Component {
 
 
   render() {
-    console.log(this.state.map);
-    console.log(this.props.google);
     this.updatePolygon(this.props.endPoints);
     // let favoritesMarkersArr = this.setMarkersIntoMap();
     let trackedMarker = null;
@@ -341,11 +340,9 @@ class GMap extends React.Component {
         center={this.state.center}
         zoom={13}
         className="mapWrapper2"
-        // controls[{this.props.google.maps.ControlPosition.TOP_CENTER}]
       >
         {this.state.currentLocationMarker}
         {this.state.favoriteMarkers}
-        {/* {favoritesMarkersArr} */}
         {this.state.clickedMarker}
         {trackedMarker}
 
@@ -429,5 +426,3 @@ class GMap extends React.Component {
 }
 
 export default GMap;
-
-// queryPlaces={this.queryPlaces} findPlaceAndMark={this.findPlaceAndMark} markFoundPlace={this.markFoundPlace}
