@@ -264,7 +264,8 @@ body {
   .searchResults{
     padding-top: 10px;
     overflow-y: auto;
-    height: 630px;
+    /* height: 630px; */
+    height: 687px;
     background-color: #eaeaea;
   }
 
