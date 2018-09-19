@@ -8,6 +8,7 @@ import LoginFormContainer from './session/login_form_container';
 import MapContainer from './map/map_container.js';
 import ButtonAppBar from './header/map-form-container';
 import Footer from './footer/footer';
+import Splash from './splash/splash';
 import { AuthRoute, ProtectedRoute} from '../util/route_util';
 import {Route, Redirect, Switch, Link, HashRouter} from 'react-router-dom';
 
@@ -18,11 +19,11 @@ class App extends Component {
       <div className="App-wrapper">
         <ButtonAppBar/>
         <Switch>
+          <Route exact path="/" component={Splash}/>
           <AuthRoute exact path="/signup" component= {RegisterFormContainer}/>
           <AuthRoute exact path="/login" component={LoginFormContainer}/>
           <MapContainer/>
         </Switch>
-        <Footer/>
       </div>
     );
   }

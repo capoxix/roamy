@@ -5,8 +5,6 @@ import '../../index.css';
 class SearchIndexItem extends React.Component{
     render(){
         const {place} = this.props;
-        // console.log('place in SearchIndexItem', place);
-        // console.log(place.place);
         return (
             <div className="index-item">
                 <div className="place-icon">

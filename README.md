@@ -1,15 +1,18 @@
 # Background and Overview
 
-“Peripatetic” is an interactive map application, based on the concept of MoneyMile, that allows users to see a defined area where they can go on a given time frame. The area will be impacted by current traffic conditions, construction, weather, and other factors . This allows people to drop pins on any location and have a visual representation of places are within reach according to the time they have available.
+“Roamy” is an interactive map application, based on the concept of MoneyMile, that allows users to see a defined area where they can go on a given time frame. The area will be impacted by current traffic conditions, construction, weather, and other factors . This allows people to drop pins on any location and have a visual representation of places are within reach according to the time they have available.
 
-# Functionality and MVP
+# Features
+* General
+    1. Display visual cloud of area reachable within given time frame
+    2. Get current location
+    3. Search Places Information
+    4. Find place in Google Maps
 
-1. Have algorithm return reachable points when a user inputs a start pin and time
-2. Get visual cloud to render on Google maps (visually appealing)
-3. User signup/login
-4. Track favorite places(logged in users)
-5. Integrate other modes of transportation
-6. Intuitive UI, animations for markers and visual cloud (if time permits)
+* Logged In Users
+    1. Track favorite places
+    2. Display favorite places located inside visual cloud
+
 
 # Technologies and Technical Challenges
 
@@ -17,7 +20,9 @@
 2. Express
 3. React/ Redux
 4. Node.js
-5. Google Maps API (Directions/Distance Matrix)
+5. Google Maps Distance Matrix API 
+6. Google Maps Places API
+7. Google Maps Geocoder API
 
 * **Integrating Google Maps:** 
     * Google maps currently provides a distance matrix service where it computes multiple start and end point travel times and distances. This utility allows us to determine how long and far it takes to reach multiple endpoints with a single API call.
@@ -25,6 +30,42 @@
     * The determined area of travel based on time will have to be based on the given roads and current traffic situation. We will use a (generic latitude/longitude change per minute ) scale to generate the first Google Maps Distance Matrix call. 
     * We will then adjust our API calls accordingly based on the return time of each endpoint vs the time available to the User. We will then adjust each respective endpoint until each of our endpoints is less than or equal to the user request time.
     * Natural barriers such as deserts parks and water will have to be taken into consideration.
+
+    ```js
+     updatePolygon = (endPoints) => {
+        this.polygon = new this.props.google.maps.Polygon({paths: endPoints});
+        this.polygonComponent =
+            <Polygon
+                paths={endPoints}
+                strokeColor="#0000FF"
+                strokeOpacity={0.8}
+                strokeWeight={2}
+                fillColor="#0000FF"
+                fillOpacity={0.35}
+                clickable={false} />;
+        }
+    ```
+* **Google Search Places**
+    * Utilized Google Maps Places API to allow users to search places and display place user is looking for in Google Maps
+    ```js
+    queryPlaces() {
+        if (this.state.map && this.state.query !== "") {
+        let request = {
+            location: this.state.map.getCenter(),
+            radius: "500",
+            query: this.state.query
+        };
+        let that = this;
+
+        function returnPlaces(results, status) {
+            if (status == that.props.google.maps.places.PlacesServiceStatus.OK)
+            that.setState({ queryPlaces: results }) 
+        }
+
+        this.state.service.textSearch(request, returnPlaces);
+        }
+    }
+    ```
 * **UX**
     * The Frontend will display a large google maps with a nav-bar at the top
     * There will be a simple input form that can take in an integer for time and a location. Users can drop a pin to enter a location as well. 
@@ -33,50 +74,10 @@
 
     ![link](readme-images/Maps1.png)
     ![link](readme-images/Maps2.png)
-* **Backend**
-    * The backend will take in the start location and deconstruct it to a latitude longitude.
-    * Multiple endpoints will radiate out from said location and a distance matrix will be generated to find the time taken to reach each point.
-    * If the travel time to a point is less than the given param, expand that radius further out. If the time exceeds the param, retry with a closer point. If the time is equal to the param, save the point and explore the areas around it??
-    * A final set up points will be returned to the frontend for google maps to draw out
-
-# Things Accomplished Over the Weekend
-* Set up MongoDB, able to connect to server
-* Able to create users w/ valid JWToken in Postman
-* Basic webpage with embedded Google Maps Tool is already functioning.
-* Established Google Maps APIs that can be useful in returning data to dynamically adjust visual cloud parameters
-* Addressed possible solutions to avoiding bodies of water in visual cloud
-* Addressed most efficient ways to minimize total # of API calls without sacrificing accuracy of visual cloud
-
-# Group Members and Work Breakdown
-**DAY 1-2**
-* Ensure user authentication is working, read along the mern intro  **GARBO/group**
-* Setup a basic frontend design that has a form for location and time **KEVIN**
-* Test out the Google Maps Matrix API calls, **TONY**
-* Create a rudimentary algorithm for expanding from an argument (single point) **GROUP**
-* Setup Github Repo, learn branching, make sure everyone is on the same page **GROUP**
-
-**DAY 3**
-* Work on Sign in and Sign out **GARBO**
-* Research how to use Google Maps draw API to create a basic shape from results **KEVIN**
-* Be able to adjust parameters according to Google Maps API return **TONY**
-* Write out logic to stop growth of point if an uncrossable barrier is reached **GROUP**
-* Write out bridge logic **GROUP**
-
-**DAY 4-5**
-* Visualize points onto google maps, render lines and how to draw shapes on MAP **KEVIN**
-* Create multiple test points based on a single origin (4 or 8) **TONY**
-* Enable track current location of the device, save location onto database **GARBO**
-* Write out first draft of expansion algorithm **GROUP**
-
-**DAY 6**
-* Write out expansion algorithm design **TBD**
-* Determine checkpoints for growth **TBD**
-* Reassess our progress and modify itinerary if needed GROUP **TBD**
 
 
-**DAY 7**
-* About the project
-* improve UX
+
+
 
 
 

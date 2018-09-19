@@ -6,7 +6,6 @@ import '../../index.css';
 class SearchIndex extends React.Component{
     render(){
        const {places} = this.props;
-        // console.log('places in Search Index', places);
 
         let placesArr = places.map(place =>
         <SearchIndexItem place={place} key={place.id}/>)

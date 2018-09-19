@@ -5,5 +5,5 @@ export const track = (location) => {
 };
 
 export const getFavorites = (userId) => {
-    return axios.get(`api/locations/favorites/${userId}`);
+    return axios.post(`api/locations/favorites`,{userId: userId});
 };

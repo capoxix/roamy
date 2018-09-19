@@ -5,7 +5,6 @@ import {
   Polygon
 } from "google-maps-react";
 import React from "react";
-import { track, getFavorites } from "../../util/location_api_util";
 import SearchIndex from "./search_index";
 import '../../styling/header/header.css';
 import '../../index.css';
@@ -16,8 +15,12 @@ class GMap extends React.Component {
     this.getServiceAndMap = this.getServiceAndMap.bind(this);
     this.update = this.update.bind(this);
     this.trackInput = this.trackInput.bind(this);
-    this.addFavoritesToMarkers = this.addFavoritesToMarkers.bind(this);
     this.setMarkersIntoMap = this.setMarkersIntoMap.bind(this);
+
+    this.queryPlaces = this.queryPlaces.bind(this);
+    this.findPlaceAndMark = this.findPlaceAndMark.bind(this);
+    this.markFoundPlace = this.markFoundPlace.bind(this);
+
   }
   state = {
     showingInfoWindow: false,
@@ -26,9 +29,8 @@ class GMap extends React.Component {
     center: {},
     clicked: {},
     clickedMarker: [],
-    trackedMarker: [],
+    trackedMarker: undefined,
     minutes: '5',
-    favoriteMarkers: [],
     trackName: "",
     currentLocationMarker: [],
     queryPlaces: [],
@@ -36,6 +38,7 @@ class GMap extends React.Component {
     service: undefined,
     map: undefined,
     foundPlace: undefined,
+    favoriteMarkers: undefined
   };
 
   onMarkerClick = (mapProps, marker, e) =>
@@ -70,9 +73,16 @@ class GMap extends React.Component {
     });
   };
 
-  componentWillReceiveProps(){
-    //only show markers for logged in users
-    if(this.props.userId) this.addFavoritesToMarkers();
+  componentDidMount(){
+    if(this.props.userId) {
+      this.props.getFavoritePoints(this.props.userId);
+    }
+  }
+
+  componentDidUpdate(prevProps){
+    if (this.props.userId != prevProps.userId){
+      this.props.getFavoritePoints(this.props.userId);
+    }
   }
 
   trackInput(e) {
@@ -97,36 +107,26 @@ class GMap extends React.Component {
         />;
     this.setState({trackName: ''});
     let that = this;
-    track(trackLocation).then(that.setState({trackedMarker: trackedMarker}));
+    this.props.trackInput(trackLocation).then(that.setState({trackedMarker: trackedMarker}));
   }
-  /*get favorites locations of user & set to map */
-  addFavoritesToMarkers() {
-    let that = this;
-    getFavorites(this.props.userId).then(favorites => {
-      console.log("in addFavoritesToMarkers", favorites.data);
-      that.setMarkersIntoMap(favorites.data);
-      }
-    );
-  }
-
+ 
   /*set favorite markers into map */
-  setMarkersIntoMap(favoriteDataArr) {
-    console.log("in setMarketsIntoMap",favoriteDataArr);
+  setMarkersIntoMap() {
     let that = this;
-    let favoritesMarkersArr = favoriteDataArr.map(favorite => {
+    let favoritesMarkersArr = this.props.locations.map(favorite => {
       // create a new LatLng object with favorite's lat and lng
       let latLng = new that.props.google.maps.LatLng(
         favorite.lat,
         favorite.lng
       );
       //check to see if polygon contains that latlng and only create markers that are inside polygon
-      // debugger;
+     
       if (that.props.google.maps.geometry) {
         if (
           that.props.google.maps.geometry.poly.containsLocation(
             latLng,
             that.polygon
-          )
+          ) && (that.state.trackedMarker ? (that.state.trackedMarker.props.position.lat != favorite.lat && that.state.trackedMarker.props.position.lng != favorite.lng) : true)
         )
           return (
             <Marker
@@ -141,7 +141,7 @@ class GMap extends React.Component {
           );
         }
     });
-    this.setState({ favoriteMarkers: favoritesMarkersArr });
+    if (favoritesMarkersArr) this.setState({favoriteMarkers: favoritesMarkersArr});
   }
 
   getCurrentLocation() {
@@ -170,10 +170,15 @@ class GMap extends React.Component {
       });
     }
   }
+
   /* get service and map for place searching*/
   getServiceAndMap(mapProps, map) {
     const { google } = mapProps;
     const service = new google.maps.places.PlacesService(map);
+    /* add controller to map */
+    let centerControlDiv = document.createElement('div');
+    let centerControl = this.centerControl(centerControlDiv, map);
+    map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(centerControlDiv);
     this.setState({ map: map, service: service });
   }
 
@@ -187,9 +192,8 @@ class GMap extends React.Component {
       let that = this;
 
       function returnPlaces(results, status) {
-        //   const searched = that.state.query;
         if (status == that.props.google.maps.places.PlacesServiceStatus.OK)
-          that.setState({ queryPlaces: results });
+          that.setState({ queryPlaces: results }) 
       }
 
       this.state.service.textSearch(request, returnPlaces);
@@ -230,6 +234,7 @@ class GMap extends React.Component {
 
         /*TO ACESS LAT OR LNG, do place.geometry.location.lat() AND place.geomtry.location.lng() [shown in markFoundPlace]*/
         if (status == that.props.google.maps.places.PlacesServiceStatus.OK) {
+          that.setState({center: { lat: result[0].geometry.location.lat(), lng: result[0].geometry.location.lng()}});
           that.setState({query: ''});
           that.setState({ foundPlace: result[0] });
           that.markFoundPlace(result[0])
@@ -258,10 +263,6 @@ class GMap extends React.Component {
   }
 
   updatePolygon = (endPoints) => {
-    // if (!endPoints || endPoints.length === 0) {
-    //   return
-    // }
-
     this.polygon = new this.props.google.maps.Polygon({paths: endPoints});
     this.polygonComponent =
     <Polygon
@@ -284,17 +285,49 @@ class GMap extends React.Component {
   discover = (e) => {
     e.preventDefault();
     let that = this;
-    this.props.sendQuery(this.state.clicked).then(that.setState({trackedMarker: []}));
+    this.props.sendQuery(this.state.clicked).then(() => {
+      that.setState({trackedMarker: undefined});
+      that.setMarkersIntoMap();
+    });
+  }
+
+  centerControl(controlDiv, map) {
+    
+    // Set CSS for the control border.
+    var controlUI = document.createElement('div');
+    controlUI.style.backgroundColor = '#fff';
+    controlUI.style.border = '2px solid #fff';
+    controlUI.style.borderRadius = '3px';
+    controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
+    controlUI.style.cursor = 'pointer';
+    controlUI.title = 'Click to recenter the map';
+    controlUI.style.marginRight = '9px';
+    controlUI.style.padding = '1px';
+    controlDiv.appendChild(controlUI);
+
+    // Set CSS for the control interior.
+    let controlImg = document.createElement('img');
+    controlImg.style.height = '21px';
+    controlImg.style.width = '22px';
+    controlImg.src = "https://s3-us-west-1.amazonaws.com/sports-with-strangers-dev/location_button.png";
+
+    controlUI.appendChild(controlImg);
+    let that = this;
+    // Setup the click event listeners: simply set the map to Chicago.
+    controlUI.addEventListener('click', function() {
+      that.getCurrentLocation();
+    });
+
   }
 
 
-  render() {
 
-    this.updatePolygon(this.props.endPoints)
-    let trackedMarker = [];
+  render() {
+    this.updatePolygon(this.props.endPoints);
+    // let favoritesMarkersArr = this.setMarkersIntoMap();
+    let trackedMarker = null;
     if (this.props.userId) trackedMarker = this.state.trackedMarker;
-    // let address;
-    // if(this.state.foundPlace) address = this.state.foundPlace.formatted_address;
+
     this.mapComponent = (
       <Map
         google={this.props.google}
@@ -303,7 +336,6 @@ class GMap extends React.Component {
         center={this.state.center}
         zoom={13}
         className="mapWrapper2"
-        // controls[{this.props.google.maps.ControlPosition.TOP_CENTER}]
       >
         {this.state.currentLocationMarker}
         {this.state.favoriteMarkers}
@@ -323,6 +355,9 @@ class GMap extends React.Component {
     );
     this.queryPlaces();
     let places = this.state.queryPlaces;
+
+    if (this.state.query === "") places =[];
+
     let userButtons =  [];
     if(this.props.userId) {
       userButtons =  [<form onSubmit={this.trackInput}>
@@ -333,7 +368,7 @@ class GMap extends React.Component {
                           placeholder="Favorite place name"
                           required
                         />
-                        <button type='submit'>TRACK LOCATION</button>
+                        <button type='submit'>Save Location</button>
                         </form>
                       ];
                       }
@@ -348,26 +383,25 @@ class GMap extends React.Component {
                 <div className="sideBar">
                   <div className="sticky-buttons">
                     {userButtons}
-                    <button type='button' onClick={()=> this.getCurrentLocation()}>Get Current Location</button>
                     <input type='text'
                       onChange={this.update('query')}
                       value={this.state.query}
                       placeholder="Search Place"/>
-                    <button type='button' onClick={()=>this.findPlaceAndMark()}>Find location</button>
+                    <button type='button' onClick={()=>this.findPlaceAndMark()}>Find Location</button>
                     <div className="discover-wrapper">
                       <select id="time" name="time" onChange={this.update("minutes")}>
-                        <option value="5" selected="true">5</option>
-                        <option value="10">10</option>
-                        <option value="15">15</option>
-                        <option value="20">20</option>
-                        <option value="25">25</option>
-                        <option value="30">30</option>
-                        <option value="35">35</option>
-                        <option value="40">40</option>
-                        <option value="45">45</option>
-                        <option value="50">50</option>
-                        <option value="55">55</option>
-                        <option value="60">60</option>
+                        <option value="5" selected="true">5 min</option>
+                        <option value="10">10 min</option>
+                        <option value="15">15 min</option>
+                        <option value="20">20 min</option>
+                        <option value="25">25 min</option>
+                        <option value="30">30 min</option>
+                        <option value="35">35 min</option>
+                        <option value="40">40 min</option>
+                        <option value="45">45 min</option>
+                        <option value="50">50 min</option>
+                        <option value="55">55 min</option>
+                        <option value="60">60 min</option>
                       </select>
                       <button className="discover-button" type='button' onClick={this.discover}>Discover</button>
                     </div>
