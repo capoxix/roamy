@@ -44,40 +44,75 @@ router.post(`/car`, async (req, res) => {
     duped = Point.modify(duped);
   }
 
-  results = await curryPoints(endPoints, origin).then((res1) => {
-    console.log(res1)
-    results = res1
-    res.send(results);
-  })
+  results = selectPoints(endPoints, origin)
+  console.log(results)
+
+  geolocate(results, (response) => res.send(response))
+
 });
 
-async function curryPoints(endPoints, origin) {
-  const results = [];
+function geolocate(endPoints, cb) {
+  let counter = 0;
+  for (i = 0; i < endPoints.length; i++) {
+    convertAddress(endPoints[i]).then( (response) => {
+      counter += 1
+      const { latitude, longitude} = response[0];
+      console.log(latitude)
+      console.log(longitude)
+      console.log(counter)
 
+      if (counter === endPoints.length) {
+
+        console.log(endPoints.length)
+
+        cb(endPoints)
+      }
+    }, (reject) => {
+      counter += 1
+      console.log(counter)
+      if (counter === 15) {
+
+        cb(endPoints)
+      }
+    })
+  }
+
+}
+
+function convertAddress(point) {
   const options = {
     provider: 'google',
     apiKey: 'AIzaSyDBghaO6vALAG_-QG2SCBN8LEB_jFM6o1Q'
   }
   const geocoder = NodeGeocoder(options)
+  return geocoder.geocode(point.address)
+}
 
+//
+
+function selectPoints(endPoints, origin) {
+  const results = [];
   for (let i = 0 ; i <  endPoints.length; i++) {
-    // && (origin.minutes + 2.5) < endPoints[i].minutes
     if (!endPoints[i].destroy && (origin.minutes + 2.5) > endPoints[i].minutes) {
-      if (endPoints[i].lat && endPoints[i].lng && endPoints[i].minutes) {
-        results.push(endPoints[i])
-        await fixLatLng(endPoints[i], geocoder)
+      if (endPoints[i].lat && endPoints[i].lng && endPoints[i].minutes && endPoints[i].address) {
+        console.log('endpoints: ', i)
+        console.log('endpoints: ', i)
+        console.log('endpoints: ', i)
+        results.push(endPoints[i])     
       }
     }
   }
-
   return results
 };
 
-async function fixLatLng(point, geocoder) {
+
+
+
+async function fixLatLng(point) {
   const dLat200m = 0.003604 * 0.5;
   const dLng200m =  0.0045402 * 0.5;
 
-  const promise = await geocoder.geocode(point.address)
+  const promise = geocoder.geocode(point.address)
     // if point difference is too big, just keep original points
     console.log('llllllllllllllllllllllllll')
     console.log(point.lat)
