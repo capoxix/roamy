@@ -46,11 +46,7 @@ router.post(`/car`, async (req, res) => {
 
   results = selectPoints(endPoints, origin)
   console.log(results)
-  console.log(results)
-  console.log(results)
-  console.log(results)
-  console.log(results)
-  console.log(results)
+
   geolocate(results, (response) => res.send(response))
 
 });
@@ -59,25 +55,23 @@ function geolocate(endPoints, cb) {
   let counter = 0;
   for (i = 0; i < endPoints.length; i++) {
     convertAddress(endPoints[i]).then( (response) => {
-      const { latitude, longitude} = response[0];
       counter += 1
-      console.log(response[0])
+      const { latitude, longitude} = response[0];
       console.log(latitude)
       console.log(longitude)
       console.log(counter)
 
+      if (counter === endPoints.length) {
+
+        console.log(endPoints.length)
+
+        cb(endPoints)
+      }
+    }, (reject) => {
+      counter += 1
+      console.log(counter)
       if (counter === 15) {
-        console.log(endPoints)
-        console.log(cb)
-        console.log("HIT")
-        console.log("HIT")
-        console.log("HIT")
-        console.log("HIT")
-        console.log("HIT")
-        console.log("HIT")
-        console.log("HIT")
-        console.log("HIT")
-        console.log("HIT")
+
         cb(endPoints)
       }
     })
@@ -101,6 +95,9 @@ function selectPoints(endPoints, origin) {
   for (let i = 0 ; i <  endPoints.length; i++) {
     if (!endPoints[i].destroy && (origin.minutes + 2.5) > endPoints[i].minutes) {
       if (endPoints[i].lat && endPoints[i].lng && endPoints[i].minutes && endPoints[i].address) {
+        console.log('endpoints: ', i)
+        console.log('endpoints: ', i)
+        console.log('endpoints: ', i)
         results.push(endPoints[i])     
       }
     }
