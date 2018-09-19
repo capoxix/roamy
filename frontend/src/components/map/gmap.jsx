@@ -286,8 +286,8 @@ class GMap extends React.Component {
     e.preventDefault();
     let that = this;
     this.props.sendQuery(this.state.clicked).then(() => {
-      that.setMarkersIntoMap();
       that.setState({trackedMarker: undefined});
+      that.setMarkersIntoMap();
     });
   }
 
