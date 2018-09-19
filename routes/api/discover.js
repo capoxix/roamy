@@ -45,7 +45,7 @@ router.post(`/car`, async (req, res) => {
   }
 
   results = selectPoints(endPoints, origin)
-  console.log(results)
+  // console.log(results)
 
   geolocate(results, (response) => res.send(response))
 
@@ -57,19 +57,19 @@ function geolocate(endPoints, cb) {
     convertAddress(endPoints[i]).then( (response) => {
       counter += 1
       const { latitude, longitude} = response[0];
-      console.log(latitude)
-      console.log(longitude)
-      console.log(counter)
+      // console.log(latitude)
+      // console.log(longitude)
+      // console.log(counter)
 
       if (counter === endPoints.length) {
 
-        console.log(endPoints.length)
+        // console.log(endPoints.length)
 
         cb(endPoints)
       }
     }, (reject) => {
       counter += 1
-      console.log(counter)
+      // console.log(counter)
       if (counter === 15) {
 
         cb(endPoints)
@@ -95,9 +95,9 @@ function selectPoints(endPoints, origin) {
   for (let i = 0 ; i <  endPoints.length; i++) {
     if (!endPoints[i].destroy && (origin.minutes + 2.5) > endPoints[i].minutes) {
       if (endPoints[i].lat && endPoints[i].lng && endPoints[i].minutes && endPoints[i].address) {
-        console.log('endpoints: ', i)
-        console.log('endpoints: ', i)
-        console.log('endpoints: ', i)
+        // console.log('endpoints: ', i)
+        // console.log('endpoints: ', i)
+        // console.log('endpoints: ', i)
         results.push(endPoints[i])     
       }
     }
@@ -114,30 +114,30 @@ async function fixLatLng(point) {
 
   const promise = geocoder.geocode(point.address)
     // if point difference is too big, just keep original points
-    console.log('llllllllllllllllllllllllll')
-    console.log(point.lat)
-    console.log(promise[0].latitude)
-    console.log('dlat is: ', Math.abs(point.lat - promise[0].latitude))
-    console.log('dlat is bool: ', Math.abs(point.lat - promise[0].latitude) < dLat200m)
-    console.log(point.lng)
-    console.log(promise[0].longitude)
-    console.log('dlng is: ', Math.abs(point.lng - promise[0].longitude))
-    console.log('dlng is bool: ', Math.abs(point.lng - promise[0].longitude) < dLng200m)
+    // console.log('llllllllllllllllllllllllll')
+    // console.log(point.lat)
+    // console.log(promise[0].latitude)
+    // console.log('dlat is: ', Math.abs(point.lat - promise[0].latitude))
+    // console.log('dlat is bool: ', Math.abs(point.lat - promise[0].latitude) < dLat200m)
+    // console.log(point.lng)
+    // console.log(promise[0].longitude)
+    // console.log('dlng is: ', Math.abs(point.lng - promise[0].longitude))
+    // console.log('dlng is bool: ', Math.abs(point.lng - promise[0].longitude) < dLng200m)
 
     if (!promise[0].latitude || !promise[0].longitude) { return }
 
     if (Math.abs(point.lat - promise[0].latitude) > dLat200m || Math.abs(point.lng - promise[0].longitude) > dLng200m) {
 
-      console.log('hit')
-      console.log('hit')
+      // console.log('hit')
+      // console.log('hit')
       
       point.lat = promise[0].latitude
       point.lng = promise[0].longitude
     }
-    console.log('')
-    console.log('')
-    console.log('')
-    console.log('')
+    // console.log('')
+    // console.log('')
+    // console.log('')
+    // console.log('')
 }
 
 

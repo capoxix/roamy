@@ -50,7 +50,6 @@ export const register = formUser => dispatch => API.register(formUser)
         // Decode token to get user data
         const decoded = jwt_decode(token);
         // Set current user
-        console.log('inside action decoded:', decoded)
         dispatch(receiveCurrentUser(decoded));
         return "successful";
     })
