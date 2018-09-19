@@ -16,7 +16,6 @@ const mapStateToProps = (state, ownProps) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    // track: (location) => dispatch(track(location))
     sendQuery: (query) => dispatch(sendQuery(query)),
     getFavoritePoints: (userId) => dispatch(getFavoritePoints(userId)),
     trackInput: (location) => dispatch(trackInput(location))

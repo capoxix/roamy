@@ -142,7 +142,6 @@ class GMap extends React.Component {
         }
     });
     if (favoritesMarkersArr) this.setState({favoriteMarkers: favoritesMarkersArr});
-    // return favoritesMarkersArr;
   }
 
   getCurrentLocation() {
@@ -171,10 +170,12 @@ class GMap extends React.Component {
       });
     }
   }
+
   /* get service and map for place searching*/
   getServiceAndMap(mapProps, map) {
     const { google } = mapProps;
     const service = new google.maps.places.PlacesService(map);
+    /* add controller to map */
     let centerControlDiv = document.createElement('div');
     let centerControl = this.centerControl(centerControlDiv, map);
     map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(centerControlDiv);
@@ -262,10 +263,6 @@ class GMap extends React.Component {
   }
 
   updatePolygon = (endPoints) => {
-    // if (!endPoints || endPoints.length === 0) {
-    //   return
-    // }
-
     this.polygon = new this.props.google.maps.Polygon({paths: endPoints});
     this.polygonComponent =
     <Polygon
@@ -291,7 +288,7 @@ class GMap extends React.Component {
     this.props.sendQuery(this.state.clicked).then(() => {
       that.setMarkersIntoMap();
       that.setState({trackedMarker: undefined});
-    });//.then(that.setMarkersIntoMap());
+    });
   }
 
   centerControl(controlDiv, map) {
@@ -326,8 +323,6 @@ class GMap extends React.Component {
 
 
   render() {
-    console.log(this.state.map);
-    console.log(this.props.google);
     this.updatePolygon(this.props.endPoints);
     // let favoritesMarkersArr = this.setMarkersIntoMap();
     let trackedMarker = null;
@@ -341,11 +336,9 @@ class GMap extends React.Component {
         center={this.state.center}
         zoom={13}
         className="mapWrapper2"
-        // controls[{this.props.google.maps.ControlPosition.TOP_CENTER}]
       >
         {this.state.currentLocationMarker}
         {this.state.favoriteMarkers}
-        {/* {favoritesMarkersArr} */}
         {this.state.clickedMarker}
         {trackedMarker}
 
@@ -375,7 +368,7 @@ class GMap extends React.Component {
                           placeholder="Favorite place name"
                           required
                         />
-                        <button type='submit'>TRACK LOCATION</button>
+                        <button type='submit'>Save Location</button>
                         </form>
                       ];
                       }
@@ -394,21 +387,21 @@ class GMap extends React.Component {
                       onChange={this.update('query')}
                       value={this.state.query}
                       placeholder="Search Place"/>
-                    <button type='button' onClick={()=>this.findPlaceAndMark()}>Find location</button>
+                    <button type='button' onClick={()=>this.findPlaceAndMark()}>Find Location</button>
                     <div className="discover-wrapper">
                       <select id="time" name="time" onChange={this.update("minutes")}>
-                        <option value="5" selected="true">5</option>
-                        <option value="10">10</option>
-                        <option value="15">15</option>
-                        <option value="20">20</option>
-                        <option value="25">25</option>
-                        <option value="30">30</option>
-                        <option value="35">35</option>
-                        <option value="40">40</option>
-                        <option value="45">45</option>
-                        <option value="50">50</option>
-                        <option value="55">55</option>
-                        <option value="60">60</option>
+                        <option value="5" selected="true">5 min</option>
+                        <option value="10">10 min</option>
+                        <option value="15">15 min</option>
+                        <option value="20">20 min</option>
+                        <option value="25">25 min</option>
+                        <option value="30">30 min</option>
+                        <option value="35">35 min</option>
+                        <option value="40">40 min</option>
+                        <option value="45">45 min</option>
+                        <option value="50">50 min</option>
+                        <option value="55">55 min</option>
+                        <option value="60">60 min</option>
                       </select>
                       <button className="discover-button" type='button' onClick={this.discover}>Discover</button>
                     </div>
@@ -429,5 +422,3 @@ class GMap extends React.Component {
 }
 
 export default GMap;
-
-// queryPlaces={this.queryPlaces} findPlaceAndMark={this.findPlaceAndMark} markFoundPlace={this.markFoundPlace}

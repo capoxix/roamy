@@ -5,7 +5,6 @@ const User = require('../../models/User');
 const jsonwebtoken = require('jsonwebtoken');
 const keys = require('../../config/keys');
 const passport = require('passport');
-// require('../../config/passport')(passport);
 
 
 const validateRegisterInput = require('../../validation/register.js');
@@ -45,7 +44,6 @@ router.post('/register', (req, res) => {
             bcrypt.hash(newUser.password, salt, (err, hash) => {
               if (err) throw err;
               newUser.password = hash;
-              // debugger;
               newUser.save()
                 .then(user => {
                   const payload = { id: user.id, name: user.name };
@@ -104,7 +102,6 @@ router.post('/login', (req, res) => {
               });
               });
           } else {
-            debugger;
           return res.status(400).json({password: 'Incorrect password'});
           }
       })

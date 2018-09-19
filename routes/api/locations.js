@@ -7,7 +7,6 @@ const passport = require('passport');
 
 const validateTrackInput = require('../../validation/track.js');
 
-router.get('/test', (req, res) => res.json({msg: 'Locations route is working'}));
 /* track favorite location for logged in user*/
 router.post('/track', (req,res) => {
 
