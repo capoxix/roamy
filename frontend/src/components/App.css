@@ -173,6 +173,8 @@ body {
   .sticky-buttons {
     padding-top: 6px;
     font-size: 24px;
+    height: 146px;
+    border-bottom: 1px solid #eaeaea;
 
 
   }
@@ -180,7 +182,7 @@ body {
   .discover-wrapper {
     padding-top: 9px;
     padding-bottom: 9px;
-    border-bottom: 1px solid #eaeaea;
+    /* border-bottom: 1px solid #eaeaea; */
   }
 
   .discover-wrapper select {
