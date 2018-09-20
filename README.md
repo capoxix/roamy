@@ -28,8 +28,9 @@
     * Google maps currently provides a distance matrix service where it computes multiple start and end point travel times and distances. This utility allows us to determine how long and far it takes to reach multiple endpoints with a single API call.
 * **Constructing the Travel Cloud:**
     * The determined area of travel based on time will have to be based on the given roads and current traffic situation. We will use a (generic latitude/longitude change per minute ) scale to generate the first Google Maps Distance Matrix call. 
-    * We will then adjust our API calls accordingly based on the return time of each endpoint vs the time available to the User. We will then adjust each respective endpoint until each of our endpoints is less than or equal to the user request time.
-    * Natural barriers such as deserts parks and water will have to be taken into consideration.
+    * We will then adjust our API calls accordingely based on the return time of each endpoint vs the time available to the User. We will then adjust each respective endpoint until each of our endpoints is less than or equal to the user request time.
+    * The cloud uses Google Map's distance matrix API to create its form. Twenty points are initialized radiating from the origin using trigonometic ratios, where the distance in Lat/Lng is calculated by the input time and a constant. A distance matrix API call is then sent to Google to determine the time it takes for each travel from origin to destination and subsequent calls will be made for all points to readjust it's value.
+    * For any given point, a ratio from it's calcuated time and the input time will be used as a scalar for to recalculate it's difference in Lat/Lng from the origin. Points that are withing a 1.5 minutes of the input time will be frozen and no further API calls will be made for that given point.
 
     ```js
      updatePolygon = (endPoints) => {
