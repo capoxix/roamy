@@ -34,7 +34,7 @@ class GMap extends React.Component {
     trackName: "",
     currentLocationMarker: [],
     queryPlaces: [],
-    query: "",
+    query: "Twin Peaks",
     service: undefined,
     map: undefined,
     foundPlace: undefined,
@@ -246,6 +246,7 @@ class GMap extends React.Component {
 
   markFoundPlace(place){
     let that = this;
+
     this.setState({ clicked: { lat: place.geometry.location.lat(), lng: place.geometry.location.lng(), minutes: this.state.minutes } });
     this.setState({
         clickedMarker: (
@@ -259,7 +260,8 @@ class GMap extends React.Component {
             }}
           />
         )
-      })
+      });
+    this.setState({center: {lat: place.geometry.location.lat(), lng: place.geometry.location.lng()}});
   }
 
   updatePolygon = (endPoints) => {
@@ -408,7 +410,7 @@ class GMap extends React.Component {
                   </div>
 
                   <div className="searchResults fadeIn">
-                    <SearchIndex places={places}/>
+                    <SearchIndex places={places} markFoundPlace={this.markFoundPlace}/>
                   </div>
 
                 </div>
