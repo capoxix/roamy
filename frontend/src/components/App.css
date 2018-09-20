@@ -282,6 +282,13 @@ body {
     margin: 0 auto;
     margin-bottom: 8px;
     background-color: white;
+    border: 1px solid transparent;
+  }
+
+  .index-item:hover {
+    cursor: pointer;
+    box-sizing: border-box;
+    border: 1px solid grey;
   }
 
   .MuiButton-label-44{
