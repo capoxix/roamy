@@ -9,20 +9,15 @@ const splash = () => {
         <div id="medium_header_text" className="animated fadeIn delay-2s">Discover great places in your immediate vicinity!</div>
         <Link to="/map" id="second_sign_up">Let's Go!</Link>
       </div>
-      <div className="splash_header_1">Favorite locations, chosen by you</div>
-      <div className="splash_caption_1">Discover your next adventure!</div>
+      <div className="splash_header_1">How to use Roamy</div>
       <div className="top_photos">
         <div className="1-1">
-          <img src="https://s3-us-west-1.amazonaws.com/720hd-prod/banff2.jpg"></img>
-        </div>
-        <div className="1-2">
-          <img src="https://s3-us-west-1.amazonaws.com/720hd-prod/patagonia.jpg"></img>
+          <h3 className="gif_header">Click and Discover</h3>
+          <img src="https://s3-us-west-1.amazonaws.com/720hd-prod/click-discover.gif"></img>
         </div>
         <div className="2-1">
-          <img src="https://s3-us-west-1.amazonaws.com/720hd-prod/yosemite.jpg"></img>
-        </div>
-        <div className="2-2">
-          <img src="https://s3-us-west-1.amazonaws.com/720hd-prod/patagonia2.jpg"></img>
+          <h3 className="gif_header">Search and Discover</h3>
+          <img src="https://s3-us-west-1.amazonaws.com/720hd-prod/search-discover.gif"></img>
         </div>
       </div>
 
@@ -33,10 +28,13 @@ const splash = () => {
           <div className="ft2-1">
             <p>
               Roamy is a single page application that integrates several Google Map APIs to render a visual representation of the places a user can travel to given a reasonable amount of time.
+              <br/>
+              The bubble is dynamically updated using Google's Distance Matrix and Geocoding API.
             </p>
           </div>
           <div className="ft2-2">
             <div>
+              Kevin Ou
               <a className="socials" href="https://www.linkedin.com/in/kevin-ou-b56a768b/">
                 <i className="fab fa-linkedin"></i>
               </a>
@@ -45,6 +43,7 @@ const splash = () => {
               </a>
             </div>
             <div>
+              <a href="https://garbocheng.netlify.com/">Garbo Cheng Ye</a>
               <a className="socials" href="https://www.linkedin.com/in/garbo-cheng-ye/">
                 <i className="fab fa-linkedin"></i>
               </a>
@@ -53,6 +52,7 @@ const splash = () => {
               </a>
             </div>
             <div>
+              <a href="https://tonyzhang.netlify.com/">Tony Zhang</a>
               <a className="socials" href="https://www.linkedin.com/in/tony-wzhang/">
                 <i className="fab fa-linkedin"></i>
               </a>
@@ -61,7 +61,8 @@ const splash = () => {
               </a>
             </div>
             <div>
-              <a className="socials tooltip" href="https://github.com/capoxix/intro-mongo">
+              <a href="https://github.com/capoxix/roamy">Project Repo</a>
+              <a className="socials tooltip" href="https://github.com/capoxix/roamy">
                 <i className="fab fa-github"></i>
               </a>
             </div>

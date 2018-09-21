@@ -71,6 +71,11 @@ a{
   text-decoration: none;
   color: white;
 }
+
+.rightNavBar .navBarLink {
+  position: relative;
+  top: 5px;
+}
 .navBarLink:hover{
   color: #999999;
 }
@@ -268,7 +273,7 @@ a{
   background-repeat: no-repeat;
   background-size: cover;
   height: 555px;
-  margin-bottom: 60px;
+  margin-bottom: 30px;
 }
 
 .header * {
@@ -291,22 +296,27 @@ a{
   padding-bottom: 30px;
 }
 
+.gif_header{
+  margin-top: -20px;
+  text-align: center;
+}
+
 .top_photos{
   display: grid;
   background-color: white;
   grid-template-columns: minmax(250px, 1fr) minmax(250px, 1fr);
   grid-column-gap: 10px;
-  grid-template-rows: repeat(2, 1fr);
   grid-row-gap: 10px;
-  margin: 50px;
-  height: 1200px;
+  height: 500px;
   /* margin-bottom: 150px; */
 }
 
 .top_photos img{
+  display: flex;
   object-fit: cover;
-  width: 100%;
-  height: 100%;
+  width: 600px;
+  height: 455px;
+  margin: 0 auto;
 }
 .features{
   display: grid;
@@ -361,7 +371,7 @@ i:hover{
 .links{
   display: grid;
   grid-template-columns: minmax(250px, 1fr) minmax(250px, 1fr);
-  grid-template-rows: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
   justify-content: center;
   align-items: center;
   text-align: center;
@@ -464,6 +474,19 @@ i:hover{
 
 .rightNavBar {
   display: flex;
+}
+
+.greeting {
+  position: relative;
+  top: 7px;
+  font-size: 18px;
+}
+
+.logout_button{
+  padding-left: 10px;
+  font-size: 18px;
+  position: relative;
+  top: 7px;
 }
 
 .navBarLink {
