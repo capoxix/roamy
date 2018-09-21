@@ -262,7 +262,6 @@ class GMap extends React.Component {
           />
         )
       });
-    console.log("place",place);
     this.setState({foundPlace: place});
     this.setState({center: {lat: place.geometry.location.lat(), lng: place.geometry.location.lng()}});
   }
