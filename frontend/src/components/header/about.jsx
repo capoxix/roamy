@@ -39,7 +39,7 @@ class SimpleDialog extends React.Component {
       <Dialog onClose={this.handleClose} aria-labelledby="simple-dialog-title" {...other}>
         <div className="info">
           <div className="1-1">
-            Roamy is a single page web-application used to render a bubble that represents the area that a user can travel to, by car, considering the time they have at their disposal.
+            Want to know where you can go in 15 minutes? Roamy can help! Set your location and time, and Roamy will render a cloud range on the map to show where you can go!
           </div>
 
           <div className="1-2">
@@ -51,16 +51,15 @@ class SimpleDialog extends React.Component {
           </div>
 
           <div className="2-2">
-            The bubble is dynamically updated using Google's Distance Matrix API.
+            Set your location and time, and Roamy will render a cloud range on the map to show where you can go!
           </div>
           <div className="3-1">
-            The user can also label their favorite points on the map and show the favorite points that are currently inside their travel bubble.
+          Pin your favorite locations to know if you favorite dessert place is within range after dinner!
           </div>
 
           <div className="3-2">
             <img src="https://www.mavenwave.com/wp-content/uploads/2016/07/act.png"></img>
           </div>
-
 
         </div>
       </Dialog>

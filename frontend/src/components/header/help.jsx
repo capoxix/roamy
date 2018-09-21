@@ -37,9 +37,10 @@ class SimpleDialog extends React.Component {
 
     return (
       <Dialog onClose={this.handleClose} aria-labelledby="simple-dialog-title" {...other}>
+        <h2>How To Use</h2>
         <div className="directions">
         <div className="1-1">
-          Set Origin Location, by either clicking the "Get Current Location" button, typing in location and clicking on "Go To Location" button, or simply by clicking on the map.
+           Set your starting point by clicking on the map, searching for your favorite burger or even your current location!  
         </div>
 
         <div className="1-2">
@@ -51,19 +52,14 @@ class SimpleDialog extends React.Component {
         </div>
 
         <div className="2-2">
-          Select timeframe available.
+          Select your time limit on the drop down then click on discover to see where YOU can discover!
+          
         </div>
         <div className="3-1">
-          Click "Discover" Button to fire off your search and enjoy!
+          Login to pin your favorite locations and see if you can reach your favorite bar within time!
         </div>
         <div className="3-2">
           <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5M0M5Xbl-NY88IO6Hk_1HpytW-7bN0HWePs_bvisPtGKKGx5v"></img>
-        </div>
-        <div className="5-1">
-          <img src="https://tse4.mm.bing.net/th?id=OIP.9_WA93uE6tx2Poz_J6IzKAHaHa&w=190&h=190&c=8&o=5&pid=1.7"></img>
-        </div>
-        <div className="5-2">
-           Logged in users have the additional option to set and view their favorite locations.
         </div>
       </div>
 
