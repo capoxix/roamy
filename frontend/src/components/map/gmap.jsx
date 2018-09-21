@@ -46,16 +46,20 @@ class GMap extends React.Component {
     this.setState({
       selectedPlace: mapProps,
       activeMarker: marker,
-      showingInfoWindow: true
+      showingInfoWindow: true,
     });
 
   onMapClicked = (mapProps, map, e) => {
     if (this.state.showingInfoWindow) {
       this.setState({
         showingInfoWindow: false,
-        activeMarker: null
+        activeMarker: null,
+
       });
     }
+    /*when map clicked changed foundplace to undefined */
+    this.setState({foundPlace: undefined});
+
     /*get latitude and longitude from clicked point on maps and set marker to show clicked point*/
     /* USED TO PICK ORIGIN POINTS BY SETTING IT TO CLICKED AND CLICKED MARKERS */
     this.setState({ clicked: { lat: e.latLng.lat(), lng: e.latLng.lng(), minutes: this.state.minutes } });
@@ -292,9 +296,20 @@ class GMap extends React.Component {
     this.props.sendQuery(this.state.clicked).then(() => {
       that.setState({trackedMarker: undefined});
       that.setMarkersIntoMap();
-      let areaInfo = [<li>Travel Radius: {this.state.minutes} minutes</li>,
-      <li>Name: {this.state.foundPlace.name}</li>,
-      <li>Address: {this.state.foundPlace.formatted_address}</li>];
+      let areaInfo;
+      console.log('clicked',that.state.clicked);
+      console.log('foundPlace', that.state.foundPlace);
+      if(this.state.foundPlace) {
+
+                                areaInfo = [<li>Travel Radius: {this.state.minutes} minutes</li>,
+                                            <li>Name: {this.state.foundPlace.name}</li>,
+                                            <li>Address: {this.state.foundPlace.formatted_address}</li>];
+      } else {
+        areaInfo = [<li>Travel Radius: {this.state.minutes} minutes</li>,
+                    <li>Name: Clicked point</li>,
+                    <li>Location: ({this.state.clicked.lat},{this.state.clicked.lng})</li>];
+      }
+      
       that.setState({areaInfo: areaInfo});
     });
   }
