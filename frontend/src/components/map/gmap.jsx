@@ -39,7 +39,9 @@ class GMap extends React.Component {
     map: undefined,
     foundPlace: undefined,
     favoriteMarkers: undefined,
-    areaInfo: undefined
+    areaInfo: [<li>Travel Radius:</li>,
+                <li>Name: </li>,
+                <li>Address:</li>]
   };
 
   onMarkerClick = (mapProps, marker, e) =>

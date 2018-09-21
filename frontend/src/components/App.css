@@ -324,11 +324,16 @@ body {
 
 .area-info{
   position: absolute;
-  top: 825px;
+  left: 5px;
+  top: 85%;
   z-index: 5;
-  font-size: 12px;
-  color: grey;
-  background-color: #b3d9fb;
+  font-size: 14px;
+  color: white;
+  background-color: #0099;
+  padding-right: 5px;
+  padding-left: 5px;
+  border-radius: 3px;
+  font-weight: 700;
   
 }
 
