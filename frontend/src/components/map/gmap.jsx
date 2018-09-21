@@ -310,12 +310,13 @@ class GMap extends React.Component {
       //               <li>Location: ({this.state.clicked.lat},{this.state.clicked.lng})</li>];
       // }
       let areaInfoP = document.createElement("p");
-      let text = document.createTextNode(`The highlighted area shows where you can travel given ${this.state.minutes} minutes`);
+      let text = document.createTextNode(`The highlighted area shows where you can travel in ${this.state.minutes} minutes`);
       areaInfoP.appendChild(text);
       // areaInfoP.style.padding = "10px";
       
       // // console.log(areaInfoP);
       let areaInfo = document.getElementById("area-info");
+      areaInfo.innerHTML = '';
       areaInfo.appendChild(areaInfoP);
       // that.setState({areaInfo: areaInfo});
     });
