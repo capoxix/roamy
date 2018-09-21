@@ -52,7 +52,6 @@ class ButtonAppBar extends Component {
 
                   <div className="rightNavBar">
                     <Help/>
-                    <About/>
                   <Typography variant="title" color="inherit">
                     <Link className="navBarLink" to={"/signup"}  onClick={()=>this.props.removeErrors()}>Sign Up</Link>
                   </Typography>
