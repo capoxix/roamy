@@ -173,6 +173,8 @@ body {
   .sticky-buttons {
     padding-top: 6px;
     font-size: 24px;
+    height: 146px;
+    border-bottom: 1px solid #eaeaea;
 
 
   }
@@ -180,7 +182,7 @@ body {
   .discover-wrapper {
     padding-top: 9px;
     padding-bottom: 9px;
-    border-bottom: 1px solid #eaeaea;
+    /* border-bottom: 1px solid #eaeaea; */
   }
 
   .discover-wrapper select {
@@ -282,6 +284,13 @@ body {
     margin: 0 auto;
     margin-bottom: 8px;
     background-color: white;
+    border: 1px solid transparent;
+  }
+
+  .index-item:hover {
+    cursor: pointer;
+    box-sizing: border-box;
+    border: 1px solid grey;
   }
 
   .MuiButton-label-44{
@@ -311,4 +320,24 @@ body {
   .howToUse *{
     color: white;
     font-size: 18px;
+  }
+
+.area-info{
+  position: absolute;
+  left: 5px;
+  top: 85%;
+  z-index: 5;
+  font-size: 14px;
+  color: white;
+  background-color: #0099;
+  padding-right: 5px;
+  padding-left: 5px;
+  border-radius: 3px;
+  font-weight: 700;
+  
+}
+
+  .area-info ul {
+    list-style-type: none;
+    padding-left: 5px;
   }
