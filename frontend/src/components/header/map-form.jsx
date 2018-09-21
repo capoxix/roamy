@@ -47,13 +47,14 @@ class ButtonAppBar extends Component {
                   <Typography variant="title" color="inherit">
                     <Link className="navBarLink" to={"/map"} onClick={()=>this.props.removeErrors()}>Roamy</Link>
                   </Typography>
-                  <Help/>
-                  <About/>
+
                   </div>
 
                   <div className="rightNavBar">
+                    <Help/>
+                    <About/>
                   <Typography variant="title" color="inherit">
-                    <Link className="navBarLink" to={"/signup"} onClick={()=>this.props.removeErrors()}>Sign Up</Link>
+                    <Link className="navBarLink" to={"/signup"}  onClick={()=>this.props.removeErrors()}>Sign Up</Link>
                   </Typography>
                   <Typography variant="title" color="inherit">
                     <Link className="navBarLink" to={"/login"} onClick={()=>this.props.removeErrors()}>Log In</Link>
@@ -78,15 +79,15 @@ class ButtonAppBar extends Component {
                         <Link className="navBarLink" to={"/"}>Roamy</Link>
                       </Typography>
 
-                      <Help/>
-                      <About/>
+
                       </div>
 
                       <div className="rightNavBar">
-                      <div>
+                        <Help/>
+                      <div className="greeting">
                         Hello {this.props.name}!
                       </div>
-                      <Link className="navBarLink" to="/" onClick={()=> this.props.logout()}>Log Out</Link>
+                      <Link className="logout_button" to="/" onClick={()=> this.props.logout()}>Log Out</Link>
                       </div>
                     </Toolbar>
                   </AppBar>

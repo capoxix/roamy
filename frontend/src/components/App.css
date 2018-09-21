@@ -110,6 +110,7 @@ body {
 
   .socials {
     color: black;
+    padding-left: 5px;
   }
 
   .socials:hover{
@@ -334,7 +335,7 @@ body {
   padding-left: 5px;
   border-radius: 3px;
   font-weight: 700;
-  
+
 }
 
   .area-info ul {
