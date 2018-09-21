@@ -321,3 +321,18 @@ body {
     color: white;
     font-size: 18px;
   }
+
+.area-info{
+  position: absolute;
+  top: 825px;
+  z-index: 5;
+  font-size: 12px;
+  color: grey;
+  background-color: #b3d9fb;
+  
+}
+
+  .area-info ul {
+    list-style-type: none;
+    padding-left: 5px;
+  }

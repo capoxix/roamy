@@ -38,7 +38,8 @@ class GMap extends React.Component {
     service: undefined,
     map: undefined,
     foundPlace: undefined,
-    favoriteMarkers: undefined
+    favoriteMarkers: undefined,
+    areaInfo: undefined
   };
 
   onMarkerClick = (mapProps, marker, e) =>
@@ -261,6 +262,8 @@ class GMap extends React.Component {
           />
         )
       });
+    console.log("place",place);
+    this.setState({foundPlace: place});
     this.setState({center: {lat: place.geometry.location.lat(), lng: place.geometry.location.lng()}});
   }
 
@@ -290,6 +293,10 @@ class GMap extends React.Component {
     this.props.sendQuery(this.state.clicked).then(() => {
       that.setState({trackedMarker: undefined});
       that.setMarkersIntoMap();
+      let areaInfo = [<li>Travel Radius: {this.state.minutes} minutes</li>,
+      <li>Name: {this.state.foundPlace.name}</li>,
+      <li>Address: {this.state.foundPlace.formatted_address}</li>];
+      that.setState({areaInfo: areaInfo});
     });
   }
 
@@ -374,16 +381,20 @@ class GMap extends React.Component {
                         </form>
                       ];
                       }
+    // let areaInfo;
+    // if(this.state.foundPlace) areaInfo = `Travel Radius ${this.state.minutes} minutes from ${this.state.foundPlace.name} in ${this.state.foundPlace.formatted_address}`;
     return (
       <div>
         <div>
             <div className="bodyWrapper">
-                <div className="mapWrapper1">
-                  {this.mapComponent}
-                </div>
+              <div className="mapWrapper1">
+                {this.mapComponent}
+              </div>
 
-                <div className="sideBar">
-                  <div className="sticky-buttons">
+                
+
+              <div className="sideBar">
+                <div className="sticky-buttons">
                     {userButtons}
                     <input type='text'
                       onChange={this.update('query')}
@@ -407,18 +418,19 @@ class GMap extends React.Component {
                       </select>
                       <button className="discover-button" type='button' onClick={this.discover}>Discover</button>
                     </div>
-                  </div>
-
-                  <div className="searchResults fadeIn">
-                    <SearchIndex places={places} markFoundPlace={this.markFoundPlace}/>
-                  </div>
-
                 </div>
+
+                <div className="searchResults fadeIn">
+                  <SearchIndex places={places} markFoundPlace={this.markFoundPlace}/>
+                </div>
+
+  
+              </div>
             </div>
-        </div>
 
-
+            <div className="area-info"><ul>{this.state.areaInfo}</ul></div>
         </div>
+      </div>
     );
   }
 }
