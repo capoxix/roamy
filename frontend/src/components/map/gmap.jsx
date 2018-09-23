@@ -39,9 +39,7 @@ class GMap extends React.Component {
     map: undefined,
     foundPlace: undefined,
     favoriteMarkers: undefined,
-    areaInfo: [<li>Travel Radius:</li>,
-                <li>Name: </li>,
-                <li>Address:</li>]
+    areaInfo: undefined
   };
 
   onMarkerClick = (mapProps, marker, e) =>
@@ -298,21 +296,29 @@ class GMap extends React.Component {
     this.props.sendQuery(this.state.clicked).then(() => {
       that.setState({trackedMarker: undefined});
       that.setMarkersIntoMap();
-      let areaInfo;
-      console.log('clicked',that.state.clicked);
-      console.log('foundPlace', that.state.foundPlace);
-      if(this.state.foundPlace) {
+      // let areaInfo;
+      // console.log('clicked',that.state.clicked);
+      // console.log('foundPlace', that.state.foundPlace);
+      // if(this.state.foundPlace) {
 
-                                areaInfo = [<li>Travel Radius: {this.state.minutes} minutes</li>,
-                                            <li>Name: {this.state.foundPlace.name}</li>,
-                                            <li>Address: {this.state.foundPlace.formatted_address}</li>];
-      } else {
-        areaInfo = [<li>Travel Radius: {this.state.minutes} minutes</li>,
-                    <li>Name: Clicked point</li>,
-                    <li>Location: ({this.state.clicked.lat},{this.state.clicked.lng})</li>];
-      }
+      //                           areaInfo = [<li>Travel Radius: {this.state.minutes} minutes</li>,
+      //                                       <li>Name: {this.state.foundPlace.name}</li>,
+      //                                       <li>Address: {this.state.foundPlace.formatted_address}</li>];
+      // } else {
+      //   areaInfo = [<li>Travel Radius: {this.state.minutes} minutes</li>,
+      //               <li>Name: Clicked point</li>,
+      //               <li>Location: ({this.state.clicked.lat},{this.state.clicked.lng})</li>];
+      // }
+      let areaInfoP = document.createElement("p");
+      let text = document.createTextNode(`The highlighted area shows where you can travel in ${this.state.minutes} minutes`);
+      areaInfoP.appendChild(text);
+      // areaInfoP.style.padding = "10px";
       
-      that.setState({areaInfo: areaInfo});
+      // // console.log(areaInfoP);
+      let areaInfo = document.getElementById("area-info");
+      areaInfo.innerHTML = '';
+      areaInfo.appendChild(areaInfoP);
+      // that.setState({areaInfo: areaInfo});
     });
   }
 
@@ -444,7 +450,7 @@ class GMap extends React.Component {
               </div>
             </div>
 
-            <div className="area-info"><ul>{this.state.areaInfo}</ul></div>
+            <div id="area-info" className="area-info"></div>
         </div>
       </div>
     );
