@@ -155,8 +155,8 @@ body {
     position: relative;
   }
   .mapWrapper1 {
-    width: 500px;
-    height: 850px;
+    width: 500px !important;
+    height: 850px !important;
     z-index: 1;
     position: flex !important;
   }
@@ -332,3 +332,26 @@ body {
     color: white;
     font-size: 18px;
   }
+
+  .area-info{
+    position: absolute;
+    left: 5px;
+    top: 85%;
+    z-index: 5;
+    font-size: 20px;
+    text-shadow: 1px 1px black;
+    color: white;
+    background-color: #0099;
+    /* padding-right: 5px;
+    padding-left: 5px; */
+    width: 210px;
+    border-radius: 3px;
+    font-weight: 700;
+   
+   }
+   
+    .area-info p {
+      padding: 10px;
+      margin-top: 5px;
+      margin-bottom: 5px;
+    }
