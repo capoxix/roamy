@@ -272,7 +272,7 @@ a{
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  height: 555px;
+  height: 400px;
   margin-bottom: 30px;
 }
 
@@ -350,7 +350,7 @@ p{
 }
 
 .footer {
-  height: 310px;
+  height: 220px;
   width: 100vw;
   background-image: url("assets/images/stunning.jpg");
   background-position: center;
@@ -371,7 +371,7 @@ i:hover{
 .links{
   display: grid;
   grid-template-columns: minmax(250px, 1fr) minmax(250px, 1fr);
-  grid-template-rows: repeat(2, 1fr);
+  /* grid-template-rows: repeat(2, 1fr); */
   justify-content: center;
   align-items: center;
   text-align: center;
@@ -386,9 +386,7 @@ i:hover{
     margin: 0 auto;
     text-align: center;
   }
-  .ft-headers{
-    font-size: 14px;
-  }
+
 
   .socials{
     font-size: 25px;
@@ -397,6 +395,11 @@ i:hover{
   i:hover{
     color: #0099e5;
   }
+}
+
+.ft-headers{
+  font-size: 14px;
+  padding-top: 25px;
 }
 
 .splash_header_2 {
@@ -436,7 +439,7 @@ i:hover{
   color: white;
   font-size: 48px;
   align-items: center;
-  padding-top: 190px;
+  padding-top: 130px;
   text-shadow: 1px 1px black;
 }
 
