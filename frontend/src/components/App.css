@@ -110,7 +110,6 @@ body {
 
   .socials {
     color: black;
-    padding-left: 5px;
   }
 
   .socials:hover{
@@ -144,7 +143,7 @@ body {
   }
   .bodyWrapper {
     display: grid;
-    grid-template-columns: minmax(250px, 2fr) minmax(250px, 1fr);
+    /* grid-template-columns: minmax(250px, 2fr) minmax(250px, 1fr); */
     justify-content: center;
     align-items: center;
     text-align: center;
@@ -156,8 +155,8 @@ body {
     position: relative;
   }
   .mapWrapper1 {
-    width: 500px !important;
-    height: 850px !important;
+    width: 500px;
+    height: 850px;
     z-index: 1;
     position: flex !important;
   }
@@ -174,16 +173,13 @@ body {
   .sticky-buttons {
     padding-top: 6px;
     font-size: 24px;
-    height: 146px;
-    border-bottom: 1px solid #eaeaea;
-
-
+    border-bottom: 2px solid #7a7a7a;
   }
 
   .discover-wrapper {
     padding-top: 9px;
     padding-bottom: 9px;
-    /* border-bottom: 1px solid #eaeaea; */
+    border-bottom: 1px solid #eaeaea;
   }
 
   .discover-wrapper select {
@@ -202,8 +198,6 @@ body {
 
   .discover-wrapper button {
     margin-right: 12px;
-    /* padding: 12px 18px 12px 18px; */
-    /* padding: 4px 6px 8px 18px; */
     padding: 6px;
 
     color: white;
@@ -214,7 +208,6 @@ body {
     border-radius: 4px;
     background-color: #01579b;
     margin-right: 9px;
-    text-shadow: 1px 1px black;
   }
 
   button:hover {
@@ -233,7 +226,6 @@ body {
     border-radius: 4px;
     background-color: #01579b;
     margin-right: 9px;
-    text-shadow: 1px 1px black;
   }
   .sticky-buttons > button {
     color: white;
@@ -246,11 +238,9 @@ body {
     border-radius: 4px;
     background-color: #01579b;
     margin-right: 9px;
-    text-shadow: 1px 1px black;
-
   }
   .sticky-buttons input {
-    font: 14px 'roboto', sans-serif;
+    font: 16px 'roboto', sans-serif;
     color: black;
     border: 4px solid #01579b;
     background-color: 0099e5;
@@ -262,6 +252,10 @@ body {
 
   }
 
+  .search-index {
+    height: 720px;
+  }
+
   .search-sticky {
     position: fixed;
     top: 0;
@@ -271,31 +265,43 @@ body {
   .searchResults{
     padding-top: 10px;
     overflow-y: auto;
-    /* height: 630px; */
-    height: 687px;
+    height: 720px;
     background-color: #eaeaea;
   }
 
-  .search-index {
-    /* border: 1px solid blue;
-    border-radius: 4px;
-    align-content: center; */
-
-  }
-
   .index-item {
+    display: flex;
+    justify-content: space-between;
     border-radius: 6px;
-    width: 94%;
+    width: 88%;
     margin: 0 auto;
     margin-bottom: 8px;
+    padding: 10px;
     background-color: white;
-    border: 1px solid transparent;
+    font: 20px 'roboto', 'sans serif';
+    border: 2px solid transparent;
   }
 
   .index-item:hover {
-    cursor: pointer;
-    box-sizing: border-box;
-    border: 1px solid grey;
+    box-shadow: 2px 2px 2px #7a7a7a;
+    border: 2px solid #7a7a7a;
+  }
+
+  .index-item img {
+    width: 50px;
+    height: 50px;
+  }
+
+  .place-name {
+    text-align: left;
+    font-size: 22px;
+    font-weight: bold;
+  }
+
+  .place-address {
+    text-align: left;
+    width: 80%;
+    height: 76px;
   }
 
   .MuiButton-label-44{
@@ -325,32 +331,4 @@ body {
   .howToUse *{
     color: white;
     font-size: 18px;
-  }
-
-.area-info{
-  position: absolute;
-  left: 5px;
-  top: 85%;
-  z-index: 5;
-  font-size: 20px;
-  text-shadow: 1px 1px black;
-  color: white;
-  background-color: #0099;
-  /* padding-right: 5px;
-  padding-left: 5px; */
-  width: 210px;
-  border-radius: 3px;
-  font-weight: 700;
-
-}
-
-  .area-info p {
-    padding: 10px;
-    margin-top: 5px;
-    margin-bottom: 5px;
-  }
-  .area-info ul {
-    list-style-type: none;
-    padding-left: 5px;
-
   }

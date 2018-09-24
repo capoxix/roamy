@@ -155,18 +155,7 @@ a{
   background-repeat: no-repeat;
   background-size: cover;
 }
-.mapWrapper1 {
-  width: 500px !important;
-  height: 850px !important;
-  z-index: 1;
-  position: flex !important;
-}
-.mapWrapper2 {
-  width: 67vw !important;
-  height: 800px !important;
-  z-index: 1;
-  position: flex !important;
-}
+
 .sideBar{
   overflow-y:auto;
   height: 850px;

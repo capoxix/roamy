@@ -9,13 +9,15 @@ class SearchIndexItem extends React.Component{
             <div className="index-item" onClick={() => markFoundPlace(place)}>
                 <div className="place-icon">
                     <img src={place.icon}></img>
-                    <div className="place-name">
-                        {place.name}
-                    </div>
                 </div>
 
                 <div className="place-address">
-                    {place.formatted_address}
+                    <div className="place-name">
+                        {place.name}
+                    </div>
+                    <div>
+                      {place.formatted_address}
+                    </div>
                 </div>
             </div>
         );
