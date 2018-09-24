@@ -143,7 +143,7 @@ body {
   }
   .bodyWrapper {
     display: grid;
-    /* grid-template-columns: minmax(250px, 2fr) minmax(250px, 1fr); */
+    grid-template-columns: minmax(250px, 2fr) minmax(250px, 1fr);
     justify-content: center;
     align-items: center;
     text-align: center;
@@ -167,6 +167,8 @@ body {
     position: flex !important;
   }
   .sideBar{
+    height: 850px;
+    overflow-y:auto;
     height: 850px;
   }
 
@@ -332,7 +334,7 @@ body {
     color: white;
     font-size: 18px;
   }
-
+  
   .area-info{
     position: absolute;
     left: 5px;

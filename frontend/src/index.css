@@ -156,10 +156,6 @@ a{
   background-size: cover;
 }
 
-.sideBar{
-  overflow-y:auto;
-  height: 850px;
-}
 .stickyButtons{
   position: fixed;
 }
