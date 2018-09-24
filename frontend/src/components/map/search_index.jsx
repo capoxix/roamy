@@ -5,10 +5,10 @@ import '../../index.css';
 
 class SearchIndex extends React.Component{
     render(){
-       const {places} = this.props;
+       const {places, markFoundPlace} = this.props;
 
         let placesArr = places.map(place =>
-        <SearchIndexItem place={place} key={place.id}/>)
+        <SearchIndexItem place={place} key={place.id} markFoundPlace={markFoundPlace}/>);
 
         return <div className="search-index">{placesArr}</div>
 

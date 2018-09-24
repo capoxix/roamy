@@ -14,16 +14,12 @@ class Directions extends Component {
     .then(response => {
       this.result = response.data;
       window.result=response.data;
-      // console.log(this.result.data);
-      // this.end_address = response.data.routes[0].legs[0].end_address;
-      // console.log(this.end_address);
+
     });
   }
 
 
   render(){
-    // if (!this.result) return null;
-    console.log(this.result);
     return (
       <div>
         <img src="https://cdn.dribbble.com/users/614757/screenshots/1832593/busy-business-guy_dribbble.gif" alt="studyin"/>

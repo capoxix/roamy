@@ -34,27 +34,32 @@ class GMap extends React.Component {
     trackName: "",
     currentLocationMarker: [],
     queryPlaces: [],
-    query: "",
+    query: "Twin Peaks",
     service: undefined,
     map: undefined,
     foundPlace: undefined,
-    favoriteMarkers: undefined
+    favoriteMarkers: undefined,
+    areaInfo: undefined
   };
 
   onMarkerClick = (mapProps, marker, e) =>
     this.setState({
       selectedPlace: mapProps,
       activeMarker: marker,
-      showingInfoWindow: true
+      showingInfoWindow: true,
     });
 
   onMapClicked = (mapProps, map, e) => {
     if (this.state.showingInfoWindow) {
       this.setState({
         showingInfoWindow: false,
-        activeMarker: null
+        activeMarker: null,
+
       });
     }
+    /*when map clicked changed foundplace to undefined */
+    this.setState({foundPlace: undefined});
+
     /*get latitude and longitude from clicked point on maps and set marker to show clicked point*/
     /* USED TO PICK ORIGIN POINTS BY SETTING IT TO CLICKED AND CLICKED MARKERS */
     this.setState({ clicked: { lat: e.latLng.lat(), lng: e.latLng.lng(), minutes: this.state.minutes } });
@@ -246,6 +251,7 @@ class GMap extends React.Component {
 
   markFoundPlace(place){
     let that = this;
+
     this.setState({ clicked: { lat: place.geometry.location.lat(), lng: place.geometry.location.lng(), minutes: this.state.minutes } });
     this.setState({
         clickedMarker: (
@@ -259,7 +265,9 @@ class GMap extends React.Component {
             }}
           />
         )
-      })
+      });
+    this.setState({foundPlace: place});
+    this.setState({center: {lat: place.geometry.location.lat(), lng: place.geometry.location.lng()}});
   }
 
   updatePolygon = (endPoints) => {
@@ -288,6 +296,29 @@ class GMap extends React.Component {
     this.props.sendQuery(this.state.clicked).then(() => {
       that.setState({trackedMarker: undefined});
       that.setMarkersIntoMap();
+      // let areaInfo;
+      // console.log('clicked',that.state.clicked);
+      // console.log('foundPlace', that.state.foundPlace);
+      // if(this.state.foundPlace) {
+
+      //                           areaInfo = [<li>Travel Radius: {this.state.minutes} minutes</li>,
+      //                                       <li>Name: {this.state.foundPlace.name}</li>,
+      //                                       <li>Address: {this.state.foundPlace.formatted_address}</li>];
+      // } else {
+      //   areaInfo = [<li>Travel Radius: {this.state.minutes} minutes</li>,
+      //               <li>Name: Clicked point</li>,
+      //               <li>Location: ({this.state.clicked.lat},{this.state.clicked.lng})</li>];
+      // }
+      let areaInfoP = document.createElement("p");
+      let text = document.createTextNode(`The highlighted area shows where you can travel in ${this.state.minutes} minutes`);
+      areaInfoP.appendChild(text);
+      // areaInfoP.style.padding = "10px";
+      
+      // // console.log(areaInfoP);
+      let areaInfo = document.getElementById("area-info");
+      areaInfo.innerHTML = '';
+      areaInfo.appendChild(areaInfoP);
+      // that.setState({areaInfo: areaInfo});
     });
   }
 
@@ -372,16 +403,20 @@ class GMap extends React.Component {
                         </form>
                       ];
                       }
+    // let areaInfo;
+    // if(this.state.foundPlace) areaInfo = `Travel Radius ${this.state.minutes} minutes from ${this.state.foundPlace.name} in ${this.state.foundPlace.formatted_address}`;
     return (
       <div>
         <div>
             <div className="bodyWrapper">
-                <div className="mapWrapper1">
-                  {this.mapComponent}
-                </div>
+              <div className="mapWrapper1">
+                {this.mapComponent}
+              </div>
 
-                <div className="sideBar">
-                  <div className="sticky-buttons">
+                
+
+              <div className="sideBar">
+                <div className="sticky-buttons">
                     {userButtons}
                     <input type='text'
                       onChange={this.update('query')}
@@ -405,18 +440,19 @@ class GMap extends React.Component {
                       </select>
                       <button className="discover-button" type='button' onClick={this.discover}>Discover</button>
                     </div>
-                  </div>
-
-                  <div className="searchResults fadeIn">
-                    <SearchIndex places={places}/>
-                  </div>
-
                 </div>
+
+                <div className="searchResults fadeIn">
+                  <SearchIndex places={places} markFoundPlace={this.markFoundPlace}/>
+                </div>
+
+  
+              </div>
             </div>
-        </div>
 
-
+            <div id="area-info" className="area-info"></div>
         </div>
+      </div>
     );
   }
 }
