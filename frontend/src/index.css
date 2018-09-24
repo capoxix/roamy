@@ -155,22 +155,7 @@ a{
   background-repeat: no-repeat;
   background-size: cover;
 }
-.mapWrapper1 {
-  width: 500px !important;
-  height: 850px !important;
-  z-index: 1;
-  position: flex !important;
-}
-.mapWrapper2 {
-  width: 67vw !important;
-  height: 800px !important;
-  z-index: 1;
-  position: flex !important;
-}
-.sideBar{
-  overflow-y:auto;
-  height: 850px;
-}
+
 .stickyButtons{
   position: fixed;
 }
@@ -238,14 +223,21 @@ a{
   padding-bottom: 10px;
 }
 .directions{
+  padding-left: 20px;
+  padding-right: 20px;
   display: grid;
   grid-template-columns: minmax(250px, 2fr) minmax(250px, 1fr);
   justify-content: center;
   align-items: center;
   text-align: center;
-  padding-left: 10px;
+  padding-top: 20px;
   font-size: 18px;
-  padding-bottom: 10px;
+  padding-bottom: 20px;
+}
+
+h2 {
+  text-align: center;
+  font-weight: bolder;
 }
 
 .div2-1{
