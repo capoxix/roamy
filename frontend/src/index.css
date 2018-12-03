@@ -28,7 +28,7 @@ i {
   display: flex;
   justify-content: space-between;
 }
-a{
+a {
   text-decoration: none;
   color: white;
 }
@@ -66,18 +66,6 @@ a{
 }
 .submit:hover{
   background-color: #008080;
-}
-.navBarLink{
-  text-decoration: none;
-  color: white;
-}
-
-.rightNavBar .navBarLink {
-  position: relative;
-  top: 7px;
-}
-.navBarLink:hover{
-  color: #999999;
 }
 
 .MuiButtonBase-root-49.MuiButton-root-91.MuiButton-text-93.MuiButton-flat-96{
@@ -343,7 +331,7 @@ p{
 
 .footer {
   height: 310px;
-  width: 100vw;
+  width: 100%;
   background-image: url("assets/images/stunning.jpg");
   background-position: center;
   background-repeat: no-repeat;
@@ -463,24 +451,50 @@ i:hover{
   display: flex;
   justify-content: space-between;
   font-size: 30px;
-  font-weight: bold;
+  font-weight: 700;
 }
 
 .leftNavBar{
   display: flex;
   align-items: center;
   justify-content: center;
+  margin: 0 12px;
 }
 
 .rightNavBar {
   font-size: 30px;
+  margin: 0 12px;
   display: flex;
+  margin-top: 7px;
+} 
+
+.rightNavBar .navlink {
+  width: 90%;
+  height: 53px;
+  box-sizing: border-box;
+  margin: 0 8px;
+  color: #e9e9e9;
+}
+
+.rightNavBar a {
+  color: inherit;
+  padding-bottom: 20px;
+}
+
+.rightNavBar .navlink:hover {
+  border-bottom: 8px solid white;
+  color: white;
+}
+
+.navbarlink {
+  width: 100%;
 }
 
 .greeting {
-  position: relative;
-  top: 7px;
-  font-size: 18px;
+  font-size: 20px;
+  color: white;
+  width: 60px;
+  margin: 0 45px;
 }
 
 .logout_button{
@@ -488,8 +502,4 @@ i:hover{
   font-size: 18px;
   position: relative;
   top: 7px;
-}
-
-.navBarLink {
-  padding-left: 10px;
 }

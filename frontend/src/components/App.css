@@ -31,12 +31,6 @@ body {
     justify-content: space-between;
   }
 
-  a{
-    text-decoration: none;
-    color: white;
-  }
-
-
   .leftNav *{
     display: inline;
   }
@@ -68,15 +62,6 @@ body {
 
   .submit:hover{
     background-color: #008080;
-  }
-
-  .navBarLink{
-    text-decoration: none;
-    color: white;
-  }
-
-  .navBarLink:hover{
-    color: #999999;
   }
 
   /* .footer {

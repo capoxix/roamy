@@ -47,26 +47,28 @@ class ButtonAppBar extends Component {
             <div className="greeting">
               Hello {this.props.name}!
             </div>
-            <Link className="logout_button" to="/" onClick={()=> this.props.logout()}>Log Out</Link>
+            <div className="navlink">
+              <Link className="navBarLink" to="/" onClick={()=> this.props.logout()}>Log Out</Link>
+
+            </div>
 
           </div>
         );
     }
 
+    return (
+      <div className="appbar">
+              <div className="leftNavBar">
 
-      return (
-        <div className="appbar">
-                <div className="leftNavBar">
-
-                  <div className="navlink"> 
-                    <Link className="navBarLink" to={"/map"} onClick={()=>this.props.removeErrors()}>Roamy</Link>
-                  </div>
-
+                <div className="navlink"> 
+                  <Link className="navBarLink" to={"/map"} onClick={()=>this.props.removeErrors()}>Roamy</Link>
                 </div>
 
-                  {rightContent}
-          </div>
-      )
+              </div>
+
+                {rightContent}
+        </div>
+    )
   }
 }
           
