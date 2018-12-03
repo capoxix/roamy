@@ -152,9 +152,8 @@ body {
     position: flex !important;
   }
   .sideBar{
-    height: 850px;
     overflow-y:auto;
-    height: 850px;
+    height: 100%;
   }
 
   .sticky-buttons {
