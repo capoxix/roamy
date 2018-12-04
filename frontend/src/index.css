@@ -149,10 +149,8 @@ a {
 }
 
 .searchResults{
-  padding-top: 10px;
   overflow-y: auto;
-  /* height: 630px; */
-  height: 687px;
+  height: 675px;
   background-color: #eaeaea;
 }
 

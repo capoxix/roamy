@@ -157,15 +157,15 @@ body {
   }
 
   .sticky-buttons {
-    padding-top: 6px;
     font-size: 24px;
+    box-sizing: border-box;
     border-bottom: 2px solid #7a7a7a;
+    height: 175px;
   }
 
   .discover-wrapper {
     padding-top: 9px;
     padding-bottom: 9px;
-    border-bottom: 1px solid #eaeaea;
   }
 
   .discover-wrapper select {
@@ -247,12 +247,6 @@ body {
     top: 0;
     align-items: center;
     background-color: white;
-  }
-  .searchResults{
-    padding-top: 10px;
-    overflow-y: auto;
-    height: 720px;
-    background-color: #eaeaea;
   }
 
   .index-item {
