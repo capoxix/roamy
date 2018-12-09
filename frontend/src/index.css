@@ -72,11 +72,7 @@ a {
   width: 100px;
   height: 50px;
 }
-.socialLinks{
-  display: flex;
-  justify-content: space-between;
-  padding-top: 10px;
-}
+
 .MuiButtonBase-root-146.MuiButton-root-120.MuiButton-text-122.MuiButton-flat-125{
   color: white;
 }
@@ -92,9 +88,17 @@ a {
 
 .ft2-2{
   display: block;
-  text-align: center;
-  align-items: center;
-  justify-content: center;
+}
+
+.dev-info {
+  display: grid;
+  grid-template-columns: 3fr 0.5fr 0.5fr;
+  width: 280px;
+  margin-left: 30%;
+}
+
+.dev-info a {
+  text-align: left;
 }
 
 .socials {
@@ -350,27 +354,11 @@ i:hover{
   align-items: center;
   text-align: center;
 
-  * {
-    color: white;
-  }
+}
 
-  p {
-    width: 250px;
-    align-items: center;
-    margin: 0 auto;
-    text-align: center;
-  }
-  .ft-headers{
-    font-size: 14px;
-  }
-
-  .socials{
-    font-size: 25px;
-  }
-
-  i:hover{
-    color: #0099e5;
-  }
+.ft-headers {
+  font-size: 30px;
+  font-weight: bold;
 }
 
 .splash_header_2 {
