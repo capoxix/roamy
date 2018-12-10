@@ -250,7 +250,7 @@ h2 {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  height: 555px;
+  height: 400px;
   margin-bottom: 30px;
 }
 
@@ -286,7 +286,6 @@ h2 {
   grid-column-gap: 10px;
   grid-row-gap: 10px;
   height: 500px;
-  /* margin-bottom: 150px; */
 }
 
 .top_photos img{
@@ -349,7 +348,7 @@ i:hover{
 .links{
   display: grid;
   grid-template-columns: minmax(250px, 1fr) minmax(250px, 1fr);
-  grid-template-rows: repeat(2, 1fr);
+  /* grid-template-rows: repeat(2, 1fr); */
   justify-content: center;
   align-items: center;
   text-align: center;
@@ -359,6 +358,11 @@ i:hover{
 .ft-headers {
   font-size: 30px;
   font-weight: bold;
+}
+
+.ft-headers{
+  font-size: 14px;
+  padding-top: 25px;
 }
 
 .splash_header_2 {
@@ -398,7 +402,7 @@ i:hover{
   color: white;
   font-size: 48px;
   align-items: center;
-  padding-top: 190px;
+  padding-top: 130px;
   text-shadow: 1px 1px black;
 }
 
