@@ -83,10 +83,6 @@ class Point {
     endPoint.minutes = datum.duration.value / 60;
     endPoint.address = address;
     let origin = this;
-    // console.log('item: ', i)
-    // console.log(endPoint)
-    // console.log('minutes: ', endPoint.minutes)
-    // console.log('address: ', address)
     
     if (Math.abs(this.minutes - endPoint.minutes) < 1.2) {
       endPoint.static = true;

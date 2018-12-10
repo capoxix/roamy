@@ -18,7 +18,7 @@ router.post(`/car`, async (req, res) => {
   let searchStr, endPoints, duped, text, addresses, results;
 
   endPoints = origin.initEndPoints()
-  origin.endPointsInWater(endPoints) // check if ENDPOINTS IN PACIFIC OR NEAR ANGEL
+  origin.endPointsInWater(endPoints) // check if ENDPOINTS IN PACIFIC OR NEAR ANGEL ISLAND
   duped = endPoints.slice();
 
   while (searches < 3) {
@@ -45,36 +45,51 @@ router.post(`/car`, async (req, res) => {
   }
 
   results = selectPoints(endPoints, origin)
-  // console.log(results)
 
+  console.log("hitttttttttttttttt")
+  console.log("hitttttttttttttttt")
+  console.log("hitttttttttttttttt")
+  console.log("hitttttttttttttttt")
+  console.log("hitttttttttttttttt")
+  
+  
   geolocate(results, (response) => res.send(response))
-
 });
 
 function geolocate(endPoints, cb) {
   let counter = 0;
   for (i = 0; i < endPoints.length; i++) {
-    convertAddress(endPoints[i]).then( (response) => {
-      counter += 1
-      const { latitude, longitude} = response[0];
-      // console.log(latitude)
-      // console.log(longitude)
-      // console.log(counter)
+    (function iife(j) {
+      const point = endPoints[j]
+      convertAddress(point).then( (response) => {
+        counter += 1;
+        const dLat = 0.003604 * 4;
+        const dLng =  0.0045402 * 4;
+        const { latitude, longitude} = response[0];
 
-      if (counter === endPoints.length) {
+        if (Math.abs(point.lat - latitude) < dLat && Math.abs(point.lng - longitude) < dLng) {
+          endPoints[j].lat = latitude;
+          endPoints[j].lng = longitude;
 
-        // console.log(endPoints.length)
+        }
+        console.log(latitude)
+        console.log(longitude)
+        console.log(endPoints[j])
+        console.log(counter, j)
+  
+        if (counter === endPoints.length) {
+  
+          cb(endPoints)
+        }
+      }, (reject) => {
+        counter += 1
+        if (counter === 15) {
+  
+          cb(endPoints)
+        }
+      })
 
-        cb(endPoints)
-      }
-    }, (reject) => {
-      counter += 1
-      // console.log(counter)
-      if (counter === 15) {
-
-        cb(endPoints)
-      }
-    })
+    })(i)
   }
 
 }
@@ -95,9 +110,6 @@ function selectPoints(endPoints, origin) {
   for (let i = 0 ; i <  endPoints.length; i++) {
     if (!endPoints[i].destroy && (origin.minutes + 2.5) > endPoints[i].minutes) {
       if (endPoints[i].lat && endPoints[i].lng && endPoints[i].minutes && endPoints[i].address) {
-        // console.log('endpoints: ', i)
-        // console.log('endpoints: ', i)
-        // console.log('endpoints: ', i)
         results.push(endPoints[i])     
       }
     }
@@ -113,52 +125,15 @@ async function fixLatLng(point) {
   const dLng200m =  0.0045402 * 0.5;
 
   const promise = geocoder.geocode(point.address)
-    // if point difference is too big, just keep original points
-    // console.log('llllllllllllllllllllllllll')
-    // console.log(point.lat)
-    // console.log(promise[0].latitude)
-    // console.log('dlat is: ', Math.abs(point.lat - promise[0].latitude))
-    // console.log('dlat is bool: ', Math.abs(point.lat - promise[0].latitude) < dLat200m)
-    // console.log(point.lng)
-    // console.log(promise[0].longitude)
-    // console.log('dlng is: ', Math.abs(point.lng - promise[0].longitude))
-    // console.log('dlng is bool: ', Math.abs(point.lng - promise[0].longitude) < dLng200m)
 
     if (!promise[0].latitude || !promise[0].longitude) { return }
 
     if (Math.abs(point.lat - promise[0].latitude) > dLat200m || Math.abs(point.lng - promise[0].longitude) > dLng200m) {
-
-      // console.log('hit')
-      // console.log('hit')
       
       point.lat = promise[0].latitude
       point.lng = promise[0].longitude
     }
-    // console.log('')
-    // console.log('')
-    // console.log('')
-    // console.log('')
 }
-
-
-// geocoder.geocode(point.address)
-// .then((res) => {
-//   point.lat = res[0].latitude
-//   point.lng = res[0].longitude
-
-//   console.log("Point------")
-//   console.log(counter.count)
-//   counter.count += 1;
-//   console.log(counter.count)
-
-//   console.log(point.address)
-//   console.log(point.angle)
-//   console.log(point.lat)
-//   console.log(point.lng)
-//   console.log("----------------")
-//   console.log("-")
-//   // console.log(res[0])
-// })
 
 module.exports = router;
 

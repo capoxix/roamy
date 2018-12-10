@@ -27,45 +27,49 @@ const splash = () => {
           <div className="ft-headers">FOLLOW</div>
           <div className="ft2-1">
             <p>
-              Roamy is a single page application that integrates several Google Map APIs to render a visual representation of the places a user can travel to given a reasonable amount of time.
-              <br/>
-              The bubble is dynamically updated using Google's Distance Matrix and Geocoding API.
+              Roamy is a single page application that integrates Google Maps Distance Matrix API to render a visual representation of places a user can travel from a given time.
+
             </p>
           </div>
           <div className="ft2-2">
-            <div>
-              Kevin Ou
-              <a className="socials" href="https://www.linkedin.com/in/kevin-ou-b56a768b/">
-                <i className="fab fa-linkedin"></i>
-              </a>
+
+            <div className="dev-info">
+              <a href="https://kevinou.netlify.com/">Kevin Ou</a>
               <a className="socials" href="https://github.com/VietnameseCoffee">
                 <i className="fab fa-github"></i>
               </a>
-            </div>
-            <div>
-              <a href="https://garbocheng.netlify.com/">Garbo Cheng Ye</a>
-              <a className="socials" href="https://www.linkedin.com/in/garbo-cheng-ye/">
+              <a className="socials" href="https://www.linkedin.com/in/kevin-ou-b56a768b/">
                 <i className="fab fa-linkedin"></i>
               </a>
+            </div>
+
+            <div className="dev-info">
+              <a href="https://garbocheng.netlify.com/">Garbo Cheng Ye</a>
               <a className="socials" href="https://github.com/capoxix">
                 <i className="fab fa-github"></i>
               </a>
-            </div>
-            <div>
-              <a href="https://tonyzhang.netlify.com/">Tony Zhang</a>
-              <a className="socials" href="https://www.linkedin.com/in/tony-wzhang/">
+              <a className="socials" href="https://www.linkedin.com/in/garbo-cheng-ye/">
                 <i className="fab fa-linkedin"></i>
               </a>
+            </div>
+
+            <div className="dev-info">
+              <a href="https://tonyzhang.netlify.com/">Tony Zhang</a>
               <a className="socials" href="https://github.com/tonywzhang/720HD">
                 <i className="fab fa-github"></i>
               </a>
+              <a className="socials" href="https://www.linkedin.com/in/tony-wzhang/">
+                <i className="fab fa-linkedin"></i>
+              </a>
             </div>
-            <div>
+
+            <div className="dev-info">
               <a href="https://github.com/capoxix/roamy">Project Repo</a>
               <a className="socials tooltip" href="https://github.com/capoxix/roamy">
                 <i className="fab fa-github"></i>
               </a>
             </div>
+
           </div>
         </div>
       </div>

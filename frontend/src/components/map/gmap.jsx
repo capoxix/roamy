@@ -406,8 +406,7 @@ class GMap extends React.Component {
     // let areaInfo;
     // if(this.state.foundPlace) areaInfo = `Travel Radius ${this.state.minutes} minutes from ${this.state.foundPlace.name} in ${this.state.foundPlace.formatted_address}`;
     return (
-      <div>
-        <div>
+      <div className="bigWrapper">
             <div className="bodyWrapper">
               <div className="mapWrapper1">
                 {this.mapComponent}
@@ -452,7 +451,6 @@ class GMap extends React.Component {
 
             <div id="area-info" className="area-info"></div>
         </div>
-      </div>
     );
   }
 }

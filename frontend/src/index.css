@@ -24,11 +24,7 @@ i {
   display: flex;
   justify-content: space-between;
 }
-.jss39.jss41.jss40{
-  display: flex;
-  justify-content: space-between;
-}
-a{
+a {
   text-decoration: none;
   color: white;
 }
@@ -67,18 +63,6 @@ a{
 .submit:hover{
   background-color: #008080;
 }
-.navBarLink{
-  text-decoration: none;
-  color: white;
-}
-
-.rightNavBar .navBarLink {
-  position: relative;
-  top: 7px;
-}
-.navBarLink:hover{
-  color: #999999;
-}
 
 .MuiButtonBase-root-49.MuiButton-root-91.MuiButton-text-93.MuiButton-flat-96{
   width: 100px;
@@ -88,11 +72,7 @@ a{
   width: 100px;
   height: 50px;
 }
-.socialLinks{
-  display: flex;
-  justify-content: space-between;
-  padding-top: 10px;
-}
+
 .MuiButtonBase-root-146.MuiButton-root-120.MuiButton-text-122.MuiButton-flat-125{
   color: white;
 }
@@ -108,9 +88,17 @@ a{
 
 .ft2-2{
   display: block;
-  text-align: center;
-  align-items: center;
-  justify-content: center;
+}
+
+.dev-info {
+  display: grid;
+  grid-template-columns: 3fr 0.5fr 0.5fr;
+  width: 280px;
+  margin-left: 30%;
+}
+
+.dev-info a {
+  text-align: left;
 }
 
 .socials {
@@ -161,10 +149,8 @@ a{
 }
 
 .searchResults{
-  padding-top: 10px;
   overflow-y: auto;
-  /* height: 630px; */
-  height: 687px;
+  height: 675px;
   background-color: #eaeaea;
 }
 
@@ -300,7 +286,6 @@ h2 {
   grid-column-gap: 10px;
   grid-row-gap: 10px;
   height: 500px;
-  /* margin-bottom: 150px; */
 }
 
 .top_photos img{
@@ -342,8 +327,8 @@ p{
 }
 
 .footer {
-  height: 220px;
-  width: 100vw;
+  height: 310px;
+  width: 100%;
   background-image: url("assets/images/stunning.jpg");
   background-position: center;
   background-repeat: no-repeat;
@@ -368,25 +353,11 @@ i:hover{
   align-items: center;
   text-align: center;
 
-  * {
-    color: white;
-  }
+}
 
-  p {
-    width: 250px;
-    align-items: center;
-    margin: 0 auto;
-    text-align: center;
-  }
-
-
-  .socials{
-    font-size: 25px;
-  }
-
-  i:hover{
-    color: #0099e5;
-  }
+.ft-headers {
+  font-size: 30px;
+  font-weight: bold;
 }
 
 .ft-headers{
@@ -460,21 +431,56 @@ i:hover{
   background-color: #00b3e5;
 }
 
+.appbar {
+  height: 60px;
+  background: #01579b;
+  display: flex;
+  justify-content: space-between;
+  font-size: 30px;
+  font-weight: 700;
+}
 
 .leftNavBar{
   display: flex;
   align-items: center;
   justify-content: center;
+  margin: 0 12px;
 }
 
 .rightNavBar {
+  font-size: 30px;
+  margin: 0 12px;
   display: flex;
+  margin-top: 7px;
+} 
+
+.rightNavBar .navlink {
+  width: 90%;
+  height: 53px;
+  box-sizing: border-box;
+  margin: 0 8px;
+  color: white;
+}
+
+.rightNavBar a {
+  color: inherit;
+  padding-bottom: 20px;
+}
+
+.rightNavBar .navlink:hover {
+  border-bottom: 8px solid #e9e9e9;
+  color: #e9e9e9;
+}
+
+.navbarlink {
+  width: 100%;
 }
 
 .greeting {
-  position: relative;
-  top: 7px;
-  font-size: 18px;
+  font-size: 20px;
+  color: white;
+  width: 60px;
+  margin: 0 45px;
 }
 
 .logout_button{
@@ -482,8 +488,4 @@ i:hover{
   font-size: 18px;
   position: relative;
   top: 7px;
-}
-
-.navBarLink {
-  padding-left: 10px;
 }
