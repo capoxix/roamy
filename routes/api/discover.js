@@ -46,12 +46,6 @@ router.post(`/car`, async (req, res) => {
 
   results = selectPoints(endPoints, origin)
 
-  console.log("hitttttttttttttttt")
-  console.log("hitttttttttttttttt")
-  console.log("hitttttttttttttttt")
-  console.log("hitttttttttttttttt")
-  console.log("hitttttttttttttttt")
-  
   
   geolocate(results, (response) => res.send(response))
 });
@@ -72,10 +66,10 @@ function geolocate(endPoints, cb) {
           endPoints[j].lng = longitude;
 
         }
-        console.log(latitude)
-        console.log(longitude)
-        console.log(endPoints[j])
-        console.log(counter, j)
+        // console.log(latitude)
+        // console.log(longitude)
+        // console.log(endPoints[j])
+        // console.log(counter, j)
   
         if (counter === endPoints.length) {
   
