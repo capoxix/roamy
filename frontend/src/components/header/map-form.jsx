@@ -61,7 +61,7 @@ class ButtonAppBar extends Component {
               <div className="leftNavBar">
 
                 <div className="navlink"> 
-                  <Link className="navBarLink" to={"/map"} onClick={()=>this.props.removeErrors()}>Roamy</Link>
+                  <Link className="navBarLink" to={"/"} onClick={()=>this.props.removeErrors()}>Roamy</Link>
                 </div>
 
               </div>
